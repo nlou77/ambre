@@ -1,0 +1,425 @@
+<form class="ombre-card-sheet {{cssClass}} {{#if system.overrideombreStyle}}{{system.overrideombreStyle}}{{else if actor.system.sheetStyle}}{{actor.system.sheetStyle}}{{/if}}" autocomplete="off">
+    <header class="ombre-card-header">
+        <div class="image-frame-wrapper">
+            {{#if system.frameImagePath}}
+            <img class="ombre-foreground-frame" src="{{system.frameImagePath}}" alt="ombre Frame"/>
+            <img class="ombre-card-image" src="/systems/ambre/assets/icons/011-hypnosis.png" data-edit="img" title="{{item.name}}" alt="Image de l'ombre"/>
+            {{else}}
+            <img class="ombre-card-image" src="/systems/ambre/assets/icons/011-hypnosis.png" data-edit="img" title="{{item.name}}" alt="Image de l'ombre"/>
+            {{/if}}
+        </div>
+        <input name="name" type="text" value="{{item.name}}" placeholder="Nom de l'ombre" title="{{item.name}}"/>
+        <a class="toggle-description-editor header-button" title="Afficher/Masquer l'éditeur de description">
+            <i class="fas fa-file-alt"></i>
+        </a>
+        <a class="refresh-possessing-actor header-button {{#if system.locked}}disabled{{/if}}"
+           title="{{#if system.locked}}Verrouillé - Action désactivée{{else}}
+                     {{#if system.allowStatRefreshOnLock}}
+                         Actualiser avec les stats de {{#if currentLivePossessingActorName}}'{{currentLivePossessingActorName}}'{{else}}(possesseur actuel){{/if}} & Verrouiller
+                     {{else}}
+                         Verrouiller (actualisation des stats interdite, stats actuelles préservées)
+                     {{/if}}
+                  {{/if}}">
+           {{!-- The button's JS logic already locks the item if unlocked, and the sheet re-render handles updates. --}}
+           <i class="fas fa-sync-alt"></i>
+        </a>
+        <a class="toggle-stat-refresh-lock header-button {{#if system.locked}}disabled{{/if}}"
+           title="{{#if system.locked}}Verrouillé - Action désactivée{{else}}{{#if system.allowStatRefreshOnLock}}Actualisation des stats du possesseur autorisée au prochain verrouillage. Cliquer pour interdire et préserver les stats actuelles.{{else}}Actualisation des stats du possesseur interdite au prochain verrouillage (les stats actuelles seront préservées). Cliquer pour autoriser.{{/if}}{{/if}}">
+           <i class="fas {{#if system.allowStatRefreshOnLock}}fa-user-check{{else}}fa-user-slash{{/if}}"></i>
+        </a>
+        <a class="toggle-ombre-lock {{#if system.locked}}locked{{/if}}"
+           title="{{#if system.locked}}Déverrouiller l'ombre{{else}}Verrouiller l'ombre (empêche les modifications des attributs et de la liaison){{/if}}">
+           <i class="fas {{#if system.locked}}fa-lock{{else}}fa-unlock-alt{{/if}}"></i>
+        </a>
+    </header>
+
+    <section class="ombre-card-body">
+        <!-- NEW TOP ROW FOR CHECKBOXES AND PUISSANCE DROPDOWN -->
+        <div class="ombre-top-controls">
+            <div class="form-group form-group-checkbox">
+                <label for="item-obtainedAtCreation-{{item._id}}" class="{{#if system.locked}}disabled-label{{/if}}">Création</label>
+                <input type="checkbox" id="item-obtainedAtCreation-{{item._id}}" name="system.obtainedAtCreation" {{checked system.obtainedAtCreation}} data-dtype="Boolean" {{#if system.locked}}disabled{{/if}}/>
+            </div>
+            <div class="form-group form-group-checkbox">
+                <label for="item-linked-{{item._id}}" class="{{#if system.locked}}disabled-label{{/if}}">Lié</label>
+                <input type="checkbox" id="item-linked-{{item._id}}" name="system.linked" {{checked system.linked}} data-dtype="Boolean" {{#if system.locked}}disabled{{/if}}/>
+            </div>
+
+            <div class="form-group x-counter-controls">
+                <label>Ex.</label>
+                <button type="button" class="x-counter-decrement control-button" {{#if system.locked}}disabled{{/if}} title="Diminuer le multiplicateur"><i class="fas fa-minus"></i></button>
+                <span class="x-counter-display">x{{#if system.xCounter}}{{system.xCounter}}{{else}}1{{/if}}</span>
+                <button type="button" class="x-counter-increment control-button" {{#if system.locked}}disabled{{/if}} title="Augmenter le multiplicateur"><i class="fas fa-plus"></i></button>
+            </div>
+            
+            <div class="form-group">
+                <label for="item-total-cost-{{item._id}}" style="width:auto;">Coût total :</label> {{!-- Adjusted width to auto --}}
+                <input type="text" id="item-total-cost-{{item._id}}" name="system.totalCost" value="{{system.totalCost}}" style="width:50px;" readonly class="ombre-total-cost-display {{#if system.locked}}locked-field{{/if}}"/>
+            </div>
+        </div>
+
+        <!-- Section Niveau Technologique Collapsible -->
+        <div class="ombre-collapsible-header" data-target-section="tech-level-content-{{item._id}}">
+            <span class="collapsible-header-title">Niveau Technologique</span>
+            <i class="fas fa-chevron-down collapsible-header-icon"></i>
+        </div>
+        <div class="ombre-top-controls tech-magic-section toggleable-content" id="tech-level-content-{{item._id}}" style="display: none;">
+            <div class="form-group tech-magic-dropdown-group">
+                <label for="select-niveauTechnologique-{{item._id}}">Niveau Technologique:</label>
+                <select id="select-niveauTechnologique-{{item._id}}" name="system.niveauTechnologique" data-dtype="String" {{#if system.locked}}disabled{{/if}}>
+                    <option value="1 Formes Primitives" {{#if (eq system.niveauTechnologique "1 Formes Primitives")}}selected{{/if}}>1 Formes Primitives</option>
+                    <option value="2 Préhistoire" {{#if (eq system.niveauTechnologique "2 Préhistoire")}}selected{{/if}}>2 Préhistoire</option>
+                    <option value="3 Antiquité" {{#if (eq system.niveauTechnologique "3 Antiquité")}}selected{{/if}}>3 Antiquité</option>
+                    <option value="4 Moyen-Âge et Renaissance" {{#if (eq system.niveauTechnologique "4 Moyen-Âge et Renaissance")}}selected{{/if}}>4 Moyen-Âge et Renaissance</option>
+                    <option value="5 Révolution Industrielle" {{#if (eq system.niveauTechnologique "5 Révolution Industrielle")}}selected{{/if}}>5 Révolution Industrielle</option>
+                    <option value="6 Période Contemporaine" {{#if (eq system.niveauTechnologique "6 Période Contemporaine")}}selected{{/if}}>6 Période Contemporaine</option>
+                    <option value="7 Découverte Spatiale" {{#if (eq system.niveauTechnologique "7 Découverte Spatiale")}}selected{{/if}}>7 Découverte Spatiale</option>
+                    <option value="8 Période Connectée" {{#if (eq system.niveauTechnologique "8 Période Connectée")}}selected{{/if}}>8 Période Connectée</option>
+                    <option value="9 Essor des Robots et IA" {{#if (eq system.niveauTechnologique "9 Essor des Robots et IA")}}selected{{/if}}>9 Essor des Robots et IA</option>
+                    <option value="10 Epuration Robotique" {{#if (eq system.niveauTechnologique "10 Epuration Robotique")}}selected{{/if}}>10 Epuration Robotique</option>
+                    <option value="11 Expansion Spatiale" {{#if (eq system.niveauTechnologique "11 Expansion Spatiale")}}selected{{/if}}>11 Expansion Spatiale</option>
+                    <option value="12 Essor des Civilisations Aliens" {{#if (eq system.niveauTechnologique "12 Essor des Civilisations Aliens")}}selected{{/if}}>12 Essor des Civilisations Aliens</option>
+                    <option value="13 Extinction des Espèces" {{#if (eq system.niveauTechnologique "13 Extinction des Espèces")}}selected{{/if}}>13 Extinction des Espèces</option>
+                    <option value="14 Renaissance Chaotique" {{#if (eq system.niveauTechnologique "14 Renaissance Chaotique")}}selected{{/if}}>14 Renaissance Chaotique</option>
+                </select>
+                <div class="info-icon-wrapper">
+                    <i class="fas fa-question-circle attribute-info-icon tech-level-info-icon" data-tooltip-id="tooltip-niveauTechnologique-{{item._id}}" title="Description du Niveau Technologique"></i>
+                    <div class="tooltip-popup tech-level-tooltip" id="tooltip-niveauTechnologique-{{item._id}}">
+                        <p>{{dynamicDescriptions.niveauTechnologique.description}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="tech-details-inline-container">
+                <div class="form-group tech-details-group">
+                    <label>Locomotion:</label> <span class="tech-detail-value">{{dynamicDescriptions.niveauTechnologique.locomotion}}</span>
+                </div>
+                <div class="form-group tech-details-group">
+                    <label>Communication:</label> <span class="tech-detail-value">{{dynamicDescriptions.niveauTechnologique.communication}}</span>
+                </div>
+                <div class="form-group tech-details-group">
+                    <label>Armes:</label> <span class="tech-detail-value">{{dynamicDescriptions.niveauTechnologique.armes}}</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section Niveau de Magie Collapsible -->
+        <div class="ombre-collapsible-header" data-target-section="magic-level-content-{{item._id}}">
+            <span class="collapsible-header-title">Niveau de Magie</span>
+            <i class="fas fa-chevron-down collapsible-header-icon"></i>
+        </div>
+        <div class="ombre-top-controls tech-magic-section toggleable-content" id="magic-level-content-{{item._id}}" style="display: none;">
+            <div class="form-group tech-magic-dropdown-group">
+                <label for="select-niveauMagie-{{item._id}}">Niveau de Magie:</label>
+                <select id="select-niveauMagie-{{item._id}}" name="system.niveauMagie" data-dtype="String" {{#if system.locked}}disabled{{/if}}>
+                    <option value="1 Absence de Magie" {{#if (eq system.niveauMagie "1 Absence de Magie")}}selected{{/if}}>1 Absence de Magie</option>
+                    <option value="2 Magie Primordiale & Draconique" {{#if (eq system.niveauMagie "2 Magie Primordiale & Draconique")}}selected{{/if}}>2 Magie Primordiale & Draconique</option>
+                    <option value="3 Magie Tribale et Totémique" {{#if (eq system.niveauMagie "3 Magie Tribale et Totémique")}}selected{{/if}}>3 Magie Tribale et Totémique</option>
+                    <option value="4 Magie Alchimique et Rituelle" {{#if (eq system.niveauMagie "4 Magie Alchimique et Rituelle")}}selected{{/if}}>4 Magie Alchimique et Rituelle</option>
+                    <option value="5 Magie Colorée" {{#if (eq system.niveauMagie "5 Magie Colorée")}}selected{{/if}}>5 Magie Colorée</option>
+                    <option value="6 Magie Héroïque" {{#if (eq system.niveauMagie "6 Magie Héroïque")}}selected{{/if}}>6 Magie Héroïque</option>
+                    <option value="7 Magie Inversée ou Fluctuante" {{#if (eq system.niveauMagie "7 Magie Inversée ou Fluctuante")}}selected{{/if}}>7 Magie Inversée ou Fluctuante</option>
+                    <option value="8 Magie Runique et Parchemins" {{#if (eq system.niveauMagie "8 Magie Runique et Parchemins")}}selected{{/if}}>8 Magie Runique et Parchemins</option>
+                    <option value="9 Magie Temporelle et Dimensionelle" {{#if (eq system.niveauMagie "9 Magie Temporelle et Dimensionelle")}}selected{{/if}}>9 Magie Temporelle et Dimensionelle</option>
+                    <option value="10 Magie Divine et Cosmique" {{#if (eq system.niveauMagie "10 Magie Divine et Cosmique")}}selected{{/if}}>10 Magie Divine et Cosmique</option>
+                    <option value="11 Magie Psionique" {{#if (eq system.niveauMagie "11 Magie Psionique")}}selected{{/if}}>11 Magie Psionique</option>
+                    <option value="12 Magie Mutante" {{#if (eq system.niveauMagie "12 Magie Mutante")}}selected{{/if}}>12 Magie Mutante</option>
+                    <option value="13 Magie Courante" {{#if (eq system.niveauMagie "13 Magie Courante")}}selected{{/if}}>13 Magie Courante</option>
+                    <option value="14 Magie Unique" {{#if (eq system.niveauMagie "14 Magie Unique")}}selected{{/if}}>14 Magie Unique</option>
+                    <option value="15 Magie Ambrienne" {{#if (eq system.niveauMagie "15 Magie Ambrienne")}}selected{{/if}}>15 Magie Ambrienne</option>
+                </select>
+                <div class="info-icon-wrapper">
+                     <i class="fas fa-question-circle attribute-info-icon magic-level-info-icon" data-tooltip-id="tooltip-niveauMagie-{{item._id}}" title="Description du Niveau de Magie"></i>
+                    <div class="tooltip-popup magic-level-tooltip" id="tooltip-niveauMagie-{{item._id}}">
+                        <p>{{dynamicDescriptions.niveauMagie.description}}</p>
+                    </div>
+                </div>
+            </div>
+            {{!-- Display for "Possédé par (PJ)" --}}
+            {{#if system.locked}}
+                {{#if system.possessingActorNameOnLock}}
+                <div class="form-group possessing-actor-display locked-display">
+                    <label>Possédé par :</label>
+                    <span>{{system.possessingActorNameOnLock}}</span>
+                    {{!-- Trash icon moved to the 'unlocked' section --}}
+                </div>
+                {{/if}}
+            {{else}} {{!-- Item is UNLOCKED --}}
+                {{#if currentLivePossessingActorName}}
+                <div class="form-group possessing-actor-display">
+                    <label>Possesseur actuel:</label>
+                    <span>{{currentLivePossessingActorName}}</span>
+                    {{!-- No trash icon here, as this is live data --}}
+                </div>
+                {{/if}}
+
+                {{!-- Section for clearing STALE stored actor data when UNLOCKED --}}
+                {{#if system.possessingActorNameOnLock}}
+                <div class="form-group possessing-actor-display stale-stored-actor-cleanup">
+                    <label>Données stockées:</label>
+                    <span>{{system.possessingActorNameOnLock}}</span>
+                    <a class="clear-possessing-actor-on-lock" title="Oublier les données de l'acteur précédemment stocké et ses stats"><i class="fas fa-trash-alt"></i></a>
+                </div>
+                {{/if}}
+            {{/if}}
+        </div>
+            
+        <div class="ombre-content-columns"> <!-- Nouveau conteneur pour les colonnes -->
+
+            <div class="ombre-center-column"> <!-- Nouvelle Colonne Centrale pour les attributs -->
+                <!-- Section Attributs Collapsible -->
+                <div class="ombre-collapsible-header" data-target-section="ombre-attributes-content-{{item._id}}">
+                    <span class="collapsible-header-title">Attributs de l'Ombre</span>
+                    <i class="fas fa-chevron-down collapsible-header-icon"></i>
+                </div>
+                
+                <div class="ombre-attributes-list toggleable-content" id="ombre-attributes-content-{{item._id}}" style="display: none;">
+                    <!-- Grid Header -->
+                    <div class="attribute-grid-header">Attributs</div>
+                    <div class="attribute-grid-header">Niveau</div>
+                    <div class="attribute-grid-header">Aide</div>
+                    <div class="attribute-grid-header">Coût</div>
+                    <div class="attribute-grid-header">Description</div>
+                    
+                    <!-- Contrôle de l'Ombre Row -->
+                    <div class="attribute-grid-label"><label for="select-controleOmbre-{{item._id}}">Contrôle de l'Ombre:</label></div>
+                    <div class="attribute-grid-niveau" data-property-name="system.controleOmbre">
+                        <select id="select-controleOmbre-{{item._id}}" class="attribute-level-select" title="Détails des niveaux de Contrôle de l'Ombre" name="system.controleOmbre" data-dtype="Number" {{#if system.locked}}disabled{{/if}}>
+                            <option value="0" {{#if (eq system.controleOmbre 0)}}selected{{/if}}>Non Applicable</option>
+                            <option value="5" {{#if (eq system.controleOmbre 5)}}selected{{/if}}>Niveau 5 : Contrôle de l'environnement</option>
+                            <option value="10" {{#if (eq system.controleOmbre 10)}}selected{{/if}}>Niveau 10 : Contrôle du vivant</option>
+                            <option value="15" {{#if (eq system.controleOmbre 15)}}selected{{/if}}>Niveau 15 : Création / destruction</option>
+                        </select>
+                    </div>
+                    <div class="attribute-grid-aide">
+                        <div class="info-icon-wrapper">
+                            <i class="fas fa-info-circle attribute-info-icon" data-tooltip-id="tooltip-controleOmbre-{{item._id}}" title="Plus d'informations sur Contrôle de l'Ombre"></i>
+                            <div class="tooltip-popup" id="tooltip-controleOmbre-{{item._id}}">
+                                <div>Cette capacité vous permet de contrôler les éléments présents dans votre Ombre.
+                                    <div>Niveau 5 : Contrôle de l'environnement. Vous contrôlez la pluie et le beau temps !</div>
+                                    <div>Niveau 10 : Contrôle du vivant. Vous contrôlez les créatures et les êtres vivants de votre Ombre.</div>
+                                    <div>Niveau 15 : Création / destruction. Vous pouvez créer ce que vous voulez dans votre Ombre, il n’y a que votre imagination pour vous limiter. Et puis le détruire si cela vous chante.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="attribute-grid-cout"><span class="attribute-cost-display">{{system.controleOmbre}}</span></div>
+                    <div class="attribute-grid-description"><span class="attribute-level-description-text" data-desc-for="system.controleOmbre">{{dynamicDescriptions.controleOmbre}}</span></div>
+                
+                    <!-- Gardien de l'Ombre Row -->
+                    <div class="attribute-grid-label"><label for="select-gardienOmbre-{{item._id}}">Gardien de l'Ombre:</label></div>
+                    <div class="attribute-grid-niveau" data-property-name="system.gardienOmbre">
+                        <select id="select-gardienOmbre-{{item._id}}" class="attribute-level-select" title="Détails des niveaux de Gardien de l'Ombre" name="system.gardienOmbre" data-dtype="Number" {{#if system.locked}}disabled{{/if}}>
+                            <option value="0" {{#if (eq system.gardienOmbre 0)}}selected{{/if}}>Non Applicable</option>
+                            <option value="5" {{#if (eq system.gardienOmbre 5)}}selected{{/if}}>Niveau 5 : Gardien de l'ombre pouvant repousser un Chaosien ou une troupe de démons.</option>
+                            <option value="10" {{#if (eq system.gardienOmbre 10)}}selected{{/if}}>Niveau 10 : Puissant Gardien de l'ombre pouvant repousser un Ambrien de 2nde génération.</option>
+                            <option value="15" {{#if (eq system.gardienOmbre 15)}}selected{{/if}}>Niveau 15 : Gardien immortel pouvant repousser un Ambrien de 1ière génération.</option>
+                        </select>
+                    </div>
+                    <div class="attribute-grid-aide">
+                        <div class="info-icon-wrapper">
+                            <i class="fas fa-info-circle attribute-info-icon" data-tooltip-id="tooltip-gardienOmbre-{{item._id}}" title="Plus d'informations sur Gardien de l'Ombre"></i>
+                            <div class="tooltip-popup" id="tooltip-gardienOmbre-{{item._id}}">
+                                <div>Un gardien est lié à l'Ombre (et à vous) et ne peut pas en sortir. Il ne possède aucun Pouvoir primordial (Marelle, Logrus, Atouts…), mais puisqu’il est lié à vous, il pourrait bloquer ou débloquer les pouvoirs que vous maitrisez au niveau 8 (voir la capacité contrôle des pouvoirs). Il peut également posséder des pouvoirs magiques qui fonctionnent uniquement dans votre Ombre. Plus votre gardien est puissant et autonome pour réagir à toute situation, plus il est intelligent et doué de sensibilité. Il devient comme un enfant qu'il faut éduquer et surveiller. Il devient un PNJ avec ses propres envies et motivations. À moins d'opter pour la fabrication d'un Robot, bête et discipliné.
+                                    <div>Niveau 5 : Gardien de l'ombre pouvant repousser un Chaosien ou une troupe de démons.</div>
+                                    <div>Niveau 10 : Puissant Gardien de l'ombre pouvant repousser un Ambrien de 2nde génération.</div>
+                                    <div>Niveau 15 : Gardien immortel pouvant repousser un Ambrien de 1ière génération.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="attribute-grid-cout"><span class="attribute-cost-display">{{system.gardienOmbre}}</span></div>
+                    <div class="attribute-grid-description"><span class="attribute-level-description-text" data-desc-for="system.gardienOmbre">{{dynamicDescriptions.gardienOmbre}}</span></div>
+
+                    <!-- Contrôle du Destin Row -->
+                    <div class="attribute-grid-label"><label for="select-controleDestin-{{item._id}}">Contrôle du Destin:</label></div>
+                    <div class="attribute-grid-niveau" data-property-name="system.controleDestin">
+                        <select id="select-controleDestin-{{item._id}}" class="attribute-level-select" title="Détails des niveaux de Contrôle du Destin" name="system.controleDestin" data-dtype="Number" {{#if system.locked}}disabled{{/if}}>
+                            <option value="0" {{#if (eq system.controleDestin 0)}}selected{{/if}}>Non Applicable</option>
+                            <option value="5" {{#if (eq system.controleDestin 5)}}selected{{/if}}>Niveau 5 : Attraction d'humain via sorcellerie</option>
+                            <option value="10" {{#if (eq system.controleDestin 10)}}selected{{/if}}>Niveau 10 : Attraction de Chaosien via sorcellerie</option>
+                            <option value="15" {{#if (eq system.controleDestin 15)}}selected{{/if}}>Niveau 15 : Attraction d'Ambrien via Marelle</option>
+                        </select>
+                    </div>
+                    <div class="attribute-grid-aide">
+                        <div class="info-icon-wrapper">
+                            <i class="fas fa-info-circle attribute-info-icon" data-tooltip-id="tooltip-controleDestin-{{item._id}}" title="Plus d'informations sur Contrôle du Destin"></i>
+                            <div class="tooltip-popup" id="tooltip-controleDestin-{{item._id}}">
+                                <div>Vous contrôlez le destin dans votre ombre.
+                                    <div>Niveau 5 : L'Ombre peut se déplacer et se trouver sur le chemin d'un humain qui utilise la sorcellerie (portail magique). Affichez l’image de l’humain sur les affiches, les murs et autres supports publicitaires de votre Ombre personnelle, pour que cela fonctionne.</div>
+                                    <div>Niveau 10 : L'Ombre peut se déplacer et se trouver sur le chemin d'un Chaosien qui utilise la sorcellerie (Portail magique). Affichez l’image du Chaosien sur les affiches, les murs et autres supports publicitaires de votre Ombre personnelle, pour que cela fonctionne.</div>
+                                    <div>Niveau 15 : L'Ombre peut se déplacer et se trouver sur le chemin d'un Ambrien qui utilise la marelle. Vous souhaitez que Fiona visite votre Ombre lors d’un voyage avec la Marelle. Affichez l’image de Fiona, sur les affiches, les murs et autres supports publicitaires de votre Ombre personnelle, pour que cela fonctionne.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="attribute-grid-cout"><span class="attribute-cost-display">{{system.controleDestin}}</span></div>
+                    <div class="attribute-grid-description"><span class="attribute-level-description-text" data-desc-for="system.controleDestin">{{dynamicDescriptions.controleDestin}}</span></div>
+
+                    <!-- Contrôle Temporel Row -->
+                    <div class="attribute-grid-label"><label for="select-controleTemporel-{{item._id}}">Contrôle Temporel:</label></div>
+                    <div class="attribute-grid-niveau" data-property-name="system.controleTemporel">
+                        <select id="select-controleTemporel-{{item._id}}" class="attribute-level-select" title="Détails des niveaux de Contrôle Temporel" name="system.controleTemporel" data-dtype="Number" {{#if system.locked}}disabled{{/if}}>
+                            <option value="0" {{#if (eq system.controleTemporel 0)}}selected{{/if}}>Non Applicable</option>
+                            <option value="5" {{#if (eq system.controleTemporel 5)}}selected{{/if}}>Niveau 5 : Accélération/Ralentissement X 2</option>
+                            <option value="10" {{#if (eq system.controleTemporel 10)}}selected{{/if}}>Niveau 10 : Accélération/Ralentissement X 4</option>
+                            <option value="15" {{#if (eq system.controleTemporel 15)}}selected{{/if}}>Niveau 15 : Accélération/Ralentissement X 6</option>
+                        </select>
+                    </div>
+                    <div class="attribute-grid-aide">
+                        <div class="info-icon-wrapper">
+                            <i class="fas fa-info-circle attribute-info-icon" data-tooltip-id="tooltip-controleTemporel-{{item._id}}" title="Plus d'informations sur Contrôle Temporel"></i>
+                            <div class="tooltip-popup" id="tooltip-controleTemporel-{{item._id}}">
+                                <div>Le décalage temporel entre une Ombre personnelle et Ambre est toujours de 6, soit 1h dans votre Ombre = 6h à Ambre.
+                                    <div>Niveau 5 : Accélération/Ralentissement X 2 (soit en Accélération 1h dans votre Ombre = 3h à Ambre. Et en Ralentissement 1h dans votre Ombre = 12h à Ambre.)</div>
+                                    <div>Niveau 10 : Accélération/Ralentissement X 4 (soit en Accélération 1h dans votre Ombre = 1h30 à Ambre. Et en Ralentissement 1h dans votre Ombre = 24h à Ambre.)</div>
+                                    <div>Niveau 15 : Accélération/Ralentissement X 6 (soit en Accélération la même heure qu’à Ambre. Et en Ralentissement 1h dans votre Ombre = 36h à Ambre.) Vous comprenez pourquoi les Ambriens ont tendance se retrouver à Ambre ou dans leur Ombre personnelle ?</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="attribute-grid-cout"><span class="attribute-cost-display">{{system.controleTemporel}}</span></div>
+                    <div class="attribute-grid-description"><span class="attribute-level-description-text" data-desc-for="system.controleTemporel">{{dynamicDescriptions.controleTemporel}}</span></div>
+
+                    <!-- Blocage Communications Row -->
+                    <div class="attribute-grid-label"><label for="select-blocageCommunications-{{item._id}}">Blocage Communications:</label></div>
+                    <div class="attribute-grid-niveau" data-property-name="system.blocageCommunications">
+                        <select id="select-blocageCommunications-{{item._id}}" class="attribute-level-select" title="Détails des niveaux de Blocage Communications" name="system.blocageCommunications" data-dtype="Number" {{#if system.locked}}disabled{{/if}}>
+                            <option value="0" {{#if (eq system.blocageCommunications 0)}}selected{{/if}}>Non Applicable</option>
+                            <option value="5" {{#if (eq system.blocageCommunications 5)}}selected{{/if}}>Niveau 5 : Communications psychiques restreintes aux Pouvoirs activés</option>
+                            <option value="10" {{#if (eq system.blocageCommunications 10)}}selected{{/if}}>Niveau 10 : Communications restreintes, détection d'activation</option>
+                            <option value="15" {{#if (eq system.blocageCommunications 15)}}selected{{/if}}>Niveau 15 : Communications restreintes, détection à distance, contenu audible</option>
+                        </select>
+                    </div>
+                    <div class="attribute-grid-aide">
+                        <div class="info-icon-wrapper">
+                            <i class="fas fa-info-circle attribute-info-icon" data-tooltip-id="tooltip-blocageCommunications-{{item._id}}" title="Plus d'informations sur Blocage Communications"></i>
+                            <div class="tooltip-popup" id="tooltip-blocageCommunications-{{item._id}}">
+                                <div>Une rupture des communications signifie qu’une chose : une invasion !
+                                    <div>Niveau 5 : Les communications psychiques (Atouts, ou autres liens mentaux) sont restreintes aux Pouvoirs que vous avez activé.</div>
+                                    <div>Niveau 10 : Les communications psychiques (Atouts, ou autres liens mentaux) sont restreintes aux Pouvoirs que vous avez activés et vous détectez l’activation de ces communications.</div>
+                                    <div>Niveau 15 : Les communications psychiques (Atouts, ou autres liens mentaux) sont restreintes aux Pouvoirs que vous avez activés et vous détectez l’activation de ces communications, même si vous êtes dans une autre Ombre. Le contenu est totalement audible si vous êtes dans votre ombre.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="attribute-grid-cout"><span class="attribute-cost-display">{{system.blocageCommunications}}</span></div>
+                    <div class="attribute-grid-description"><span class="attribute-level-description-text" data-desc-for="system.blocageCommunications">{{dynamicDescriptions.blocageCommunications}}</span></div>
+
+                    <!-- Blocage des Accès Row -->
+                    <div class="attribute-grid-label"><label for="select-blocageAcces-{{item._id}}">Blocage des Accès:</label></div>
+                    <div class="attribute-grid-niveau" data-property-name="system.blocageAcces">
+                        <select id="select-blocageAcces-{{item._id}}" class="attribute-level-select" title="Détails des niveaux de Blocage des Accès" name="system.blocageAcces" data-dtype="Number" {{#if system.locked}}disabled{{/if}}>
+                            <option value="0" {{#if (eq system.blocageAcces 0)}}selected{{/if}}>Non Applicable</option>
+                            <option value="5" {{#if (eq system.blocageAcces 5)}}selected{{/if}}>Niveau 5 : Accès conditionné, alerte gardien</option>
+                            <option value="10" {{#if (eq system.blocageAcces 10)}}selected{{/if}}>Niveau 10 : Accès restreint (1 règle), alerte vous et gardien</option>
+                            <option value="15" {{#if (eq system.blocageAcces 15)}}selected{{/if}}>Niveau 15 : Accès restreint (1 point), alerte vous et gardien</option>
+                        </select>
+                    </div>
+                    <div class="attribute-grid-aide">
+                        <div class="info-icon-wrapper">
+                            <i class="fas fa-info-circle attribute-info-icon" data-tooltip-id="tooltip-blocageAcces-{{item._id}}" title="Plus d'informations sur Blocage des Accès"></i>
+                            <div class="tooltip-popup" id="tooltip-blocageAcces-{{item._id}}">
+                                <div>Niveau 5 : L'accès à l'Ombre est conditionné à plusieurs règles. Si quelqu'un/quelque chose passe l'entrée, le gardien de l'ombre est averti immédiatement.</div>
+                                <div>Niveau 10 : L'accès à l'Ombre est restreint à une unique règle. Si quelqu'un/quelque chose passe l'entrée, vous et votre gardien de l'Ombre êtes avertis immédiatement.</div>
+                                <div>Niveau 15 : L'accès à l'Ombre est totalement restreint à un unique point d'entrée. Si quelqu'un/quelque chose passe l'entrée, vous et votre gardien de l'Ombre êtes avertis immédiatement.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="attribute-grid-cout"><span class="attribute-cost-display">{{system.blocageAcces}}</span></div>
+                    <div class="attribute-grid-description"><span class="attribute-level-description-text" data-desc-for="system.blocageAcces">{{dynamicDescriptions.blocageAcces}}</span></div>
+
+                    <!-- Omniscience Divine Row -->
+                    <div class="attribute-grid-label"><label for="select-omniscienceDivine-{{item._id}}">Omniscience Divine:</label></div>
+                    <div class="attribute-grid-niveau" data-property-name="system.omniscienceDivine">
+                        <select id="select-omniscienceDivine-{{item._id}}" class="attribute-level-select" title="Détails des niveaux d'Omniscience Divine" name="system.omniscienceDivine" data-dtype="Number" {{#if system.locked}}disabled{{/if}}>
+                            <option value="0" {{#if (eq system.omniscienceDivine 0)}}selected{{/if}}>Non Applicable</option>
+                            <option value="5" {{#if (eq system.omniscienceDivine 5)}}selected{{/if}}>Niveau 5 : Prévenance (PER x 10s)</option>
+                            <option value="10" {{#if (eq system.omniscienceDivine 10)}}selected{{/if}}>Niveau 10 : Prévenance (PER x 1s)</option>
+                            <option value="15" {{#if (eq system.omniscienceDivine 15)}}selected{{/if}}>Niveau 15 : Prévenance (PER / 10s)</option>
+                        </select>
+                    </div>
+                    <div class="attribute-grid-aide">
+                        <div class="info-icon-wrapper">
+                            <i class="fas fa-info-circle attribute-info-icon" data-tooltip-id="tooltip-omniscienceDivine-{{item._id}}" title="Plus d'informations sur Omniscience Divine"></i>
+                            <div class="tooltip-popup" id="tooltip-omniscienceDivine-{{item._id}}">
+                                <div>Niveau 5 : Le propriétaire de l'Ombre peut voir à court terme ce qu'il va se passer d'anormal. Le temps de prévenance est égal à sa PERCEPTION x 10 en seconde.</div>
+                                <div>Niveau 10 : Le propriétaire de l'Ombre peut voir à court terme ce qu'il va se passer d'anormal. Le temps de prévenance est égal à sa PERCEPTION en seconde.</div>
+                                <div>Niveau 15 : Le propriétaire de l'Ombre peut voir à court terme ce qu'il va se passer d'anormal. Le temps de prévenance est égal à sa PERCEPTION / 10 en seconde.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="attribute-grid-cout"><span class="attribute-cost-display">{{system.omniscienceDivine}}</span></div>
+                    <div class="attribute-grid-description"><span class="attribute-level-description-text" data-desc-for="system.omniscienceDivine">{{dynamicDescriptions.omniscienceDivine}}</span></div>
+
+                    <!-- Contrôle des Pouvoirs Row -->
+                    <div class="attribute-grid-label"><label for="select-controlePouvoirs-{{item._id}}">Contrôle des Pouvoirs:</label></div>
+                    <div class="attribute-grid-niveau" data-property-name="system.controlePouvoirs">
+                        <select id="select-controlePouvoirs-{{item._id}}" class="attribute-level-select" title="Détails des niveaux de Contrôle des Pouvoirs" name="system.controlePouvoirs" data-dtype="Number" {{#if system.locked}}disabled{{/if}}>
+                            <option value="0" {{#if (eq system.controlePouvoirs 0)}}selected{{/if}}>Non Applicable</option>
+                            <option value="5" {{#if (eq system.controlePouvoirs 5)}}selected{{/if}}>Niv 5: Vous seul (pouvoirs niv. 8+)</option>
+                            <option value="10" {{#if (eq system.controlePouvoirs 10)}}selected{{/if}}>Niv 10: Vous/Gardien (pouvoirs niv. 8+), Gardien bloque</option>
+                            <option value="15" {{#if (eq system.controlePouvoirs 15)}}selected{{/if}}>Niv 15: Vous/Gardien/Amis (pouvoirs niv. 8+)</option>
+                        </select>
+                    </div>
+                    <div class="attribute-grid-aide">
+                        <div class="info-icon-wrapper">
+                            <i class="fas fa-info-circle attribute-info-icon" data-tooltip-id="tooltip-controlePouvoirs-{{item._id}}" title="Plus d'informations sur Contrôle des Pouvoirs"></i>
+                            <div class="tooltip-popup" id="tooltip-controlePouvoirs-{{item._id}}">
+                                <div>Cette capacité vous permet d’activer ou désactiver un pouvoir, que vous maitrisez au niveau 8 au minimum, dans votre Ombre personnel. Si vous ne le maitrisez pas, vous n’en aurez pas le contrôle. Si vous avez choisi le niveau 15 dans cette capacité vos amis ou amies, ils peuvent activer ou désactiver un pouvoir qu’ils maitrisent au niveau 8 minimum. De base, les Pouvoirs sont non limités et activés en permanence dans votre Ombre.
+                                    <div>Niveau 5 : Il n’y a que vous qui pouvez activer/désactiver vos pouvoirs de niveau 8.</div>
+                                    <div>Niveau 10 : Il n’y a que vous et votre gardien qui pouvez activer/désactiver les pouvoirs de niveau 8. Quand vous êtes absent, il peut bloquer ou débloquer un intrus utilisant l’énergie de vos pouvoirs niveau 8.</div>
+                                    <div>Niveau 15 : Il n’y a que vous, votre gardien et vos amis qui pouvez activer/désactiver les pouvoirs de niveau 8.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="attribute-grid-cout"><span class="attribute-cost-display">{{system.controlePouvoirs}}</span></div>
+                    <div class="attribute-grid-description"><span class="attribute-level-description-text" data-desc-for="system.controlePouvoirs">{{dynamicDescriptions.controlePouvoirs}}</span></div>
+                    {{#if (eq system.controlePouvoirs 15)}}
+                    <div class="controle-pouvoirs-amis-container" style="grid-column: 1 / -1;">
+                        <div class="controle-pouvoirs-amis-details">
+                            {{> "systems/ambre/templates/partials/ombre-controle-pouvoirs-amis.hbs"}}
+                        </div>
+                    </div>
+                    {{/if}}
+                                    
+                </div>
+            </div> <!-- Fin de ombre-center-column -->
+
+        </div> <!-- Fin de ombre-content-columns -->
+                
+        <!-- Section Journaux Liés Collapsible -->
+        <div class="ombre-collapsible-header" data-target-section="ombre-linked-journals-content-{{item._id}}">
+            <span class="collapsible-header-title">Journaux Liés</span>
+            <i class="fas fa-chevron-down collapsible-header-icon"></i>
+        </div>
+        <div class="ombre-linked-journals-section toggleable-content" id="ombre-linked-journals-content-{{item._id}}" style="display: none;">
+            <div class="header-controls">
+                <a class="item-control journal-create-button" title="Créer une nouvelle Entrée de Journal et la lier"><i class="fas fa-plus"></i> Créer Journal</a>
+            </div>
+            <div class="drop-target journal-drop-target" data-item-type="journal" aria-label="Zone de dépôt pour lier des journaux existants">
+                {{#if linkedJournals.length}}
+                    <ul class="linked-journals-list">
+                    {{#each linkedJournals as |journal|}}
+                        <li class="journal-list-item" data-journal-uuid="{{journal.uuid}}">
+                            <span class="journal-name">{{journal.name}}</span>
+                            <div class="item-controls">
+                                <a class="item-control journal-edit" title="Éditer l'Entrée de Journal"><i class="fas fa-edit"></i></a>
+                                <a class="item-control journal-unlink" title="Délier l'Entrée de Journal de cet Ombre"><i class="fas fa-unlink"></i></a>
+                            </div>
+                        </li>
+                    {{/each}}
+                    </ul>
+                {{else}}
+                    <p class="drop-hint">Déposez des Entrées de Journal ici pour les lier, ou créez-en une nouvelle.</p>
+                {{/if}}
+            </div>
+        </div>
+
+    </section>
+    <section class="sheet-body">
+        <div class="tab active" data-tab="description">
+            {{editor system.description target="system.description" button=true owner=owner editable=editable}}
+        </div>
+    </section>
+</form>

@@ -1,0 +1,371 @@
+<!-- Section for All Avantages -->
+<h3 class="clickable-tab-title section-header-with-controls {{#if avantagesExpanded}}active{{/if}}" data-tab-target="avantages-content-area">
+    <span>Avantages</span>
+    <a class="button icon-button refresh-avantages-button" title="Réinitialiser tous les avantages"><i class="fas fa-sync-alt"></i></a>
+</h3>
+<div class="avantages-all-section toggleable-tab-content" id="avantages-content-area" {{#unless avantagesExpanded}}style="display: none;"{{/unless}}>
+    <!-- Avantages from PHYSIQUE -->
+    {{#if (gt system.force 50)}}
+        <div class="avantage-item">
+            <h4>PHYSIQUE - Force : Puissance</h4>
+            <div class="avantage-control-line">
+                <label class="clickable-label" data-description="puissance">Puissance</label>
+                <div class="avantage-dots-container">
+                    {{#if (and system.force (gte system.force 50))}}
+                        {{#each (range 1 (div (sub system.force 1) 50))}}
+                            <span class="avantage-dot {{#if (lookup ../system.puissance this)}}filled{{/if}}"
+                                  data-level="{{this}}"
+                                  data-avantage-key="puissance"
+                                  title="Niveau {{this}} de Puissance"></span>
+                        {{/each}}
+                    {{else}}
+                        <span class="avantage-none-message">Aucune puissance (Force < 50)</span>
+                    {{/if}}
+                </div>
+            </div>
+            <div class="description-note" id="desc-puissance" style="display: none;">
+                <small>{{localize "ambre.descriptions.puissance"}}</small>
+            </div>
+        </div>
+        {{/if}}
+
+        {{#if (gt system.dexterite 50)}}
+        <div class="avantage-item">
+            <h4>PHYSIQUE - Dextérité : Criticité</h4>
+            <div class="avantage-control-line">
+                <label class="clickable-label" data-description="criticite">Criticité</label>
+                <div class="avantage-dots-container">
+                    {{#if (and system.dexterite (gte system.dexterite 50))}}
+                        {{#each (range 1 (div (sub system.dexterite 1) 50))}}
+                            <span class="avantage-dot {{#if (lookup ../system.criticite this)}}filled{{/if}}"
+                                  data-level="{{this}}"
+                                  data-avantage-key="criticite"
+                                  title="Niveau {{this}} de Criticité"></span>
+                        {{/each}}
+                    {{else}}
+                        <span class="avantage-none-message">Aucune criticité (Dextérité < 50)</span>
+                    {{/if}}
+                </div>
+            </div>
+            <div class="description-note" id="desc-criticite" style="display: none;">
+                <small>{{localize "ambre.descriptions.criticite"}}</small>
+            </div>
+        </div>
+        {{/if}}
+
+        {{#if (gt system.reflexe 50)}}
+        <div class="avantage-item">
+            <h4>PHYSIQUE - Réflexe : Esquive</h4>
+            <div class="avantage-control-line">
+                <label class="clickable-label" data-description="esquive">Esquive</label>
+                <div class="avantage-dots-container">
+                    {{#if (and system.reflexe (gte system.reflexe 50))}}
+                        {{#each (range 1 (div (sub system.reflexe 1) 50))}}
+                            <span class="avantage-dot {{#if (lookup ../system.esquive this)}}filled{{/if}}"
+                                  data-level="{{this}}"
+                                  data-avantage-key="esquive"
+                                  title="Niveau {{this}} d'Esquive"></span>
+                        {{/each}}
+                    {{else}}
+                        <span class="avantage-none-message">Aucune esquive (Réflexe < 50)</span>
+                    {{/if}}
+                </div>
+            </div>
+            <div class="description-note" id="desc-esquive" style="display: none;">
+                <small>{{localize "ambre.descriptions.esquive"}}</small>
+            </div>
+        </div>
+        {{/if}}
+
+        <!-- Avantages from ENDURANCE -->
+        {{#if (gt system.adaptation 50)}}
+        <div class="avantage-item">
+            <h4>ENDURANCE - Adaptation : Insensibilité</h4>
+            <div class="avantage-control-line">
+                <label class="clickable-label" data-description="insensibilite">Insensibilité</label>
+                <div class="avantage-dots-container">
+                    {{#if (and system.adaptation (gte system.adaptation 50))}}
+                        {{#each (range 1 (div (sub system.adaptation 1) 50))}}
+                            <span class="avantage-dot {{#if (lookup ../system.insensibilite this)}}filled{{/if}}"
+                                  data-level="{{this}}"
+                                  data-avantage-key="insensibilite"
+                                  title="Niveau {{this}} d'Insensibilité"></span>
+                        {{/each}}
+                    {{else}}
+                        <span class="avantage-none-message">Aucune insensibilité (Adaptation < 50)</span>
+                    {{/if}}
+                </div>
+            </div>
+            <div class="description-note" id="desc-insensibilite" style="display: none;">
+                <small>{{localize "ambre.descriptions.insensibilite"}}</small>
+            </div>
+        </div>
+        {{/if}}
+
+        {{#if (gt system.regeneration 50)}}
+        <div class="avantage-item">
+            <h4>ENDURANCE - Régénération : Cicatrisation</h4>
+            <div class="avantage-control-line">
+                <label class="clickable-label" data-description="cicatrisation">Cicatrisation</label>
+                <div class="avantage-dots-container">
+                    {{#if (and system.regeneration (gte system.regeneration 50))}}
+                        {{#each (range 1 (div (sub system.regeneration 1) 50))}}
+                            <span class="avantage-dot {{#if (lookup ../system.cicatrisation this)}}filled{{/if}}"
+                                  data-level="{{this}}"
+                                  data-avantage-key="cicatrisation"
+                                  title="Niveau {{this}} de Cicatrisation"></span>
+                        {{/each}}
+                    {{else}}
+                        <span class="avantage-none-message">Aucune cicatrisation (Régénération < 50)</span>
+                    {{/if}}
+                </div>
+            </div>
+            <div class="description-note" id="desc-cicatrisation" style="display: none;">
+                <small>{{localize "ambre.descriptions.cicatrisation"}}</small>
+            </div>
+        </div>
+        {{/if}}
+
+        {{#if (gt system.resistance 50)}}
+        <div class="avantage-item">
+            <h4>ENDURANCE - Résistance : Tenacité</h4>
+            <div class="avantage-control-line">
+                <label class="clickable-label" data-description="tenacite">Tenacité</label>
+                <div class="avantage-dots-container">
+                    {{#if (and system.resistance (gte system.resistance 50))}}
+                        {{#each (range 1 (div (sub system.resistance 1) 50))}}
+                            <span class="avantage-dot {{#if (lookup ../system.tenacite this)}}filled{{/if}}"
+                                  data-level="{{this}}"
+                                  data-avantage-key="tenacite"
+                                  title="Niveau {{this}} de Tenacité"></span>
+                        {{/each}}
+                    {{else}}
+                        <span class="avantage-none-message">Aucune tenacité (Résistance < 50)</span>
+                    {{/if}}
+                </div>
+            </div>
+            <div class="description-note" id="desc-tenacite" style="display: none;">
+                <small>{{localize "ambre.descriptions.tenacite"}}</small>
+            </div>
+        </div>
+        {{/if}}
+
+        <!-- Avantages from PSYCHE -->
+        {{#if (gt system.intelligence 50)}}
+        <div class="avantage-item">
+            <h4>PSYCHE - Intelligence : Liberté</h4>
+            <div class="avantage-control-line">
+                <label class="clickable-label" data-description="liberte">Liberté</label>
+                <div class="avantage-dots-container">
+                    {{#if (and system.intelligence (gte system.intelligence 50))}}
+                        {{#each (range 1 (div (sub system.intelligence 1) 50))}}
+                            <span class="avantage-dot {{#if (lookup ../system.liberte this)}}filled{{/if}}"
+                                  data-level="{{this}}"
+                                  data-avantage-key="liberte"
+                                  title="Niveau {{this}} de Liberté"></span>
+                        {{/each}}
+                    {{else}}
+                        <span class="avantage-none-message">Aucune liberté (Intelligence < 50)</span>
+                    {{/if}}
+                </div>
+            </div>
+            <div class="description-note" id="desc-liberte" style="display: none;">
+                <small>{{localize "ambre.descriptions.liberte"}}</small>
+            </div>
+        </div>
+        {{/if}}
+
+        {{#if (gt system.concentration 50)}}
+        <div class="avantage-item">
+            <h4>PSYCHE - Concentration : Dualité</h4>
+            <div class="avantage-control-line">
+                <label class="clickable-label" data-description="dualite">Dualité</label>
+                <div class="avantage-dots-container">
+                    {{#if (and system.concentration (gte system.concentration 50))}}
+                        {{#each (range 1 (div (sub system.concentration 1) 50))}}
+                            <span class="avantage-dot {{#if (lookup ../system.dualite this)}}filled{{/if}}"
+                                  data-level="{{this}}"
+                                  data-avantage-key="dualite"
+                                  title="Niveau {{this}} de Dualité"></span>
+                        {{/each}}
+                    {{else}}
+                        <span class="avantage-none-message">Aucune dualité (Concentration < 50)</span>
+                    {{/if}}
+                </div>
+            </div>
+            <div class="description-note" id="desc-dualite" style="display: none;">
+                <small>{{localize "ambre.descriptions.dualite"}}</small>
+            </div>
+        </div>
+        {{/if}}
+
+        {{#if (gt system.volonte 50)}}
+        <div class="avantage-item">
+            <h4>PSYCHE - Volonté : Acharnement</h4>
+            <div class="avantage-control-line">
+                <label class="clickable-label" data-description="acharnement">Acharnement</label>
+                <div class="avantage-dots-container">
+                    {{#if (and system.volonte (gte system.volonte 50))}}
+                        {{#each (range 1 (div (sub system.volonte 1) 50))}}
+                            <span class="avantage-dot {{#if (lookup ../system.acharnement this)}}filled{{/if}}"
+                                  data-level="{{this}}"
+                                  data-avantage-key="acharnement"
+                                  title="Niveau {{this}} d'Acharnement"></span>
+                        {{/each}}
+                    {{else}}
+                        <span class="avantage-none-message">Aucun acharnement (Volonté < 50)</span>
+                    {{/if}}
+                </div>
+            </div>
+            <div class="description-note" id="desc-acharnement" style="display: none;">
+                <small>{{localize "ambre.descriptions.acharnement"}}</small>
+            </div>
+        </div>
+        {{/if}}
+
+        <!-- Avantages from PERCEPTION -->
+        {{#if (gt system.sens 50)}}
+        <div class="avantage-item">
+            <h4>PERCEPTION - Sens : Acuité</h4>
+            <div class="avantage-control-line">
+                <label class="clickable-label" data-description="acuite">Acuité</label>
+                <div class="avantage-dots-container">
+                    {{#if (and system.sens (gte system.sens 50))}}
+                        {{#each (range 1 (div (sub system.sens 1) 50))}}
+                            <span class="avantage-dot {{#if (lookup ../system.acuite this)}}filled{{/if}}"
+                                  data-level="{{this}}"
+                                  data-avantage-key="acuite"
+                                  title="Niveau {{this}} d'Acuité"></span>
+                        {{/each}}
+                    {{else}}
+                        <span class="avantage-none-message">Aucune acuité (Sens < 50)</span>
+                    {{/if}}
+                </div>
+            </div>
+            <div class="description-note" id="desc-acuite" style="display: none;">
+                <small>{{localize "ambre.descriptions.acuite"}}</small>
+            </div>
+        </div>
+        {{/if}}
+
+        {{#if (gt system.sixiemesens 50)}}
+        <div class="avantage-item">
+            <h4>PERCEPTION - Sixième Sens : Chance</h4>
+            <div class="avantage-control-line">
+                <label class="clickable-label" data-description="chance">Chance</label>
+                <div class="avantage-dots-container">
+                    {{#if (and system.sixiemesens (gte system.sixiemesens 50))}}
+                        {{#each (range 1 (div (sub system.sixiemesens 1) 50))}}
+                            <span class="avantage-dot {{#if (lookup ../system.chance this)}}filled{{/if}}"
+                                  data-level="{{this}}"
+                                  data-avantage-key="chance"
+                                  title="Niveau {{this}} de Chance"></span>
+                        {{/each}}
+                    {{else}}
+                        <span class="avantage-none-message">Aucune chance (Sixième Sens < 50)</span>
+                    {{/if}}
+                </div>
+            </div>
+            <div class="description-note" id="desc-chance" style="display: none;">
+                <small>{{localize "ambre.descriptions.chance"}}</small>
+            </div>
+        </div>
+        {{/if}}
+
+        {{#if (gt system.empathie 50)}}
+        <div class="avantage-item">
+            <h4>PERCEPTION - Empathie : Opacité</h4>
+            <div class="avantage-control-line">
+                <label class="clickable-label" data-description="opacite">Opacité</label>
+                <div class="avantage-dots-container">
+                    {{#if (and system.empathie (gte system.empathie 50))}}
+                        {{#each (range 1 (div (sub system.empathie 1) 50))}}
+                            <span class="avantage-dot {{#if (lookup ../system.opacite this)}}filled{{/if}}"
+                                  data-level="{{this}}"
+                                  data-avantage-key="opacite"
+                                  title="Niveau {{this}} d'Opacité"></span>
+                        {{/each}}
+                    {{else}}
+                        <span class="avantage-none-message">Aucune opacité (Empathie < 50)</span>
+                    {{/if}}
+                </div>
+            </div>
+            <div class="description-note" id="desc-opacite" style="display: none;">
+                <small>{{localize "ambre.descriptions.opacite"}}</small>
+            </div>
+        </div>
+        {{/if}}
+
+        <!-- Avantages from CHARISME -->
+        {{#if (gt system.eloquence 50)}}
+        <div class="avantage-item">
+            <h4>CHARISME - Eloquence : Audience</h4>
+            <div class="avantage-control-line">
+                <label class="clickable-label" data-description="audience">Audience</label>
+                <div class="avantage-dots-container">
+                    {{#if (and system.eloquence (gte system.eloquence 50))}}
+                        {{#each (range 1 (div (sub system.eloquence 1) 50))}}
+                            <span class="avantage-dot {{#if (lookup ../system.audience this)}}filled{{/if}}"
+                                  data-level="{{this}}"
+                                  data-avantage-key="audience"
+                                  title="Niveau {{this}} d'Audience"></span>
+                        {{/each}}
+                    {{else}}
+                        <span class="avantage-none-message">Aucune audience (Éloquence < 50)</span>
+                    {{/if}}
+                </div>
+            </div>
+            <div class="description-note" id="desc-audience" style="display: none;">
+                <small>{{localize "ambre.descriptions.audience"}}</small>
+            </div>
+        </div>
+        {{/if}}
+
+        {{#if (gt system.intimidation 50)}}
+        <div class="avantage-item">
+            <h4>CHARISME - Intimidation : Entrave</h4>
+            <div class="avantage-control-line">
+                <label class="clickable-label" data-description="entrave">Entrave</label>
+                <div class="avantage-dots-container">
+                    {{#if (and system.intimidation (gte system.intimidation 50))}}
+                        {{#each (range 1 (div (sub system.intimidation 1) 50))}}
+                            <span class="avantage-dot {{#if (lookup ../system.entrave this)}}filled{{/if}}"
+                                  data-level="{{this}}"
+                                  data-avantage-key="entrave"
+                                  title="Niveau {{this}} d'Entrave"></span>
+                        {{/each}}
+                    {{else}}
+                        <span class="avantage-none-message">Aucune entrave (Intimidation < 50)</span>
+                    {{/if}}
+                </div>
+            </div>
+            <div class="description-note" id="desc-entrave" style="display: none;">
+                <small>{{localize "ambre.descriptions.entrave"}}</small>
+            </div>
+        </div>
+        {{/if}}
+
+        {{#if (gt system.apparence 50)}}
+        <div class="avantage-item">
+            <h4>CHARISME - Apparence : Incognito</h4>
+            <div class="avantage-control-line">
+                <label class="clickable-label" data-description="incognito">Incognito</label>
+                <div class="avantage-dots-container">
+                    {{#if (and system.apparence (gte system.apparence 50))}}
+                        {{#each (range 1 (div (sub system.apparence 1) 50))}}
+                            <span class="avantage-dot {{#if (lookup ../system.incognito this)}}filled{{/if}}"
+                                  data-level="{{this}}"
+                                  data-avantage-key="incognito"
+                                  title="Niveau {{this}} d'Incognito"></span>
+                        {{/each}}
+                    {{else}}
+                        <span class="avantage-none-message">Pas incognito (Apparence < 50)</span>
+                    {{/if}}
+                </div>
+            </div>
+            <div class="description-note" id="desc-incognito" style="display: none;">
+                <small>{{localize "ambre.descriptions.incognito"}}</small>
+            </div>
+        </div>
+    {{/if}}
+</div>

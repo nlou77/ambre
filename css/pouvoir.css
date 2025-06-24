@@ -1,0 +1,1378 @@
+/* ===== POUVOIR MAIN SECTION STYLES ===== */
+
+/* Main pouvoir section container */
+.pouvoir-section {
+    width: 100%;
+    margin-bottom: 25px;
+    /* Uniformize frame style with .capacites-display-settings */
+    padding: 15px; /* Reduced padding */
+    background: var(--theme-background-alt);
+    border-radius: 8px; /* Reduced radius */
+    border: 1px solid var(--theme-primary-color); /* Reduced border thickness */
+    transition: all 0.3s ease;
+}
+
+.pouvoir-section:hover {
+    box-shadow: 0 6px 12px var(--theme-primary-shadow, rgba(44, 96, 109, 0.3));
+}
+
+.pouvoir-section h3 {
+    font-family: var(--theme-font-header); /* Uniformisation de la police */
+    font-size: 16px; /* Reduced font size */
+    font-weight: bold;
+    color: var(--theme-primary-color);
+    text-transform: uppercase;
+    letter-spacing: 1px; /* Reduced spacing */
+    margin-bottom: 10px; /* Reduced margin */
+    text-align: center;
+    padding-bottom: 8px; /* Reduced padding */
+    border-bottom: 1px solid var(--theme-primary-light); /* Uniformisation du style de bordure */
+}
+
+/* Pouvoir container */
+.pouvoir-container {
+    width: 100%;
+}
+
+/* ===== POUVOIR MAIN ROW STYLES ===== */
+
+.pouvoir-main-row {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Reduced gap */
+    margin-bottom: 15px; /* Reduced margin */
+    padding: 10px; /* Reduced padding */
+    background: var(--theme-primary-light, rgba(44, 96, 109, 0.1));
+    border-radius: 8px;
+    border: 1px solid var(--theme-primary-color, #2C606D);
+    transition: all 0.3s ease;
+}
+
+.pouvoir-main-row:hover {
+    background: var(--theme-primary-medium, rgba(44, 96, 109, 0.15));
+    box-shadow: 0 2px 4px var(--theme-primary-shadow, rgba(44, 96, 109, 0.2));
+}
+
+.pouvoir-label-main {
+    font-weight: bold;
+    min-width: 120px;
+    color: var(--theme-primary-color, #2C606D);
+    font-family: var(--theme-font-header, 'AJensonPro'), serif;
+    font-size: 16px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.pouvoir-input-main {
+    width: 80px;
+    padding: 8px;
+    border: 2px solid var(--theme-border-color, #ccc);
+    border-radius: 6px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 14px;
+    background: var(--theme-background-light, rgba(255, 255, 255, 0.9));
+    color: var(--theme-text-color, #262925);
+    transition: all 0.3s ease;
+}
+
+.pouvoir-input-main:focus {
+    border-color: var(--theme-primary-color, #2C606D);
+    outline: none;
+    box-shadow: 0 0 6px var(--theme-primary-shadow, rgba(44, 96, 109, 0.4));
+}
+
+.pouvoir-input-main:hover {
+    border-color: var(--theme-primary-color, #2C606D);
+}
+
+.pouvoir-niveau-main {
+    font-weight: bold;
+    color: var(--theme-primary-color, #2C606D);
+    font-family: var(--theme-font-header, 'AJensonPro'), serif;
+    font-size: 16px;
+    padding: 8px 12px;
+    background: var(--theme-background-light, rgba(255, 255, 255, 0.9));
+    border-radius: 6px;
+    border: 1px solid var(--theme-primary-color, #2C606D);
+    min-width: 120px;
+    text-align: center;
+}
+
+.pouvoir-capacites-btn-main {
+    background: var(--theme-primary-color, #2C606D);
+    color: white;
+    padding: 10px 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 14px;
+    font-family: var(--theme-font-header, 'AJensonPro'), serif;
+    transition: all 0.3s ease;
+    min-width: 160px;
+    text-align: center;
+}
+
+.pouvoir-capacites-btn-main:hover {
+    background: var(--theme-primary-dark, #1a4a54);
+    box-shadow: 0 2px 6px var(--theme-primary-shadow, rgba(44, 96, 109, 0.4));
+    transform: translateY(-1px);
+}
+
+.pouvoir-capacites-btn-main:active {
+    transform: translateY(0);
+    box-shadow: 0 1px 3px var(--theme-primary-shadow, rgba(44, 96, 109, 0.3));
+}
+
+/* ===== TALENTS SPECIFIQUES SECTION STYLES ===== */
+.talents-specifiques-section {
+    /* margin-top: 15px; Removed, gap on parent will handle */
+    /* margin-bottom: 15px; Removed, gap on parent will handle */
+    border: 1px solid var(--theme-primary-medium, #6c9aa6); /* Slightly different border */
+    border-radius: 8px; /* Consistent with other new sections */
+    padding: 15px; /* Consistent padding */
+    background: var(--theme-background-alt, rgba(240, 245, 245, 0.9)); /* Slightly different background */
+    box-shadow: inset 0 1px 3px var(--theme-shadow-color, rgba(0, 0, 0, 0.04));
+    transition: all 0.3s ease;
+    flex: 0 0 auto; /* Don't grow, don't shrink, basis is content width */
+    /* width: fit-content; /* Alternative to flex-basis: auto for minimal width */
+}
+
+.talents-specifiques-section:hover {
+    border-color: var(--theme-primary-color);
+    box-shadow: 0 2px 6px var(--theme-shadow-color, rgba(0, 0, 0, 0.1)),
+                inset 0 1px 3px var(--theme-shadow-color, rgba(0, 0, 0, 0.04));
+}
+
+.talents-specifiques-section h4 {
+    margin-top: 0;
+    margin-bottom: 12px; /* Reduced margin */
+    color: var(--theme-primary-dark, #1a4a54); /* Darker title color */
+    font-family: var(--theme-font-title, 'AJensonPro'), serif;
+    font-size: 16px; /* Slightly smaller than capacites h4 */
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--theme-primary-medium, #6c9aa6); /* Different border */
+}
+
+.talent-item {
+    display: flex; /* Align label and circles horizontally */
+    align-items: center; /* Vertically align items */
+    gap: 10px; /* Space between label and circles container */
+    
+    /* Reset styles that made it look like an h4 */
+    color: var(--theme-text-color, #262925); /* Use a general text color */
+    font-family: var(--theme-font-body, 'Inter'), sans-serif; /* Use body font */
+    font-size: 14px; /* Regular text size */
+    font-weight: normal; /* Regular weight */
+    text-transform: none; /* No uppercase */
+    letter-spacing: normal; /* Normal spacing */
+    border-bottom: 1px solid var(--theme-border-light, #ddd); /* Lighter border or remove if not desired */
+    
+    padding: 8px 0; /* Adjust padding as needed */
+    margin-bottom: 8px;
+
+    /* --- Remove previous conflicting styles --- */
+    background: none;
+    border-radius: 0;
+    border-left: none;
+}
+
+.talents-specifiques-collapsible-group {
+    border: 1px solid var(--theme-primary-color);
+    border-radius: 8px;
+    margin-bottom: 20px; /* Space below the entire collapsible group */
+    background: var(--theme-background-alt); /* Match section background */
+}
+
+.talents-main-header { /* Specific class for the main collapsible header */
+    display: flex;
+    justify-content: space-between; /* Pushes icon to the right */
+    align-items: center;
+    padding: 10px 15px;
+    cursor: pointer;
+    background-color: var(--theme-primary-light); /* Slightly different from section content */
+    color: var(--theme-primary-dark);
+    font-family: var(--theme-font-header, 'AJensonPro'), serif;
+    font-size: 1.1em; /* Slightly larger than individual talent section titles */
+    font-weight: bold;
+    border-bottom: 1px solid var(--theme-primary-color);
+    border-top-left-radius: 7px; /* Match outer border-radius */
+    border-top-right-radius: 7px;
+    margin: 0; /* Remove default h3 margin */
+    transition: background-color 0.2s ease;
+}
+
+.talents-main-header:hover {
+    background-color: var(--theme-primary-medium);
+}
+
+.talents-main-header .collapsible-icon i {
+    transition: transform 0.3s ease;
+}
+
+.talents-main-header.expanded .collapsible-icon i {
+    transform: rotate(90deg);
+}
+
+.talents-specifiques-collapsible-group .collapsible-content {
+    display: flex; /* Changed from block/none to flex for row layout */
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 15px; /* Spacing between talent blocks */
+    padding: 10px 15px 15px 15px; /* Padding for the content area */
+    align-items: flex-start; /* Align items at the start of the cross axis */
+}
+
+/* Styles for draggable talent blocks */
+.talent-block-draggable {
+    cursor: grab;
+    /* flex: 0 0 auto; /* Already applied to inner sections, ensure wrapper behaves */
+    /* width: fit-content; /* Ensure wrapper is also fit-content */
+}
+
+.talent-block-draggable.dragging {
+    opacity: 0.4;
+    border: 2px dashed var(--theme-primary-dark);
+}
+
+.talent-item-icons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px; /* Space between icons */
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--theme-border-light, #ddd);
+    margin-bottom: 8px;
+}
+
+.talent-icon {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px; 
+    cursor: help; /* Indicate it's a tooltip */
+    padding: 5px 8px;
+    border: 1px solid var(--theme-border-light);
+    border-radius: 4px;
+    background-color: var(--theme-background-light);
+    font-size: 0.9em; /* Slightly smaller text for icon labels */
+}
+
+/* Styles for the Atout Gallery Grid images */
+.atout-gallery-grid .atout-grid-item .atout-image-as-button {
+    display: block; /* Ensure the link takes up space */
+    width: 90px; /* Match image size */
+    height: 90px; /* Match image size */
+    margin: 0 auto; /* Center the link/image within the grid item */
+}
+
+.atout-gallery-grid .atout-grid-image {
+    width: 100%; /* Fill the parent link */
+    height: 100%; /* Fill the parent link */
+    object-fit: cover; /* Ensure the image covers the area without distortion */
+}
+
+/* Custom Tooltip for Orbochromat */
+.orbochromat-custom-tooltip {
+    position: absolute; /* Changed from fixed to absolute */
+    /* top, left, and transform will be set by JavaScript */
+    background-color: var(--theme-background-light, #f8f9fa); /* Lighter background from theme */
+    border: 1px solid var(--theme-primary-color, #2C606D);
+    border-radius: 6px;
+    padding: 12px;
+    box-shadow: 0 4px 12px var(--theme-primary-shadow, rgba(44, 96, 109, 0.2)); /* Use theme shadow */
+    z-index: 1050;    /* Increased z-index to ensure it's on top, consistent with other popups */
+    width: auto; 
+    min-width: 250px; /* Ensure a minimum width */
+    max-width: 550px; /* Increased max-width to accommodate two columns */
+    font-size: 0.9em;
+    line-height: 1.5;
+    color: var(--theme-text-color, #262925);
+    font-family: var(--theme-font-body, 'Inter', sans-serif); /* Use theme body font */
+    max-height: 80vh; /* Add max-height to prevent overly tall tooltips */
+    overflow-y: auto; /* Allow scrolling for content that exceeds max-height */
+}
+
+.orbochromat-custom-tooltip div {
+    margin-bottom: 4px;
+    /* For multi-column layout, prevent items from breaking across columns if possible */
+    break-inside: avoid-column;
+    -webkit-column-break-inside: avoid; 
+            page-break-inside: avoid;
+}
+
+.orbochromat-custom-tooltip .tooltip-term {
+    font-weight: bold;
+    color: var(--theme-primary-dark, #1a4a54); 
+}
+
+.orbochromat-custom-tooltip .tooltip-definition {
+    color: var(--theme-text-secondary, #4b4b4b); /* Use secondary text color for definitions */
+    margin-left: 5px;
+}
+
+/* Specific styling for Brumes tooltip content to be in two columns */
+.orbochromat-custom-tooltip[data-tooltip-content-type="brumes"] .tooltip-content-wrapper {
+    column-count: 2;
+    column-gap: 20px;
+}
+
+.orbochromat-custom-tooltip .tooltip-separator {
+    font-weight: bold;
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px dashed var(--theme-border-color);
+    color: var(--theme-primary-dark);
+}
+
+.talent-subtitle {
+    display: block; /* Ensures it takes its own line below the h4 */
+    font-size: 0.8em;
+    font-weight: normal;
+    color: var(--theme-text-muted);
+    margin-top: 2px; /* Small space below the h4 content */
+    margin-bottom: 8px; /* Space before the next element like .drop-hint */
+    line-height: 1.2;
+}
+
+.talent-label {
+    font-weight: bold;
+    color: var(--theme-primary-dark, #1a4a54);
+    white-space: nowrap; 
+}
+
+.talent-circles-container {
+    display: flex;
+    flex-wrap: wrap; /* Allow circles to wrap if too many */
+    gap: 4px; /* Space between circles */
+}
+
+.talent-circle {
+    width: 12px; /* Size of the circle */
+    height: 12px; /* Size of the circle */
+    border-radius: 50%; /* Make it round */
+    display: inline-block;
+    box-sizing: border-box;
+}
+
+.talent-circle.filled {
+    background-color: var(--theme-primary-dark, #1a4a54); /* Color for filled circle */
+    border: 1px solid var(--theme-primary-dark, #1a4a54);
+}
+
+.talent-circle.empty {
+    background-color: transparent;
+    border: 1px solid var(--theme-text-muted, #6c757d); /* Color for empty circle border */
+}
+
+.talent-value-text {
+    font-size: 0.9em;
+    color: var(--theme-text-muted, #6c757d);
+    margin-left: 5px; /* Space from the circles */
+}
+
+/* ===== CAPACITES DETAIL SECTION STYLES ===== */
+
+.capacites-detail-main {
+    margin-top: 20px;
+    border: 2px solid var(--theme-primary-color, #2C606D);
+    border-radius: 10px;
+    padding: 20px;
+    background: var(--theme-background-light, rgba(255, 255, 255, 0.95));
+    box-shadow: inset 0 2px 4px var(--theme-shadow-color, rgba(0, 0, 0, 0.05));
+    transition: all 0.3s ease;
+}
+
+.capacites-detail-main h4 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: var(--theme-primary-color, #2C606D);
+    font-family: var(--theme-font-title, 'AJensonPro'), serif;
+    font-size: 18px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--theme-primary-color, #2C606D);
+}
+
+/* ===== CAPACITES GRID LAYOUT ===== */
+
+.capacites-header-main {
+    display: grid;
+    grid-template-columns: 2fr 80px 60px 100px 100px 100px 100px 120px;
+    gap: 10px;
+    font-weight: bold;
+    padding: 12px;
+    background: var(--theme-primary-color, #2C606D);
+    color: white;
+    border-radius: 6px;
+    margin-bottom: 10px;
+    font-family: var(--theme-font-header, 'AJensonPro'), serif;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.capacite-row-main {
+    display: grid;
+    grid-template-columns: 2fr 80px 60px 100px 100px 100px 100px 120px;
+    gap: 8px; /* Reduced gap */
+    padding: 8px 10px; /* Reduced padding */
+    margin-bottom: 6px; /* Reduced margin */
+    border-radius: 4px; /* Reduced radius */
+    transition: all 0.3s ease;
+    font-family: var(--theme-font-body, 'Inter'), sans-serif;
+    font-size: 13px;
+    border: 1px solid transparent;
+}
+
+.capacite-row-main:hover {
+    transform: translateX(2px);
+    box-shadow: 0 2px 6px var(--theme-shadow-color, rgba(0, 0, 0, 0.1));
+}
+
+/* Available capacite styling */
+.capacite-row-main.available {
+    background: rgba(40, 167, 69, 0.08); /* Slightly less intense */
+    border-left: 4px solid #28a745;
+    border-color: rgba(40, 167, 69, 0.2);
+}
+
+.capacite-row-main.available:hover {
+    background: rgba(40, 167, 69, 0.12); /* Slightly less intense */
+    border-color: rgba(40, 167, 69, 0.3);
+}
+
+/* Unavailable capacite styling */
+.capacite-row-main.unavailable {
+    background: rgba(220, 53, 69, 0.08);
+    border-left: 4px solid #dc3545;
+    border-color: rgba(220, 53, 69, 0.2);
+    opacity: 0.8; /* Slightly less transparent */
+}
+
+.capacite-row-main.unavailable:hover {
+    background: rgba(220, 53, 69, 0.15); /* Slightly less intense */
+    border-color: rgba(220, 53, 69, 0.3);
+    opacity: 0.8;
+}
+
+/* ===== CAPACITE CELL STYLES ===== */
+
+.capacite-nom-main {
+    font-weight: bold;
+    color: var(--theme-text-color, #262925);
+}
+
+.capacite-nom-main div {
+    font-size: 11px;
+    font-weight: normal;
+    color: var(--theme-text-muted, #666);
+    margin-top: 3px;
+    line-height: 1.3;
+}
+
+.capacite-niveau-main {
+    text-align: center;
+    font-weight: bold;
+    color: var(--theme-primary-color);
+    background: var(--theme-primary-light, rgba(44, 96, 109, 0.1));
+    border-radius: 4px;
+    padding: 4px;
+}
+
+.capacite-cout-main {
+    text-align: center;
+    font-weight: normal; /* Reduced emphasis */
+    color: var(--theme-accent-color, indianred);
+}
+
+.capacite-temps-main,
+.capacite-zone-main,
+.capacite-duree-main {
+    font-size: 11px;
+    color: var(--theme-text-secondary, #4b4b4b);
+    line-height: 1.2;
+}
+
+.capacite-rang-main {
+    text-align: center;
+    font-size: 11px;
+    font-weight: normal; /* Reduced emphasis */
+    color: var(--theme-primary-color, #2C606D);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.capacite-status-main {
+    text-align: center;
+}
+
+.status-available {
+    color: #28a745;
+    font-weight: normal; /* Reduced emphasis */
+    font-size: 12px;
+}
+
+.status-unavailable {
+    color: #dc3545;
+    font-size: 12px; /* Consistent size */
+    font-style: italic;
+}
+
+/* ===== SPECIFIC SCROLLBAR REMOVAL ===== */
+
+/* Remove scrollbars from specific pouvoir elements */
+.no-scrollbar-pouvoir {
+    overflow: visible !important;
+    height: auto !important;
+    max-height: none !important;
+}
+
+.no-scrollbar-pouvoir::-webkit-scrollbar {
+    display: none;
+}
+
+.no-scrollbar-pouvoir {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+/* Apply to all pouvoir-related containers */
+.pouvoir-section,
+.pouvoir-container,
+.capacites-detail-main,
+.capacites-header-main,
+.capacite-row-main {
+    overflow: visible;
+    height: auto;
+    max-height: none;
+}
+
+/* ===== POUVOIR STATS SECTION ===== */
+
+.pouvoir-stats {
+    text-align: center;
+    margin-bottom: 20px;
+    padding: 15px;
+    background: var(--theme-primary-light, rgba(44, 96, 109, 0.1));
+    border-radius: 8px;
+    border: 1px solid var(--theme-primary-color, #2C606D);
+    font-family: var(--theme-font-header, 'AJensonPro'), serif;
+    font-size: 16px;
+    color: var(--theme-text-color, #262925);
+    font-weight: bold;
+}
+
+/* ===== NO POUVOIR STATE ===== */
+
+.no-pouvoir {
+    text-align: center;
+    padding: 30px;
+    background: rgba(248, 215, 218, 0.8);
+    border: 2px solid #f5c6cb;
+    border-radius: 8px;
+    color: #721c24;
+    font-family: var(--theme-font-body, 'Inter'), sans-serif;
+}
+
+.no-pouvoir p {
+    margin: 8px 0;
+}
+
+.no-pouvoir strong {
+    font-size: 16px;
+}
+
+/* ===== SUMMARY SECTION ===== */
+
+.capacites-summary {
+    margin-top: 20px;
+    padding: 15px;
+    background: var(--theme-background-alt, rgba(233, 236, 239, 0.8));
+    border-radius: 6px;
+    font-size: 14px;
+    color: var(--theme-text-color, #262925);
+    border-left: 4px solid var(--theme-primary-color, #2C606D);
+}
+
+.capacites-summary strong {
+    color: var(--theme-primary-color, #2C606D);
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+
+@media (max-width: 1200px) {
+    .capacites-header-main,
+    .capacite-row-main {
+        grid-template-columns: 2fr 70px 50px 80px 80px 80px 80px 100px;
+        gap: 8px;
+        font-size: 12px;
+    }
+    
+    .pouvoir-main-row {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+    
+    .pouvoir-label-main {
+        min-width: 100px;
+    }
+}
+
+@media (max-width: 768px) {
+    .capacites-header-main,
+    .capacite-row-main {
+        grid-template-columns: 1fr;
+        gap: 5px;
+    }
+    
+    .capacites-header-main > div,
+    .capacite-row-main > div {
+        padding: 5px;
+        border-bottom: 1px solid var(--theme-border-light, #eee);
+    }
+    
+    .pouvoir-main-row {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .pouvoir-input-main,
+    .pouvoir-capacites-btn-main {
+        width: 100%;
+    }
+}
+
+/* ===== ANIMATION EFFECTS ===== */
+
+@keyframes capaciteAppear {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.capacites-detail-main[style*="block"] .capacite-row-main {
+    animation: capaciteAppear 0.3s ease forwards;
+}
+
+.capacites-detail-main[style*="block"] .capacite-row-main:nth-child(2) { 
+    animation-delay: 0.1s; 
+}
+
+.capacites-detail-main[style*="block"] .capacite-row-main:nth-child(3) { 
+    animation-delay: 0.2s; 
+}
+
+.capacites-detail-main[style*="block"] .capacite-row-main:nth-child(4) { 
+    animation-delay: 0.3s; 
+}
+
+.capacites-detail-main[style*="block"] .capacite-row-main:nth-child(4) { 
+    animation-delay: 0.3s; 
+}
+
+.capacites-detail-main[style*="block"] .capacite-row-main:nth-child(5) { 
+    animation-delay: 0.4s; 
+}
+
+.capacites-detail-main[style*="block"] .capacite-row-main:nth-child(6) { 
+    animation-delay: 0.5s; 
+}
+
+/* ===== VALIDATION STATES ===== */
+
+.pouvoir-input-main.valid {
+    border-color: #28a745;
+    background: rgba(40, 167, 69, 0.05);
+}
+
+.pouvoir-input-main.invalid {
+    border-color: #dc3545;
+    background: rgba(220, 53, 69, 0.05);
+    box-shadow: 0 0 5px rgba(220, 53, 69, 0.3);
+}
+
+.pouvoir-input-main.at-max {
+    border-color: #ffc107;
+    background: rgba(255, 193, 7, 0.05);
+    box-shadow: 0 0 5px rgba(255, 193, 7, 0.3);
+}
+
+/* ===== ACCESSIBILITY IMPROVEMENTS ===== */
+
+.pouvoir-capacites-btn-main:focus {
+    outline: 2px solid var(--theme-primary-color, #2C606D);
+    outline-offset: 2px;
+}
+
+.pouvoir-input-main:focus {
+    outline: 2px solid var(--theme-primary-color, #2C606D);
+    outline-offset: 1px;
+}
+
+/* ===== PRINT STYLES ===== */
+
+@media print {
+    .pouvoir-section {
+        break-inside: avoid;
+        box-shadow: none;
+        border: 1px solid #000;
+    }
+    
+    .pouvoir-capacites-btn-main {
+        display: none;
+    }
+    
+    .capacites-detail-main {
+        display: block !important;
+        box-shadow: none;
+    }
+    
+    .capacite-row-main {
+        border-bottom: 1px solid #ccc;
+    }
+}
+
+/* ===== THEME OVERRIDES ===== */
+
+/* Dark theme adjustments */
+.theme-dark .pouvoir-section {
+    background: rgba(40, 40, 40, 0.9);
+    border-color: var(--theme-primary-color, #4a90a4);
+}
+
+.theme-dark .capacites-detail-main {
+    background: rgba(50, 50, 50, 0.9);
+    color: #e0e0e0;
+}
+
+.theme-dark .pouvoir-input-main {
+    background: rgba(60, 60, 60, 0.9);
+    color: #e0e0e0;
+    border-color: #555;
+}
+
+.theme-dark .pouvoir-input-main:focus {
+    border-color: var(--theme-primary-color, #4a90a4);
+}
+
+/* Light theme adjustments */
+.theme-light .pouvoir-section {
+    background: rgba(255, 255, 255, 0.95);
+    border-color: var(--theme-primary-color, #1976d2);
+}
+
+.theme-light .capacites-header-main {
+    background: var(--theme-primary-color, #1976d2);
+}
+
+/* Fantasy theme adjustments */
+.theme-fantasy .pouvoir-section {
+    background: rgba(245, 235, 220, 0.9);
+    border-color: var(--theme-primary-color, #8b4513);
+}
+
+.theme-fantasy .capacites-header-main {
+    background: var(--theme-primary-color, #8b4513);
+}
+
+/* ===== MOTS DE POUVOIRS HEADER ARTEFACT SLOT ===== */
+.motspouvoirs-header-artefact-slot {
+    display: flex; /* Keep internal flex for alignment */
+    align-items: center;
+    justify-content: center; 
+    min-height: fit-content; 
+    padding: 4px;
+    /* margin-bottom: 10px; Removed, parent gap will handle */
+    border: 2px dashed var(--theme-accent-color, #b33e5c); /* Distinct border for artefact slot */
+    border-radius: 6px;
+    background-color: var(--theme-background-transparent, rgba(255, 255, 255, 0.05));
+    transition: all 0.3s ease;
+    cursor: grab; /* Indicate draggable content can be placed here */
+    flex: 0 1 auto; /* Allow shrinking, don't grow, basis is content. Important for fitting in a row. */
+    min-width: 100px; /* Give it some base width, especially when empty */
+}
+
+.motspouvoirs-header-area { /* New wrapper for artefact slot and title */
+    display: flex;
+    flex-direction: row; /* Try to put artefact slot and title on same row */
+    flex-wrap: wrap;     /* Allow title to wrap below if not enough space */
+    align-items: center; /* Align items vertically if they wrap or have different heights */
+    gap: 4px;           /* Space between artefact slot and title */
+    margin-bottom: 4px; /* Space below this header area */
+}
+
+.motspouvoirs-header-artefact-slot:hover,
+.motspouvoirs-header-artefact-slot.hover { /* .hover is added by Foundry on drag over */
+    border-color: var(--theme-accent-dark, #8c2d46);
+    background-color: var(--theme-background-transparent, rgba(255, 255, 255, 0.1));
+    box-shadow: 0 0 8px var(--theme-accent-shadow, rgba(179, 62, 92, 0.3));
+}
+
+.motspouvoirs-header-artefact-slot .linked-artefact-display {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    width: 100%; /* Take full width of the slot */
+}
+
+.motspouvoirs-header-artefact-slot .item-image {
+    border: 1px solid var(--theme-border-light, #eee);
+    border-radius: 3px;
+}
+
+.motspouvoirs-header-artefact-slot .item-name {
+    flex-grow: 1;
+    font-weight: bold;
+    color: var(--theme-accent-dark, #8c2d46);
+}
+
+.motspouvoirs-header-artefact-slot .drop-hint-small {
+    font-style: italic;
+    color: var(--theme-text-muted, #6c757d);
+    font-size: 0.9em;
+}
+.motspouvoirs-header-artefact-slot .drop-icon-placeholder {
+    font-size: 1.5em;
+    color: var(--theme-text-muted, #6c757d);
+    margin-left: 8px;
+}
+
+/* ===== MOTS DE POUVOIRS SECTION STYLES (for Magie) ===== */
+.mots-pouvoirs-section {
+    /* padding: 15px; Reduced by parent gap */
+    padding: 10px; /* Consistent overall padding for the section */
+    background: var(--theme-background-alt, rgba(240, 245, 245, 0.85)); /* Slightly different from capacites */
+    border: 1px dashed var(--theme-primary-medium, #6c9aa6); /* Dashed to indicate drop zone */
+    border-radius: 8px;
+    min-height: 80px; /* Give it a reasonable starting height */
+    overflow-y: auto; /* Add scrollbar if content overflows vertically */
+    transition: all 0.3s ease;
+    flex: 0 0 auto; /* Don't grow, don't shrink, basis is content width */
+    /* width: fit-content; */
+    display: flex; /* Make its direct children flex items */
+    flex-direction: column; /* Stack children vertically */
+    gap: 8px; /* Space between direct children (header-area, drop-hint, item-list) */
+}
+
+.mots-pouvoirs-section:hover,
+.mots-pouvoirs-section.hover { /* Foundry adds .hover on drag over */
+    border-color: var(--theme-primary-color, #2C606D);
+    background: var(--theme-background-light, rgba(230, 240, 240, 0.9));
+    box-shadow: 0 0 10px var(--theme-primary-shadow, rgba(44, 96, 109, 0.2));
+}
+
+.mots-pouvoirs-section h4 {
+    margin-top: 0;
+    /* margin-bottom: 10px; Removed, handled by parent gap or .motspouvoirs-header-area */
+    margin-bottom: 0; /* Reset margin as it's now a flex item in .motspouvoirs-header-area */
+    color: var(--theme-primary-dark, #1a4a54);
+    font-family: var(--theme-font-title, 'AJensonPro'), serif;
+    font-size: 12px;
+    font-weight: bold;
+    padding-bottom: 4px;
+    border-bottom: 1px solid var(--theme-primary-light, #a7c8d0);
+    flex: 1 1 auto; /* Allow title to grow/shrink within the header-area row */
+}
+
+.mots-pouvoirs-section h4 small {
+    font-size: 0.8em;
+    font-weight: normal;
+    color: var(--theme-text-muted);
+}
+
+.mots-pouvoirs-section .drop-hint {
+    font-size: 10px;
+    color: var(--theme-text-muted, #6c757d);
+    /* margin-bottom: 15px; Removed, handled by parent gap */
+    margin-bottom: 0; /* Reset margin */
+    text-align: center;
+    font-style: italic;
+}
+
+.motspouvoirs-item-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex; /* Arrange items horizontally */
+    flex-direction: row; /* Display items in a row */
+    flex-wrap: wrap; /* Allow items to wrap to the next line */
+    gap: 10px; /* Consistent space between items */
+    align-items: flex-start; /* Align items to the top of the line */
+
+}
+
+.motspouvoirs-item {
+    display: flex;
+    align-items: center;
+    gap: 5px; /* Space between elements within an item */
+    padding: 5px 8px; /* Consistent padding around each item */
+    background: var(--theme-background-light, #fff);
+    border: 1px solid var(--theme-border-color, #ddd);
+    border-radius: 4px;
+    box-shadow: 0 1px 2px var(--theme-shadow-color, rgba(0,0,0,0.05));
+    min-width: 100px; /* Ensure items have some width */
+    transition: box-shadow 0.2s ease;
+}
+
+.motspouvoirs-item:hover {
+    box-shadow: 0 2px 4px var(--theme-shadow-color, rgba(0,0,0,0.1));
+}
+
+.motspouvoirs-item .item-image {
+    margin-right: 8px;
+    border: 1px solid var(--theme-border-light, #eee);
+    border-radius: 3px;
+}
+
+.motspouvoirs-item .item-name {
+    flex-grow: 1;
+    font-size: 12px;
+    color: var(--theme-text-color, #262925);
+}
+
+.motspouvoirs-item .item-controls {
+    margin-left: 6px;
+    display: flex;
+    gap: 4px;
+}
+
+.motspouvoirs-item .item-controls a {
+    color: var(--theme-text-muted, #6c757d);
+    font-size: 12px;
+}
+
+.motspouvoirs-item .item-controls a:hover {
+    color: var(--theme-primary-color, #2C606D);
+}
+
+.motspouvoirs-item-list .no-items-message {
+    width: 100%;
+    text-align: center;
+    font-style: italic;
+    color: var(--theme-text-muted, #6c757d);
+    padding: 6px;
+}
+
+/* ===== SORTILEGES SECTION STYLES (for Magie) ===== */
+.sortileges-section {
+    /* padding: 15px; Reduced by parent gap */
+    padding: 8px; /* Slightly reduced overall padding for the section */
+    background: var(--theme-background-alt, rgba(240, 245, 245, 0.85)); /* Slightly different from capacites */
+    border: 1px dashed var(--theme-primary-medium, #6c9aa6); /* Dashed to indicate drop zone */
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    flex: 0 0 auto; /* Don't grow, don't shrink, basis is content width */
+    /* width: fit-content; */
+    display: flex; /* Make its direct children flex items */
+    flex-direction: column; /* Stack children vertically */
+    gap: 8px; /* Space between direct children (header-area, drop-hint, item-list) */
+}
+
+.sortileges-section:hover,
+.sortileges-section.hover { /* Foundry adds .hover on drag over */
+    border-color: var(--theme-primary-color, #2C606D);
+    background: var(--theme-background-light, rgba(230, 240, 240, 0.9));
+    box-shadow: 0 0 10px var(--theme-primary-shadow, rgba(44, 96, 109, 0.2));
+}
+
+.sortileges-section h4 {
+    margin-top: 0;
+    /* margin-bottom: 10px; Removed, handled by parent gap or .motspouvoirs-header-area */
+    margin-bottom: 0; /* Reset margin as it's now a flex item in .motspouvoirs-header-area */
+    color: var(--theme-primary-dark, #1a4a54);
+    font-family: var(--theme-font-title, 'AJensonPro'), serif;
+    font-size: 12px;
+    font-weight: bold;
+    padding-bottom: 4px;
+    border-bottom: 1px solid var(--theme-primary-light, #a7c8d0);
+    flex: 1 1 auto; /* Allow title to grow/shrink within the header-area row */
+}
+
+.sortileges-section h4 small {
+    font-size: 0.8em;
+    font-weight: normal;
+    color: var(--theme-text-muted);
+}
+
+.sortileges-section .drop-hint {
+    font-size: 10px;
+    color: var(--theme-text-muted, #6c757d);
+    /* margin-bottom: 15px; Removed, handled by parent gap */
+    margin-bottom: 0; /* Reset margin */
+    text-align: center;
+    font-style: italic;
+}
+
+.sortileges-item-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    min-width: 80px;
+    flex: 1 1 auto; /* Allow title to grow/shrink within the header-area row */
+    flex-direction: row; /* Display items in a row */
+    /* flex-wrap: wrap; Removed to ensure vertical stacking */
+    gap: 4px; /* Space between items */
+}
+
+.sortileges-item {
+    display: flex;
+    align-items: center;
+    padding: 4px;
+    background: var(--theme-background-light, #fff); /* Already matches mots-pouvoirs-item */
+    border: 1px solid var(--theme-border-color, #ddd); /* Already matches mots-pouvoirs-item */
+    border-radius: 4px; /* Already matches mots-pouvoirs-item */
+    box-shadow: 0 1px 2px var(--theme-shadow-color, rgba(0,0,0,0.05)); /* Already matches mots-pouvoirs-item */
+    min-width: 120px; /* Match mots-pouvoirs-item */
+    transition: box-shadow 0.2s ease;
+    flex-direction: row;
+    padding: 6px; /* Match mots-pouvoirs-item */
+    gap: 6px; /* Match mots-pouvoirs-item */
+}
+
+.sortileges-item:hover {
+    box-shadow: 0 2px 4px var(--theme-shadow-color, rgba(0,0,0,0.1));
+}
+
+.sortileges-item .item-image {
+    margin-right: 8px;
+    border: 1px solid var(--theme-border-light, #eee);
+    border-radius: 3px;
+}
+
+.sortileges-item .item-name {
+    flex-grow: 1;
+    font-size: 12px;
+    color: var(--theme-text-color, #262925);
+}
+
+.sortileges-item .item-controls {
+    margin-left: 6px;
+    display: flex;
+    gap: 4px;
+}
+
+.sortileges-item .item-controls a {
+    color: var(--theme-text-muted, #6c757d);
+    font-size: 12px;
+}
+
+.sortileges-item .item-controls a:hover {
+    color: var(--theme-primary-color, #2C606D);
+}
+
+.sortileges-item-list .no-items-message {
+    width: 100%;
+    text-align: center;
+    font-style: italic;
+    color: var(--theme-text-muted, #6c757d);
+    padding: 6px;
+}
+
+/* ===== CAPACITES ANIMALES SECTION STYLES (for Metamorphose) ===== */
+/* Reusing mots-pouvoirs styles for now, adjust if different look is needed */
+.capacites-animales-section {
+    /* margin-top: 20px; Removed, gap on parent will handle */
+    padding: 4px;
+    background: var(--theme-background-alt, rgba(240, 245, 245, 0.85));
+    border: 1px dashed var(--theme-primary-medium, #6c9aa6);
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    flex: 0 0 auto; /* Don't grow, don't shrink, basis is content width */
+    width: fit-content; 
+}
+
+.capacites-animales-section:hover,
+.capacites-animales-section.hover {
+    border-color: var(--theme-primary-color, #2C606D);
+    background: var(--theme-background-light, rgba(230, 240, 240, 0.9));
+    box-shadow: 0 0 10px var(--theme-primary-shadow, rgba(44, 96, 109, 0.2));
+}
+
+.capacites-animales-section h4 {
+    margin-top: 0;
+    margin-bottom: 4px; /* Adjusted for consistency */
+    color: var(--theme-primary-dark, #1a4a54);
+    font-family: var(--theme-font-title, 'AJensonPro'), serif;
+    font-size: 12px;
+    font-weight: bold;
+    padding-bottom: 4px;
+    border-bottom: 1px solid var(--theme-primary-light, #a7c8d0);
+}
+
+
+.capacites-animales-section .drop-hint {
+    font-size: 8px;
+    color: var(--theme-text-muted, #6c757d);
+    margin-bottom: 8px;
+    text-align: center;
+    font-style: italic;
+}
+
+.capaciteanimale-item-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 4px;
+}
+
+.capaciteanimale-item {
+    display: flex;
+    align-items: center;
+    padding: 4px;
+    background: var(--theme-background-light, #fff);
+    border: 1px solid var(--theme-border-color, #ddd);
+    border-radius: 4px;
+    box-shadow: 0 1px 2px var(--theme-shadow-color, rgba(0,0,0,0.05));
+    min-width: 80px;
+    transition: box-shadow 0.2s ease;
+}
+
+.capaciteanimale-item:hover {
+    box-shadow: 0 2px 4px var(--theme-shadow-color, rgba(0,0,0,0.1));
+}
+
+.capaciteanimale-item .item-image {
+    margin-right: 8px;
+    border: 1px solid var(--theme-border-light, #eee);
+    border-radius: 3px;
+}
+
+.capaciteanimale-item .item-name {
+    flex-grow: 1;
+    font-size: 10px;
+    color: var(--theme-text-color, #262925);
+}
+
+.capaciteanimale-item .item-controls {
+    margin-left: 10px;
+    display: flex;
+    gap: 5px;
+}
+
+.capaciteanimale-item .item-controls a {
+    color: var(--theme-text-muted, #6c757d);
+    font-size: 12px;
+}
+
+.capaciteanimale-item .item-controls a:hover {
+    color: var(--theme-primary-color, #2C606D);
+}
+
+.capaciteanimale-item-list .no-items-message {
+    width: 100%;
+    text-align: center;
+    font-style: italic;
+    color: var(--theme-text-muted, #6c757d);
+    padding: 6px;
+}
+
+/* ===== MOTS DE POUVOIRS SECTION STYLES (for Magie) ===== */
+.mots-pouvoirs-section {
+    margin-top: 4px;
+    padding: 4px;
+    background: var(--theme-background-alt, rgba(240, 245, 245, 0.85)); /* Slightly different from capacites */
+    border: 1px dashed var(--theme-primary-medium, #6c9aa6); /* Dashed to indicate drop zone */
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.mots-pouvoirs-section:hover,
+.mots-pouvoirs-section.hover { /* Foundry adds .hover on drag over */
+    border-color: var(--theme-primary-color, #2C606D);
+    background: var(--theme-background-light, rgba(230, 240, 240, 0.9));
+    box-shadow: 0 0 10px var(--theme-primary-shadow, rgba(44, 96, 109, 0.2));
+}
+
+.mots-pouvoirs-section h4 {
+    margin-top: 0;
+    margin-bottom: 6px;
+    color: var(--theme-primary-dark, #1a4a54);
+    font-family: var(--theme-font-title, 'AJensonPro'), serif;
+    font-size: 12px;
+    font-weight: bold;
+    padding-bottom: 4px;
+    border-bottom: 1px solid var(--theme-primary-light, #a7c8d0);
+}
+
+.mots-pouvoirs-section h4 small {
+    font-size: 0.8em;
+    font-weight: normal;
+    color: var(--theme-text-muted);
+}
+
+.mots-pouvoirs-section .drop-hint {
+    font-size: 10px;
+    color: var(--theme-text-muted, #6c757d);
+    margin-bottom: 6px;
+    text-align: center;
+    font-style: italic;
+}
+
+.motspouvoirs-item-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column; /* Display items in a row */
+    flex-wrap: wrap; /* Allow items to wrap to the next line */
+    gap: 6px; /* Space between items */
+}
+
+.motspouvoirs-item {
+    display: flex;
+    align-items: center;
+    padding: 6px;
+    background: var(--theme-background-light, #fff);
+    border: 1px solid var(--theme-border-color, #ddd);
+    border-radius: 4px;
+    box-shadow: 0 1px 2px var(--theme-shadow-color, rgba(0,0,0,0.05));
+    min-width: 120px; /* Ensure items have some width */
+    transition: box-shadow 0.2s ease;
+}
+
+.motspouvoirs-item:hover {
+    box-shadow: 0 2px 4px var(--theme-shadow-color, rgba(0,0,0,0.1));
+}
+
+.motspouvoirs-item .item-image {
+    margin-right: 8px;
+    border: 1px solid var(--theme-border-light, #eee);
+    border-radius: 3px;
+}
+
+.motspouvoirs-item .item-name {
+    flex-grow: 1;
+    font-size: 10px;
+    color: var(--theme-text-color, #262925);
+}
+
+.motspouvoirs-item .item-controls {
+    margin-left: 10px;
+    display: flex;
+    gap: 5px;
+}
+
+.motspouvoirs-item .item-controls a {
+    color: var(--theme-text-muted, #6c757d);
+    font-size: 12px;
+}
+
+.motspouvoirs-item .item-controls a:hover {
+    color: var(--theme-primary-color, #2C606D);
+}
+
+.motspouvoirs-item-list .no-items-message {
+    width: 100%;
+    text-align: center;
+    font-style: italic;
+    color: var(--theme-text-muted, #6c757d);
+    padding: 4px;
+}
+
+/* ===== CAPACITES ANIMALES SPECIALES SECTION STYLES (for Metamorphose Niveau 8+) ===== */
+/* Largely reusing capacites-animales styles, adjust if a very different look is needed */
+.capacites-animales-speciales-section {
+    /* margin-top: 20px; Removed, gap on parent will handle */
+    padding: 4px;
+    background: var(--theme-background-alt, rgba(235, 240, 250, 0.85)); /* Slightly different tint */
+    border: 1px dashed var(--theme-accent-color, #b33e5c); /* Different border color for distinction */
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    flex: 0 0 auto; /* Don't grow, don't shrink, basis is content width */
+    width: fit-content;
+}
+
+.capacites-animales-speciales-section:hover,
+.capacites-animales-speciales-section.hover {
+    border-color: var(--theme-accent-dark, #8c2d46);
+    background: var(--theme-background-light, rgba(225, 230, 245, 0.9));
+    box-shadow: 0 0 10px var(--theme-accent-shadow, rgba(179, 62, 92, 0.2));
+}
+
+.capacites-animales-speciales-section h4 {
+    margin-top: 0;
+    margin-bottom: 6px;
+    color: var(--theme-accent-dark, #8c2d46);
+    font-family: var(--theme-font-title, 'AJensonPro'), serif;
+    font-size: 12px; /* Adjusted to match .capacites-animales-section h4 */
+    font-weight: bold;
+    padding-bottom: 4px;
+    border-bottom: 1px solid var(--theme-accent-light, #d98fa7);
+}
+
+.capacites-animales-speciales-section .drop-hint {
+    font-size: 10px;
+    color: var(--theme-text-muted, #6c757d);
+    margin-bottom: 8px;
+    text-align: center;
+    font-style: italic;
+}
+
+.capaciteanimale-speciale-item-list { /* Distinct list class if needed */
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 4px;
+}
+
+/* .capaciteanimale-item class can be reused if styling is identical */
+/* If not, define .capaciteanimale-speciale-item here */
+
+.capaciteanimale-speciale-item-list .no-items-message {
+    width: 100%;
+    text-align: center;
+    font-style: italic;
+    color: var(--theme-text-muted, #6c757d);
+    padding: 6px;
+}
+
+/* Ensure item controls are styled if reusing .capaciteanimale-item */
+.capaciteanimale-speciale-item-list .item-controls a {
+    color: var(--theme-text-muted, #6c757d);
+    font-size: 10px;
+}
+
+.capaciteanimale-speciale-item-list .item-controls a:hover {
+    color: var(--theme-accent-color, #b33e5c); /* Use accent for hover on special items */
+}
+.pouvoir-block-draggable {
+    padding: 5px; /* Add some padding for better visual separation */
+    margin-bottom: 5px; /* Spacing between draggable blocks */
+    border: 1px solid transparent; /* Base border */
+    cursor: grab;
+}
+
+.pouvoir-block-draggable.dragging {
+    opacity: 0.5;
+    border: 1px dashed #999; /* Style for the item being dragged */
+}
+
+.pouvoir-block-draggable.drag-over-before {
+    border-top: 2px solid blue !important; /* Visual cue for dropping before */
+}
+
+.pouvoir-block-draggable.drag-over-after {
+    border-bottom: 2px solid blue !important; /* Visual cue for dropping after */
+}
+
+.pouvoir-block-draggable:active {
+    cursor: grabbing;
+}

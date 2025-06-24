@@ -1,0 +1,397 @@
+/* d:\VTT Foundry_data\foundrydata\Data\systems\ambre\css\possession.css */
+
+/* Possession Page Specific Styles */
+
+.possession-content {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Spacing between major sections */
+    padding: 10px;
+    height: 100%;
+    box-sizing: border-box;
+    overflow-y: auto;
+}
+
+.page-header h1 {
+    font-family: var(--theme-font-header, 'AJensonPro');
+    color: var(--theme-primary-color);
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 24px;
+    border-bottom: 2px solid var(--theme-primary-light);
+    padding-bottom: 10px;
+}
+
+/* Top Groups: Artefact, Creature, Ombre */
+.item-groups.top-groups {
+    display: flex;
+    flex-direction: row;
+    gap: 15px; /* Spacing between groups */
+    justify-content: space-between;
+}
+
+.item-group {
+    flex: 1; /* Each group takes equal width in the flex container */
+    /* Dark block with light borders */
+    background: var(--theme-primary-dark, #1a4a54); /* Dark background */
+    border: 2px solid var(--theme-text-light, #afc4a6); /* Light border */
+    border-radius: 8px;
+    color: var(--theme-text-light, #afc4a6); /* Default light font color for contrast */
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 2px 4px var(--theme-shadow-color, rgba(0,0,0,0.1));
+}
+
+.group-header-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--theme-text-light, #afc4a6); /* Light border for the underline */
+}
+
+.group-header {
+    font-family: var(--theme-font-header, 'AJensonPro');
+    font-size: 18px;
+    color: var(--theme-text-light, #afc4a6); /* Light font color */
+    margin-top: 0;
+    margin-bottom: 0; /* Removed as wrapper handles bottom margin/padding */
+    padding-bottom: 0; /* Removed as wrapper handles bottom padding */
+    border-bottom: none; /* Removed as wrapper handles border */
+    text-align: left; /* Align to left, button will be on the right */
+    flex-grow: 1;
+}
+
+/* Removed general .draggable-item styles as they are superseded by more specific ones below */
+.drop-target {
+    border: 2px dashed var(--theme-primary-light);
+    border-radius: 6px;
+    padding: 15px;
+    min-height: 100px; /* Ensure drop target has some height */
+    background-color: var(--theme-background-light);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex-grow: 1; /* Allow drop target to fill space in item-group */
+}
+
+.drop-target.drag-over { /* Add this class with JS on drag enter */
+    border-color: var(--theme-primary-color);
+    background-color: var(--theme-primary-light);
+}
+
+.drop-hint {
+    font-style: italic;
+    color: var(--theme-text-light, #afc4a6); /* Light font color */
+    text-align: center;
+    margin: auto; /* Center hint if no items */
+}
+
+/* Styling for items within drop targets (artefacts, creatures, ombres, atouts) */
+.drop-target .item.draggable-item {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Similar to pouvoir-main-row gap */
+    margin-bottom: 10px; /* Spacing between items */
+    padding: 10px 12px; /* Similar to pouvoir-main-row padding */
+    background: var(--theme-primary-light, rgba(44, 96, 109, 0.08)); /* Lighter than pouvoir for distinction or match if preferred */
+    border-radius: 8px; /* Match pouvoir-main-row */
+    border: 1px solid var(--theme-primary-color, #2C606D); /* Match pouvoir-main-row */
+    transition: all 0.3s ease;
+    cursor: grab;
+    box-shadow: 0 1px 2px var(--theme-shadow-color, rgba(0,0,0,0.05));
+}
+
+.drop-target .item.draggable-item:hover {
+    background: var(--theme-primary-medium, rgba(44, 96, 109, 0.15));
+    box-shadow: 0 2px 4px var(--theme-primary-shadow, rgba(44, 96, 109, 0.1));
+    border-color: var(--theme-primary-dark);
+}
+
+/* Item image styling (consistent for all item types if they have images) */
+.drop-target .item-image {
+    width: 32px; /* Consistent size */
+    height: 32px;
+    object-fit: cover;
+    border: 1px solid var(--theme-border-dark);
+    border-radius: 4px; /* Rounded corners for images */
+    flex-shrink: 0;
+}
+
+/* Placeholder for items without an image, to maintain alignment */
+.drop-target .item-image-placeholder {
+    width: 32px;  /* Same as .item-image width */
+    height: 32px; /* Same as .item-image height */
+    flex-shrink: 0; /* Same as .item-image flex-shrink */
+}
+
+/* General item name styling (h3, h4) - similar to .pouvoir-label-main */
+.drop-target .item-name { /* Targets h3 and h4 with class .item-name */
+    flex-grow: 1;
+    font-weight: bold;
+    color: var(--theme-text-light, #afc4a6); /* Light font color */
+    font-family: var(--theme-font-header, 'AJensonPro'), serif;
+    font-size: 15px; /* Slightly smaller than pouvoir-label-main or adjust as needed */
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin: 0; /* Remove default h4 margin */
+    border: none; /* Ensure no underline/border */
+    text-decoration: none; /* Ensure no underline */
+}
+
+/* Specific layout for h3.item-name when controls are direct children */
+.drop-target .item.draggable-item > h3.item-name {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Pushes controls to the right */
+    width: 100%; /* Ensure h3 takes full available width in its flex item context */
+}
+
+/* Item controls styling - buttons similar to .pouvoir-capacites-btn-main */
+/* Styling for the div.item-controls wrapper (used in Atouts) */
+.drop-target .item.draggable-item .item-controls {
+    display: flex;
+    flex-shrink: 0; /* Prevent controls from shrinking */
+    gap: 8px; /* Spacing between control buttons */
+}
+/* General style for individual control links (a tags) */
+.drop-target .item-controls .item-control {
+    background: var(--theme-text-light, #afc4a6); /* Light background for buttons */
+    color: var(--theme-primary-dark, #1a4a54);    /* Dark font color for button text/icons */
+    padding: 6px 10px; /* Adjust for smaller buttons */
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 12px; /* Smaller font for icons/text */
+    font-family: var(--theme-font-header, 'AJensonPro'), serif;
+    transition: all 0.3s ease;
+    display: inline-flex; /* For icon alignment */
+    align-items: center;
+    justify-content: center;
+    line-height: 1; /* Ensure icon is centered */
+}
+
+.drop-target .item-controls .item-control:hover {
+    background: var(--theme-border-light, #ddd); /* Slightly darker light background on hover */
+    color: var(--theme-primary-dark, #1a4a54);
+    box-shadow: 0 1px 3px var(--theme-primary-shadow, rgba(44, 96, 109, 0.2));
+}
+
+/* Styles for Journaux Management Section (from atouts_mat.hbs context) */
+.journaux-management {
+    background: var(--theme-background-light);
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 15px;
+    border: 1px solid var(--theme-border-color);
+}
+
+.journaux-management .actorDesc-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--theme-primary-medium);
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+}
+
+.journaux-management .actorDesc-header h4 {
+    color: var(--theme-primary-dark);
+    margin: 0;
+    flex-grow: 1;
+    text-align: center; /* From align="center" attribute */
+    font-family: var(--theme-font-header, 'AJensonPro'); /* Assuming consistency */
+    font-size: 16px; /* Assuming consistency, adjust if needed */
+    text-transform: uppercase; /* Common for headers */
+}
+
+/* Specific drop target style for journaux */
+.journaux-management .drop-target {
+    min-height: 100px;
+    border: 1px dashed var(--theme-border-color); /* From inline */
+    padding: 5px; /* From inline */
+    background: var(--theme-background-light); /* From inline */
+    border-radius: 0; /* Override if generic .drop-target has one */
+    display: flex; /* Consistent with generic .drop-target */
+    flex-direction: column; /* Consistent with generic .drop-target */
+    gap: 5px; /* Space between items in the list */
+}
+
+.journaux-management .drop-target .drop-hint {
+    color: var(--theme-text-muted); /* From inline */
+    text-align: center; /* From inline */
+    font-style: italic; /* Consistent with generic .drop-hint */
+    margin: auto; /* Consistent with generic .drop-hint */
+}
+
+/* Journal List Item Styling */
+.journal-list-item {
+    background: var(--theme-background-light);
+    margin-bottom: 5px;
+    padding: 8px 5px;
+    border-radius: 3px;
+    border-left: 3px solid var(--theme-primary-color);
+    color: var(--theme-text-color); /* Default text color for the item */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: grab;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.journal-list-item:hover {
+    background-color: var(--theme-primary-light); /* Or a slightly different hover state */
+}
+
+/* Atouts Management Section */
+.atouts-management {
+    background: var(--theme-background-alt);
+    border: 1px solid var(--theme-border-color, #ccc);
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0 2px 4px var(--theme-shadow-color, rgba(0,0,0,0.1));
+}
+
+.atouts-management .section-header h2 { /* More specific selector */
+    font-family: var(--theme-font-header, 'AJensonPro');
+    font-size: 20px;
+    color: var(--theme-primary-color);
+    text-align: center;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--theme-primary-light);
+}
+
+.atouts-layout {
+    display: flex;
+    flex-direction: row;
+    gap: 15px; /* Spacing between columns */
+}
+
+.atouts-drop-column {
+    flex: 1; /* Takes 1/3 of the width */
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.atouts-drop-column h3 {
+    font-family: var(--theme-font-body, 'AJensonProLtDisp');
+    font-size: 16px;
+    color: var(--theme-primary-color);
+    margin-bottom: 5px;
+    text-align: center;
+}
+
+.atouts-display-column {
+    flex: 2; /* Takes 2/3 of the width */
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.atouts-display-column h3 {
+    font-family: var(--theme-font-body, 'AJensonProLtDisp');
+    font-size: 16px;
+    color: var(--theme-primary-color);
+    margin-bottom: 5px;
+    text-align: center;
+}
+
+.atout-gallery {
+    display: flex;
+    flex-wrap: wrap; /* Allow items to wrap to next line */
+    gap: 5px; /* Spacing between atout cards */
+    padding: 5px;
+    background: var(--theme-background-light);
+    border: 1px solid var(--theme-border-color);
+    border-radius: 6px;
+    min-height: 200px; /* Ensure gallery has some height */
+    align-content: flex-start; /* Align wrapped lines to the start */
+}
+
+.atout-card {
+    background-color: var(--theme-background-light);
+    border: 1px solid var(--theme-border-color);
+    border-radius: 6px;
+    padding: 10px;
+    width: calc(40% - 10px); /* Example: 3 cards per row, adjust as needed */
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 1px 3px var(--theme-shadow-color);
+}
+
+.atout-card.activatable {
+    cursor: pointer;
+}
+
+.atout-card.activatable:hover,
+.atout-card.activatable:focus {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px var(--theme-primary-shadow, rgba(44, 96, 109, 0.3));
+    border-color: var(--theme-primary-color);
+    outline: none; /* Remove default focus outline if custom is applied */
+}
+
+.atout-card.activatable:focus {
+    box-shadow: 0 0 0 2px var(--theme-primary-color), 0 4px 8px var(--theme-primary-shadow, rgba(44, 96, 109, 0.3)); /* Focus ring */
+}
+
+
+.atout-image {
+    width: 200px; /* Adjust size as needed */
+    height: 200px; /* Adjust size as needed */
+    object-fit: cover; /* Or 'contain' based on preference */
+    border-radius: 4px;
+    margin-bottom: 8px;
+    border: 2px solid var(--theme-border-dark);
+}
+
+.atout-name {
+    font-family: var(--theme-font-body, 'AJensonProLtDisp');
+    font-size: 12px;
+    color: var(--theme-text-color);
+    margin: 0;
+    font-weight: bold;
+}
+
+/* Responsive adjustments */
+@media (max-width: 900px) {
+    .item-groups.top-groups {
+        flex-direction: column; /* Stack groups vertically on smaller screens */
+    }
+
+    .atouts-layout {
+        flex-direction: column; /* Stack atout columns vertically */
+    }
+
+    .atout-card {
+        width: calc(50% - 10px); /* 2 cards per row */
+    }
+}
+
+@media (max-width: 600px) {
+    .atout-card {
+        width: calc(100% - 10px); /* 1 card per row */
+    }
+
+    .page-header h1 {
+        font-size: 20px;
+    }
+
+    .group-header,
+    .atouts-management .section-header h2 {
+        font-size: 16px;
+    }
+
+    .atouts-drop-column h3,
+    .atouts-display-column h3 {
+        font-size: 14px;
+    }
+}

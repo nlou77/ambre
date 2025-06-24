@@ -1,0 +1,160 @@
+/* d:\VTT Foundry_data\foundrydata\Data\systems\ambre\css\actorDescription.css */
+
+/* General layout for description tab content */
+.tab[data-tab="description"] .sheet-content {
+    padding: 10px;
+}
+
+/* Specific for Karma/Mal inputs to be smaller and circular.
+   Made selector more general to apply in new structures too. */
+.karma-input-circle { /* Was: .tab[data-tab="description"] .actorDesc-value input[type="number"].karma-input-circle */
+    width: 40px !important;  /* Ensure this overrides .karma-component width */
+    height: 40px !important; /* Ensure this maintains a square for the circle */
+    padding: 0; /* Remove padding to allow text to center properly with flex */
+    border-radius: 50%; /* Circular shape */
+    border: 2px solid var(--theme-primary-color); 
+    background-color: rgba(0, 0, 0, 0.5) !important; /* Darker, semi-transparent background for overlay */
+    font-family: var(--theme-font-body, "Arial", sans-serif); 
+    color: white !important; /* Light text color for contrast on dark overlay bg */
+    text-align: center; /* Center text horizontally */
+    font-weight: bold;
+    font-size: 1.1em; /* Adjust as needed for the 40px circle */
+    box-sizing: border-box; /* Include border and padding in width/height */
+    display: inline-flex; 
+    align-items: center;
+    justify-content: center;
+    appearance: textfield;
+    text-shadow: 1px 1px 2px black; /* Add text shadow for better readability on image */
+    -moz-appearance: textfield; /* Firefox */
+    box-shadow: 
+        2px 2px 5px var(--theme-shadow-color, rgba(0,0,0,0.2)), /* Outer shadow for depth */
+        inset 2px 2px 3px var(--theme-primary-light, rgba(255,255,255,0.35)), /* Inner highlight (top-left) */
+        inset -2px -2px 3px var(--theme-primary-shadow, rgba(0,0,0,0.15)); /* Inner shadow (bottom-right) */
+    transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.karma-input-circle::-webkit-outer-spin-button, /* Generalizing selector */
+.karma-input-circle::-webkit-inner-spin-button { /* Generalizing selector */
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.karma-input-circle:focus { /* Generalizing selector */
+    outline: none;
+    border-color: var(--theme-primary-dark); /* Darker border on focus */
+    box-shadow: 0 0 0 2px var(--theme-background), /* Clear existing shadow for a clean glow base */
+                0 0 0 4px var(--theme-primary-color), /* Outer glow */
+                inset 1px 1px 2px var(--theme-primary-light, rgba(255,255,255,0.25)), 
+                inset -1px -1px 2px var(--theme-primary-shadow, rgba(0,0,0,0.1)); /* Maintain inner relief */
+}
+
+/* Contributions section styling */
+
+.tab[data-tab="description"] .actorDesc-contribution-inputs .actorDesc-group-for-counter:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+.tab[data-tab="description"] .actorDesc-contribution-inputs .actorDesc-value {
+    flex-basis: auto; 
+    flex-grow: 1;
+}
+.tab[data-tab="description"] .actorDesc-contribution-inputs .actorDesc-value input[type="text"]{
+    max-width: none; 
+    text-align: left;
+}
+.tab[data-tab="description"] .actorDesc-contribution-inputs .actorDesc-group-counter-input input[type="number"] {
+    max-width: 60px; 
+    text-align: center;
+}
+.tab[data-tab="description"] .contribution-summary {
+    font-size: 0.9em;
+    color: var(--theme-text-muted);
+    display: block; 
+    text-align: center;
+    margin-top: -5px;
+    margin-bottom: 5px;
+}
+.tab[data-tab="description"] .actorDesc-group .actorDesc-header h4 .contribution-summary {
+    font-weight: normal; 
+    text-align: center;
+}
+*/
+/* HP and Energy styling */
+.tab[data-tab="description"] .actorDesc-statusGroup {
+    display: grid;
+    grid-template-columns: max-content auto minmax(80px, auto) auto minmax(80px, auto); /* Icon, Label, Value, Separator, Max */
+    align-items: end;
+    gap: 5px 2px; /* Reduced column gap */
+    padding: 4px; /* Reduced padding */
+    background-color: var(--theme-background-alt); /* Keep distinct background for status groups */
+    border-radius: 4px;
+    margin-bottom: 8px;
+    border: 1px solid var(--theme-border-light);
+}
+
+.tab[data-tab="description"] .actorDesc-statusLabel {
+    font-weight: bold;
+    color: var(--theme-text-color);
+    font-family: var(--theme-font-header, "Arial", sans-serif); 
+    text-align: left;
+    padding-right: 8px;
+}
+
+.tab[data-tab="description"] .actorDesc-statusValue {
+    padding: 5px;
+    border: 1px solid var(--theme-border-color);
+    border-radius: 3px;
+    background-color: var(--theme-background-light);
+    color: var(--theme-text-color);
+    font-family: var(--theme-font-body, "Arial", sans-serif); 
+    text-align: center;
+    font-weight: bold;
+}
+.tab[data-tab="description"] .actorDesc-statusValue.max-hp,
+.tab[data-tab="description"] .actorDesc-statusValue.max-healthReserve,
+.tab[data-tab="description"] .actorDesc-statusValue.max-energy,
+.tab[data-tab="description"] .actorDesc-statusValue.max-energyReserve {
+    background-color: transparent;
+    border: none;
+    padding: 5px 0; /* Adjust padding if border is removed */
+}
+
+.tab[data-tab="description"] .actorDesc-statusSeparator {
+    text-align: center;
+    font-weight: bold;
+    font-family: var(--theme-font-body, "Arial", sans-serif);
+    color: var(--theme-text-secondary);
+}
+/* Container for the icon to maintain grid alignment */
+.counter-icon-container {
+    width: 62px; /* Match new icon width (77 * 0.8) */
+    height: 62px; /* Match new icon height (77 * 0.8) */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: translateY(15px);
+}
+/* Styling for the new counter icons */
+.counter-icon {
+    width: 62px; /* Decreased size */
+    height: 62px; /* Decreased size */
+    object-fit: contain;
+    border: none; /* Explicitly remove any border */
+}
+/* Styles for Decorum Separators */
+.decorum-separator-container {
+    width: 100%; /* Make the container span the full width */
+    display: flex; /* Use flexbox for robust centering */
+    justify-content: center; /* Center the image horizontally */
+    margin: 20px 0; /* Add some vertical space around the separator */
+    padding: 0; /* No padding on the container */
+    line-height: 0; /* Remove extra space from line height */
+}
+
+.decorum-separator {
+    max-width: 100%; /* Allow the image to scale down if larger than container */
+    /* Removed: width: 100%; to allow image to retain its intrinsic width */
+    height: auto; /* Maintain aspect ratio */
+    border: none; /* Explicitly remove any borders */
+    box-shadow: none; /* Remove any potential shadows */
+}

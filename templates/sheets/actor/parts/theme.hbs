@@ -1,0 +1,196 @@
+{{!-- Theme Selection - Styled like accespouvoirs --}}
+<div class="opt-group">
+    <div class="pouvoirs-section">
+        <h3>Thème Général</h3>
+        <div class="pouvoirs-container">
+            <div class="pouvoir-row">
+                <input type="radio" 
+                        id="theme-defaut" 
+                        name="system.selectedtheme" 
+                        value="defaut" 
+                        {{#if (eq system.selectedtheme "defaut")}}checked{{/if}}
+                        data-dtype="String"/>
+                <label for="theme-defaut">Défaut</label>
+            </div>
+            <div class="pouvoir-row">
+                <input type="radio" 
+                        id="theme-marelle" 
+                        name="system.selectedtheme" 
+                        value="marelle" 
+                        {{#if (eq system.selectedtheme "marelle")}}checked{{/if}}
+                        data-dtype="String"/>
+                <label for="theme-marelle">Marelle</label>
+            </div>
+            <div class="pouvoir-row">
+                <input type="radio" 
+                        id="theme-pentacre" 
+                        name="system.selectedtheme" 
+                        value="pentacre" 
+                        {{#if (eq system.selectedtheme "pentacre")}}checked{{/if}}
+                        data-dtype="String"/>
+                <label for="theme-pentacre">Pentacre</label>
+            </div>
+            <div class="pouvoir-row">
+                <input type="radio" 
+                        id="theme-abreuvoir" 
+                        name="system.selectedtheme" 
+                        value="abreuvoir" 
+                        {{#if (eq system.selectedtheme "abreuvoir")}}checked{{/if}}
+                        data-dtype="String"/>
+                <label for="theme-abreuvoir">Abreuvoir</label>
+            </div>
+            <div class="pouvoir-row">
+                <input type="radio" 
+                        id="theme-harmonium" 
+                        name="system.selectedtheme" 
+                        value="harmonium" 
+                        {{#if (eq system.selectedtheme "harmonium")}}checked{{/if}}
+                        data-dtype="String"/>
+                <label for="theme-harmonium">Harmonium</label>
+            </div>
+            <div class="pouvoir-row">
+                <input type="radio" 
+                        id="theme-chimerion" 
+                        name="system.selectedtheme" 
+                        value="chimerion" 
+                        {{#if (eq system.selectedtheme "chimerion")}}checked{{/if}}
+                        data-dtype="String"/>
+                <label for="theme-chimerion">Chimerion</label>
+            </div>
+            <div class="pouvoir-row">
+                <input type="radio" 
+                        id="theme-sabliers" 
+                        name="system.selectedtheme" 
+                        value="sabliers" 
+                        {{#if (eq system.selectedtheme "sabliers")}}checked{{/if}}
+                        data-dtype="String"/>
+                <label for="theme-sabliers">Sabliers d'Ujuhe</label>
+            </div>
+            <div class="pouvoir-row">
+                <input type="radio" 
+                        id="theme-kolvir" 
+                        name="system.selectedtheme" 
+                        value="kolvir" 
+                        {{#if (eq system.selectedtheme "kolvir")}}checked{{/if}}
+                        data-dtype="String"/>
+                <label for="theme-kolvir">Kolvir</label>
+            </div>
+            <div class="pouvoir-row">
+                <input type="radio" 
+                        id="theme-tirnanogth" 
+                        name="system.selectedtheme" 
+                        value="tirnanogth" 
+                        {{#if (eq system.selectedtheme "tirnanogth")}}checked{{/if}}
+                        data-dtype="String"/>
+                <label for="theme-tirnanogth">Tir Na Nog'th</label>
+            </div>
+            <div class="pouvoir-row">
+                <input type="radio" 
+                        id="theme-rebma" 
+                        name="system.selectedtheme" 
+                        value="rebma" 
+                        {{#if (eq system.selectedtheme "rebma")}}checked{{/if}}
+                        data-dtype="String"/>
+                <label for="theme-rebma">Rebma</label>
+            </div>
+            <div class="pouvoir-row">
+                <input type="radio" 
+                        id="theme-chaos" 
+                        name="system.selectedtheme" 
+                        value="chaos" 
+                        {{#if (eq system.selectedtheme "chaos")}}checked{{/if}}
+                        data-dtype="String"/>
+                <label for="theme-chaos">Chaos</label>
+            </div>
+            <div class="pouvoir-row">
+                <input type="radio" 
+                        id="theme-abysses-deep" 
+                        name="system.selectedtheme" 
+                        value="abysses-deep" 
+                        {{#if (eq system.selectedtheme "abysses-deep")}}checked{{/if}}
+                        data-dtype="String"/>
+                <label for="theme-abysses-deep">Abysses Profondes</label>
+            </div>
+            <div class="pouvoir-row">
+                <input type="radio" 
+                        id="theme-ygg" 
+                        name="system.selectedtheme" 
+                        value="ygg" 
+                        {{#if (eq system.selectedtheme "ygg")}}checked{{/if}}
+                        data-dtype="String"/>
+                <label for="theme-ygg">Ygg</label>
+            </div>
+            <div class="pouvoir-row">
+                <input type="radio" 
+                        id="theme-marelle-corwin" 
+                        name="system.selectedtheme" 
+                        value="marelle-corwin" 
+                        {{#if (eq system.selectedtheme "marelle-corwin")}}checked{{/if}}
+                        data-dtype="String"/>
+                <label for="theme-marelle-corwin">Marelle de Corwin</label>
+            </div>
+            <div class="pouvoir-row">
+                <input type="radio" 
+                        id="theme-roue-spectrale" 
+                        name="system.selectedtheme" 
+                        value="roue-spectrale" 
+                        {{#if (eq system.selectedtheme "roue-spectrale")}}checked{{/if}}
+                        data-dtype="String"/>
+                <label for="theme-roue-spectrale">Roue Spectrale</label>
+            </div>
+        </div>
+    </div>
+
+    <div class="opt-group">
+        <div class="pouvoirs-section">
+            <h3>Entête</h3>
+            <div class="pouvoirs-container">
+                <div class="pouvoir-row">
+                    <input type="radio" 
+                            id="header-text-defaut" 
+                            name="system.options.headerTextColor" 
+                            value="defaut" 
+                            {{#if (eq system.options.headerTextColor "defaut")}}checked{{/if}}
+                            data-dtype="String"/>
+                    <label for="header-text-defaut">Défaut</label>
+                </div>
+                <div class="pouvoir-row">
+                    <input type="radio" 
+                            id="header-text-sombre" 
+                            name="system.options.headerTextColor" 
+                            value="sombre" 
+                            {{#if (eq system.options.headerTextColor "sombre")}}checked{{/if}}
+                            data-dtype="String"/>
+                    <label for="header-text-sombre">Sombre</label>
+                </div>
+                <div class="pouvoir-row">
+                    <input type="radio" 
+                            id="header-text-lumineux" 
+                            name="system.options.headerTextColor" 
+                            value="lumineux" 
+                            {{#if (eq system.options.headerTextColor "lumineux")}}checked{{/if}}
+                            data-dtype="String"/>
+                    <label for="header-text-lumineux">Lumineux</label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="opt-group atout-style-settings-group">
+        {{!-- This section retains its previous styling method for now. --}}
+        {{!-- The class "atout-style-settings-group" can be used for specific styling if needed. --}}
+        <div class="theme-item">
+            <label>Style d'Atouts</label>
+            <div class="select-group">
+                <select name="system.atoutStyle" data-dtype="String">
+                    <option value="">-- Défaut --</option>
+                    {{#select system.atoutStyle}}
+                        {{#each (range 1 20)}} {{!-- Loop from 1 to 20 --}}
+                            <option value="style{{this}}">Style {{this}}</option>
+                        {{/each}}
+                    {{/select}}
+                </select>
+            </div>
+        </div>
+    </div>
+</div>

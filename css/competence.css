@@ -1,0 +1,830 @@
+/* ===== COMPETENCES SECTION STYLES - TWO COLUMNS ===== */
+
+/* Main competences section - BIGGER */
+.competences-section {
+    width: 100%;
+    padding: 15px;
+    background: var(--theme-background-alt, rgba(255, 255, 255, 0.8));
+    border-radius: 15px;
+    border: 3px solid var(--theme-primary-color, #2C606D);
+    margin: 10px 0;
+    box-shadow: 0 6px 12px var(--theme-primary-shadow, rgba(44, 96, 109, 0.3));
+    height: auto !important;
+    overflow: visible !important;
+    max-height: none !important;
+    opacity: 0.8;
+}
+
+.competences-section h3 {
+    font-family: var(--theme-font-title, 'AJensonPro'), serif;
+    font-size: 26px; /* Increased from 24px */
+    font-weight: bold;
+    color: var(--theme-primary-color, #2C606D);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 25px;
+    text-align: center;
+    padding-bottom: 15px;
+    border-bottom: 3px solid var(--theme-primary-color, #2C606D);
+}
+
+/* Competences stats */
+.competences-stats {
+    text-align: center;
+    margin-bottom: 15px;
+    padding: 12px;
+    background: var(--theme-primary-light, rgba(44, 96, 109, 0.1));
+    border-radius: 8px;
+    border: 1px solid var(--theme-primary-color, #2C606D);
+    font-family: var(--theme-font-header, 'AJensonPro'), serif;
+    font-size: 16px;
+    color: var(--theme-text-color, #262925);
+}
+
+/* ===== TWO COLUMN GRID LAYOUT - BIGGER ===== */
+
+.competences-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px; /* Increased from 20px */
+    width: 100%; /* Tries to be 100% of parent's content width */
+    max-width: 90%; /* Reduce overall width of the grid */
+    margin-left: 0; /* Align grid to the left */
+    margin-right: auto; /* Remaining space (if any due to max-width) goes to the right */
+    height: auto;
+    align-items: start;
+    overflow: visible;
+    opacity: 1;
+}
+
+/* Individual column container - BIGGER */
+.competences-column {
+    width: 100%;
+    height: auto;
+    overflow: visible !important;
+    border: 2px solid var(--theme-border-color, #ddd);
+    border-radius: 8px;
+    background: var(--theme-background-light, rgba(255, 255, 255, 0.9));
+}
+
+/* Header row for each column - BIGGER */
+.competences-header {
+    display: flex;
+    align-items: center;
+    padding: 12px; /* Increased from 8px */
+    border-bottom: 3px solid var(--theme-primary-color, #2C606D);
+    font-weight: bold;
+    background: var(--theme-primary-color, #2C606D); /* Background remains themed */
+    color: white; /* Ensure text is white */
+    font-size: 14px; /* Increased from 13px */
+    font-family: var(--theme-font-header, 'AJensonPro'), serif;
+    height: auto ;
+    width: 100%;
+    box-sizing: border-box;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    border-radius: 6px 6px 0 0;
+}
+
+/* Competences list container for each column - NO SCROLLBARS */
+.competences-list {
+    height: auto !important;
+    overflow: visible !important;
+    width: 100%;
+    max-height: none !important;
+    background: var(--theme-background-light, rgba(255, 255, 255, 0.9));
+}
+
+/* Individual competence row - BIGGER */
+.competence-row {
+    display: flex;
+    align-items: center;
+    padding: 12px; /* Increased from 10px */
+    border-bottom: 1px solid var(--theme-border-light, #eee);
+    font-size: 13px; /* Increased from 12px */
+    height: auto !important;
+    overflow: visible !important;
+    width: 100%;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+    position: relative;
+    min-height: 45px; /* Increased from 40px */
+    background: var(--theme-background-light, rgba(255, 255, 255, 0.9));
+    font-family: var(--theme-font-body, 'Inter'), sans-serif;
+}
+
+/* ===== ADJUSTED COLUMN WIDTH DEFINITIONS ===== */
+
+/* Column 1: Competence Name - MUCH BIGGER */
+.competences-header .header-competence,
+.competence-label {
+    width: 190px; /* Increased from 170px */
+    min-width: 190px;
+    max-width: 190px;
+    text-align: left;
+    padding-right: 8px; /* Increased from 6px */
+    box-sizing: border-box;
+    font-weight: bold;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 16px; /* Increased from 15px */
+    /* Color will be inherited for .header-competence, and set specifically for .competence-label */
+    font-family: var(--theme-font-header, 'AJensonPro'), serif;
+}
+.competence-label { /* For list items */
+    color: var(--theme-primary-color);
+}
+
+/* Column 2: Caracteristique - BIGGER */
+.competences-header .header-caract,
+.competence-caract {
+    width: 70px; /* Increased from 60px */
+    min-width: 70px;
+    max-width: 70px;
+    text-align: center;
+    padding-right: 6px;
+    box-sizing: border-box;
+    font-size: 12px; /* Increased from 11px */
+    /* Color will be inherited for .header-caract, and set specifically for .competence-caract */
+    font-family: var(--theme-font-header, 'AJensonPro'), serif; /* Consistent font */
+}
+.competence-caract { /* For list items */
+    color: var(--theme-primary-color);
+}
+
+/* Column 3: Caracteristique Value - BIGGER REFERENCE VALUE */
+.competences-header .header-val,
+.competence-caract-value {
+    width: 40px; /* Increased from 30px */
+    min-width: 40px;
+    max-width: 40px;
+    text-align: center;
+    padding: 4px; /* Increased padding */
+    box-sizing: border-box;
+    font-weight: bold;
+    font-size: 12px; /* Increased font size */
+    color: var(--theme-text-color, #262925); /* Dark text on its light background */
+    background: var(--theme-primary-light, rgba(44, 96, 109, 0.1));
+    border-radius: 4px;
+    position: relative;
+}
+
+/* Add a small indicator to show this is the max value */
+.competence-caract-value::after {
+    content: 'MAX';
+    position: absolute;
+    top: -10px;
+    right: -3px;
+    font-size: 7px; /* Slightly increased */
+    color: #666;
+    background: white;
+    padding: 2px 3px;
+    border-radius: 3px;
+    border: 1px solid #ddd;
+}
+
+/* Column 4: Competence Input - BIGGER VALIDATED INPUT */
+.competences-header .header-comp {
+    width: 60px; /* Increased from 50px */
+    min-width: 60px;
+    max-width: 60px;
+    text-align: center;
+    padding-right: 6px;
+    box-sizing: border-box;
+}
+
+.competence-input {
+    width: 55px; /* Increased from 45px */
+    min-width: 55px;
+    max-width: 55px;
+    padding: 6px; /* Increased from 4px */
+    font-size: 13px; /* Increased from 12px */
+    border: 2px solid var(--theme-border-color, #ccc);
+    border-radius: 4px;
+    text-align: center;
+    margin-right: 6px;
+    box-sizing: border-box;
+    position: relative;
+    transition: all 0.3s ease;
+    font-weight: bold;
+    height: 32px; /* Increased from 28px */
+    background: var(--theme-background-light, rgba(255, 255, 255, 0.9));
+    color: var(--theme-text-color, #262925);
+}
+
+/* ===== VALIDATION STATES FOR COMPETENCE INPUT ===== */
+
+/* Valid: Competence <= Caracteristique */
+.competence-input.valid {
+    border-color: #28a745;
+    background-color: rgba(40, 167, 69, 0.1);
+    color: #155724;
+}
+
+.competence-input.valid:focus {
+    border-color: #28a745;
+    box-shadow: 0 0 6px rgba(40, 167, 69, 0.5);
+    outline: none;
+}
+
+/* At Maximum: Competence = Caracteristique */
+.competence-input.at-max {
+    border-color: #ffc107;
+    background-color: rgba(255, 193, 7, 0.15);
+    color: #856404;
+}
+
+.competence-input.at-max:focus {
+    border-color: #ffc107;
+    box-shadow: 0 0 6px rgba(255, 193, 7, 0.5);
+    outline: none;
+}
+
+/* Invalid: Competence > Caracteristique - RED TINT */
+.competence-input.invalid {
+    border-color: #dc3545 !important;
+    background-color: rgba(220, 53, 69, 0.2) !important; /* Increased opacity for more red tint */
+    color: #721c24 !important;
+    animation: shake 0.5s ease-in-out;
+    box-shadow: 0 0 8px rgba(220, 53, 69, 0.4); /* Added red glow */
+}
+
+.competence-input.invalid:focus {
+    border-color: #dc3545 !important;
+    box-shadow: 0 0 10px rgba(220, 53, 69, 0.7) !important;
+    outline: none;
+}
+
+/* Shake animation for invalid values */
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-3px); }
+    75% { transform: translateX(3px); }
+}
+
+/* Column 5: Half Value - BIGGER */
+.competences-header .header-half,
+.competence-half {
+    width: 50px; /* Increased from 45px */
+    min-width: 50px;
+    max-width: 50px;
+    text-align: center;
+    padding: 6px; /* Increased padding */
+    background-color: var(--theme-background-alt, #f8f9fa);
+    color: var(--theme-text-muted, #6c757d);
+    border: 1px solid var(--theme-border-light, #dee2e6);
+    font-size: 12px; /* Increased from 11px */
+    border-radius: 3px;
+    text-align: center;
+    margin-right: 6px;
+    box-sizing: border-box;
+    cursor: not-allowed;
+    font-weight: normal;
+    height: 32px; /* Match input height */
+}
+
+/* Column 6: Total - MUCH BIGGER */
+.competences-header .header-total,
+.competence-total {
+    width: 70px; /* Increased from 50px */
+    min-width: 70px;
+    max-width: 70px;
+    text-align: center;
+    padding: 6px; /* Increased padding */
+    box-sizing: border-box;
+    font-weight: bold;
+    font-size: 16px; /* Increased from 12px - MUCH BIGGER */
+    /* Color will be inherited for .header-total, and set specifically for .competence-total (list items) */
+    transition: all 0.3s ease;
+    font-family: var(--theme-font-header, 'AJensonPro'), serif;
+    background: var(--theme-primary-light, rgba(44, 96, 109, 0.1));
+    border-radius: 6px;
+    border: 1px solid var(--theme-primary-color, #2C606D);
+}
+.competence-total { /* For list items */
+    color: var(--theme-primary-color, #2C606D);
+}
+
+/* Total value styling based on validation */
+.competence-total.valid {
+    color: #28a745;
+    background-color: rgba(40, 167, 69, 0.1);
+    border-color: #28a745;
+}
+
+.competence-total.at-max {
+    color: #856404;
+    background-color: rgba(255, 193, 7, 0.15);
+    border-color: #ffc107;
+}
+
+.competence-total.invalid {
+    color: #dc3545 !important;
+    background-color: rgba(220, 53, 69, 0.2);
+    border-color: #dc3545;
+    box-shadow: 0 0 4px rgba(220, 53, 69, 0.3);
+}
+
+/* Column 7: Specialite Checkbox - BIGGER */
+.competences-header .header-active {
+    width: 40px; /* Increased from 35px */
+    min-width: 40px;
+    max-width: 40px;
+    text-align: center;
+    padding-right: 6px;
+    box-sizing: border-box;
+}
+
+.competence-specialite-checkbox {
+    width: 20px; /* Increased from 18px */
+    height: 20px;
+    min-width: 20px;
+    max-width: 20px;
+    margin-right: 6px;
+    cursor: pointer;
+    accent-color: var(--theme-primary-color, #2C606D);
+    transition: all 0.3s ease;
+    transform: scale(1.3); /* Increased from 1.2 */
+}
+
+/* Disable specialite checkbox if competence is invalid or 0 */
+.competence-specialite-checkbox.disabled {
+    cursor: not-allowed;
+    opacity: 0.3;
+    pointer-events: none;
+    filter: grayscale(100%);
+}
+
+/* Column 8: Specialite Select - BIGGER */
+.competences-header .header-specialite {
+    width: 120px; /* Increased from 100px */
+    min-width: 120px;
+    max-width: 120px;
+    text-align: left;
+    box-sizing: border-box;
+}
+
+.competence-select {
+    width: 120px;
+    min-width: 120px;
+    max-width: 120px;
+    font-size: 12px; /* Increased from 11px */
+    padding: 6px; /* Increased padding */
+    border: 1px solid var(--theme-border-color, #ccc);
+    border-radius: 3px;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+    height: 32px; /* Match input height */
+    background: var(--theme-background-light, rgba(255, 255, 255, 0.9));
+    color: var(--theme-text-color, #262925);
+}
+
+/* ===== ROW VALIDATION STYLING WITH THEME COLORS ===== */
+
+/* Alternating row colors for better readability */
+.competence-row:nth-child(even) {
+    background-color: var(--theme-background-transparent, rgba(44, 96, 109, 0.03));
+}
+
+.competence-row:nth-child(odd) {
+    background-color: var(--theme-background-light, white);
+}
+
+/* Hover effect */
+.competence-row:hover {
+    background-color: var(--theme-primary-light, rgba(44, 96, 109, 0.08)) !important;
+    border-left: 4px solid var(--theme-primary-color, #2C606D);
+}
+
+/* Row validation styling - STRONG RED TINT FOR INVALID */
+.competence-row.invalid {
+    background-color: rgba(220, 53, 69, 0.12) !important; /* Strong red tint */
+    border-left: 5px solid #dc3545; /* Thicker border */
+    position: relative;
+    box-shadow: inset 0 0 10px rgba(220, 53, 69, 0.1); /* Inner red glow */
+}
+
+.competence-row.invalid::before {
+    content: '⚠';
+    position: absolute;
+    left: -18px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #dc3545;
+    font-weight: bold;
+    font-size: 14px; /* Increased size */
+    background: white;
+    border-radius: 50%;
+    width: 20px;
+}
+
+.competence-row.invalid::before {
+    content: '⚠';
+    position: absolute;
+    left: -15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #dc3545;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+.competence-row.at-max {
+    background-color: rgba(255, 193, 7, 0.05) !important;
+    border-left: 4px solid #ffc107;
+    position: relative;
+}
+
+.competence-row.at-max::before {
+    content: '⚡';
+    position: absolute;
+    left: -15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #ffc107;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+.competence-row.valid {
+    border-left: 4px solid #28a745;
+    position: relative;
+}
+
+.competence-row.valid::before {
+    content: '✓';
+    position: absolute;
+    left: -15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #28a745;
+    font-weight: bold;
+    font-size: 10px;
+}
+
+/* ===== VALIDATION TOOLTIPS ===== */
+
+.competence-input-container {
+    position: relative;
+    display: inline-block;
+}
+
+.competence-validation-tooltip {
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-bottom: 5px;
+    padding: 6px 10px;
+    border-radius: 4px;
+    font-size: 10px;
+    font-weight: bold;
+    white-space: nowrap;
+    z-index: 1000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.competence-validation-tooltip::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 5px solid transparent;
+}
+
+/* Error tooltip */
+.competence-validation-tooltip.error {
+    background: #dc3545;
+    color: white;
+}
+
+.competence-validation-tooltip.error::after {
+    border-top-color: #dc3545;
+}
+
+/* Warning tooltip */
+.competence-validation-tooltip.warning {
+    background: #ffc107;
+    color: #333;
+}
+
+.competence-validation-tooltip.warning::after {
+    border-top-color: #ffc107;
+}
+
+/* ===== SPECIALITE FUNCTIONALITY ===== */
+
+/* Disabled select styling */
+.competence-select.disabled {
+    background-color: var(--theme-background-alt, #f5f5f5);
+    color: var(--theme-text-muted, #999);
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.competence-select:disabled {
+    background-color: var(--theme-background-alt, #f5f5f5);
+    color: var(--theme-text-muted, #999);
+    cursor: not-allowed;
+}
+
+/* Enabled select styling */
+.competence-select:not(.disabled):not(:disabled) {
+    background-color: white;
+    color: #333;
+    cursor: pointer;
+}
+
+/* Visual feedback for checkbox state */
+.competence-specialite-checkbox:checked + .competence-select {
+    border-color: var(--theme-primary-color, #2C606D);
+    box-shadow: 0 0 2px var(--theme-primary-shadow, rgba(44, 96, 109, 0.3));
+}
+
+/* Hover effects */
+.competence-specialite-checkbox:hover:not(.disabled) {
+    transform: scale(1.05);
+}
+
+.competence-select:not(:disabled):hover {
+    border-color: var(--theme-primary-color, #2C606D);
+}
+
+/* ===== VALIDATION MESSAGES ===== */
+
+.competences-validation-summary {
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 8px;
+    background: var(--theme-background-light, rgba(255, 255, 255, 0.9));
+    border: 2px solid var(--theme-border-color, #ddd);
+    transition: all 0.3s ease;
+}
+
+/* Styling for .competence-total */
+.competence-total {
+    width: 42px !important; /* Increased from 38px */
+    height: 42px !important; /* Match width for a circle */
+    padding: 0 !important; /* Remove padding for flex centering */
+    border-radius: 50%; /* Makes it round */
+
+    font-size: 1.1em !important; /* Increased from 1em */
+    font-weight: bold !important;
+    color: var(--theme-primary-color) !important; /* Use theme primary color for text */
+    background-color: var(--theme-background-alt) !important; /* Consistent background */
+    
+    border: 1px solid var(--theme-primary-dark, #1a4a54); /* Slightly thinner border for smaller circle */
+    
+    /* Shadow for depth and relief */
+    box-shadow:
+        1px 1px 3px rgba(0, 0, 0, 0.22), /* Outer shadow, slightly adjusted */
+        inset 1px 1px 2px var(--theme-primary-light, rgba(255,255,255,0.3)), /* Inner highlight, slightly adjusted */
+        inset -1px -1px 2px var(--theme-primary-shadow, rgba(0,0,0,0.12)); /* Inner contour, slightly adjusted */
+
+    /* Text centering */
+    display: flex !important; /* Ensure flex display */
+    align-items: center !important;
+    justify-content: center !important;
+    line-height: 1 !important; /* Reset line-height */
+
+    text-align: center !important; /* Ensure text is centered if flex fails for some reason */
+    box-sizing: border-box !important;
+    flex-shrink: 0; /* Prevent shrinking in flex layouts */
+    margin: auto 5px; /* Auto margins for horizontal centering if parent is flex, plus some side margin */
+    transition: all 0.2s ease-in-out;
+}
+
+.competences-validation-summary.has-errors {
+    border-color: #dc3545;
+    background: rgba(220, 53, 69, 0.05);
+}
+
+.validation-message {
+    margin-bottom: 10px;
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.validation-message.error {
+    background: rgba(220, 53, 69, 0.1);
+    color: #721c24;
+    border-left: 4px solid #dc3545;
+}
+
+.validation-message.warning {
+    background: rgba(255, 193, 7, 0.1);
+    color: #856404;
+}
+
+/* ===== BOTTOM SECTIONS ===== */
+
+/* Formula explanation */
+.competences-formula {
+    margin-top: 15px;
+    padding: 12px;
+    background: var(--theme-primary-light, rgba(44, 96, 109, 0.1));
+    border-radius: 6px;
+    font-size: 12px;
+    color: #666;
+    border-left: 4px solid var(--theme-primary-color, #2C606D);
+}
+
+.competences-formula .formula-title {
+    font-weight: bold;
+    color: var(--theme-primary-color, #2C606D);
+    margin-bottom: 8px;
+}
+
+.competences-formula .formula-rule {
+    margin: 4px 0;
+}
+
+/* Actions section */
+.competences-actions {
+    margin-top: 15px;
+    text-align: center;
+}
+
+.init-competences-btn {
+    padding: 10px 20px;
+    background: var(--theme-primary-color, #2C606D);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.init-competences-btn:hover {
+    background: var(--theme-primary-dark, #1a4a54);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* No competences state */
+.no-competences {
+    text-align: center;
+    padding: 30px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    border: 2px dashed #dee2e6;
+    margin: 20px 0;
+}
+
+.no-competences p {
+    margin-bottom: 20px;
+    color: #666;
+    font-size: 16px;
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+
+@media (max-width: 1200px) {
+    .competences-grid {
+        gap: 15px;
+    }
+    
+    .competences-header .header-competence,
+    .competence-label {
+        width: 80px;
+        min-width: 80px;
+        max-width: 80px;
+    }
+    
+    .competences-header .header-specialite,
+    .competence-select {
+        width: 70px;
+        min-width: 70px;
+        max-width: 70px;
+    }
+}
+
+@media (max-width: 900px) {
+    .competences-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .competences-header .header-competence,
+    .competence-label {
+        width: 120px;
+        min-width: 120px;
+        max-width: 120px;
+    }
+    
+    .competences-header .header-caract,
+    .competence-caract {
+        width: 60px;
+        min-width: 60px;
+        max-width: 60px;
+    }
+    
+    .competences-header .header-specialite,
+    .competence-select {
+        width: 100px;
+        min-width: 100px;
+        max-width: 100px;
+    }
+}
+
+@media (max-width: 600px) {
+    .competences-section {
+        padding: 15px;
+    }
+    
+    .competence-row,
+    .competences-header {
+        font-size: 9px;
+        padding: 6px;
+    }
+    
+    .competence-input {
+        width: 30px;
+        font-size: 9px;
+    }
+    
+    .competence-half {
+        width: 25px;
+        font-size: 8px;
+    }
+    
+    .competence-select {
+        font-size: 8px;
+    }
+}
+
+/* ===== FOCUS STATES FOR ACCESSIBILITY ===== */
+
+.competence-input:focus,
+.competence-select:focus {
+    border-color: var(--theme-primary-color, #2C606D);
+    outline: none;
+    box-shadow: 0 0 3px var(--theme-primary-shadow, rgba(44, 96, 109, 0.3));
+}
+
+.competence-specialite-checkbox:focus {
+    outline: 2px solid var(--theme-primary-color, #2C606D);
+    outline-offset: 2px;
+}
+
+/* ===== REMOVE ALL SCROLLBARS FROM COMPETENCE TABLES ===== */
+
+/* Remove scrollbars from all competence-related containers */
+.competences-section,
+.competences-grid,
+.competences-column,
+.competences-list,
+.competence-row {
+    overflow: visible !important;
+    overflow-x: visible !important;
+    overflow-y: visible !important;
+    max-height: none !important;
+    height: auto !important;
+}
+
+/* Ensure no scrollbar styling is applied */
+.competences-list::-webkit-scrollbar,
+.competences-column::-webkit-scrollbar,
+.competences-grid::-webkit-scrollbar {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+}
+
+/* Firefox scrollbar removal */
+.competences-list,
+.competences-column,
+.competences-grid {
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
+}
+
+/* ===== ENSURE PARENT CONTAINERS HANDLE SCROLLING ===== */
+
+.sheet-content {
+    overflow-y: auto !important;
+    overflow-x: visible !important;
+}
+
+.tab[data-tab="competences"] {
+    height: auto !important;
+    overflow: visible !important;
+}
+
+.tab[data-tab="competences"] .sheet-content {
+    height: auto !important;
+    max-height: none !important;
+    overflow-y: auto !important;
+    overflow-x: visible !important;
+}
+
+/* ===== DEBUG STYLING (Remove in production) ===== */

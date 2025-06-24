@@ -1,0 +1,74 @@
+<main class="possession-content">
+  <!-- 
+    Note: CSS is required for layout (e.g., flexbox/grid for columns and widths) 
+    and styling. JavaScript is needed for drag-and-drop and event handling.
+  -->
+
+  <!-- Top Section: Artefacts, Creatures, Ombres -->
+  <section class="item-groups top-groups">
+    <div class="two-column-layout"> {{!-- Changed from three-column-layout --}}
+      <div class="column">
+        <div class="actorDesc-group artefact-group"> 
+          <div class="actorDesc-header"> 
+            <h4>ARTEFACTS</h4> 
+            <a class="item-control item-create" title="Add Artefact" data-item-type="artefact"><i class="fas fa-plus"></i></a>
+          </div>
+          <div class="drop-target" data-group-type="artefact" aria-label="Drop zone for artefacts"> <!-- Style en ligne retiré; theme.css devrait styler .drop-target (bordure, fond, etc.) -->
+            <p class="drop-hint">Déposez vos Artefacts ici</p> 
+            
+            {{#each possessedArtefacts}}
+              <!-- Structure de l'item mise à jour pour ressembler à atout-list-item-detailed -->
+              <div class="item draggable-item artefact-list-item-detailed" data-item-id="{{this._id}}" draggable="true"> <!-- theme.css devrait styler cette classe (fond, marge, bordure gauche, etc.) -->
+                <div class="item-details">
+                  <h4 class="item-name item-name-clickable" style="color: var(--theme-text-color);" title="Ouvrir {{this.name}}">{{this.name}}</h4>
+                </div>
+                <!-- Si les artefacts avaient une quantité, des cases à cocher, etc., ils iraient ici -->
+                <div class="item-controls"> <!-- Contrôles dans leur propre div -->
+                  <a class="item-control item-edit" title="Edit Artefact"><i class="fas fa-edit"></i></a>
+                  <a class="item-control item-delete" title="Remove Artefact"><i class="fas fa-trash"></i></a>
+                </div>
+              </div>
+            {{/each}}
+            {{#unless possessedArtefacts}}
+              <p class="no-items-message">Pas d'Artefact.</p> <!-- Message si aucun item, à styler via theme.css (couleur discrète, centré) -->
+            {{/unless}}
+          </div>
+        </div>
+        <div class="decorum-separator-container">
+          <img src="systems/ambre/assets/skin/frames/separator{{system.decorumNumber}}.png" class="decorum-separator" alt="Separator"/>
+        </div>
+      </div>
+
+      <div class="column">
+        <div class="actorDesc-group creature-group"> <!-- theme.css devrait styler .actorDesc-group -->
+          <div class="actorDesc-header"> <!-- theme.css devrait styler .actorDesc-header -->
+            <h4>CREATURES</h4> <!-- theme.css devrait styler .actorDesc-header h4 -->
+            <a class="item-control item-create" title="Add Creature" data-item-type="creature"><i class="fas fa-plus"></i></a>
+          </div>
+          <div class="drop-target" data-group-type="creature" aria-label="Drop zone for creatures"> <!-- Style en ligne retiré; theme.css devrait styler .drop-target -->
+            <p class="drop-hint">Déposez vos Créatures ici</p> <!-- Indice de dépôt ajouté -->
+            {{#each possessedCreatures}}
+              <!-- Structure de l'item mise à jour -->
+              <div class="item draggable-item creature-list-item-detailed" data-item-id="{{this._id}}" draggable="true"> <!-- theme.css devrait styler cette classe -->
+                <div class="item-details">
+                  <h4 class="item-name item-name-clickable" style="color: var(--theme-text-color);" title="Ouvrir {{this.name}}">{{this.name}}</h4>
+                </div>
+                <div class="item-controls">
+                  <a class="item-control item-edit" title="Edit Creature"><i class="fas fa-edit"></i></a>
+                  <a class="item-control item-delete" title="Remove Creature"><i class="fas fa-trash"></i></a>
+                </div>
+              </div>
+            {{/each}}
+            {{#unless possessedCreatures}}
+              <p class="no-items-message">Pas de Créature.</p> <!-- Message si aucun item -->
+            {{/unless}}
+          </div>
+        </div>
+        <div class="decorum-separator-container">
+          <img src="systems/ambre/assets/skin/frames/separator{{system.decorumNumber}}.png" class="decorum-separator" alt="Separator"/>
+        </div>
+      </div>
+      {{!-- The right-column containing Ombres has been removed --}}
+    </div>
+  </section>
+</main>

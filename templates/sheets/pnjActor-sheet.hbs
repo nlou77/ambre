@@ -1,0 +1,156 @@
+<form class="{{cssClass}} pnj-actor-sheet" autocomplete="off">
+
+    {{!-- Sheet Header --}}
+    <header class="sheet-header" style="background-color: #f0f0f0; padding: 10px; min-height: 200px; display: flex; align-items: center;">
+        <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" style="height: 175px; width: 175px; object-fit: cover; margin-right: 10px; flex-shrink: 0;"/>
+        
+        <div class="header-main-content" style="flex-grow: 1; display: flex; flex-direction: column; justify-content: center; min-height: 175px;">
+            {{!-- This div will contain the name input and the karma section, arranged horizontally --}} {{!-- The sheet-header-buttons are now styled in ambre.css --}}
+            <div class="name-and-karma-row" style="display: flex; align-items: center; width: 100%; height: 100%; position: relative;">
+                <h1 class="charname" style="flex-grow: 1; margin: 0 5px 0 0;">
+                    <div class="form-group">
+                        <input name="name" type="text" value="{{actor.name}}" placeholder="Nom du PNJ" style="width: 100%; font-size: 1.6em; padding: 5px; box-sizing: border-box;"/>
+                    </div> {{!-- Removed inline style for sheet-header-buttons --}}
+                    <div class="form-group" style="align-items: center; display: flex; gap: 5px;"> {{!-- This form-group is still needed for layout --}}
+                        <div class="sheet-header-buttons">
+                            <button type="button" class="refresh-button" title="Réinitialiser Santé/Énergie"><i class="fas fa-sync-alt"></i></button>
+                            <button type="button" class="show-image-button" title="Montrer l'image aux joueurs"><i class="fas fa-eye"></i></button>
+                            <a class="toggle-description-editor header-button" title="Afficher/Masquer l'éditeur de description">
+                                <i class="fas fa-file-alt"></i>
+                            </a>
+                            <button type="button" class="lock-sheet-button" title="{{#if sheetLocked}}Déverrouiller la fiche{{else}}Verrouiller la fiche{{/if}}">
+                                {{#if sheetLocked}}
+                                    <i class="fas fa-lock"></i>
+                                {{else}}
+                                    <i class="fas fa-lock-open"></i>
+                                {{/if}}
+                            </button>
+                        </div>
+                    </div>
+                </h1>
+                
+                {{!-- Karma Section --}}
+                <div class="karma-section" style="display: flex; align-items: center; justify-content: center; flex-shrink: 0; width: 125px; height: 125px; position: relative;">
+                    {{!-- Background Image --}}
+                    <img src="systems/ambre/assets/artwork/pnj-karma-counter.png" alt="Karma Counter Background" title="Karma" style="width: 100%; height: 100%; object-fit: contain; position: absolute; top: 0; left: 0;"/>
+                    
+                    {{!-- Overlay Input --}}
+                    <input name="system.karma" type="number" value="{{system.karma}}" data-dtype="Number" placeholder="0" title="Karma" class="karma-input" style="width: 100px; height: 100px; border-radius: 50%; text-align: center; font-size: 4em; border: none; box-sizing: border-box; -moz-appearance: textfield; appearance: textfield; position: relative; z-index: 1; background-color: none; color:blanchedalmond"/> {{!-- Added position relative, z-index and slight background for readability --}}
+                </div>
+            </div>
+        </div>
+    </header>
+
+    {{!-- Sheet Body --}}
+    <section class="pnj-sheet-body" style="background-color: #f0f0f0; padding: 10px; height: 100%; width: 100%;">
+        <div class="pnj-main-layout"  style="display: flex; flex-direction: column; align-items: left";> {{!-- This will now be a flex column container --}}
+            <div class="pnj-block major-stats-block" style="display: flex; flex-direction: row; align-items: left; margin-bottom: 5px;">
+                <h3 class="pnj-block-title">CARACTERISTIQUES</h3>
+                <div class="pnj-block caracteristics-block" style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr 1fr; grid-gap: 6px; align-items: center;">
+                    <div class="form-group">
+                        <label for="system.physique">PHYSIQUE</label>
+                        <input type="number" name="system.physique" value="{{system.physique}}" data-dtype="Number" style="width: 100px;" {{#if sheetLocked}}readonly{{/if}}/>
+                    </div>
+                    <div class="form-group">
+                        <label for="system.endurance">ENDURANCE</label>
+                        <input type="number" name="system.endurance" value="{{system.endurance}}" data-dtype="Number" style="width: 100px;" {{#if sheetLocked}}readonly{{/if}}/>
+                    </div>
+                    <div class="form-group">
+                        <label for="system.psyche">PSYCHE</label>
+                        <input type="number" name="system.psyche" value="{{system.psyche}}" data-dtype="Number" style="width: 100px;" {{#if sheetLocked}}readonly{{/if}}/>
+                    </div>
+                    <div class="form-group">
+                        <label for="system.perception">PERCEPTION</label>
+                        <input type="number" name="system.perception" value="{{system.perception}}" data-dtype="Number" style="width: 100px;" {{#if sheetLocked}}readonly{{/if}}/>
+                    </div>
+                    <div class="form-group">
+                        <label for="system.charisme">CHARISME</label>
+                        <input type="number" name="system.charisme" value="{{system.charisme}}" data-dtype="Number" style="width: 100px;" {{#if sheetLocked}}readonly{{/if}}/>
+                    </div>
+                </div>
+            </div>
+            
+            {{!-- New Health & Energy Block --}}
+            <div class="pnj-block health-energy-block" style="display: flex; flex-direction: column; align-items: left; margin-bottom: 5px;">
+                <h3 class="pnj-block-title">SANTÉ & ÉNERGIE</h3>
+                <div class="health-energy-grid-container" style="display: grid; grid-template-columns: 1fr 1fr; gap: 5px; padding-top: 5px;">
+                    {{!-- Health Column --}}
+                    <div class="health-column" style="display: flex; flex-direction: column; gap: 8px;">
+                        <div class="form-group" style="display: flex; flex-direction: row; gap: 8px;"> {{!-- Uses pnj.css for flex-row --}}
+                            <label for="system.health.value" style="min-width: 100px; margin-top: 5px; margin-bottom: 5px; flex-basis: 15px; flex-grow: 0; flex-shrink: 0;">{{localize "ambre.pj.health"}}</label>
+                            <input type="number" name="system.health.value" value="{{system.health.value}}" data-dtype="Number" style="min-width: 100px; flex-grow: 0;" {{#if sheetLocked}}readonly{{/if}}/>
+                            <input type="number" name="system.health.max" value="{{system.health.max}}" data-dtype="Number" style="min-width: 100px; flex-grow: 0;" readonly class="calculated-field"/>
+                        </div>
+                        <div class="form-group" style="display: flex; flex-direction: row; gap: 8px;">
+                            <label for="system.health.healthReserve.value" style="min-width: 100px; margin-top: 5px; margin-bottom: 5px; flex-basis: 15px; flex-grow: 0; flex-shrink: 0;">Réserve Santé</label>
+                            <input type="number" name="system.health.healthReserve.value" value="{{system.health.healthReserve.value}}" data-dtype="Number" style="min-width: 100px; flex-grow: 0;" {{#if sheetLocked}}readonly{{/if}}/>
+                            <input type="number" name="system.health.healthReserve.max" value="{{system.health.healthReserve.max}}" data-dtype="Number" style="min-width: 100px; flex-grow: 0;" readonly class="calculated-field"/>
+                        </div>
+                    </div>
+                    {{!-- Energy Column --}}
+                    <div class="energy-column" style="display: flex; flex-direction: column; gap: 8px;">
+                        <div class="form-group" style="display: flex; flex-direction: row; gap: 8px";>
+                            <label for="system.energy.value" style="min-width: 100px; margin-top: 5px; margin-bottom: 5px; flex-basis: 15px; flex-grow: 0; flex-shrink: 0;">{{localize "ambre.pj.energy"}}</label>
+                            <input type="number" name="system.energy.value" value="{{system.energy.value}}" data-dtype="Number" style="min-width: 100px; flex-grow: 0;" {{#if sheetLocked}}readonly{{/if}}/>
+                            <input type="number" name="system.energy.max" value="{{system.energy.max}}" data-dtype="Number" style="min-width: 100px; flex-grow: 0;" readonly class="calculated-field"/>
+                        </div>
+                        <div class="form-group" style="display: flex; flex-direction: row; gap: 8px";>
+                            <label for="system.energy.energyReserve.value" style="min-width: 100px; margin-top: 5px; margin-bottom: 5px; flex-basis: 15px; flex-grow: 0; flex-shrink: 0;">Réserve Énergie</label>
+                            <input type="number" name="system.energy.energyReserve.value" value="{{system.energy.energyReserve.value}}" data-dtype="Number" style="min-width: 100px; flex-grow: 0;" {{#if sheetLocked}}readonly{{/if}}/>
+                            <input type="number" name="system.energy.energyReserve.max" value="{{system.energy.energyReserve.max}}" data-dtype="Number" style="min-width: 100px; flex-grow: 0;" readonly class="calculated-field"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pnj-block major-stats-block" style="display: flex; flex-direction: row; align-items: left;">
+                <h3 class="pnj-block-title">POUVOIRS</h3>
+                <div class="pnj-block pouvoirs-block" style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr; grid-gap: 6px; align-items: left;">
+                    {{#each pouvoirTypes as |pouvoir|}}
+                    <div class="form-group">
+                        <label for="system.creation.{{pouvoir.field}}" style="font-weight: bold; margin-bottom: 5px;">{{pouvoir.label}}</label>
+                        <input type="number" name="system.creation.{{pouvoir.field}}" value="{{lookup ../system.creation pouvoir.field}}" data-dtype="Number" style="width: 75px;" {{#if sheetLocked}}readonly{{/if}}/>
+                    </div>
+                    {{/each}}
+                </div>
+            </div>
+            {{!-- Drop Zones for Items and Journal --}}
+            <div class="pnj-block drop-zones">
+                <div class="drop-target" data-group-type="artefact" style="min-height: 50px; border: 2px dashed #aaa; border-radius: 5px; padding: 5px; text-align: center; color: #888; background-color: #f0f0f0;">
+                    <p class="drop-hint" style="font-size: 0.8em; margin: 0;">Déposer Artefact</p>
+                            {{#each possessedArtefacts as |item id|}}
+                                <div class="item linked-item-display" data-item-uuid="{{item.uuid}}" data-item-type="artefact">
+                                    <img src="{{item.img}}" class="item-image" width="20" height="20" title="{{item.name}}"/>
+                                    <span class="item-name clickable-link">{{item.name}}</span>
+                                    <a class="unlink-linked-item" data-item-type="artefact" title="Délier cet artefact"><i class="fas fa-unlink"></i></a>
+                                </div>
+                    {{/each}}
+                </div>
+                <div class="drop-target" data-group-type="ombre"  style="min-height: 50px; border: 2px dashed #aaa; border-radius: 5px; padding: 5px; text-align: center; color: #888; background-color: #f0f0f0;">
+                    <p class="drop-hint" style="font-size: 0.8em; margin: 0;">Déposer Ombre</p>
+                             {{#each possessedOmbres as |item id|}}
+                                <div class="item linked-item-display" data-item-uuid="{{item.uuid}}" data-item-type="ombre">
+                                    <img src="{{item.img}}" class="item-image" width="20" height="20" title="{{item.name}}"/>
+                                    <span class="item-name clickable-link">{{item.name}}</span>
+                                    <a class="unlink-linked-item" data-item-type="ombre" title="Délier cette ombre"><i class="fas fa-unlink"></i></a>
+                                </div>
+                    {{/each}}
+                </div>
+                <div class="journal-drop-target" data-group-type="journal"  style="min-height: 50px; border: 2px dashed #aaa; border-radius: 5px; padding: 5px; text-align: center; color: #888; background-color: #f0f0f0;">
+                    <p class="drop-hint" style="font-size: 0.8em; margin: 0;">Déposer Journal</p>
+                             {{#each linkedJournals as |journal id|}}
+                                <div class="journal linked-item-display" data-journal-uuid="{{journal.uuid}}" data-item-type="journal">
+                                    <span class="item-name clickable-link">{{journal.name}}</span>
+                                    <a class="unlink-linked-journal" title="Délier ce journal"><i class="fas fa-unlink"></i></a>
+                                </div>
+                    {{/each}}
+                </div>
+            </div>
+        </div>
+        
+        {{!-- Biography Editor Section --}}
+        <div class="biography-section">
+            {{editor system.biographie target="system.biographie" button=true owner=owner editable=editable}}
+        </div>
+    </section>
+</form>

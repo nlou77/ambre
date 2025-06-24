@@ -1,0 +1,161 @@
+<h3 class="clickable-tab-title section-header-with-controls" data-tab-target="competences-content-area">
+    <span>Compétences</span>
+</h3>
+<div class="competences-all-section toggleable-tab-content" id="competences-content-area">    
+    <div class="competences-section">
+        {{#if competencesFlat}}
+            {{#if competencesFlat.length}}
+                <div class="competences-grid">
+                    <!-- Left Column -->
+                    <div class="competences-column">
+                        <div class="competences-header">
+                            <div class="header-competence">Compétence</div>
+                            <div class="header-caract">Caract.</div>
+                            <div class="header-comp">Valeur</div>
+                            <div class="header-half">½</div>
+                            <div class="header-total">Total</div>
+                            <div class="header-specialite">Spécialité</div>
+                        </div>
+                        <div class="competences-list">
+                            {{#each competencesFlat}}
+                                {{#if (lt @index (div ../competencesFlat.length 2))}}
+                                    <div class="competence-row">
+                                        <!-- Competence Name -->
+                                        <div class="competence-label" title="{{this.description}}">
+                                            {{this.label}}
+                                        </div>
+                                        
+                                        <!-- Caracteristique -->
+                                        <div class="competence-caract">
+                                            {{this.caracteristique}} ({{this.caracteristiqueValue}})
+                                        </div>
+                                        
+                                        <!-- Competence Input -->
+                                        <input type="number" 
+                                            class="competence-input"
+                                            name="{{this.inputName}}.value" 
+                                            value="{{this.value}}" 
+                                            min="0" 
+                                            max="{{this.caracteristiqueValue}}"
+                                            data-dtype="Number"
+                                            data-competence-key="{{this.key}}"
+                                            data-max-value="{{this.caracteristiqueValue}}"/>
+                                        
+                                        <!-- Half Value (Read-only) -->
+                                        <input type="text" 
+                                            class="competence-half" 
+                                            value="{{div this.value 2}}" 
+                                            readonly 
+                                            tabindex="-1"/>
+                                        
+                                        <!-- Total Value -->
+                                        <div class="competence-total">
+                                            {{this.total}}
+                                        </div>
+                                        <!-- Specialite Select -->
+                                        <select class="competence-select" 
+                                                name="{{this.inputName}}.specialite" 
+                                                style="visibility: {{#if (gte this.value @root.system.baseScoreSpecialite)}}visible{{else}}hidden{{/if}};">
+                                            <option value="">-- Aucune --</option>
+                                            {{#each this.specialites}}
+                                                <option value="{{this.key}}" {{#if (eq this.key ../selectedSpecialite)}}selected{{/if}}>
+                                                    {{this.label}}
+                                                </option>
+                                            {{/each}}
+                                        </select>
+                                    </div>
+                                    {{!-- Temporary Debug Line --}}
+                                    {{!-- <div style="font-size: 0.7em; color: #7a7971;">
+                                        Debug: CompVal={{this.value}}, BaseSpecScore={{@root.data.system.baseScoreSpecialite}}
+                                    </div> --}}
+                                {{/if}}
+                            {{/each}}
+                        </div>
+                    </div>
+                    
+                    <!-- Right Column -->
+                    <div class="competences-column">
+                        <div class="competences-header">
+                            <div class="header-competence">Compétence</div>
+                            <div class="header-caract">Caract.</div>
+                            <div class="header-comp">Valeur</div>
+                            <div class="header-half">½</div>
+                            <div class="header-total">Total</div>
+                            <div class="header-specialite">Spécialité</div>
+                        </div>
+                        <div class="competences-list">
+                            {{#each competencesFlat}}
+                                {{#if (gte @index (div ../competencesFlat.length 2))}}
+                                    <div class="competence-row">
+                                        <!-- Competence Name -->
+                                        <div class="competence-label" title="{{this.description}}">
+                                            {{this.label}}
+                                        </div>
+                                        
+                                        <!-- Caracteristique -->
+                                        <div class="competence-caract">
+                                            {{this.caracteristique}} ({{this.caracteristiqueValue}})
+                                        </div>
+                                        
+                                        <!-- Competence Input -->
+                                        <input type="number" 
+                                            class="competence-input"
+                                            name="{{this.inputName}}.value" 
+                                            value="{{this.value}}" 
+                                            min="0" 
+                                            max="{{this.caracteristiqueValue}}"
+                                            data-dtype="Number"
+                                            data-competence-key="{{this.key}}"
+                                            data-max-value="{{this.caracteristiqueValue}}"/>
+                                        
+                                        <!-- Half Value (Read-only) -->
+                                        <input type="text" 
+                                            class="competence-half" 
+                                            value="{{div this.value 2}}" 
+                                            readonly 
+                                            tabindex="-1"/>
+                                        
+                                        <!-- Total Value -->
+                                        <div class="competence-total">
+                                            {{this.total}}
+                                        </div>
+                                        <!-- Specialite Select -->
+                                        <select class="competence-select" 
+                                                name="{{this.inputName}}.specialite" 
+                                                style="visibility: {{#if (gte this.value @root.system.baseScoreSpecialite)}}visible{{else}}hidden{{/if}};">
+                                            <option value="">-- Aucune --</option>
+                                            {{#each this.specialites}}
+                                                <option value="{{this.key}}" {{#if (eq this.key ../selectedSpecialite)}}selected{{/if}}>
+                                                    {{this.label}}
+                                                </option>
+                                            {{/each}}
+                                        </select>
+                                    </div>
+                                    {{!-- Temporary Debug Line --}}
+                                    {{!-- <div style="font-size: 0.7em; color: #7a7971;">
+                                        Debug: CompVal={{this.value}}, BaseSpecScore={{@root.data.system.baseScoreSpecialite}}
+                                    </div> --}}
+                                {{/if}}
+                            {{/each}}
+                        </div>
+                    </div>
+                </div>
+                        
+            {{else}}
+                <div class="no-competences">
+                    <p>Aucune compétence trouvée.</p>
+                    <button type="button" class="init-competences-btn">
+                        Initialiser les Compétences
+                    </button>
+                </div>
+            {{/if}}
+        {{else}}
+            <div class="no-competences">
+                <p><strong>Les compétences ne sont pas initialisées.</strong></p>
+                <button type="button" class="init-competences-btn">
+                    Initialiser les Compétences
+                </button>
+            </div>
+        {{/if}}
+    </div>
+</div>

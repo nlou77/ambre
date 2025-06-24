@@ -1,0 +1,153 @@
+<div class="options">
+
+    <div class="options-column">
+
+        <div class="options-group">
+
+            <div class="header">
+
+                <img class="puce"/>
+
+                <img class="separator"/>
+
+                <span class="options-name">{{localize "ambre.options"}}</span>
+
+            </div>
+
+            <ol class="body">
+
+                {{> "systems/ambre/templates/sheets/actor/parts/option.hbs" label="ambre.caracteristiques" name="actor.system.options.caracteristiques" value=actor.system.options.caracteristiques}}
+
+                {{> "systems/ambre/templates/sheets/actor/parts/option.hbs" label="ambre.competences" name="actor.system.options.competences" value=actor.system.options.competences}}
+
+                {{> "systems/ambre/templates/sheets/actor/parts/option.hbs" label="ambre.artefacts" name="system.options.artefacts" value=system.options.artefacts}}
+
+                {{> "systems/ambre/templates/sheets/actor/parts/option.hbs" label="ambre.ombres" name="system.options.ombres" value=system.options.ombres}}
+
+                {{> "systems/ambre/templates/sheets/actor/parts/option.hbs" label="ambre.creatures" name="system.options.creatures" value=system.options.creatures}}
+
+            </ol>
+
+        </div>
+
+        <div class="options-group">
+
+            <div class="header">
+
+                <span class="options-name">{{localize "ambre.options"}}</span>
+
+            </div>
+
+            <ol class="body">
+
+                {{> "systems/ambre/templates/sheets/actor/parts/option.hbs" label="ambre.marelle" name="system.options.marelle" value=system.options.marelle}}
+
+                {{> "systems/ambre/templates/sheets/actor/parts/option.hbs" label="ambre.logrus" name="system.options.logrus" value=system.options.logrus}}
+
+                {{> "systems/ambre/templates/sheets/actor/parts/option.hbs" label="ambre.atouts" name="system.options.atouts" value=system.options.atouts}}
+
+                {{> "systems/ambre/templates/sheets/actor/parts/option.hbs" label="ambre.metamorphose" name="system.options.metamorphose" value=system.options.metamorphose}}
+
+                {{> "systems/ambre/templates/sheets/actor/parts/option.hbs" label="ambre.pentacre" name="system.options.pentacre" value=system.options.pentacre}}
+
+                {{> "systems/ambre/templates/sheets/actor/parts/option.hbs" label="ambre.coeur-flamme" name="system.options.coeurflamme" value=system.options.coeurflamme}}
+
+                {{> "systems/ambre/templates/sheets/actor/parts/option.hbs" label="ambre.orbachromat" name="system.options.orbochromat" value=system.options.orbochromat}}
+
+                {{> "systems/ambre/templates/sheets/actor/parts/option.hbs" label="ambre.abreuvoir" name="system.options.abreuvoir" value=system.options.abreuvoir}}
+
+                {{> "systems/ambre/templates/sheets/actor/parts/option.hbs" label="ambre.harmonium" name="system.options.harmonium" value=system.options.harmonium}}
+
+                {{> "systems/ambre/templates/sheets/actor/parts/option.hbs" label="ambre.chimerion" name="system.options.chimerion" value=system.options.chimerion}}
+                
+                {{> "systems/ambre/templates/sheets/actor/parts/option.hbs" label="ambre.sabliers" name="system.options.sabliers" value=system.options.sabliers}}
+
+                {{> "systems/ambre/templates/sheets/actor/parts/option.hbs" label="ambre.abysses" name="system.options.abysses" value=system.options.abysses}}
+
+                {{> "systems/ambre/templates/sheets/actor/parts/option.hbs" label="ambre.magie" name="system.options.magie" value=system.options.magie}}
+
+            </ol>
+
+        </div>
+
+    </div>
+
+    <input
+        name="actor.system.options.marelle"
+        type="checkbox" 
+        value="{{actor.system.options.marelle}}"
+        data-dtype="Boolean"/>
+
+    <input
+        name="system.options.logrus"
+        type="hidden"
+        value="{{system.options.logrus}}"
+        data-dtype="Boolean"/>
+
+    <input
+        name="system.options.atouts"
+        type="hidden"
+        value="{{system.options.atouts}}"
+        data-dtype="Boolean"/>
+
+    <input
+        name="system.options.metamorphose"
+        type="hidden"
+        value="{{system.options.metamorphose}}"
+        data-dtype="Boolean"/>
+
+    <input
+        name="system.options.pentacre"
+        type="hidden"
+        value="{{system.options.pentacre}}"
+        data-dtype="Boolean"/>
+
+    <input
+        name="system.options.coeurflamme"
+        type="checkbox" 
+        value="{{system.options.coeurflamme}}"
+        data-dtype="Boolean"/>
+
+    <input
+        name="system.options.orbochromat"
+        type="checkbox" 
+        value="{{system.options.orbochromat}}"
+        data-dtype="Boolean"/>
+
+    <input
+        name="system.options.abreuvoir"
+        type="hidden"
+        value="{{system.options.abreuvoir}}"
+        data-dtype="Boolean"/>
+
+    <input
+        name="system.options.harmonium"
+        type="hidden"
+        value="{{system.options.harmonium}}"
+        data-dtype="Boolean"/>
+
+    <input
+        name="system.options.chimerion"
+        type="hidden"
+        value="{{system.options.chimerion}}"
+        data-dtype="Boolean"/>
+    
+    <input
+        name="system.options.sabliers"
+        type="hidden"
+        value="{{system.options.sabliers}}"
+        data-dtype="Boolean"/>
+
+    <input
+        name="system.options.abysses"
+        type="hidden"
+        value="{{system.options.abysses}}"
+        data-dtype="Boolean"/>
+
+    <input
+        name="system.options.magie"
+        type="hidden"
+        value="{{system.options.magie}}"
+        data-dtype="Boolean"/>
+    </div>
+</div>

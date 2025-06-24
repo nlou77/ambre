@@ -1,0 +1,46 @@
+<form class="artefactabyssal-sheet {{cssClass}}" autocomplete="off">
+    <header class="sheet-header">
+        <img class="profile-img" src="/systems/ambre/assets/icons/026-skull.png" data-edit="img" title="{{item.name}}"/>
+        <div class="header-fields">
+            <h1 class="charname"><input name="name" type="text" value="{{item.name}}" placeholder="Nom de l'Artefact Abyssal"/></h1>
+        </div>
+    </header>
+
+    <nav class="sheet-tabs tabs" data-group="primary">
+        <a class="item active" data-tab="description">Description</a>
+        <a class="item" data-tab="attributes">Attributs</a>
+    </nav>
+
+    <section class="sheet-body">
+        <div class="tab description active" data-group="primary" data-tab="description">
+            {{editor system.description target="system.description" button=true owner=owner editable=editable}}
+        </div>
+
+        <div class="tab attributes" data-group="primary" data-tab="attributes">
+            <div class="form-group">
+                <label for="system.bonus">Bonus</label>
+                <input type="text" id="system.bonus" name="system.bonus" value="{{system.bonus}}" placeholder="Ex: +2 Force, Résistance au feu"/>
+            </div>
+            <div class="form-group">
+                <label for="system.pouvoirLie">Pouvoir Lié</label>
+                <select id="system.pouvoirLie" name="system.pouvoirLie">
+                    {{#select system.pouvoirLie}}
+                    {{#each pouvoirTypes as |pouvoir|}}
+                        <option value="{{pouvoir.key}}">{{pouvoir.label}}</option>
+                    {{/each}}
+                    {{/select}}
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="system.capaciteLiee">Capacité Liée</label>
+                <select id="system.capaciteLiee" name="system.capaciteLiee" {{#unless system.pouvoirLie}}disabled{{/unless}}>
+                    {{#select system.capaciteLiee}}
+                    {{#each capacitesList as |capacite|}}
+                        <option value="{{capacite.key}}">{{capacite.label}}</option>
+                    {{/each}}
+                    {{/select}}
+                </select>
+            </div>
+        </div>
+    </section>
+</form>

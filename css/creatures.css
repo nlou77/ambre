@@ -1,0 +1,889 @@
+/* Styles généraux pour la feuille d'creature */
+.ambre .window-app .creature-card-sheet, /* Sélecteur plus spécifique pour Foundry VTT */
+.creature-card-sheet {
+    min-width: 800px; /* Adjusted to match the new default JS width */
+    /* max-width: 1365px; Removed to allow sheet to grow with content */
+    width: auto;      /* S'adapte au contenu jusqu'à max-width */
+    max-height: 85vh; /* Cap the maximum height of the sheet to 85% of viewport height */
+    min-height: 420px;/* Hauteur minimale pour la feuille réduite */
+    height: auto;     /* S'adapte au contenu verticalement */
+    display: flex;
+    flex-direction: column;
+}
+
+.creature-card-sheet .creature-card-header {
+    display: flex;
+    align-items: center; /* Aligne l'image et le titre verticalement */
+    gap: 15px; /* Espace entre l'image et le titre */
+}
+.creature-card-sheet .creature-card-header input[name="name"] {
+    flex-grow: 1; /* Le champ de nom prend l'espace restant */
+    padding: 8px 12px;
+    font-size: 2em; /* Augmentation de la taille de la police */
+    font-family: var(--theme-font-header, "Modesto Condensed", serif);
+    text-align: center;
+    border: none;
+    border-bottom: 2px solid var(--theme-primary-color);
+    background-color: transparent;
+    color: var(--theme-primary-color);
+    margin-bottom: 10px;
+}
+
+.creature-card-sheet .creature-card-header .toggle-creature-lock,
+.creature-card-sheet .creature-card-header .refresh-possessing-actor.header-button,
+.creature-card-sheet .creature-card-header .toggle-stat-refresh-lock.header-button,
+.creature-card-sheet .creature-card-header .toggle-description-editor.header-button {
+    font-size: 1.6em; /* Adjusted for better visual balance with the 2em name input */
+    color: var(--theme-primary-color);
+    cursor: pointer;
+    padding: 0 5px; /* Reduced padding slightly for two buttons */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0; /* Prevent it from shrinking */
+    /* height: 100%; Removed as align-items on parent should handle vertical centering */
+}
+
+.creature-card-sheet .creature-card-header .toggle-creature-lock:hover,
+.creature-card-sheet .creature-card-header .refresh-possessing-actor.header-button:hover,
+.creature-card-sheet .creature-card-header .toggle-stat-refresh-lock.header-button:hover,
+.creature-card-sheet .creature-card-header .toggle-description-editor.header-button:hover {
+    color: var(--theme-primary-dark);
+}
+
+/* Specific adjustment for the lock button's right padding */
+.creature-card-sheet .creature-card-header .toggle-creature-lock {
+    padding-right: 20px; /* Increased from 5px (from shared rule) to 10px */
+}
+
+.creature-card-sheet .creature-card-header .toggle-creature-lock.locked i {
+    color: var(--theme-text-muted); /* Example: Mute the icon color when locked */
+}
+
+.creature-card-sheet .creature-card-header .refresh-possessing-actor.header-button.disabled i,
+.creature-card-sheet .creature-card-header .toggle-stat-refresh-lock.header-button.disabled i {
+    color: var(--theme-text-muted); /* Mute refresh icon when disabled (locked) */
+}
+
+.creature-card-sheet .creature-card-body {
+    padding: 5px 5px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column; /* Lays out .creature-top-controls, .creature-content-columns, and .creature-description-section vertically */
+    overflow-y: auto;   /* Allows this section to scroll if content exceeds sheet height */
+    min-height: 0;      /* Important for nested flex containers to prevent overflow issues */
+}
+
+/* Styles for the new top controls row */
+.creature-card-sheet .creature-top-controls {
+    display: flex;
+    align-items: flex-start;
+    gap: 25px;
+    padding: 8px 5px 12px 5px;
+    border-bottom: 1px solid var(--theme-border-light);
+    margin-bottom: 15px;
+    flex-direction: row;
+}
+
+.creature-card-sheet .creature-top-controls .form-group {
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Space between label and control within each group */
+}
+
+.creature-card-sheet .creature-top-controls .form-group label {
+    margin-bottom: 0; /* Remove default bottom margin if any */
+    font-weight: bold; 
+    color: var(--theme-primary-color);
+    white-space: nowrap; /* Prevent label text from wrapping */
+}
+
+/* Styles for the X Counter controls */
+.creature-card-sheet .creature-top-controls .x-counter-controls {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    flex-direction: row;
+}
+
+.creature-card-sheet .creature-top-controls .x-counter-controls .control-button {
+    padding: 3px 6px;
+    font-size: 0.8em;
+    line-height: 1;
+    min-width: 24px; /* Ensure buttons have a decent click area */
+    background-color: var(--theme-primary-light);
+    border: 1px solid var(--theme-primary-medium);
+    color: var(--theme-primary-color);
+    cursor: pointer;
+}
+.creature-card-sheet .creature-top-controls .x-counter-controls .control-button:hover:not(:disabled) {
+    background-color: var(--theme-primary-medium);
+}
+.creature-card-sheet .creature-top-controls .x-counter-display {
+    font-weight: bold;
+    padding: 0 5px; /* Space around the 'xN' text */
+}
+.creature-card-sheet .creature-content-columns {
+    display: flex; /* Utilisation de Flexbox pour les colonnes */
+    padding-bottom: 15px; /* Espace avant la section description */
+    align-items: stretch;
+}
+
+/* Ajustements pour l'image pour qu'elle s'adapte bien */
+.creature-card-sheet .creature-card-header .image-frame-wrapper {
+    width: 80px;  /* Taille fixe pour l'image dans l'en-tête */
+    height: 80px; /* Taille fixe pour l'image dans l'en-tête */
+    flex-shrink: 0; /* Empêche l'image de rétrécir */
+    position: relative; /* Si vous utilisez des cadres superposés */
+    aspect-ratio: 1 / 1; /* Assure que le conteneur de l'image est carré */
+    align-items: center;
+    justify-content: center;
+}
+.creature-card-sheet .creature-card-image,
+.creature-card-sheet .creature-foreground-frame {
+    max-width: 100%;
+    height: auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%; /* L'image remplit le conteneur carré */
+    height: 100%; /* L'image remplit le conteneur carré */
+    object-fit: cover; /* L'image couvre la zone, peut être rognée */
+}
+.creature-card-sheet .creature-foreground-frame {
+    pointer-events: none; /* Pour que le cadre ne bloque pas les clics sur l'image en dessous */
+    z-index: 1; /* S'assure que le cadre est au-dessus de l'image */
+}
+/* Styles génériques pour image-frame-wrapper si besoin ailleurs, mais celui du header est prioritaire */
+.creature-card-sheet .image-frame-wrapper {
+    display: flex; /* Assure le centrage interne si pas déjà fait */
+    align-items: center;
+    justify-content: center;
+    position: relative; /* Pour les cadres superposés */
+}
+
+/* La colonne centrale (anciennement) est maintenant la colonne principale à gauche du contenu */
+.creature-card-sheet .creature-center-column { /* Was creature-right-column */
+    flex: 0 0 750px; /* Largeur fixe pour la colonne principale */
+    min-width: 750px; /* Assure que la largeur n'est pas réduite en dessous de la valeur flex-basis */
+    display: flex;
+    flex-direction: column;
+    gap: 8px; /* Espacement vertical réduit dans la colonne de droite */
+}
+
+/* Styles pour la liste des attributs de l'creature */
+.creature-card-sheet .creature-attributes-list {
+    background: var(--theme-primary-light); /* Similaire à .actorDesc-group */
+    border-radius: 6px; /* Similaire à .actorDesc-group */
+    padding: 10px;       /* Similaire à .actorDesc-group */
+    border: 2px solid var(--theme-primary-color);
+    display: grid;
+    grid-template-columns: minmax(100px, auto) minmax(200px, 1.2fr) auto minmax(70px, auto) minmax(150px, 1fr); /* Attributs, Niveau, Aide, Coût, Description */
+    gap: 8px 12px; /* row-gap column-gap */
+    align-items: center; /* Vertically center items in their cells */
+    /* height: 100%; -- Removed to allow column to shrink/grow with content */
+}
+
+.creature-card-sheet .attribute-grid-header {
+    font-weight: bold;
+    color: var(--theme-primary-color);
+    padding-bottom: 5px;
+    border-bottom: 1px solid var(--theme-primary-medium);
+    text-align: left;
+}
+
+.creature-card-sheet .attribute-grid-label label {
+    margin: 0;
+    font-family: var(--theme-font-header, Arial, sans-serif);
+    font-size: 14px;
+    font-weight: bold;
+    color: var(--theme-primary-color);
+}
+
+.creature-card-sheet .attribute-grid-niveau .attribute-level-select {
+    width: 100%; /* Make select take full width of its grid cell */
+}
+
+/* Base style for all form-group-stat to ensure children are vertically aligned */
+/* .creature-card-sheet .form-group-stat {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+}
+
+/* Styles pour chaque ligne d'attribut (label + input) */
+.creature-card-sheet .creature-attributes-list .form-group-stat {
+    /* display: flex; and align-items: center; are inherited from the base .form-group-stat rule */ /* No longer used */
+    gap: 20px; /* Espace entre le groupe label/select et le groupe valeur/description */
+    /* justify-content: space-between; /* Removed to align groups to the left */
+} */
+
+/* Styles pour le label de l'attribut */
+.creature-card-sheet .creature-attributes-list .form-group-stat .label-with-info {
+    display: flex;
+    align-items: center; /* Changé pour aligner verticalement au centre */
+    gap: 5px; /* Espace entre le label et l'icône d'info */
+    position: relative; /* Pour le positionnement du tooltip */
+    /* flex-grow: 1; /* Removed to prevent pushing value control to the far right */
+    /* margin-right: 10px; /* Replaced by gap on parent */
+    /* color: var(--theme-primary-color); */ /* No longer used */
+}
+
+.creature-card-sheet .creature-attributes-list .form-group-stat .label-with-info label {
+    margin: 0;                     /* Similaire à .actorDesc-header h4 */
+    font-family: var(--theme-font-header, Arial, sans-serif); /* Police avec fallback */
+    font-size: 14px;
+    font-weight: bold;
+    color: var(--theme-primary-color);
+    /* flex-grow: 1; -- Déplacé vers .label-with-info */
+    /* margin-right: 10px; -- Géré par le gap de .label-with-info et margin-right de .label-with-info */
+} */
+
+/* Nouveaux styles pour les groupes horizontaux d'attributs */
+.creature-card-sheet .creature-attribute-group-horizontal {
+    display: flex;
+    flex-direction: row;
+    gap: 10px; /* Espace horizontal entre les attributs dans un groupe */
+    align-items: flex-start; /* Aligne les items du groupe en haut */
+}
+
+.creature-card-sheet .creature-attribute-group-horizontal .form-group-stat {
+    flex: 1; /* Chaque attribut dans le groupe prend une part égale de l'espace */
+    min-width: 0; /* Permet aux éléments flex de rétrécir si nécessaire */
+}
+
+/* Styles pour le groupe de contrôle de valeur (boutons et input numérique) */
+.creature-card-sheet .creature-attributes-list .form-group-stat .creature-attribute-value-control {
+    /* display: flex; */ /* No longer used directly here, cost is in its own cell */
+    /* align-items: center; */
+    /* gap: 4px; */
+} */
+
+/* Styles pour l'icône d'information et son tooltip */
+.creature-card-sheet .info-icon-wrapper {
+    position: relative;
+    display: inline-flex; /* S'assure que le wrapper prend juste la taille de l'icône */
+    align-items: center;
+}
+.creature-card-sheet .attribute-grid-aide .info-icon-wrapper { /* Center icon in its cell */
+    justify-content: center;
+    width: 100%;
+}
+
+.creature-card-sheet .attribute-info-icon {
+    cursor: help;
+    font-size: 0.9em; /* Légèrement plus petit que le texte du label */
+    /* color est hérité de .label-with-info ou peut être défini ici */
+}
+
+.creature-card-sheet .tooltip-popup {
+    display: none; /* Caché par défaut */
+    position: absolute;
+    top: 100%; /* En dessous de l'icône */
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: 5px; /* Petit espace */
+    background-color: var(--theme-background-light, white);
+    border: 1px solid var(--theme-primary-color, #2C606D);
+    border-radius: 4px;
+    padding: 8px 10px;
+    box-shadow: 0 3px 7px var(--theme-primary-shadow, rgba(0,0,0,0.2));
+    z-index: 100; /* Au-dessus des autres éléments */
+    min-width: 300px; /* Largeur minimale du tooltip (200px * 1.5) */
+    max-width: 450px; /* Largeur maximale (300px * 1.5) */
+    font-size: 13px;
+    color: var(--theme-text-color);
+    text-align: left;
+}
+
+.creature-card-sheet .attribute-grid-cout .attribute-cost-display {
+    font-weight: bold;
+    color: var(--theme-text-color);
+}
+
+.creature-card-sheet .creature-attributes-list .form-group-stat .creature-attribute-value-control button {
+    background-color: var(--theme-primary-color);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    width: 28px;
+    height: 28px;
+    font-size: 1.1em; /* Taille de police pour les signes +/- */
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1; /* Assure que le texte est centré verticalement */
+    padding: 0;
+    transition: background-color 0.2s ease;
+} */ /* Buttons are not in this list anymore */
+
+.creature-card-sheet .creature-attributes-list .form-group-stat .creature-attribute-value-control button:hover {
+    background-color: var(--theme-primary-dark);
+}
+
+.creature-card-sheet .creature-attributes-list .form-group-stat .creature-attribute-value-control input[type="number"] {
+    /* Styling to look like a label/static text */
+    width: 40px;
+    min-width: 20px;
+    text-align: center;
+    background: transparent;
+    color: var(--theme-text-color);
+    padding: 0; /* Remove default input padding */
+    border: none; /* Remove input border */
+    font-size: inherit; /* Inherit from parent for consistency */
+    font-family: inherit; /* Inherit from parent for consistency */
+    font-weight: bold; /* Make the cost value stand out a bit */
+    box-sizing: border-box;
+    margin-right: 5px; /* Space before the description text span */
+} */ /* Input number is not in this list anymore */
+
+/* Cache les flèches sur les navigateurs WebKit (Chrome, Safari, Edge) */
+.creature-card-sheet .creature-attributes-list .form-group-stat .creature-attribute-value-control input[type="number"]::-webkit-outer-spin-button,
+.creature-card-sheet .creature-attributes-list .form-group-stat .creature-attribute-value-control input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.creature-card-sheet .creature-attributes-list .form-group-stat .creature-attribute-value-control input[type="number"][readonly]:focus {
+    /* Prevent focus styles on readonly inputs if they look like labels */
+    outline: none;
+    box-shadow: none;
+    /* border-color: var(--theme-primary-color); Similaire à .actorDesc-select:focus */
+}
+
+.creature-card-sheet .creature-attributes-list .form-group-stat .creature-attribute-value-control .attribute-cost-display {
+    /* font-weight: bold; */ /* Moved to .attribute-grid-cout .attribute-cost-display */
+    /* color: var(--theme-text-color); */
+    /* padding-left: 5px; */
+} */
+
+.creature-card-sheet .attribute-grid-description .attribute-level-description-text {
+    font-size: 0.9em; /* Slightly smaller than main text */
+    color: var(--theme-text-muted, #555); /* Muted color for descriptive text */
+    font-style: italic;
+    text-align: left;
+}
+
+/* En-tête cliquable pour les sections masquables */
+.creature-card-sheet .creature-collapsible-header {
+    cursor: pointer;
+    padding: 8px 12px;
+    background: var(--theme-primary-light);
+    border: 1px solid var(--theme-primary-color);
+    border-radius: 6px;
+    margin-top: 15px; /* Espace au-dessus de l'en-tête */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background-color 0.2s ease;
+}
+
+.creature-card-sheet .creature-collapsible-header:hover {
+    background: var(--theme-primary-medium);
+}
+
+.creature-card-sheet .creature-collapsible-header .collapsible-header-title {
+    font-family: var(--theme-font-header, Arial, sans-serif);
+    font-size: 1.05em; /* Légèrement plus petit que le label de description */
+    font-weight: bold;
+    color: var(--theme-primary-color);
+}
+
+.creature-card-sheet .creature-collapsible-header .collapsible-header-icon {
+    transition: transform 0.3s ease;
+    margin-left: 10px; /* Adds space between the title and the icon */
+}
+
+.creature-card-sheet .creature-collapsible-header.open .collapsible-header-icon {
+    transform: rotate(180deg);
+}
+
+/* Content for single attribute collapsible sections like Polymorphie, now in right column */
+.creature-parameters-content-main .creature-single-attribute-collapsible-content { /* Path updated */
+    display: flex; /* Pour gérer l'espacement entre la valeur principale et la section des formes */
+    flex-direction: row;
+    gap: 15px; /* Espace entre la ligne de valeur polymorphie et la section des formes */
+    margin-top: 5px; /* Petit espace entre l'en-tête et le contenu lorsqu'il est ouvert */
+    padding: 12px;
+    background: var(--theme-background-alt); 
+    border-radius: 6px;
+    border: 1px solid var(--theme-primary-color);
+    width: 100%; /* Prend toute la largeur de la colonne (droite dans ce cas) */
+    box-sizing: border-box;
+}
+
+.column-toggle-container {
+    /* This class might be removed or repurposed if no longer used for left/right column toggles */
+    flex: 0 0 30px; /* Fixed width for the toggle area */
+    display: flex;
+    align-items: center; /* Center button vertically */
+    justify-content: center; /* Center button horizontally */
+    background-color: var(--theme-background-alt); 
+    cursor: pointer;
+    align-self: stretch; /* Ensure it stretches to full height of flex container */
+    z-index: 5; /* Ensure it's above the column gap */
+    border-left: 1px solid var(--theme-border-dark);
+    border-right: 1px solid var(--theme-border-dark);
+}
+
+.column-toggle-container button {
+    background: none;
+    border: none;
+    padding: 10px 0px;
+    cursor: pointer;
+    color: var(--theme-primary-color);
+    font-size: 1.5em; /* Larger icon */
+    line-height: 1;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.column-toggle-container button:hover {
+    background-color: var(--theme-primary-light);
+    color: var(--theme-primary-dark);
+}
+
+/* Styles for the new Parameters section */
+.creature-card-sheet .creature-parameters-section {
+    margin-top: 10px;
+    width: 750px; /* Match the width of .creature-center-column */
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+    position: relative;
+}
+
+.creature-card-sheet .creature-parameters-content-main {
+    padding: 12px;
+    background: var(--theme-background-alt); /* Or a slightly different background if desired */
+    border-radius: 6px;
+    border: 1px solid var(--theme-primary-color);
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Space between nested collapsible sections */
+}
+
+/* Ensure the form-group inside Polymorphie (if it uses .form-group-stat) aligns items */
+.creature-card-sheet .creature-parameters-content-main .creature-single-attribute-collapsible-content .form-group-stat {
+    justify-content: space-between;
+}
+
+/* Styles for Polymorphie Forms Section */
+.creature-card-sheet .polymorphie-formes-section {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding-top: 10px;
+    border-top: 1px solid var(--theme-primary-light); /* Séparateur optionnel */
+}
+
+.creature-card-sheet .polymorphie-formes-header {
+    margin: 0 0 8px 0;
+    font-family: var(--theme-font-header, Arial, sans-serif);
+    font-size: 1.0em;
+    font-weight: bold;
+    color: var(--theme-primary-color);
+    text-align: left;
+}
+
+.creature-card-sheet .polymorphie-formes-list {
+    display: flex;
+    flex-direction: column;
+    gap: 6px; /* Espace entre chaque ligne de forme */
+}
+
+.creature-card-sheet .polymorphie-forme-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.creature-card-sheet .polymorphie-forme-label {
+    font-size: 13px;
+    color: var(--theme-text-color);
+    flex-shrink: 0; /* Empêche le label de rétrécir */
+    min-width: 110px; /* Donne une largeur minimale au label */
+}
+
+.creature-card-sheet .polymorphie-forme-input {
+    flex-grow: 1; /* L'input prend l'espace restant */
+    padding: 4px 6px;
+    border: 1px solid var(--theme-border-color);
+    border-radius: 3px;
+    background: var(--theme-background-light);
+    font-size: 13px;
+}
+
+.creature-card-sheet .polymorphie-forme-button {
+    flex-shrink: 0;
+    width: 24px; /* Taille des boutons +/- */
+    height: 24px;
+    padding: 0; /* Ajustez si l'icône n'est pas centrée */
+    font-size: 0.9em; /* Taille de l'icône dans le bouton */
+    /* Les styles de base des boutons (couleur, etc.) sont hérités de .creature-attribute-value-control button */
+}
+
+/* Section pour le coût, liaison et acteurs liés */
+.creature-card-sheet .creature-linking-details {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Espace entre les champs internes, légèrement réduit */
+    margin-top: 5px; /* Petit espace entre l'en-tête et le contenu lorsqu'il est ouvert */
+    padding: 12px;
+    background: var(--theme-background-alt); /* Consistent background with other collapsible content */
+    border-radius: 6px;
+    border: 1px solid var(--theme-primary-color);
+}
+
+.creature-card-sheet .creature-linking-details .form-group {
+    display: flex;
+    align-items: center; /* Aligne label et contrôle par défaut */
+    gap: 10px;
+    flex-direction: row;
+}
+
+.creature-card-sheet .creature-linking-details .form-group label {
+    flex-shrink: 0; /* Empêche le label de rétrécir */
+    min-width: 80px; /* Donne de l'espace au label */
+    margin: 0;
+    font-family: var(--theme-font-header, Arial, sans-serif);
+    font-size: 14px;
+    font-weight: bold;
+    color: var(--theme-primary-color);
+}
+
+.creature-card-sheet .creature-linking-details .creature-total-cost-display {
+    flex-grow: 1; /* Prevent the input from growing */
+    flex-shrink: 0; /* Prevent the input from shrinking (optional but good practice for fixed width) */
+    width: 80px;  /* Set the desired width */
+    background-color: var(--theme-background-light);
+    border: 1px solid var(--theme-border-color);
+    padding: 6px 8px;
+    border-radius: 4px;
+    color: var(--theme-text-secondary); /* Couleur discrète pour readonly */
+    cursor: default;
+    text-align: right; /* Keep text alignment if desired */
+}
+
+.creature-card-sheet .creature-linking-details .form-group-checkbox label {
+    min-width: auto; /* Annule le min-width pour les labels de checkbox */
+}
+
+.creature-card-sheet .creature-linking-details .form-group-checkbox input[type="checkbox"] {
+    width: 18px; /* Taille de la checkbox */
+    height: 18px;
+    cursor: pointer;
+}
+
+/* New style for horizontally aligning checkboxes */
+.creature-card-sheet .creature-linking-details .form-group-horizontal-checkboxes {
+    display: flex;
+    flex-direction: row;
+    gap: 20px; /* Adjust gap between checkbox groups as needed */
+}
+
+/* Styles spécifiques pour le groupe de dépôt d'acteur */
+.creature-card-sheet .creature-linking-details .form-group.actor-drop-group {
+    align-items: flex-start; /* Aligne le label en haut avec la zone de dépôt */
+}
+
+.creature-card-sheet .actor-drop-target {
+    border: 2px dashed var(--theme-primary-color);
+    border-radius: 6px;
+    padding: 10px;
+    text-align: center;
+    background-color: var(--theme-primary-light);
+    color: var(--theme-text-muted);
+    min-height: 70px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1; /* Prend l'espace disponible */
+    transition: background-color 0.2s ease, border-style 0.2s ease;
+}
+
+.creature-card-sheet .actor-drop-target.drag-over { /* Classe à ajouter via JS lors du survol pendant un glisser-déposer */
+    background-color: var(--theme-primary-strong);
+    border-style: solid;
+}
+
+.creature-card-sheet .actor-drop-target .drop-hint {
+    margin: 0 0 8px 0;
+    font-style: italic;
+    font-size: 12px;
+}
+
+.creature-card-sheet .linked-actors-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    max-height: 80px; /* Hauteur max avec défilement */
+    overflow-y: auto;
+    font-size: 13px;
+}
+
+.creature-card-sheet .linked-actors-list li {
+    background-color: var(--theme-background-light);
+    border: 1px solid var(--theme-border-light);
+    padding: 4px 8px;
+    margin-bottom: 3px;
+    border-radius: 4px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--theme-text-color);
+}
+
+.creature-card-sheet .linked-actors-list li .linked-actor-img {
+    width: 24px; /* Adjust size as needed */
+    height: 24px; /* Adjust size as needed */
+    border-radius: 3px; /* Slightly rounded square, or 50% for circular */
+    margin-right: 8px;
+    object-fit: cover;
+    border: 1px solid var(--theme-border-light);
+    vertical-align: middle;
+}
+
+.creature-card-sheet .linked-actors-list li span {
+    flex-grow: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin-right: 5px;
+}
+
+.creature-card-sheet .linked-actors-list li .unlink-actor {
+    color: var(--theme-error-color, #D32F2F); /* Pensez à définir --theme-error-color dans theme.css */
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.creature-card-sheet .linked-actors-list li .unlink-actor:hover {
+    color: var(--theme-error-dark, #B71C1C); /* Pensez à définir --theme-error-dark dans theme.css */
+}
+
+.creature-card-sheet .linked-actors-list li.no-actors-linked {
+    background-color: transparent;
+    border: none;
+    color: var(--theme-text-muted);
+    font-style: italic;
+    text-align: center;
+    padding: 8px 0;
+}
+
+/* Standardized Description Section */
+.creature-card-sheet .tab[data-tab="description"] {
+    margin-top: 10px; /* Marge supérieure réduite */
+    width: 750px; /* Match the width of .creature-center-column */
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+    flex-grow: 1; /* This section as a whole should grow to fill available vertical space */
+    display: flex; /* It will lay out its header and content vertically */
+    flex-direction: column;
+    min-height: 0; /* Important for flex children that need to shrink/grow properly */
+}
+
+.label-with-info {
+    display: flex; /* Or inline-flex */
+    align-items: center; /* Vertically align items */
+    gap: 5px; /* Space between label, select, and icon */
+}
+
+/* General styling for select elements within the creature sheet */
+.creature-card-sheet select {
+    padding: 6px 8px;
+    border: 1px solid var(--theme-border-color);
+    border-radius: 4px;
+    background-color: var(--theme-background-light);
+    color: var(--theme-text-color);
+    font-family: var(--theme-font-body, sans-serif);
+    font-size: 1em; /* Or a specific size like 14px */
+    min-width: 150px; /* Ensure a decent default width */
+}
+.creature-card-sheet select:focus {
+    border-color: var(--theme-primary-color);
+    outline: none;
+    box-shadow: 0 0 0 2px var(--theme-primary-shadow);
+}
+
+.attribute-level-select {
+    /* Example styles - adjust as needed */
+    flex-grow: 1; /* Allow it to take available space if desired */
+    min-width: 150px; /* Assure une largeur minimale pour la lisibilité */
+    max-width: 250px; /* Or a fixed width */
+    font-size: 0.9em;
+    padding: 2px 4px;
+    margin-left: 5px; /* Space from the label */
+    margin-right: 5px; /* Space before the info icon */
+}
+
+/* === Disabled/Locked States === */
+
+/* General style for labels of disabled/locked elements */
+.creature-card-sheet label.disabled-label {
+    opacity: 0.5;
+    cursor: default; /* Indicate non-interactivity */
+}
+
+/* General style for <a> tags acting as buttons that are disabled/locked */
+.creature-card-sheet a.disabled { /* Class 'disabled' should be added via JS/Handlebars */
+    pointer-events: none;
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* General style for disabled input fields */
+.creature-card-sheet input[type="text"]:disabled,
+.creature-card-sheet input[type="number"]:disabled,
+.creature-card-sheet input[type="checkbox"]:disabled,
+.creature-card-sheet select:disabled,
+.creature-card-sheet textarea:disabled { /* If textareas are used and disabled */
+    opacity: 0.6;
+    cursor: not-allowed !important; /* Ensure cursor changes */
+    background-color: var(--theme-border-lighter); /* Use a light theme color for disabled bg */
+    color: var(--theme-text-muted); /* Use theme muted text color */
+    border-color: var(--theme-border-color); /* Use theme border color */
+}
+
+/* Specific override for the main name input when disabled */
+.creature-card-sheet .creature-card-header input[name="name"]:disabled {
+    background-color: transparent; /* Keep transparent background if desired */
+    border-bottom-color: var(--theme-border-color); /* Use theme border color */
+    color: var(--theme-text-muted); /* Use theme muted text color */
+    opacity: 0.7; /* Apply opacity */
+}
+
+/* General style for disabled buttons */
+.creature-card-sheet button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed !important;
+    background-color: var(--theme-border-light) !important; /* Use a light theme color for disabled bg */
+    color: var(--theme-text-muted) !important; /* Use theme muted text color */
+    border-color: var(--theme-border-color) !important; /* Use theme border color */
+}
+
+
+/* Style for the possessing PJ actor display */
+.creature-card-sheet .possessing-actor-display {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 4px 0; /* Add some vertical padding */
+    margin-left: 5px; /* Indent slightly */
+}
+.creature-card-sheet .possessing-actor-display label {
+    font-weight: normal; /* Less emphasis than main labels */
+    color: var(--theme-text-muted, #555);
+}
+
+/* New styles for the moved Polymorphie forms section */
+.polymorphie-forms-container {
+    /* Ensures it spans the grid columns under the polymorphie attribute row */
+    grid-column: 1 / -1;
+    /* Adds some spacing above and below the forms section */
+    margin-top: 8px;
+    margin-bottom: 12px;
+    /* Optional: if you want to indent it slightly from the grid edges */
+    /* padding-left: 15px; */
+    /* padding-right: 15px; */
+}
+
+.polymorphie-forms-details {
+    padding: 8px 12px; /* Reduced padding compared to typical collapsible sections */
+    background-color: rgba(0, 0, 0, 0.02); /* A very subtle background, or use 'transparent' */
+    border: 1px solid var(--color-border-light-tertiary, #ddd); /* Lighter border */
+    border-radius: 3px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05); /* Subtle shadow for a slight lift */
+}
+
+/* Optional: Adjust font size and spacing within the forms if the partial doesn't already handle it */
+.polymorphie-forms-details h4 { /* If you add a title like "Formes de Polymorphie :" */
+    margin-top: 0;
+    margin-bottom: 8px;
+    font-size: 1.05em;
+    font-weight: bold;
+    border-bottom: 1px solid var(--color-border-light-secondary, #eee);
+    padding-bottom: 4px;
+}
+
+.polymorphie-forms-details .form-group {
+    margin-bottom: 6px; /* Slightly reduced space between form groups */
+}
+
+.polymorphie-forms-details label {
+    font-size: 0.95em; /* Slightly smaller labels */
+}
+
+.polymorphie-forms-details input[type="text"],
+.polymorphie-forms-details input[type="number"] {
+    font-size: 0.95em; /* Slightly smaller input text */
+    padding: 3px 5px; /* Compact padding for inputs */
+}
+
+.polymorphie-forms-details button {
+    font-size: 0.9em; /* Smaller buttons */
+    padding: 3px 8px;
+}
+
+/* Style for readonly inputs that should appear locked */
+.creature-top-controls .creature-total-cost-display.locked-field {
+    opacity: 0.7;
+    background-color: var(--theme-border-lighter, #eee); /* Or a very light grey */
+    cursor: default;
+    color: var(--theme-text-muted, #555);
+}
+
+/* Style for the possessing actor display when locked */
+.creature-top-controls .possessing-actor-display.locked-display label,
+.creature-top-controls .possessing-actor-display.locked-display span {
+    opacity: 0.7;
+    color: var(--theme-text-muted, #555);
+}
+/* Styles for the trash icon to clear stale stored actor data (when item is unlocked) */
+.creature-top-controls .stale-stored-actor-cleanup .clear-possessing-actor-on-lock {
+    color: var(--theme-error-color, #D32F2F);
+    cursor: pointer;
+    font-size: 0.9em;
+    margin-left: 8px;
+}
+.creature-top-controls .stale-stored-actor-cleanup .clear-possessing-actor-on-lock:hover {
+    color: var(--theme-error-dark, #B71C1C);
+}
+
+/* OLD styles for trash icon when it was in the locked display - can be removed or kept if you might revert */
+/* .creature-top-controls .possessing-actor-display.locked-display .clear-possessing-actor-on-lock {
+    opacity: 1; /* Counteract parent opacity if needed, color will still apply */
+.creature-top-controls .possessing-actor-display.locked-display .clear-possessing-actor-on-lock:hover {
+    color: var(--theme-error-dark, #B71C1C);
+}
+/* === Custom Scrollbar Styles === */
+/* For WebKit-based browsers (Chrome, Safari, Edge) */
+.creature-card-sheet .creature-card-body::-webkit-scrollbar {
+    width: 14px; /* Makes the scrollbar wider */
+}
+
+.creature-card-sheet .creature-card-body::-webkit-scrollbar-track {
+    background: var(--theme-background-light, #e0e0e0); /* Light background for the track, adjust var as needed */
+    border-radius: 10px; /* Rounded corners for the track */
+    margin: 2px 0; /* Optional: adds a little space at the top and bottom of the track */
+}
+
+.creature-card-sheet .creature-card-body::-webkit-scrollbar-thumb {
+    background-color: var(--theme-primary-color, #2C606D); /* Main theme color for the thumb */
+    border-radius: 10px; /* Rounded corners for the thumb */
+    border: 3px solid var(--theme-background-light, #e0e0e0); /* Creates a "padding" effect around the thumb */
+}
+
+.creature-card-sheet .creature-card-body::-webkit-scrollbar-thumb:hover {
+    background-color: var(--theme-primary-dark, #1E4A55); /* Darker theme color on hover */
+}
+
+/* For Firefox */
+.creature-card-sheet .creature-card-body {
+    scrollbar-width: auto; /* 'auto' is default, 'thin' is an option. 'auto' allows for a wider scrollbar if browser supports it. */
+    scrollbar-color: var(--theme-primary-color, #2C606D) var(--theme-background-light, #e0e0e0); /* thumb color and track color */
+}

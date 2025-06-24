@@ -1,0 +1,45 @@
+{
+  "id": "ambre",
+  "version": "1.0.0",
+  "title": "Ambre",
+  "url": "https://github.com/foundryvtt/worldbuilding/",
+  "description": "Ambre est un système de jeu de rôle basé s'inspirant de la Saga d'Ambre de Roger Zelazny.",
+  "license": "LICENSE.txt",
+  "authors": [
+    {
+      "name": "Nikohell",
+      "url": "https://foundryvtt.com",
+      "flags": {}
+    }
+  ],
+  "esmodules": [
+    "ambre.js"
+  ],
+  "styles": [
+    "ambre.css"
+  ],
+  "languages": [
+    {
+      "lang": "fr",
+      "name": "French",
+      "path": "lang/fr.json"
+    },
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "lang/en.json"
+    }
+  ],
+  "compatibility": {
+    "minimum": "10",
+    "verified": "11"
+  },
+  "primaryTokenAttribute": "health",
+  "secondaryTokenAttribute": "energy",
+  "manifest": "https://raw.githubusercontent.com/foundryvtt/worldbuilding/master/system.json",
+  "download": "https://github.com/foundryvtt/worldbuilding/archive/refs/tags/release-082.zip",
+  "grid": {
+    "distance": 5,
+    "units": "ft"
+  }
+}

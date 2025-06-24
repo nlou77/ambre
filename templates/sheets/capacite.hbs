@@ -1,0 +1,40 @@
+<form class="{{cssClass}}" autocomplete="off">
+    <header class="sheet-header">
+        <img class="profile-img" src="/systems/ambre/assets/icons/026-skull.png" data-edit="img" title="{{item.name}}"/>
+        <div class="header-fields">
+            <h1 class="charname"><input name="name" type="text" value="{{item.name}}" placeholder="Nom de la Voie Secrète"/></h1>
+        </div>
+    </header>
+
+    {{!-- Sheet Tab Navigation --}}
+    <nav class="sheet-tabs tabs" data-group="primary">
+        <a class="item" data-tab="description">Description</a>
+        <a class="item" data-tab="details">Détails</a>
+    </nav>
+
+    {{!-- Sheet Body --}}
+    <section class="sheet-body">
+
+        {{!-- Description Tab --}}
+        <div class="tab" data-tab="description">
+            {{editor systemData.description target="system.description" button=true owner=owner editable=editable}}
+        </div>
+
+        {{!-- Details Tab --}}
+        <div class="tab" data-tab="details">
+            <div class="form-group">
+                <label for="linkedPouvoirType">Pouvoir Lié</label>
+                <select name="system.linkedPouvoirType" id="linkedPouvoirType">
+                    <option value="">-- Aucun --</option>
+                    {{#each pouvoirTypes as |pouvoir|}}
+                        <option value="{{pouvoir.key}}" {{#if (eq ../systemData.linkedPouvoirType pouvoir.key)}}selected{{/if}}>{{pouvoir.label}}</option>
+                    {{/each}}
+                    {{!-- Add more options for each pouvoir type your system has --}}
+                    {{!-- Example: <option value="marelle" {{#if (eq systemData.linkedPouvoirType "marelle")}}selected{{/if}}>Marelle</option> --}}
+                </select>
+            </div>
+            <p class="notes">Sélectionnez le type de Pouvoir auquel cette Voie Secrète est associée. Cela déterminera où elle apparaît sur la fiche de personnage.</p>
+            {{!-- Add other fields specific to VoieSecrète items here if needed --}}
+        </div>
+    </section>
+</form>

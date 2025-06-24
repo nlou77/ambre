@@ -1,0 +1,21 @@
+<!-- Section pour les formes de polymorphie -->
+<div class="polymorphie-formes-section">
+    <h4 class="polymorphie-formes-header">Formes de Polymorphie</h4>
+    <div class="polymorphie-formes-list">
+        <!-- Forme par défaut -->
+        <div class="polymorphie-forme-item default-forme">
+            <label for="item-polymorphie-forme-defaut-{{item._id}}" class="polymorphie-forme-label">Forme par défaut:</label>
+            <input type="text" id="item-polymorphie-forme-defaut-{{item._id}}" name="system.polymorphie.formes.defaut" value="{{system.polymorphie.formes.defaut}}" placeholder="Description de la forme par défaut" class="polymorphie-forme-input"/>
+            <button type="button" class="polymorphie-forme-button add-polymorphie-forme" title="Ajouter une forme alternative"><i class="fas fa-plus"></i></button>
+        </div>
+
+        <!-- Formes additionnelles (gérées par JS et Handlebars #each) -->
+        {{#each system.polymorphie.formes.alternatives as |forme index|}}
+        <div class="polymorphie-forme-item additional-forme">
+            <label for="item-polymorphie-forme-{{index}}-{{../item._id}}" class="polymorphie-forme-label">Forme alt. {{add index 1}}:</label>
+            <input type="text" id="item-polymorphie-forme-{{index}}-{{../item._id}}" name="system.polymorphie.formes.alternatives.{{index}}" value="{{forme}}" placeholder="Description de la forme alternative" class="polymorphie-forme-input"/>
+            <button type="button" class="polymorphie-forme-button remove-polymorphie-forme" data-index="{{index}}" title="Supprimer cette forme"><i class="fas fa-minus"></i></button>
+        </div>
+        {{/each}}
+    </div>
+</div>

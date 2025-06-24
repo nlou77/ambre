@@ -1,0 +1,309 @@
+<form class="artefact-card-sheet {{cssClass}} {{#if system.overrideArtefactStyle}}{{system.overrideArtefactStyle}}{{else if actor.system.sheetStyle}}{{actor.system.sheetStyle}}{{/if}}" autocomplete="off">
+    <header class="artefact-card-header">
+        <div class="image-frame-wrapper">
+            {{#if system.frameImagePath}}
+            <img class="artefact-foreground-frame" src="{{system.frameImagePath}}" alt="Artefact Frame"/>
+            <img class="artefact-card-image" src="{{item.img}}" data-edit="img" title="{{item.name}}" alt="Image de l'Artefact"/>
+            {{else}}
+            <img class="artefact-card-image" src="{{item.img}}" data-edit="img" title="{{item.name}}" alt="Image de l'Artefact"/>
+            {{/if}}
+        </div>
+        <input name="name" type="text" value="{{item.name}}" placeholder="Nom de l'Artefact" title="{{item.name}}"/>
+        <a class="toggle-description-editor header-button" title="Afficher/Masquer l'éditeur de description">
+            <i class="fas fa-file-alt"></i>
+        </a>
+        <a class="refresh-possessing-actor header-button {{#if system.locked}}disabled{{/if}}"
+           title="{{#if system.locked}}Verrouillé - Action désactivée{{else}}
+                     {{#if system.allowStatRefreshOnLock}}
+                         Actualiser avec les stats de {{#if currentLivePossessingActorName}}'{{currentLivePossessingActorName}}'{{else}}(possesseur actuel){{/if}} & Verrouiller
+                     {{else}}
+                         Verrouiller (actualisation des stats interdite, stats actuelles préservées)
+                     {{/if}}
+                  {{/if}}">
+           {{!-- The button's JS logic already locks the item if unlocked, and the sheet re-render handles updates. --}}
+           <i class="fas fa-sync-alt"></i>
+        </a>
+        <a class="toggle-stat-refresh-lock header-button {{#if system.locked}}disabled{{/if}}"
+           title="{{#if system.locked}}Verrouillé - Action désactivée{{else}}{{#if system.allowStatRefreshOnLock}}Actualisation des stats du possesseur autorisée au prochain verrouillage. Cliquer pour interdire et préserver les stats actuelles.{{else}}Actualisation des stats du possesseur interdite au prochain verrouillage (les stats actuelles seront préservées). Cliquer pour autoriser.{{/if}}{{/if}}">
+           <i class="fas {{#if system.allowStatRefreshOnLock}}fa-user-check{{else}}fa-user-slash{{/if}}"></i>
+        </a>
+        <a class="toggle-artefact-lock {{#if system.locked}}locked{{/if}}"
+           title="{{#if system.locked}}Déverrouiller l'artefact{{else}}Verrouiller l'artefact (empêche les modifications des attributs et de la liaison){{/if}}">
+           <i class="fas {{#if system.locked}}fa-lock{{else}}fa-unlock-alt{{/if}}"></i>
+        </a>
+    </header>
+
+    <section class="artefact-card-body">
+        <!-- NEW TOP ROW FOR CHECKBOXES AND PUISSANCE DROPDOWN -->
+        <div class="artefact-top-controls">
+            <div class="form-group form-group-checkbox">
+                <label for="item-obtainedAtCreation-{{item._id}}" class="{{#if system.locked}}disabled-label{{/if}}">Obtenu à la création :</label>
+                <input type="checkbox" id="item-obtainedAtCreation-{{item._id}}" name="system.obtainedAtCreation" {{checked system.obtainedAtCreation}} data-dtype="Boolean" {{#if system.locked}}disabled{{/if}}/>
+            </div>
+            <div class="form-group form-group-checkbox">
+                <label for="item-linked-{{item._id}}" class="{{#if system.locked}}disabled-label{{/if}}">Lié :</label>
+                <input type="checkbox" id="item-linked-{{item._id}}" name="system.linked" {{checked system.linked}} data-dtype="Boolean" {{#if system.locked}}disabled{{/if}}/>
+            </div>
+
+            <div class="form-group x-counter-controls">
+                <label>Multiplicateur:</label>
+                <button type="button" class="x-counter-decrement control-button" {{#if system.locked}}disabled{{/if}} title="Diminuer le multiplicateur"><i class="fas fa-minus"></i></button>
+                <span class="x-counter-display">x{{#if system.xCounter}}{{system.xCounter}}{{else}}1{{/if}}</span>
+                <button type="button" class="x-counter-increment control-button" {{#if system.locked}}disabled{{/if}} title="Augmenter le multiplicateur"><i class="fas fa-plus"></i></button>
+            </div>
+            
+            <div class="form-group"> <!-- Puissance Dropdown -->
+                <label for="select-puissance-{{item._id}}">Puissance:</label>
+                <select id="select-puissance-{{item._id}}" name="system.puissance" data-dtype="String" {{#if system.locked}}disabled{{/if}}>
+                    <option value="">-- Aucune --</option>
+                    {{#each pouvoirsList as |pouvoir|}}
+                        <option value="{{pouvoir._id}}" {{#if (eq ../system.puissance pouvoir._id)}}selected{{/if}}>{{pouvoir.name}}</option>
+                    {{/each}}
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="item-total-cost-{{item._id}}" style="width:auto;">Coût total :</label> {{!-- Adjusted width to auto --}}
+                <input type="text" id="item-total-cost-{{item._id}}" name="system.totalCost" value="{{system.totalCost}}" readonly class="artefact-total-cost-display {{#if system.locked}}locked-field{{/if}}"/>
+            </div>
+
+            {{!-- Display for "Possédé par (PJ)" --}}
+            {{#if system.locked}}
+                {{#if system.possessingActorNameOnLock}}
+                <div class="form-group possessing-actor-display locked-display">
+                    <label>Possédé par :</label>
+                    <span>{{system.possessingActorNameOnLock}}</span>
+                    {{!-- Trash icon moved to the 'unlocked' section --}}
+                </div>
+                {{/if}}
+            {{else}} {{!-- Item is UNLOCKED --}}
+                {{#if currentLivePossessingActorName}}
+                <div class="form-group possessing-actor-display">
+                    <label>Possesseur actuel:</label>
+                    <span>{{currentLivePossessingActorName}}</span>
+                    {{!-- No trash icon here, as this is live data --}}
+                </div>
+                {{/if}}
+
+                {{!-- Section for clearing STALE stored actor data when UNLOCKED --}}
+                {{#if system.possessingActorNameOnLock}}
+                <div class="form-group possessing-actor-display stale-stored-actor-cleanup">
+                    <label>Données stockées:</label>
+                    <span>{{system.possessingActorNameOnLock}}</span>
+                    <a class="clear-possessing-actor-on-lock" title="Oublier les données de l'acteur précédemment stocké et ses stats"><i class="fas fa-trash-alt"></i></a>
+                </div>
+                {{/if}}
+            {{/if}}
+
+        </div>
+
+        <div class="artefact-content-columns"> <!-- Nouveau conteneur pour les colonnes -->
+
+            <div class="artefact-attributes-column"> <!-- Renamed from artefact-center-column -->
+                
+                <div class="artefact-attributes-list">
+                    <!-- Grid Header -->
+                    <div class="attribute-grid-header">Attributs</div>
+                    <div class="attribute-grid-header">Niveau</div>
+                    <div class="attribute-grid-header">Aide</div>
+                    <div class="attribute-grid-header">Coût</div>
+                    <div class="attribute-grid-header">Description</div>
+
+                    <!-- Vitesse Row -->
+                    <div class="attribute-grid-label"><label for="select-vitesse-{{item._id}}">Vitesse:</label></div>
+                    <div class="attribute-grid-niveau" data-property-name="system.vitesse">
+                        <select id="select-vitesse-{{item._id}}" class="attribute-level-select" title="Détails des niveaux de Vitesse" name="system.vitesse" data-dtype="Number" {{#if system.locked}}disabled{{/if}}>
+                            <option value="0" {{#if (eq system.vitesse 0)}}selected{{/if}}>Non Applicable</option>
+                            <option value="5" {{#if (eq system.vitesse 5)}}selected{{/if}}>Niveau 5 : 50 km/heure</option>
+                            <option value="10" {{#if (eq system.vitesse 10)}}selected{{/if}}>Niveau 10 : 100 km/heure</option>
+                            <option value="15" {{#if (eq system.vitesse 15)}}selected{{/if}}>Niveau 15 : 150 km/heure</option>
+                        </select>
+                    </div>
+                    <div class="attribute-grid-aide">
+                        <div class="info-icon-wrapper">
+                            <i class="fas fa-info-circle attribute-info-icon" data-tooltip-id="tooltip-vitesse-{{item._id}}" title="Plus d'informations sur Vitesse"></i>
+                            <div class="tooltip-popup" id="tooltip-vitesse-{{item._id}}">
+                                <div>
+                                    La vitesse mesure la rapidité de votre objet si celui-ci est mobile. Une haute vitesse peut être utile pour l'esquive, la poursuite, la réactivité et la réalisation d'actions rapides. (Rollers, vélo, planche de surf…) Tant que vous êtes en contact physique avec votre objet, vous vous déplacez à la même vitesse. 
+                                    <div>Niveau 5 : 50 km/heure + votre PHYSIQUE/2</div>
+                                    <div>Niveau 10 : 100 km/heure + votre PHYSIQUE/2</div>
+                                    <div>Niveau 15 : 150 km/heure + votre PHYSIQUE/2</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="attribute-grid-cout"><span class="attribute-cost-display">{{system.vitesse}}</span></div>
+                    <div class="attribute-grid-description"><span class="attribute-level-description-text" data-desc-for="system.vitesse">{{dynamicDescriptions.vitesse}}</span></div>
+
+
+                    <!-- Résistance Row -->
+                    <div class="attribute-grid-label"><label for="select-resistance-{{item._id}}">Résistance:</label></div>
+                    <div class="attribute-grid-niveau" data-property-name="system.resistance">
+                        <select id="select-resistance-{{item._id}}" class="attribute-level-select" title="Détails des niveaux de Résistance" name="system.resistance" data-dtype="Number" {{#if system.locked}}disabled{{/if}}>
+                            <option value="0" {{#if (eq system.resistance 0)}}selected{{/if}}>Non Applicable</option>
+                            <option value="5" {{#if (eq system.resistance 5)}}selected{{/if}}>Niveau 5 : Peau du Mammouth 5</option>
+                            <option value="10" {{#if (eq system.resistance 10)}}selected{{/if}}>Niveau 10 : Carapace de la Tortue 10</option>
+                            <option value="15" {{#if (eq system.resistance 15)}}selected{{/if}}>Niveau 15 : Écaille du Dragon 15</option>
+                        </select>
+                    </div>
+                    <div class="attribute-grid-aide">
+                        <div class="info-icon-wrapper">
+                            <i class="fas fa-info-circle attribute-info-icon" data-tooltip-id="tooltip-resistance-{{item._id}}" title="Plus d'informations sur Résistance"></i>
+                            <div class="tooltip-popup" id="tooltip-resistance-{{item._id}}">
+                                <div>La résistance aux dégâts représente la capacité de votre objet à encaisser des dommages physiques sans se briser. Une grande résistance aux dégâts permet de survivre à des situations dangereuses. S’il se brise, vous le retrouverez plus tard en Ombre. N'oubliez pas que la Résistance de votre Artefact peut être utlisé pour augmenter votre score global en Combat.</div>
+                                <div>Niveau 5 : Peau du Mammouth 5 + votre ENDURANCE/2</div>
+                                <div>Niveau 10 : Carapace de la Tortue 10 + votre ENDURANCE /2</div>
+                                <div>Niveau 15 : Écaille du Dragon 15 + votre ENDURANCE /2</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="attribute-grid-cout"><span class="attribute-cost-display">{{system.resistance}}</span></div>
+                    <div class="attribute-grid-description"><span class="attribute-level-description-text" data-desc-for="system.resistance">{{dynamicDescriptions.resistance}}</span></div>
+
+                    <!-- Dégâts Row -->
+                    <div class="attribute-grid-label"><label for="select-degats-{{item._id}}">Dégâts:</label></div>
+                    <div class="attribute-grid-niveau" data-property-name="system.degats">
+                        <select id="select-degats-{{item._id}}" class="attribute-level-select" title="Détails des niveaux de Dégâts" name="system.degats" data-dtype="Number" {{#if system.locked}}disabled{{/if}}>
+                            <option value="0" {{#if (eq system.degats 0)}}selected{{/if}}>Non Applicable</option>
+                            <option value="5" {{#if (eq system.degats 5)}}selected{{/if}}>Niveau 5 : Crocs du Loup 5</option>
+                            <option value="10" {{#if (eq system.degats 10)}}selected{{/if}}>Niveau 10 : Dents du Requin 10</option>
+                            <option value="15" {{#if (eq system.degats 15)}}selected{{/if}}>Niveau 15 : Crocs du Dragon 15</option>
+                        </select>
+                    </div>
+                    <div class="attribute-grid-aide">
+                        <div class="info-icon-wrapper">
+                            <i class="fas fa-info-circle attribute-info-icon" data-tooltip-id="tooltip-degats-{{item._id}}" title="Plus d'informations sur Dégâts"></i>
+                            <div class="tooltip-popup" id="tooltip-degats-{{item._id}}">
+                                <div>Les dégâts mesurent la puissance offensive de votre personnage. Une haute capacité à infliger des dégâts est essentielle dans le combat (Pour les armes de tout type). N'oubliez pas que les Dégâts de votre Artefact peuvent être utlisé pour augmenter votre score global en Combat</div>
+                                <div>Niveau 5 : Crocs du Loup 5 + votre PHYSIQUE/2</div>
+                                <div>Niveau 10 : Dents du Requin 10 + votre PHYSIQUE/2</div>
+                                <div>Niveau 15 : Crocs du Dragon 15 + votre PHYSIQUE/2</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="attribute-grid-cout"><span class="attribute-cost-display">{{system.degats}}</span></div>
+                    <div class="attribute-grid-description"><span class="attribute-level-description-text" data-desc-for="system.degats">{{dynamicDescriptions.degats}}</span></div>
+
+                    <!-- Intelligence Row -->
+                    <div class="attribute-grid-label"><label for="select-intelligence-{{item._id}}">Intelligence:</label></div>
+                    <div class="attribute-grid-niveau" data-property-name="system.intelligence">
+                        <select id="select-intelligence-{{item._id}}" class="attribute-level-select" title="Détails des niveaux d'Intelligence" name="system.intelligence" data-dtype="Number" {{#if system.locked}}disabled{{/if}}>
+                            <option value="0" {{#if (eq system.intelligence 0)}}selected{{/if}}>Non Applicable</option>
+                            <option value="5" {{#if (eq system.intelligence 5)}}selected{{/if}}>Niveau 5 : Esprit du Loup 5</option>
+                            <option value="10" {{#if (eq system.intelligence 10)}}selected{{/if}}>Niveau 10 : Esprit humain 10</option>
+                            <option value="15" {{#if (eq system.intelligence 15)}}selected{{/if}}>Niveau 15 : Esprit chaosien 15</option>
+                        </select>
+                    </div>
+                    <div class="attribute-grid-aide">
+                        <div class="info-icon-wrapper">
+                            <i class="fas fa-info-circle attribute-info-icon" data-tooltip-id="tooltip-intelligence-{{item._id}}" title="Plus d'informations sur Intelligence"></i>
+                            <div class="tooltip-popup" id="tooltip-intelligence-{{item._id}}">
+                                <div>Votre objet contient un esprit ou une âme, ce qui lui permet de comprendre, d'apprendre, de résoudre des problèmes complexes et de communiquer efficacement avec vous. Cette capacité est essentielle pour la prise de décision, la résolution d'énigmes et la manipulation des connaissances.</div>
+                                <div>Niveau 5 : Esprit du Loup 5 + votre PSYCHÉ/2</div>
+                                <div>Niveau 10 : Esprit humain 10 + votre PSYCHÉ/2</div>
+                                <div>Niveau 15 : Esprit chaosien 15 + votre PSYCHÉ/2</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="attribute-grid-cout"><span class="attribute-cost-display">{{system.intelligence}}</span></div>
+                    <div class="attribute-grid-description"><span class="attribute-level-description-text" data-desc-for="system.intelligence">{{dynamicDescriptions.intelligence}}</span></div>
+
+                    {{#if (gt system.intelligence 0)}}
+                    <!-- Télépathie Row -->
+                    <div class="attribute-grid-label"><label for="select-telepathie-{{item._id}}">Télépathie:</label></div>
+                    <div class="attribute-grid-niveau" data-property-name="system.telepathie">
+                            <select id="select-telepathie-{{item._id}}" class="attribute-level-select" title="Détails des niveaux de Télépathie" name="system.telepathie" data-dtype="Number" {{#if system.locked}}disabled{{/if}}>
+                                <option value="0" {{#if (eq system.telepathie 0)}}selected{{/if}}>Non Applicable</option>
+                                <option value="5" {{#if (eq system.telepathie 5)}}selected{{/if}}>Niveau 5 : Télépathie au toucher 5</option>
+                                <option value="10" {{#if (eq system.telepathie 10)}}selected{{/if}}>Niveau 10 : Télépathie visuelle 10</option>
+                                <option value="15" {{#if (eq system.telepathie 15)}}selected{{/if}}>Niveau 15 : Télépathie dans l’Ombre 15</option>
+                            </select>
+                    </div>
+                    <div class="attribute-grid-aide">
+                            <div class="info-icon-wrapper">
+                                <i class="fas fa-info-circle attribute-info-icon" data-tooltip-id="tooltip-telepathie-{{item._id}}" title="Plus d'informations sur Télépathie"></i>
+                                <div class="tooltip-popup" id="tooltip-telepathie-{{item._id}}">
+                                    <div>Cette capacité psychique représente le potentiel mental de votre objet. Une grande capacité psychique permet de maitriser la télépathie. Tant que vous êtes en contact physique, visuel ou dans l’Ombre, vous pourrez communiquer avec votre épée, votre bague, votre chapeau… Votre objet doit avoir obligatoirement un niveau en « Intelligence et communication » pour avoir cette capacité. Un contact mental ou une activité psychique rompt la télépathie avec votre objet.</div>
+                                    <div>Niveau 5 : Télépathie au toucher 5 + votre PERCEPTION /2</div>
+                                    <div>Niveau 10 : Télépathie visuelle 10 + votre PERCEPTION /2</div>
+                                    <div>Niveau 15 : Télépathie dans l’Ombre 15 + votre PERCEPTION/2</div>
+                                </div>
+                            </div>
+                    </div>
+                    <div class="attribute-grid-cout"><span class="attribute-cost-display">{{system.telepathie}}</span></div>
+                    <div class="attribute-grid-description"><span class="attribute-level-description-text" data-desc-for="system.telepathie">{{dynamicDescriptions.telepathie}}</span></div>
+                    {{/if}}
+
+                    <!-- Défense Psy Row -->
+
+                    <div class="attribute-grid-label"><label for="select-defensepsy-{{item._id}}">Défense Psy:</label></div>
+                    <div class="attribute-grid-niveau" data-property-name="system.defensepsy">
+                            <select id="select-defensepsy-{{item._id}}" class="attribute-level-select" title="Détails des niveaux de Défense Psy" name="system.defensepsy" data-dtype="Number" {{#if system.locked}}disabled{{/if}}>
+                                <option value="0" {{#if (eq system.defensepsy 0)}}selected{{/if}}>Non Applicable</option>
+                                <option value="5" {{#if (eq system.defensepsy 5)}}selected{{/if}}>Niveau 5 : Activation Manuelle</option>
+                                <option value="10" {{#if (eq system.defensepsy 10)}}selected{{/if}}>Niveau 10 : Activation Magique</option>
+                                <option value="15" {{#if (eq system.defensepsy 15)}}selected{{/if}}>Niveau 15 : Défense permanente</option>
+                            </select>
+                    </div>
+                    <div class="attribute-grid-aide">
+                            <div class="info-icon-wrapper">
+                                <i class="fas fa-info-circle attribute-info-icon" data-tooltip-id="tooltip-defensepsy-{{item._id}}" title="Plus d'informations sur Défense Psy"></i>
+                                <div class="tooltip-popup" id="tooltip-defensepsy-{{item._id}}">
+                                    <div>La défense psychique mesure la résistance de votre objet aux attaques et aux influences mentales, telles que les pouvoirs psychiques ou les manipulations de l'esprit. Une défense psychique solide protège contre les intrusions mentales indésirables. Votre objet doit avoir obligatoirement un niveau en « Intelligence et communication » pour avoir cette capacité. Tant que vous êtes en contact physique avec votre objet, celui-ci vous protège également.</div>
+                                    <div>Niveau 5 : Défense Activable Manuellement 5 + votre PSYCHÉ/2 (un bouton, une rotation d’une pierre précieuse sur son socle…)</div>
+                                    <div>Niveau 10 : Défense Activable Magiquement 10 + votre PSYCHÉ/2 (par un mot d’activation/désactivation)</div>
+                                    <div>Niveau 15 : Défense permanente 15 + votre PSYCHÉ/2 (une bague que vous allez devoir retirer, si vous souhaitez être contacté par Atout)</div>
+                                </div>
+                            </div>
+                    </div>
+                    <div class="attribute-grid-cout"><span class="attribute-cost-display">{{system.defensepsy}}</span></div>
+                    <div class="attribute-grid-description"><span class="attribute-level-description-text" data-desc-for="system.defensepsy">{{dynamicDescriptions.defensepsy}}</span></div>
+                    
+
+                    <!-- Polymorphie Row -->
+                    <div class="attribute-grid-label"><label for="select-polymorphie-value-{{item._id}}">Polymorphie:</label></div>
+                    <div class="attribute-grid-niveau" data-property-name="system.polymorphie.value">
+                            <select id="select-polymorphie-value-{{item._id}}" class="attribute-level-select" title="Détails des niveaux de Polymorphie" name="system.polymorphie.value" data-dtype="Number" {{#if system.locked}}disabled{{/if}}>
+                                <option value="0" {{#if (eq system.polymorphie.value 0)}}selected{{/if}}>Non Applicable</option>
+                                <option value="5" {{#if (eq system.polymorphie.value 5)}}selected{{/if}}>Niveau 5 : Formes simples, changements mineurs</option>
+                                <option value="10" {{#if (eq system.polymorphie.value 10)}}selected{{/if}}>Niveau 10 : Formes plus complexes</option>
+                                <option value="15" {{#if (eq system.polymorphie.value 15)}}selected{{/if}}>Niveau 15 : Transformations majeures</option>
+                            </select>
+                    </div>
+                    <div class="attribute-grid-aide">
+                            <div class="info-icon-wrapper">
+                                <i class="fas fa-info-circle attribute-info-icon" data-tooltip-id="tooltip-polymorphie-{{item._id}}" title="Plus d'informations sur Polymorphie"></i>
+                                <div class="tooltip-popup" id="tooltip-polymorphie-{{item._id}}">
+                                    La Polymorphie permet à votre objet de changer de forme. Chaque niveau de Polymorphie représente une complexité ou une puissance de transformation accrue.
+                                    <div>Le coût en points de création pour chaque forme alternative dépendra de sa complexité et de ses avantages par rapport à la forme par défaut.</div>
+                                    <div>Niveau 5 : Formes simples, changements cosmétiques mineurs ou variations sur le thème de l'objet (ex: une épée peut devenir une dague, un couteau).</div>
+                                    <div>Niveau 10 : Formes plus complexes, peut inclure des changements de taille modérés ou des propriétés simples (ex: un bouclier devient une armure légère, un stylo devient un petit outil).</div>
+                                    <div>Niveau 15 : Transformations majeures, formes très différentes de l'original, capacités spéciales liées à la forme (ex: une bague devient un animal de compagnie mécanique, une cape devient des ailes).</div>
+                                </div>
+                            </div>
+                    </div>
+                    <div class="attribute-grid-cout"><span class="attribute-cost-display">{{system.polymorphie.value}}</span></div>
+                    <div class="attribute-grid-description"><span class="attribute-level-description-text" data-desc-for="system.polymorphie.value">{{dynamicDescriptions.polymorphie_value}}</span></div>
+
+                    {{#if (gt system.polymorphie.value 0)}}
+                    <div class="polymorphie-forms-container" style="grid-column: 1 / -1; /* Spans all 5 columns of the attribute grid */">
+                        <div class="polymorphie-forms-details">
+                            {{!-- You could add a small title here, e.g., <h4>Formes de Polymorphie :</h4> --}}
+                            {{> "systems/ambre/templates/partials/artefact-polymorphie-forms.hbs"}}
+                        </div>
+                    </div>
+                    {{/if}}
+                </div>
+            </div> <!-- Fin de artefact-attributes-column -->
+        </div> <!-- Fin de artefact-attributes-grid -->
+    </section>
+    <section class="sheet-body">
+        <div class="tab active" data-tab="description">
+            {{editor system.description target="system.description" button=true owner=owner editable=editable}}
+        </div>
+    </section>
+</form>
+
+{{!-- Partial for Polymorphie Forms --}}
+<template id="polymorphie-forms-partial">
+    {{> "systems/ambre/templates/partials/artefact-polymorphie-forms.hbs"}}
+</template>

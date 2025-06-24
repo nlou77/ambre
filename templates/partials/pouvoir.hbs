@@ -1,0 +1,192 @@
+<div class="pouvoir-section" data-pouvoir-type="{{pouvoirType}}">
+    {{#if pouvoirData}}
+
+        <div class="pouvoir-container">
+            <!-- Pouvoir Value Input -->
+            <div class="pouvoir-main-row" style="display: flex; align-items: center; gap: 15px; margin-bottom: 20px; padding: 10px; background: var(--theme-background-alt); border-radius: 4px;">
+                <div class="pouvoir-label-main" style="font-weight: bold; min-width: 100px;">
+                    {{pouvoirLabel}}:
+                </div>
+                
+                <input type="number" 
+                       class="pouvoir-input-main"
+                       name="system.{{pouvoirData.field}}" 
+                       value="{{pouvoirData.value}}" 
+                       min="0" 
+                       max="500"
+                       data-dtype="Number"                       
+                       data-pouvoir-type="{{pouvoirType}}"/>
+                
+                <div class="pouvoir-niveau-main" style="font-weight: bold; color: var(--theme-primary-color);">
+                    Niveau: {{pouvoirData.niveau}}
+                </div>
+                
+                <button type="button" 
+                        class="pouvoir-capacites-btn-main"
+                        data-pouvoir-type="{{pouvoirType}}"
+                        data-pouvoir-value="{{pouvoirData.value}}">
+                    <span class="btn-text">
+                        {{#if pouvoirData.showCapacites}}
+                            Masquer Capacités
+                        {{else}}
+                            Afficher Capacités
+                        {{/if}}
+                    </span> ({{pouvoirData.capacitesCount}})
+                </button>
+
+                {{#if (gt pouvoirData.value 240)}}
+                    <!-- New Input for Voie Secrète Points -->
+                    <div class="vs-label-main" style="font-weight: bold; min-width: 150px; text-align: right;">
+                        Pts Voie Secrète:
+                    </div>
+                    <input type="number"
+                           class="vs-input-main"
+                           name="system.creation.ptsvs{{pouvoirType}}"
+                           value="{{pouvoirData.ptsvsValue}}"
+                           min="0"
+                           max="500" {{!-- Adjust max value as needed --}}
+                           data-dtype="Number"                       
+                           style="margin-right: 10px;"/> {{!-- width and padding now from CSS, margin-right is layout specific --}}
+                    
+                    <button type="button"
+                            class="vs-capacites-btn-main" {{!-- New class for styling/selection --}}
+                            data-pouvoir-type="{{pouvoirType}}"
+                            data-action="display-vs-element" {{!-- Action for the event listener --}}
+                            >
+                        <span class="btn-text">Dévoiler Voies Secrètes</span>
+                    </button>
+                {{/if}}
+
+            
+            </div>
+
+            
+            <!-- Capacites Detail Section - Initially hidden -->
+            <div class="capacites-detail-main"
+                 data-pouvoir-type="{{pouvoirType}}" 
+                 style="display: {{#if pouvoirData.showCapacites}}block{{else}}none{{/if}}; margin-top: 20px; border: 2px solid var(--theme-primary-dark); border-radius: 8px; padding: 15px; background: var(--theme-background-light);">
+                <h4 style="margin-top: 0; color: var(--theme-primary-dark); border-bottom: 2px solid var(--theme-primary-medium); padding-bottom: 10px;">
+                    Capacités de {{pouvoirLabel}} (Valeur: {{pouvoirData.value}})
+                </h4>
+                
+                {{#if pouvoirData.capacites.length}}
+                        <!-- Summary -->
+                        <div style="margin-top: 15px; padding: 10px; background: var(--theme-background-alt); border-radius: 4px; font-size: 14px; color: var(--theme-text-color);">
+                            <strong>Résumé:</strong>
+                            {{pouvoirData.capacitesCount}} capacité(s) disponible(s) sur {{pouvoirData.capacites.length}} affichée(s) au total.
+                            Mode d'affichage: 
+                            {{#if (eq pouvoirData.currentDisplayMode "all")}}Toutes les capacités du pouvoir.{{/if}}
+                            {{#if (eq pouvoirData.currentDisplayMode "above_level")}}Capacités jusqu'au niveau actuel de l'acteur.{{/if}}
+                            {{#if (eq pouvoirData.currentDisplayMode "next_level")}}Capacités jusqu'au niveau actuel de l'acteur +1.{{/if}}
+                            {{#if (eq pouvoirData.currentDisplayMode "next")}}Capacités jusqu'au niveau actuel de l'acteur +1.{{/if}}
+                            <br>
+                            {{#unless pouvoirData.capacitesCount}}
+                                Augmentez votre niveau de {{pouvoirLabel}} pour débloquer des capacités.
+                            {{/unless}}
+                        </div>
+
+                        <!-- Header -->
+                        <div class="capacites-header-main" style="display: grid; grid-template-columns: 2fr 80px 60px 100px 100px 100px 100px 120px; gap: 10px; font-weight: bold; padding: 10px; background: var(--theme-primary-dark); color: white; border-radius: 4px; margin-bottom: 10px;">
+                            <div>Capacité</div>
+                            <div>Niveau</div>
+                            <div>Coût</div>
+                            <div>Temps</div>
+                            <div>Zone d'Effet</div>
+                            <div>Durée</div>
+                            <div>Rang</div>
+                            <div>Statut</div>
+                        </div>
+                        
+                        {{#each pouvoirData.capacites}}
+                            <div class="capacite-row-main {{#if this.available}}available{{else}}unavailable{{/if}}"
+                                 style="display: grid; grid-template-columns: 2fr 80px 60px 100px 100px 100px 100px 120px; gap: 10px; padding: 10px; margin-bottom: 5px; border-radius: 4px; color: var(--theme-text-color); {{#if this.available}}background: var(--theme-primary-light); border-left: 4px solid var(--theme-primary-color);{{else}}background: var(--theme-background-transparent); border-left: 4px solid var(--theme-text-muted); opacity: 0.7;{{/if}}">
+                                
+                                <div class="capacite-nom-main" title="{{this.description}}" style="font-weight: bold;">
+                                    {{this.nom}}
+                                    {{#if this.description}}
+                                        <div style="font-size: 12px; font-weight: normal; color: var(--theme-text-secondary); margin-top: 2px;">
+                                            {{{this.description}}}
+                                        </div> {{!-- Consider {{{this.description}}} if it can contain HTML --}}
+                                    {{/if}}
+                                </div>
+                                
+                                <div class="capacite-niveau-main" style="text-align: center; font-weight: bold;">
+                                    {{this.niveau}}
+                                </div>
+                                
+                                <div class="capacite-cout-main" style="text-align: center;">
+                                    {{this.cout}}
+                                </div>
+                                
+                                <div class="capacite-temps-main" style="font-size: 12px;">
+                                    {{this.tempsInvocation}}
+                                </div>
+                                
+                                <div class="capacite-zone-main" style="font-size: 12px;">
+                                    {{this.zoneEffet}}
+                                </div>
+                                
+                                <div class="capacite-duree-main" style="font-size: 12px;">
+                                    {{this.duree}}
+                                </div>
+                                
+                                <div class="capacite-rang-main" style="text-align: center; font-size: 12px; font-weight: bold;">
+                                    {{this.rang}}
+                                </div>
+                                
+                                <div class="capacite-status-main" style="text-align: center;">
+                                    {{#if this.available}}
+                                        <span style="color: var(--theme-primary-dark); font-weight: bold;">Disponible</span>
+                                    {{else}}
+                                        <span style="color: var(--theme-text-muted);">Non disponible</span>
+                                    {{/if}}
+                                </div>
+                            </div>
+                        {{/each}}
+                    {{else}}
+                        <p style="text-align: center; color: var(--theme-text-muted); font-style: italic;">Aucune capacité à afficher avec les filtres actuels ou pour ce pouvoir.</p>
+                {{/if}}
+            </div>
+
+            <!-- Voies Secrètes Drop Zone Section (Hidden by default) -->
+            <div class="voies-secretes-section drop-target" {{!-- Added drop-target class --}}
+                 data-pouvoir-type="{{pouvoirType}}"
+                 data-group-type="voiesecrete" {{!-- Specify what can be dropped here --}}
+                 style="display: none;"> {{!-- JS handles visibility; other styles moved to CSS --}}
+                <h4>
+                    Voies Secrètes pour {{pouvoirLabel}}
+                </h4>
+                <p class="drop-hint">
+                    Déposez ici les objets de type "Voie Secrète" associés à ce pouvoir.
+                </p>
+                
+                <ul class="item-list voiesecrete-item-list">
+                    {{#each pouvoirData.linkedVoiesSecretes}}
+                        <li class="item voiesecrete-item" data-item-id="{{this._id}}">
+                            <img src="{{this.img}}" title="{{this.name}}" width="24" height="24" class="item-image"/>
+                            <span class="item-name">{{this.name}}</span>
+                            <div class="item-controls">
+                                <a class="item-control item-edit" title="Éditer"><i class="fas fa-edit"></i></a>
+                                <a class="item-control item-delete" title="Supprimer"><i class="fas fa-trash"></i></a>
+                            </div>
+                        </li>
+                    {{else}}
+                        <li class="no-items-message">
+                            Aucune Voie Secrète liée à {{pouvoirLabel}} n'a été trouvée.
+                            <br>
+                            <small>Vous pouvez déposer des objets de type "Voie Secrète" ici ou les lier via leur propre fiche.</small>
+                        </li>
+                    {{/each}}
+                </ul>
+            </div>
+
+            
+        </div>
+        
+    {{else}}
+        <div class="no-pouvoir" style="text-align: center; padding: 20px; background: var(--theme-primary-light); border: 1px solid var(--theme-primary-medium); border-radius: 4px; color: var(--theme-primary-dark);">
+            <p><strong style="color: var(--theme-primary-dark);">Le pouvoir {{pouvoirLabel}} n'est pas disponible.</strong></p>
+            <p>Données du pouvoir non trouvées.</p>
+        </div>
+    {{/if}}
+</div>

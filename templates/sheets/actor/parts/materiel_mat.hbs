@@ -1,0 +1,201 @@
+<main class="possession-content">
+    <div class="item-groups top-groups">
+        {{!-- Ingredient Section --}}
+        <section class="ingredient-section actorDesc-group">
+            <h4 class="clickable-tab-title section-header-with-controls {{#if ingredientExpanded}}active{{/if}}" data-toggles="ingredient-content-area">
+                <span>INGREDIENTS</span>
+                <a class="item-control item-create" title="Ajouter un Ingrédient" data-item-type="ingredient"><i class="fas fa-plus"></i></a>
+            </h4>
+            <div id="ingredient-content-area" class="toggleable-tab-content" {{#unless ingredientExpanded}}style="display: none;"{{/unless}}>
+                <div class="drop-target" data-group-type="ingredient" aria-label="Zone de dépôt pour ingrédients">
+                    <p class="drop-hint">Déposez vos Ingrédients ici</p>
+                    {{#each possessedIngredients}}
+                        <div class="item draggable-item ingredient-list-item" data-item-id="{{this._id}}" draggable="true">
+                            <h4 class="item-name item-name-clickable" title="Ouvrir {{this.name}}">{{this.name}}</h4>
+                            <div class="item-controls">
+                                <a class="item-control item-edit" title="Éditer l'Ingrédient"><i class="fas fa-edit"></i></a>
+                                <a class="item-control item-delete" title="Supprimer l'Ingrédient"><i class="fas fa-trash"></i></a>
+                            </div>
+                        </div>
+                    {{/each}}
+                    {{#unless possessedIngredients}}
+                        <p class="no-items-message">Pas d'Ingrédient.</p>
+                    {{/unless}}
+                </div>
+            </div>
+        </section>
+
+        {{!-- Artefact Abyssal Section --}}
+        <section class="artefactabyssal-section actorDesc-group">
+            <h4 class="clickable-tab-title section-header-with-controls {{#if artefactabyssalExpanded}}active{{/if}}" data-toggles="artefactabyssal-content-area">
+                <span>ARTEFACTS ABYSSAUX</span>
+                <a class="item-control item-create" title="Ajouter un Artefact Abyssal" data-item-type="artefactabyssal"><i class="fas fa-plus"></i></a>
+            </h4>
+            <div id="artefactabyssal-content-area" class="toggleable-tab-content" {{#unless artefactabyssalExpanded}}style="display: none;"{{/unless}}>
+                <div class="drop-target" data-group-type="artefactabyssal" aria-label="Zone de dépôt pour artefacts abyssaux">
+                    <p class="drop-hint">Déposez vos Artefacts Abyssaux ici</p>
+                    {{#each possessedArtefactAbyssals}}
+                        <div class="item draggable-item artefactabyssal-list-item" data-item-id="{{this._id}}" draggable="true">
+                            <h4 class="item-name item-name-clickable" title="Ouvrir {{this.name}}">{{this.name}}</h4>
+                            <div class="item-controls">
+                                <a class="item-control item-edit" title="Éditer l'Artefact Abyssal"><i class="fas fa-edit"></i></a>
+                                <a class="item-control item-delete" title="Supprimer l'Artefact Abyssal"><i class="fas fa-trash"></i></a>
+                            </div>
+                        </div>
+                    {{/each}}
+                    {{#unless possessedArtefactAbyssals}}
+                        <p class="no-items-message">Pas d'Artefact Abyssal.</p>
+                    {{/unless}}
+                </div>
+                <div class="decorum-separator-container">
+                    <img src="systems/ambre/assets/skin/frames/separator{{system.decorumNumber}}.png" class="decorum-separator" alt="Separator"/>
+                </div>
+            </div>
+        </section>
+
+        {{!-- Catalyseur Section --}}
+        <section class="catalyseur-section actorDesc-group">
+            <h4 class="clickable-tab-title section-header-with-controls {{#if catalyseurExpanded}}active{{/if}}" data-toggles="catalyseur-content-area">
+                <span>CATALYSEURS</span>
+                <a class="item-control item-create" title="Ajouter un Catalyseur" data-item-type="catalyseur"><i class="fas fa-plus"></i></a>
+            </h4>
+            <div id="catalyseur-content-area" class="toggleable-tab-content" {{#unless catalyseurExpanded}}style="display: none;"{{/unless}}>
+                <div class="drop-target" data-group-type="catalyseur" aria-label="Zone de dépôt pour catalyseurs">
+                    <p class="drop-hint">Déposez vos Catalyseurs ici</p>
+                    {{#each possessedCatalyseurs}}
+                        <div class="item draggable-item catalyseur-list-item" data-item-id="{{this._id}}" draggable="true">
+                            <h4 class="item-name item-name-clickable" title="Ouvrir {{this.name}}">{{this.name}}</h4>
+                            <div class="item-controls">
+                                <a class="item-control item-edit" title="Éditer le Catalyseur"><i class="fas fa-edit"></i></a>
+                                <a class="item-control item-delete" title="Supprimer le Catalyseur"><i class="fas fa-trash"></i></a>
+                            </div>
+                        </div>
+                    {{/each}}
+                    {{#unless possessedCatalyseurs}}
+                        <p class="no-items-message">Pas de Catalyseur.</p>
+                    {{/unless}}
+                </div>
+                <div class="decorum-separator-container">
+                    <img src="systems/ambre/assets/skin/frames/separator{{system.decorumNumber}}.png" class="decorum-separator" alt="Separator"/>
+                </div>
+            </div>
+        </section>
+
+        {{!-- Miroir Section --}}
+        <section class="miroir-section actorDesc-group">
+            <h4 class="clickable-tab-title section-header-with-controls {{#if miroirExpanded}}active{{/if}}" data-toggles="miroir-content-area">
+                <span>MIROIRS</span>
+                <a class="item-control item-create" title="Ajouter un Miroir" data-item-type="miroir"><i class="fas fa-plus"></i></a>
+            </h4>
+            <div id="miroir-content-area" class="toggleable-tab-content" {{#unless miroirExpanded}}style="display: none;"{{/unless}}>
+                <div class="drop-target" data-group-type="miroir" aria-label="Zone de dépôt pour miroirs">
+                    <p class="drop-hint">Déposez vos Miroirs ici</p>
+                    {{#each possessedMiroirs}}
+                        <div class="item draggable-item miroir-list-item" data-item-id="{{this._id}}" draggable="true">
+                            <h4 class="item-name item-name-clickable" title="Ouvrir {{this.name}}">{{this.name}}</h4>
+                            <div class="item-controls">
+                                <a class="item-control item-edit" title="Éditer le Miroir"><i class="fas fa-edit"></i></a>
+                                <a class="item-control item-delete" title="Supprimer le Miroir"><i class="fas fa-trash"></i></a>
+                            </div>
+                        </div>
+                    {{/each}}
+                    {{#unless possessedMiroirs}}
+                        <p class="no-items-message">Pas de Miroir.</p>
+                    {{/unless}}
+                </div>
+                <div class="decorum-separator-container">
+                    <img src="systems/ambre/assets/skin/frames/separator{{system.decorumNumber}}.png" class="decorum-separator" alt="Separator"/>
+                </div>
+            </div>
+        </section>
+
+        {{!-- Receptacle Section --}}
+        <section class="receptacle-section actorDesc-group">
+            <h4 class="clickable-tab-title section-header-with-controls {{#if receptacleExpanded}}active{{/if}}" data-toggles="receptacle-content-area">
+                <span>RECEPTACLES</span>
+                <a class="item-control item-create" title="Ajouter un Réceptacle" data-item-type="receptacle"><i class="fas fa-plus"></i></a>
+            </h4>
+            <div id="receptacle-content-area" class="toggleable-tab-content" {{#unless receptacleExpanded}}style="display: none;"{{/unless}}>
+                <div class="drop-target" data-group-type="receptacle" aria-label="Zone de dépôt pour réceptacles">
+                    <p class="drop-hint">Déposez vos Réceptacles ici</p>
+                    {{#each possessedReceptacles}}
+                        <div class="item draggable-item receptacle-list-item" data-item-id="{{this._id}}" draggable="true">
+                            <h4 class="item-name item-name-clickable" title="Ouvrir {{this.name}}">{{this.name}}</h4>
+                            <div class="item-controls">
+                                <a class="item-control item-edit" title="Éditer le Réceptacle"><i class="fas fa-edit"></i></a>
+                                <a class="item-control item-delete" title="Supprimer le Réceptacle"><i class="fas fa-trash"></i></a>
+                            </div>
+                        </div>
+                    {{/each}}
+                    {{#unless possessedReceptacles}}
+                        <p class="no-items-message">Pas de Réceptacle.</p>
+                    {{/unless}}
+                </div>
+                <div class="decorum-separator-container">
+                    <img src="systems/ambre/assets/skin/frames/separator{{system.decorumNumber}}.png" class="decorum-separator" alt="Separator"/>
+                </div>
+            </div>
+        </section>
+
+        {{!-- Rune Section --}}
+        <section class="rune-section actorDesc-group">
+            <h4 class="clickable-tab-title section-header-with-controls {{#if runeExpanded}}active{{/if}}" data-toggles="rune-content-area">
+                <span>RUNES</span>
+                <a class="item-control item-create" title="Ajouter une Rune" data-item-type="rune"><i class="fas fa-plus"></i></a>
+            </h4>
+            <div id="rune-content-area" class="toggleable-tab-content" {{#unless runeExpanded}}style="display: none;"{{/unless}}>
+                <div class="drop-target" data-group-type="rune" aria-label="Zone de dépôt pour runes">
+                    <p class="drop-hint">Déposez vos Runes ici</p>
+                    {{#each possessedRunes}}
+                        <div class="item draggable-item rune-list-item" data-item-id="{{this._id}}" draggable="true">
+                            <h4 class="item-name item-name-clickable" title="Ouvrir {{this.name}}">{{this.name}}</h4>
+                            <div class="item-controls">
+                                <a class="item-control item-edit" title="Éditer la Rune"><i class="fas fa-edit"></i></a>
+                                <a class="item-control item-delete" title="Supprimer la Rune"><i class="fas fa-trash"></i></a>
+                            </div>
+                        </div>
+                    {{/each}}
+                    {{#unless possessedRunes}}
+                        <p class="no-items-message">Pas de Rune.</p>
+                    {{/unless}}
+                </div>
+                <div class="decorum-separator-container">
+                    <img src="systems/ambre/assets/skin/frames/separator{{system.decorumNumber}}.png" class="decorum-separator" alt="Separator"/>
+                </div>
+            </div>
+        </section>
+
+        {{!-- Sortilege Section --}}
+        <section class="sortilege-section actorDesc-group">
+            <h4 class="clickable-tab-title section-header-with-controls {{#if sortilegeExpanded}}active{{/if}}" data-toggles="sortilege-content-area">
+                <span>SORTILEGES</span>
+                <a class="item-control item-create" title="Ajouter un Sortilège" data-item-type="sortileges"><i class="fas fa-plus"></i></a>
+            </h4>
+            <div id="sortilege-content-area" class="toggleable-tab-content" {{#unless sortilegeExpanded}}style="display: none;"{{/unless}}>
+                <div class="drop-target" data-group-type="sortileges" aria-label="Zone de dépôt pour sortilèges">
+                    <p class="drop-hint">Déposez vos Sortilèges ici</p>
+                    {{#each possessedSortileges}}
+                        <div class="item draggable-item sortilege-list-item" data-item-id="{{this._id}}" draggable="true">
+                            <h4 class="item-name item-name-clickable" title="Ouvrir {{this.name}}">{{this.name}}</h4>
+                            <div class="item-controls">
+                                <a class="item-control item-edit" title="Éditer le Sortilège"><i class="fas fa-edit"></i></a>
+                                <a class="item-control item-delete" title="Supprimer le Sortilège"><i class="fas fa-trash"></i></a>
+                            </div>
+                        </div>
+                    {{/each}}
+                    {{#unless possessedSortileges}}
+                        <p class="no-items-message">Pas de Sortilège.</p>
+                    {{/unless}}
+                </div>
+                <div class="decorum-separator-container">
+                    <img src="systems/ambre/assets/skin/frames/separator{{system.decorumNumber}}.png" class="decorum-separator" alt="Separator"/>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <section class="materiel-section actorDesc-group">
+        {{!-- The draggable properties and header are now handled in pjActor-sheet.hbs to ensure consistent collapsible behavior --}}
+    {{editor system.materiel target="system.materiel" button=true owner=owner editable=editable}}
+</section>
+</main>

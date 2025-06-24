@@ -1,0 +1,199 @@
+
+<h3 class="clickable-tab-title section-header-with-controls {{#if caracteristiquesExpanded}}active{{/if}}" data-tab-target="caracteristiques-content-area">
+    <span>Caracteristiques</span>
+    <a class="button icon-button refresh-caracteristiques-button" title="Réinitialiser les bonus temporaires"><i class="fas fa-sync-alt"></i></a>
+</h3>
+<div class="caracteristiques-all-section toggleable-tab-content" id="caracteristiques-content-area" {{#unless caracteristiquesExpanded}}style="display: none;"{{/unless}}> 
+    <div class="sheet-content">
+        <div class="caracteristiques-container">
+            <!-- Section for Characteristics and their Sub-stats -->
+            <div class="caracteristiques-details-layout">
+                <!-- PHYSIQUE Section -->
+                <div class="caracteristique-block">
+                    <div class="main-stat-info">
+                        <label>PHYSIQUE</label>
+                        <div class="major-stat-line">
+                            <input name="system.physique" type="number" value="{{system.physique}}" data-dtype="Number" readonly class="calculated-field major-stat-value" style="width: 100px !important;"/>
+                            <input name="system.temporarybonusphysique" type="number" value="{{system.temporarybonusphysique}}" data-dtype="Number" class="temp-bonus-input major-stat-temp-bonus" title="Bonus temporaire Physique" style="width: 40px !important;"/>
+                        </div>
+                    </div>
+                    <div class="sub-stats-list">
+                        <div class="form-group">
+                            <div class="characteristic-value-line">
+                                <label>Force</label>
+                                <input name="system.force" type="number" value="{{system.force}}" data-dtype="Number" class="physique-component" style="width: 100px;"/>
+                                <input name="system.temporarybonusforce" type="number" value="{{system.temporarybonusforce}}" data-dtype="Number" class="physique-component temp-bonus-input" title="Bonus temporaire Force" style="width: 40px !important;"/>
+                                <input name="system.force_display" type="number" value="{{system.force_display}}" data-dtype="Number" readonly class="sub-characteristic-total-display" title="Force Totale (Force + Bonus Temp.)"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="characteristic-value-line">
+                                <label>Dextérité</label>
+                                <input name="system.dexterite" type="number" value="{{system.dexterite}}" data-dtype="Number" class="physique-component" style="width: 100px;"/>
+                                <input name="system.temporarybonusdexterite" type="number" value="{{system.temporarybonusdexterite}}" data-dtype="Number" class="physique-component temp-bonus-input" title="Bonus temporaire Dextérité" style="width: 40px !important;"/>
+                                <input name="system.dexterite_display" type="number" value="{{system.dexterite_display}}" data-dtype="Number" readonly class="sub-characteristic-total-display" title="Dextérité Totale (Dextérité + Bonus Temp.)"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="characteristic-value-line">
+                                <label>Réflexe</label>
+                                <input name="system.reflexe" type="number" value="{{system.reflexe}}" data-dtype="Number" class="physique-component" style="width: 100px;"/>
+                                <input name="system.temporarybonusreflexe" type="number" value="{{system.temporarybonusreflexe}}" data-dtype="Number" class="physique-component temp-bonus-input" title="Bonus temporaire Réflexe" style="width: 40px !important;"/>
+                                <input name="system.reflexe_display" type="number" value="{{system.reflexe_display}}" data-dtype="Number" readonly class="sub-characteristic-total-display" title="Réflexe Total (Réflexe + Bonus Temp.)"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ENDURANCE Section -->
+                <div class="caracteristique-block">
+                    <div class="main-stat-info">
+                    <label>ENDURANCE</label>
+                    <div class="major-stat-line">
+                        <input name="system.endurance" type="number" value="{{system.endurance}}" data-dtype="Number" readonly class="calculated-field major-stat-value" style="width: 100px !important;"/>
+                        <input name="system.temporarybonusendurance" type="number" value="{{system.temporarybonusendurance}}" data-dtype="Number" class="temp-bonus-input major-stat-temp-bonus" title="Bonus temporaire Endurance" style="width: 40px !important;"/>
+                    </div>
+                    </div>
+                    <div class="sub-stats-list">
+                        <div class="form-group">
+                            <div class="characteristic-value-line">
+                                <label>Adaptation</label>
+                                <input name="system.adaptation" type="number" value="{{system.adaptation}}" data-dtype="Number" class="endurance-component"  style="width: 100px"/>
+                                <input name="system.temporarybonusadaptation" type="number" value="{{system.temporarybonusadaptation}}" data-dtype="Number" class="endurance-component temp-bonus-input" title="Bonus temporaire Adaptation" style="width: 40px !important;"/>
+                                <input name="system.adaptation_display" type="number" value="{{system.adaptation_display}}" data-dtype="Number" readonly class="sub-characteristic-total-display" title="Adaptation Totale (Adaptation + Bonus Temp.)"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="characteristic-value-line">
+                                <label>Régénération</label>
+                                <input name="system.regeneration" type="number" value="{{system.regeneration}}" data-dtype="Number" class="endurance-component" style="width: 100px;"/>
+                                <input name="system.temporarybonusregeneration" type="number" value="{{system.temporarybonusregeneration}}" data-dtype="Number" class="endurance-component temp-bonus-input" title="Bonus temporaire Régénération" style="width: 40px !important;"/>
+                                <input name="system.regeneration_display" type="number" value="{{system.regeneration_display}}" data-dtype="Number" readonly class="sub-characteristic-total-display" title="Régénération Totale (Régénération + Bonus Temp.)"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="characteristic-value-line">
+                                <label>Résistance</label>
+                                <input name="system.resistance" type="number" value="{{system.resistance}}" data-dtype="Number" class="endurance-component" style="width: 100px;"/>
+                                <input name="system.temporarybonusresistance" type="number" value="{{system.temporarybonusresistance}}" data-dtype="Number" class="endurance-component temp-bonus-input" title="Bonus temporaire Résistance" style="width: 40px !important;"/>
+                                <input name="system.resistance_display" type="number" value="{{system.resistance_display}}" data-dtype="Number" readonly class="sub-characteristic-total-display" title="Résistance Totale (Résistance + Bonus Temp.)"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PSYCHE Section -->
+                <div class="caracteristique-block">
+                    <div class="main-stat-info">
+                    <label>PSYCHE</label>
+                    <div class="major-stat-line">
+                        <input name="system.psyche" type="number" value="{{system.psyche}}" data-dtype="Number" readonly class="calculated-field major-stat-value" style="width: 100px !important;"/>
+                        <input name="system.temporarybonuspsyche" type="number" value="{{system.temporarybonuspsyche}}" data-dtype="Number" class="temp-bonus-input major-stat-temp-bonus" title="Bonus temporaire Psyché" style="width: 40px !important;"/>
+                    </div>
+                    </div>
+                    <div class="sub-stats-list">
+                        <div class="form-group">
+                            <div class="characteristic-value-line">
+                                <label>Intelligence</label>
+                                <input name="system.intelligence" type="number" value="{{system.intelligence}}" data-dtype="Number" class="psyche-component"  style="width: 100px"/>
+                                <input name="system.temporarybonusintelligence" type="number" value="{{system.temporarybonusintelligence}}" data-dtype="Number" class="psyche-component temp-bonus-input" title="Bonus temporaire Intelligence" style="width: 40px !important;"/>
+                                <input name="system.intelligence_display" type="number" value="{{system.intelligence_display}}" data-dtype="Number" readonly class="sub-characteristic-total-display" title="Intelligence Totale (Intelligence + Bonus Temp.)"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="characteristic-value-line">
+                                <label>Concentration</label>
+                                <input name="system.concentration" type="number" value="{{system.concentration}}" data-dtype="Number" class="psyche-component" style="width: 100px;"/>
+                                <input name="system.temporarybonusconcentration" type="number" value="{{system.temporarybonusconcentration}}" data-dtype="Number" class="psyche-component temp-bonus-input" title="Bonus temporaire Concentration" style="width: 40px !important;"/>
+                                <input name="system.concentration_display" type="number" value="{{system.concentration_display}}" data-dtype="Number" readonly class="sub-characteristic-total-display" title="Concentration Totale (Concentration + Bonus Temp.)"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="characteristic-value-line">
+                                <label>Volonté</label>
+                                <input name="system.volonte" type="number" value="{{system.volonte}}" data-dtype="Number" class="psyche-component" style="width: 100px;"/>
+                                <input name="system.temporarybonusvolonte" type="number" value="{{system.temporarybonusvolonte}}" data-dtype="Number" class="psyche-component temp-bonus-input" title="Bonus temporaire Volonté" style="width: 40px !important;"/>
+                                <input name="system.volonte_display" type="number" value="{{system.volonte_display}}" data-dtype="Number" readonly class="sub-characteristic-total-display" title="Volonté Totale (Volonté + Bonus Temp.)"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PERCEPTION Section -->
+                <div class="caracteristique-block">
+                    <div class="main-stat-info">
+                    <label>PERCEPTION</label>
+                    <div class="major-stat-line">
+                        <input name="system.perception" type="number" value="{{system.perception}}" data-dtype="Number" readonly class="calculated-field major-stat-value" style="width: 100px !important;"/>
+                        <input name="system.temporarybonusperception" type="number" value="{{system.temporarybonusperception}}" data-dtype="Number" class="temp-bonus-input major-stat-temp-bonus" title="Bonus temporaire Perception" style="width: 40px !important;"/>
+                    </div>
+                    </div>
+                    <div class="sub-stats-list">
+                        <div class="form-group">
+                            <div class="characteristic-value-line">
+                                <label>Sens</label>
+                                <input name="system.sens" type="number" value="{{system.sens}}" data-dtype="Number" class="perception-component"  style="width: 100px"/>
+                                <input name="system.temporarybonussens" type="number" value="{{system.temporarybonussens}}" data-dtype="Number" class="perception-component temp-bonus-input" title="Bonus temporaire Sens" style="width: 40px !important;"/>
+                                <input name="system.sens_display" type="number" value="{{system.sens_display}}" data-dtype="Number" readonly class="sub-characteristic-total-display" title="Sens Total (Sens + Bonus Temp.)"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="characteristic-value-line">
+                                <label>Sixième Sens</label>
+                                <input name="system.sixiemesens" type="number" value="{{system.sixiemesens}}" data-dtype="Number" class="perception-component" style="width: 100px;"/>
+                                <input name="system.temporarybonussixiemesens" type="number" value="{{system.temporarybonussixiemesens}}" data-dtype="Number" class="perception-component temp-bonus-input" title="Bonus temporaire Sixième Sens" style="width: 40px !important;"/>
+                                <input name="system.sixiemesens_display" type="number" value="{{system.sixiemesens_display}}" data-dtype="Number" readonly class="sub-characteristic-total-display" title="Sixième Sens Total (Sixième Sens + Bonus Temp.)"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="characteristic-value-line">
+                                <label>Empathie</label>
+                                <input name="system.empathie" type="number" value="{{system.empathie}}" data-dtype="Number" class="perception-component" style="width: 100px;"/>
+                                <input name="system.temporarybonusempathie" type="number" value="{{system.temporarybonusempathie}}" data-dtype="Number" class="perception-component temp-bonus-input" title="Bonus temporaire Empathie" style="width: 40px !important;"/>
+                                <input name="system.empathie_display" type="number" value="{{system.empathie_display}}" data-dtype="Number" readonly class="sub-characteristic-total-display" title="Empathie Totale (Empathie + Bonus Temp.)"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CHARISME Section -->
+                <div class="caracteristique-block">
+                    <div class="main-stat-info">
+                    <label>CHARISME</label>
+                    <div class="major-stat-line">
+                        <input name="system.charisme" type="number" value="{{system.charisme}}" data-dtype="Number" readonly class="calculated-field major-stat-value" style="width: 100px !important;"/>
+                        <input name="system.temporarybonuscharisme" type="number" value="{{system.temporarybonuscharisme}}" data-dtype="Number" class="temp-bonus-input major-stat-temp-bonus" title="Bonus temporaire Charisme" style="width: 40px !important;"/>
+                    </div>
+                    </div>
+                    <div class="sub-stats-list">
+                        <div class="form-group">
+                            <div class="characteristic-value-line">
+                                <label>Eloquence</label>
+                                <input name="system.eloquence" type="number" value="{{system.eloquence}}" data-dtype="Number" class="charisme-component"  style="width: 100px"/>
+                                <input name="system.temporarybonuseloquence" type="number" value="{{system.temporarybonuseloquence}}" data-dtype="Number" class="charisme-component temp-bonus-input" title="Bonus temporaire Eloquence" style="width: 40px !important;"/>
+                                <input name="system.eloquence_display" type="number" value="{{system.eloquence_display}}" data-dtype="Number" readonly class="sub-characteristic-total-display" title="Éloquence Totale (Éloquence + Bonus Temp.)"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="characteristic-value-line">
+                                <label>Intimidation</label>
+                                <input name="system.intimidation" type="number" value="{{system.intimidation}}" data-dtype="Number" class="charisme-component"  style="width: 100px;"/>
+                                <input name="system.temporarybonusintimidation" type="number" value="{{system.temporarybonusintimidation}}" data-dtype="Number" class="charisme-component temp-bonus-input" title="Bonus temporaire Intimidation" style="width: 40px !important;"/>
+                                <input name="system.intimidation_display" type="number" value="{{system.intimidation_display}}" data-dtype="Number" readonly class="sub-characteristic-total-display" title="Intimidation Totale (Intimidation + Bonus Temp.)"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="characteristic-value-line">
+                                <label>Apparence</label>
+                                <input name="system.apparence" type="number" value="{{system.apparence}}" data-dtype="Number" class="charisme-component" style="width: 100px;"/>
+                                <input name="system.temporarybonusapparence" type="number" value="{{system.temporarybonusapparence}}" data-dtype="Number" class="charisme-component temp-bonus-input" title="Bonus temporaire Apparence" style="width: 40px !important;"/>
+                                <input name="system.apparence_display" type="number" value="{{system.apparence_display}}" data-dtype="Number" readonly class="sub-characteristic-total-display" title="Apparence Totale (Apparence + Bonus Temp.)"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- End of caracteristiques-details-layout -->
+        </div> <!-- End of caracteristiques-container -->
+
+    </div>
+</div> 

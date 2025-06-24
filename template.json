@@ -1,0 +1,726 @@
+{
+  "Actor": {
+    "types": [
+      "pj",
+      "pnj",
+      "figurant"
+    ],
+    "templates": {
+      "characterDescription": {
+        "taille": "",
+        "poids": "",
+        "age": "",
+        "couleurCheveux": "",
+        "couleurYeux": "",
+        "origine": "",
+        "symbolePersonnel": "",
+        "pere": "",
+        "mere": "",
+        "biographie": "",
+        "materiel": "",
+        "karma": "",
+        "malchaos": "",
+        "malabysses": "",
+        "contribution1": "",
+        "contribution1_text": "",
+        "contribution2": "",
+        "contribution2_text": "",
+        "contribution3": "",
+        "contribution3_text": "",
+        "ennemistype": "",
+        "ennemis": "",
+        "allieType": "",
+        "allies": "",
+        "pointfaible_type": "",
+        "pointfaible": "",
+        "pointfaible_valeur": 0,
+        "defaultAtoutStyle": "default",
+        "linkedJournalUUIDs": [],
+        "linkedArtefactUUIDs": [],
+        "linkedOmbreUUIDs": [],
+        "talentOrder": [],
+        "headerBannerNumber": 1,
+        "decorumNumber": 1,
+        "healthIconTheme": "00",
+        "healthReserveIconTheme": "00",
+        "energyIconTheme": "00",
+        "energyReserveIconTheme": "00"
+      },
+      "competencesliste": {
+        "armescontact": {
+          "label": "Armes de contact",
+          "value": 0,
+          "caracteristique": "physique",
+          "active": false,
+          "specialite": ["couteau", "epee"],
+          "description": ""
+        },
+        "armesdistance": {
+          "label": "Armes à distance",
+          "value": 0,
+          "caracteristique": "physique",
+          "active": false,
+          "specialite": ["couteau", "epee"],
+          "description": ""
+        },
+        "athletisme": {
+          "label": "Athlétisme",
+          "value": 0,
+          "caracteristique": "physique",
+          "active": false,
+          "specialite": ["couteau", "epee"],
+          "description": ""
+        },
+        "corpsacorps": {
+          "label": "Corps à corps",
+          "value": 0,
+          "caracteristique": "physique",
+          "active": false,
+          "specialite": ["couteau", "epee"],
+          "description": ""
+        },
+        "discretion": {
+          "label": "Discretion",
+          "value": 0,
+          "caracteristique": "physique",
+          "active": false,
+          "specialite": ["couteau", "epee"],
+          "description": ""
+        },
+        "pilotage": {
+          "label": "Pilotage",
+          "value": 0,
+          "caracteristique": "physique",
+          "active": false,
+          "specialite": ["couteau", "epee"],
+          "description": ""
+        }
+      },
+      "creation": {
+        "ptsbase": 600,
+        "ptstotaux": 0,
+        "ptscaracteristiques": 0,
+        "ptsrestants": 0,
+        "ptskarma": 0,
+        "ptscompetences": 0,
+        "ptsartefacts": 0,
+        "ptsombres": 0,
+        "ptscreatures": 0,
+        "ptspouvoirs": 0,
+        "ptsmarelle": 0,
+        "ptslogrus": 0,
+        "ptsabreuvoir": 0,
+        "ptsabysses": 0,
+        "ptsmetamorphose": 0,
+        "ptsatouts": 0,
+        "ptspentacre": 0,
+        "ptscoeurflamme": 0,
+        "ptsorbochromat": 0,
+        "ptsharmonium": 0,
+        "ptschimerion": 0,
+        "ptssabliers": 0,
+        "ptsmagie": 0,
+        "ptscontribution": 0,
+        "ptspointfaible": 0,
+        "ennemis_valeur": 0,
+        "allies_valeur": 0,
+        "ptsvsmarelle": 0,
+        "ptsvslogrus": 0,
+        "ptsvsabreuvoir": 0,
+        "ptsvsabysses": 0,
+        "ptsvsmetamorphose": 0,
+        "ptsvsatouts": 0,
+        "ptsvspentacre": 0,
+        "ptsvscoeurflamme": 0,
+        "ptsvsorbochromat": 0,
+        "ptsvsharmonium": 0,
+        "ptsvschimerion": 0,
+        "ptsvssabliers": 0,
+        "ptsvsmagie": 0
+      },
+      "options": {
+        "description": true,
+        "caracteristiques": true,
+        "competences": true,
+        "artefacts": false,
+        "ombres": true,
+        "creatures": true,
+        "marelle": false,
+        "logrus": false,
+        "atouts": false,
+        "metamorphose": false,
+        "pentacre": false,
+        "coeurflamme": false,
+        "orbochromat": false,
+        "abreuvoir": false,
+        "harmonium": false,
+        "chimerion": false,
+        "sabliers": false,
+        "abysses": false,
+        "magie": false,
+        "options": true,
+        "headerTextColor": "defaut",
+        "selectedtheme": "defaut",
+        "capacitesDisplayMode": {
+          "type": "String",
+          "value": "all",
+          "label": "Mode d'affichage des capacités"
+        }
+      },
+      "majorStats": {
+      "physique": 0,
+      "endurance": 0,
+      "psyche": 0,
+      "perception": 0,
+      "charisme": 0,
+      "temporarybonusphysique": 0,
+      "temporarybonusendurance": 0,
+      "temporarybonuspsyche": 0,
+      "temporarybonusperception": 0,
+      "temporarybonuscharisme": 0
+      },
+      "commonStats": {
+      "force": 20,
+      "dexterite": 20,
+      "reflexe": 20,
+      "adaptation": 20,
+      "regeneration": 20,
+      "resistance": 20,
+      "intelligence": 20,
+      "concentration": 20,
+      "volonte": 20,
+      "sens": 20,
+      "sixiemesens": 20,
+      "empathie": 20,
+      "eloquence": 20,
+      "intimidation": 20,
+      "apparence": 20,
+      "temporarybonusforce": 0,
+      "temporarybonusdexterite": 0,
+      "temporarybonusreflexe": 0,
+      "temporarybonusadaptation": 0,
+      "temporarybonusregeneration": 0,
+      "temporarybonusresistance": 0,
+      "temporarybonusintelligence": 0,
+      "temporarybonusconcentration": 0,
+      "temporarybonusvolonte": 0,
+      "temporarybonussens": 0,
+      "temporarybonussixiemesens": 0,
+      "temporarybonusempathie": 0,
+      "temporarybonuseloquence": 0,
+      "temporarybonusintimidation": 0,
+      "temporarybonusapparence": 0,
+      "puissance": {}
+      },
+      "competences": {
+      "athletisme": {
+        "label": "Athlétisme",
+        "value": 0,
+        "caracteristique": "physique",
+        "active": false,
+        "specialite": ["Course longue", "Course rapide"],
+        "description": "L'athlétisme représente les compétences de votre personnage dans des activités physiques telles que la course, le saut, l'escalade et la natation, lui permettant d'accomplir des prouesses physiques exceptionnelles."
+      },
+      "armescontact": {
+        "label": "Armes de contact",
+        "value": 0,
+        "caracteristique": "physique",
+        "active": false,
+        "specialite": "",
+        "description": "La compétence 'Armes de Contact' englobe la capacité de manier efficacement des armes de mêlée permettant à votre personnage de briller dans le combat armé rapproché. Elle représente son talent pour infliger des dégâts mortels à ses adversaires avec ces armes."
+      },
+      "armesdistance": {
+        "label": "Armes à Distance",
+        "value": 0,
+        "caracteristique": "physique",
+        "active": false,
+        "specialite": "",
+        "description": "Cette compétence révèle la maîtrise de votre personnage dans l'utilisation d'armes à distance telles que les arcs, les arbalètes ou les fusils, lui permettant de viser avec précision pour causer des dégâts."
+      },
+      "corpsacorps": {
+        "label": "Corps à corps",
+        "value": 0,
+        "caracteristique": "physique",
+        "active": false,
+        "specialite": "",
+        "description": "Cette compétence représente la capacité de votre personnage à se battre efficacement au combat à mains nues, tout simplement avec ses poings, ses pieds et son corps. Elle englobe à la fois les compétences d'arts martiaux et les autres techniques de combat à mains nues."
+      },
+      "discretion": {
+        "label": "Discrétion",
+        "value": 0,
+        "caracteristique": "physique",
+        "active": false,
+        "specialite": "",
+        "description": "Cette compétence dénote la capacité de votre personnage à se déplacer silencieusement, à éviter d'être vu, et à se fondre dans son environnement, ce qui lui permet de se faufiler sans être détecté et d'opérer de manière furtive dans diverses situations."
+      },
+      "pilotage": {
+        "label": "Pilotage",
+        "value": 0,
+        "caracteristique": "physique",
+        "active": false,
+        "specialite": "",
+        "description": "La compétence 'Pilotage' reflète l'expertise de votre personnage dans la conduite de véhicules tels que des vaisseaux spatiaux, des voitures, ou des navires."
+      },
+      "abstinence": {
+        "label": "Abstinence",
+        "value": 0,
+        "caracteristique": "endurance",
+        "active": false,
+        "specialite": "",
+        "description": "La compétence Abstinence représente la capacité de votre personnage à résister aux tentations, que ce soit pour éviter la dépendance à des substances ou pour maintenir une discipline stricte dans des situations de privation."
+      },
+      "immunite": {
+        "label": "Immunité",
+        "value": 0,
+        "caracteristique": "endurance",
+        "active": false,
+        "specialite": "",
+        "description": "Cette compétence mesure la capacité de votre personnage à résister aux maladies, aux infections et aux poisons, ainsi qu'à maintenir sa santé générale."
+      },
+      "luxure": {
+        "label": "Luxure",
+        "value": 0,
+        "caracteristique": "endurance",
+        "active": false,
+        "specialite": "",
+        "description": "La compétence Luxure reflète le niveau de performance et de résistance à faire la fête toutes les nuits."
+      },
+      "poison": {
+        "label": "Poison",
+        "value": 0,
+        "caracteristique": "endurance",
+        "active": false,
+        "specialite": "",
+        "description": "Cette compétence représente la connaissance de votre personnage en matière de poisons, lui permettant de détecter, ou créer des substances toxiques."
+      },
+      "survie": {
+        "label": "Survie",
+        "value": 0,
+        "caracteristique": "endurance",
+        "active": false,
+        "specialite": "",
+        "description": "La compétence Survie reflète la capacité de votre personnage à survivre dans des environnements hostiles, à trouver de la nourriture, de l'eau et à s'abriter, ainsi qu'à naviguer en terrain inconnu."
+      },
+      "resilience": {
+        "label": "Résilience",
+        "value": 0,
+        "caracteristique": "endurance",
+        "active": false,
+        "specialite": "",
+        "description": "Cette compétence montre la capacité de votre personnage à résister à la douleur physique et aux privations."
+      },
+      "courage": {
+        "label": "Courage",
+        "value": 0,
+        "caracteristique": "psyche",
+        "active": false,
+        "specialite": "",
+        "description": "La compétence Courage représente la détermination, la volonté et la capacité de votre personnage à affronter des peurs, à résister à des influences mentales néfastes et à maintenir son sangfroid dans des situations dangereuses."
+      },
+      "dissimulation": {
+        "label": "Dissimulation",
+        "value": 0,
+        "caracteristique": "psyche",
+        "active": false,
+        "specialite": "",
+        "description": "Cette compétence représente la capacité de votre personnage à se cacher, à passer inaperçu et à tromper les sens de vos interlocuteurs, que ce soit pour l'infiltration, l'espionnage ou l'évasion."
+      },
+      "duelmental": {
+        "label": "Duel mental",
+        "value": 0,
+        "caracteristique": "psyche",
+        "active": false,
+        "specialite": "",
+        "description": "Cet compétence reflète votre capacité à engager des confrontations psychiques, à résister aux attaques mentales et à manipuler les pensées et les émotions de vos interlocuteurs. Avant un Duel mental, il faut effectuer un Contact mental. Il existe plusieurs sortes de contacts mentaux : par le toucher (peau à peau), par Contact d'Atout (si vous acceptez l'appel), par une extension du Logrus ou un sortilège, par un contact visuel prolongé entre Ambriens (il faut un regard fixe (maintenu d'yeux à yeux sans interruption pendant quelques secondes) et par télépathie sur les Ombres où celle-ci fonctionne."
+      },
+      "erudition": {
+        "label": "Érudition",
+        "value": 0,
+        "caracteristique": "psyche",
+        "active": false,
+        "specialite": "",
+        "description": "Cette compétence mesure la connaissance, la recherche et la compréhension approfondie des informations et des connaissances, permettant à votre personnage de résoudre des énigmes, de décrypter des textes anciens et d'acquérir de nouvelles compétences."
+      },
+      "meditation": {
+        "label": "Méditation",
+        "value": 0,
+        "caracteristique": "psyche",
+        "active": false,
+        "specialite": "",
+        "description": "Cette compétence mesure la capacité de votre personnage à se concentrer, à méditer et à exploiter son propre esprit pour améliorer ses pouvoirs psychiques, sa clarté mentale et sa résistance aux influences extérieures."
+      },
+      "stratégie": {
+        "label": "Stratégie",
+        "value": 0,
+        "caracteristique": "psyche",
+        "active": false,
+        "specialite": "",
+        "description": "La compétence Stratégie mesure la capacité de votre personnage à élaborer des plans complexes, à anticiper les actions de ses adversaires et à prendre des décisions judicieuses en situation de crise."
+      },
+      "clairvoyance": {
+        "label": "Clairvoyance",
+        "value": 0,
+        "caracteristique": "perception",
+        "active": false,
+        "specialite": "",
+        "description": "Cette compétence mesure la capacité de votre personnage à percevoir des informations ou des événements à distance, que ce soit par le biais de visions, de rêves prémonitoires ou de sens extrasensoriels."
+      },
+      "fouille": {
+        "label": "Fouille",
+        "value": 0,
+        "caracteristique": "perception",
+        "active": false,
+        "specialite": "",
+        "description": "La compétence Fouille représente la capacité de votre personnage à rechercher des objets cachés, des indices ou des éléments importants dans son environnement, que ce soit pour résoudre des mystères, trouver des trésors ou repérer des pièges."
+      },
+      "intuition": {
+        "label": "Intuition",
+        "value": 0,
+        "caracteristique": "perception",
+        "active": false,
+        "specialite": "",
+        "description": "Cette compétence mesure la capacité de votre personnage à percevoir les intentions, les émotions cachées et les vérités non dites de vos interlocuteurs, que ce soit en observant leur comportement, leurs microexpressions ou en ressentant leur présence."
+      },
+      "orientation": {
+        "label": "Orientation",
+        "value": 0,
+        "caracteristique": "perception",
+        "active": false,
+        "specialite": "",
+        "description": "Cette compétence mesure la capacité de votre personnage à se repérer dans son environnement, à cartographier des lieux inconnus et à trouver le chemin vers sa destination, que ce soit en utilisant des repères visuels ou des sens aiguisés."
+      },
+      "pistage": {
+        "label": "Pistage",
+        "value": 0,
+        "caracteristique": "perception",
+        "active": false,
+        "specialite": "",
+        "description": "La compétence Pistage représente la capacité de votre personnage à suivre des traces, des empreintes ou des indices laissés par d'autres personnes ou créatures, que ce soit pour traquer une proie, retrouver un individu ou résoudre des enquêtes."
+      },
+      "subtilisation": {
+        "label": "Subtilisation",
+        "value": 0,
+        "caracteristique": "perception",
+        "active": false,
+        "specialite": "",
+        "description": "La compétence Subtilisation représente la capacité de votre personnage à se faufiler discrètement, à voler des objets sans être détecté et à utiliser son agilité pour échapper à la surveillance."
+      },
+      "bluff": {
+        "label": "Bluff",
+        "value": 0,
+        "caracteristique": "charisme",
+        "active": false,
+        "specialite": "",
+        "description": "La compétence Bluff représente la capacité de votre personnage à tromper ou à mystifier les autres en utilisant des mensonges convaincants, des ruses habiles et des feintes astucieuses pour atteindre ses objectifs."
+      },
+      "commerce": {
+        "label": "Commerce",
+        "value": 0,
+        "caracteristique": "charisme",
+        "active": false,
+        "specialite": "",
+        "description": "La compétence Commerce représente la maitrise des pratiques commerciales, de la négociation des prix, de la gestion des stocks et de la connaissance des marchés, que ce soit pour réussir dans le monde des affaires, réaliser des transactions lucratives ou établir des partenariats."
+      },
+      "dressage": {
+        "label": "Dressage",
+        "value": 0,
+        "caracteristique": "charisme",
+        "active": false,
+        "specialite": "",
+        "description": "Cette compétence mesure la capacité de votre personnage à entraîner et à contrôler des animaux ou des créatures, que ce soit pour les utiliser comme montures, les dresser pour des tâches spécifiques ou les apaiser en cas de danger."
+      },
+      "persuasion": {
+        "label": "Persuasion",
+        "value": 0,
+        "caracteristique": "charisme",
+        "active": false,
+        "specialite": "",
+        "description": "Cette compétence mesure la capacité de votre personnage à influencer et à convaincre les autres par le biais d'arguments logiques, de discours persuasifs et de négociations habiles, que ce soit pour obtenir leur soutien, leur confiance ou leur coopération."
+      },
+      "representation": {
+        "label": "Représentation",
+        "value": 0,
+        "caracteristique": "charisme",
+        "active": false,
+        "specialite": "",
+        "description": "Cette compétence mesure la capacité de votre personnage à se produire sur scène, à divertir un public, à jouer un rôle ou à effectuer des performances artistiques, que ce soit pour gagner sa vie en tant qu'artiste ou pour influencer les autres par des moyens artistiques."
+      },
+      "seduction": {
+        "label": "Séduction",
+        "value": 0,
+        "caracteristique": "charisme",
+        "active": false,
+        "specialite": "",
+        "description": "La compétence Séduction représente l'art de charmer et de séduire les autres en utilisant le charisme, l'attrait physique et la flatterie, que ce soit pour établir des relations amoureuses, gagner des faveurs ou manipuler subtilement."
+      }
+      },
+      "health": {
+      "value": 20,
+      "max": 600,
+      "min": 0,
+      "healthReserve": {
+        "value": 0,
+        "max": 0
+      }
+      },
+      "energy": {
+      "value": 20,
+      "max": 0,
+      "min": 0,
+      "energyReserve": {
+        "value": 0,
+        "max": 0
+      }
+    }
+    },
+    "pj": {
+      "biographie": "",
+      "templates": ["characterDescription", "options", "majorStats", "commonStats", "health", "energy", "competences", "creation"],
+      "schemaVersion": 0,
+      "biographyEditorVisible": false,
+      "sheetLocked": false,
+      "allowStatRefreshOnLock": true
+    },
+    "pnj": {
+      "biographie": "",
+      "templates": ["characterDescription", "creation", "options", "majorStats", "health", "energy"],
+      "schemaVersion": 0,
+      "biographyEditorVisible": false,
+      "sheetLocked": false,
+      "allowStatRefreshOnLock": true
+    },
+    "figurant": {
+      "biography": "",
+      "templates": ["characterDescription", "options", "majorStats", "health", "energy"],
+      "schemaVersion": 0,
+      "biographyEditorVisible": false,
+      "sheetLocked": false,
+      "allowStatRefreshOnLock": true
+    }
+  },
+  "Item": {
+    "types": [
+      "artefact",
+      "creature",
+      "ombre",
+    "pouvoir",
+    "atout",
+    "voiesecrete",
+    "motspouvoirs",
+    "sortileges",
+    "capaciteanimale",
+    "artefactabyssal",
+    "ingredient",
+    "catalyseur",
+    "receptacle",
+    "miroir",
+    "rune"
+  ],
+  "templates": {
+    "itemDescription": {
+      "type": "",
+      "description": ""
+    }
+  },
+  "pouvoir": {
+    "templates": ["itemDescription"],
+    "niveau": "",
+    "schemaVersion": 0
+  },
+  "atout": {
+    "templates": ["itemDescription"],
+    "croquis": false,
+    "representation": "",
+    "background": "",
+    "frame": "",
+    "banner": "",
+    "textureBlendMode": "afterAll",
+    "memorized": false,
+    "auteur": "",
+    "quantity": 0,
+    "atoutStyle": "",
+    "portraitScale": 1,
+    "portraitMaskWidth": 0,
+    "frameScale": 1,
+    "portraitX": 0,
+    "portraitY": 0,
+    "backgroundOpacity": 1,
+    "frameOpacity": 1,
+    "bannerOpacity": 1,
+    "bannerScale": 0.25,
+    "bannerY": 0,
+    "designationFont": "Arial",
+    "designationColor": "#FFFFFF",
+    "designationSize": 48,
+    "designationY": 0,
+    "schemaVersion": 0
+  },
+  "artefact": {
+    "templates": ["itemDescription"],
+    "vitesse": 0,
+    "resistance": 0,
+    "degats": 0,
+    "intelligence": 0,
+    "telepathie": 0,
+    "defensepsy": 0,
+    "storedPhysique": null,
+    "storedEndurance": null,
+    "storedPsyche": null,
+    "storedPerception": null,
+    "possessingActorNameOnLock": null,
+    "possessingActorIdOnLock": null,
+    "allowStatRefreshOnLock": true,
+    "puissance": "",
+    "polymorphie": {
+      "value": 0,
+      "formes": {
+        "defaut": "",
+        "alternatives": []
+      }
+    },
+    "totalCost": 0,
+    "linked": false,
+    "locked": false,
+    "linkedActors": [],
+    "overrideArtefactStyle": "",
+    "schemaVersion": 0,
+    "frameImagePath": "",
+    "obtainedAtCreation": {
+      "type": "Boolean",
+      "value": false,
+      "label": "Obtenu à la création"
+    }
+  },
+  "creature": {
+    "templates": ["itemDescription"],
+    "vitalite": 0,
+    "vitesse": 0,
+    "souffle": 0,
+    "agression": 0,
+    "resistance": 0,
+    "degats": 0,
+    "intelligence": 0,
+    "telepathie": 0,
+    "defensepsy": 0,
+    "polymorphie": {
+      "value": 0,
+      "formes": {
+        "defaut": "",
+        "alternatives": []
+      }
+    },
+    "duplication": "",
+    "storedPhysique": null,
+    "storedEndurance": null,
+    "storedPsyche": null,
+    "storedPerception": null,
+    "possessingActorNameOnLock": null,
+    "possessingActorIdOnLock": null,
+    "allowStatRefreshOnLock": true,
+    "locked": false,
+    "xCounter": 1,
+    "totalCost": 0,
+    "obtainedAtCreation": {
+      "type": "Boolean",
+      "value": false,
+      "label": "Obtenu à la création"
+    },
+    "frameImagePath": "",
+    "schemaVersion": 0
+  },
+  "ombre": {
+    "templates": ["itemDescription"],
+    "controleOmbre": 0,
+    "gardienOmbre": 0,
+    "controleDestin": 0,
+    "controleTemporel": 0,
+    "blocageCommunications": 0,
+    "blocageAcces": 0,
+    "omniscienceDivine": 0,
+    "controlePouvoirs": 0,
+    "controlePouvoirsAmis": [],
+    "niveauTechnologique": "1 Formes Primitives",
+    "niveauMagie": "1 Absence de Magie",
+    "totalCost": 0,
+    "linkedJournalUUIDs": [],
+    "obtainedAtCreation": false,
+    "linked": false,
+    "xCounter": 1,
+    "locked": false,
+    "allowStatRefreshOnLock": true,
+    "possessingActorNameOnLock": null,
+    "possessingActorIdOnLock": null,
+    "storedPhysique": null,
+    "storedEndurance": null,
+    "storedPsyche": null,
+    "storedPerception": null,
+    "schemaVersion": 0
+  },
+  "voiesecrete": {
+    "templates": ["itemDescription"],
+    "linkedPouvoirType": "",
+    "schemaVersion": 0
+  },
+  "motspouvoirs": {
+    "templates": ["itemDescription"],
+    "linkedPouvoir": "",
+    "linkedSortilegeUUID": "",
+    "exemplaires": 0,
+    "exemplairesStatus": [],
+    "schemaVersion": 0
+  },
+  "sortileges": {
+    "templates": ["itemDescription"],
+    "level": 0,
+    "castingTime": "",
+    "schemaVersion": 0
+  },
+  "capaciteanimale": {
+    "templates": ["itemDescription"],
+    "schemaVersion": 0
+  },
+  "artefactabyssal": {
+    "templates": ["itemDescription"],
+    "bonus": "",
+    "pouvoirLie": "",
+    "capaciteLiee": "",
+    "schemaVersion": 0
+  },
+  "ingredient": {
+    "templates": ["itemDescription"],
+    "categorie": "fleurs_herbes",
+    "schemaVersion": 0
+  },
+  "catalyseur": {
+    "templates": ["itemDescription"],
+    "linkedSortilegeUUID": "",
+    "exemplaires": 0,
+    "exemplairesStatus": [],
+    "linkedMotPouvoirUUID": "",
+    "schemaVersion": 0
+  },
+  "receptacle": {
+    "templates": ["itemDescription"],
+    "linkedPouvoir": "",
+    "linkedSortilegeUUID": "",
+    "schemaVersion": 0,
+    "exemplaires": 0,
+    "exemplairesStatus": [],
+    "linkedMotPouvoirUUID": ""
+  },
+  "miroir": {
+    "templates": ["itemDescription"],
+    "linkedPouvoir": "",
+    "schemaVersion": 0
+  },
+  "rune": {
+    "templates": ["itemDescription"],
+    "linkedPouvoir": "",
+    "linkedSortilegeUUID": "",
+    "schemaVersion": 0,
+    "exemplaires": 0,
+    "exemplairesStatus": [],
+    "linkedMotPouvoirUUID": ""
+  }
+}
+}

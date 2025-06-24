@@ -1,0 +1,78 @@
+<main class="possession-content">
+  <!-- 
+    Note: CSS is required for layout (e.g., flexbox/grid for columns and widths) 
+    and styling. JavaScript is needed for drag-and-drop and event handling.
+  -->
+
+
+
+<!-- Bottom Section: Atouts -->
+  <section class="atouts-management actorDesc-group" style="background: var(--theme-background-light); padding: 10px; border-radius: 4px; margin-bottom: 15px; border: 1px solid var(--theme-border-color);">
+    <div class="actorDesc-header" style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--theme-primary-medium); margin-bottom: 10px; padding-bottom: 5px;">
+      <h4 align="center" style="color: var(--theme-primary-dark); margin: 0; flex-grow: 1;">ATOUTS</h4>
+      <a class="item-control item-create" title="Add Atout" data-item-type="atout"><i class="fas fa-plus"></i></a>
+    </div>
+    <div class="atouts-layout">
+      <!-- 
+        Column 1: Atout drop zone (e.g., flex: 1; for 1/3 width)
+      -->
+      <div class="atouts-drop-column" style="background: var(--theme-background-alt); padding: 8px; border-radius: 3px; margin-right: 10px;">
+        <h3 style="color: var(--theme-primary-dark); margin-top: 0; border-bottom: 1px solid var(--theme-border-color); padding-bottom: 5px;">Jeu d'Atouts</h3>
+        <div class="drop-target" data-group-type="atout" aria-label="Drop zone for atouts">
+          <p class="drop-hint" style="color: var(--theme-text-muted); text-align: center;">Déposez vos Atouts ici</p>
+          {{#each equippedAtouts}}
+            <div class="item draggable-item atout-list-item-detailed" data-item-id="{{this._id}}" draggable="true" style="background: var(--theme-background-light); margin-bottom: 5px; padding: 5px; border-radius: 3px; border-left: 3px solid var(--theme-primary-color); color: var(--theme-text-color);">
+              <div class="atout-details">
+                <h4 class="item-name item-name-clickable" style="color: var(--theme-text-color); margin-bottom: 3px;" title="Ouvrir {{this.name}}">{{this.name}}</h4>
+              </div>
+              <div class="atout-quantity-control">
+                <label title="Quantité">Qté:</label>
+                <input type="number" name="items.{{this._id}}.system.quantity" value="{{this.system.quantity}}" data-dtype="Number" class="atout-quantity-input"/>
+              </div>
+              <div class="atout-checkboxes">
+                <label title="Mark if this Atout is a Croquis">
+                  <input type="checkbox" class="atout-croquis-checkbox" {{checked this.system.croquis}} data-dtype="Boolean" /> Croquis
+                </label>
+                <label title="Mark if this Atout is memorized">
+                  <input type="checkbox" class="atout-memorized-checkbox" {{checked this.system.memorized}} data-dtype="Boolean" /> Memorisé
+                </label>
+              </div>
+              <div class="item-controls">
+                <a class="item-control item-edit" title="Edit Atout"><i class="fas fa-edit"></i></a>
+                <a class="item-control item-delete" title="Remove Atout"><i class="fas fa-trash"></i></a>
+              </div>
+            </div>
+          {{/each}}
+          {{#unless equippedAtouts}}
+            <p style="color: var(--theme-text-muted); text-align: center;">Pas d'Atout dans ton jeu.</p>
+          {{/unless}}
+        </div>
+      </div>
+      <!-- 
+        Column 2: Atout picture display (e.g., flex: 2; for 2/3 width)
+      -->
+      <div class="atouts-display-column" style="background: var(--theme-background-alt); padding: 8px; border-radius: 3px;">
+        <h3 style="color: var(--theme-primary-dark); margin-top: 0; border-bottom: 1px solid var(--theme-border-color); padding-bottom: 5px;">Gallerie d'Atouts</h3>
+        <div class="atout-gallery-grid">
+          {{#each equippedAtouts}}
+            <div class="atout-grid-item item" data-item-id="{{this._id}}"> <!-- Added 'item' class -->
+              <a class="item-control item-edit atout-image-as-button" title="Ouvrir {{this.name}}">
+                <img src="{{this.img}}" alt="{{this.name}}" class="atout-grid-image">
+              </a>
+              <p class="atout-grid-name" style="color: var(--theme-text-color);">{{this.name}}</p>
+            </div>
+          {{/each}}
+          {{#unless equippedAtouts}}
+            <p style="color: var(--theme-text-muted); text-align: center;">Pas d'atouts de ton jeu dans cette galerie.</p>
+          {{/unless}}
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="decorum-separator-container">
+    <img src="systems/ambre/assets/skin/frames/separator{{system.decorumNumber}}.png" class="decorum-separator" alt="Separator"/>
+  </div>
+</main>
+
+<!-- Suggested CSS classes for styling (define in your CSS file):
+.page-header, .possession-content, .item-groups, .top-groups, .item-group, .group-header, .drop-target, .drop-hint, .draggable-item, .atouts-management, .section-header, .atouts-layout, .atouts-drop-column, .atouts-display-column, .atout-gallery, .atout-card, .atout-image, .atout-name, .activatable -->

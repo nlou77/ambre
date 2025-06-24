@@ -1,0 +1,109 @@
+/* Styles spécifiques pour MesAtoutsApp pour gérer le layout et le scrolling */
+
+/* Assurez-vous que la fenêtre de l'application gère correctement le débordement de ses enfants directs */
+.mes-atouts-app .window-content {
+    overflow: hidden; /* Empêche window-content de défiler lui-même */
+    display: flex;
+    flex-direction: column; /* Empile H1, container principal, etc. verticalement */
+    padding: 10px;
+    height: 100%; /* Occupe toute la hauteur de la fenêtre de l'application */
+    box-sizing: border-box;
+}
+
+/* Style pour le titre principal de l'application */
+.mes-atouts-app > h1 { /* Cible le H1 direct dans le template */
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 0; /* Supprime la marge en dessous du titre */
+    padding: 0; /* Supprime tout padding interne au h1 si le padding de .window-content suffit */
+    /* font-size: 1.6em; Remplacé par une valeur en px ou rem pour un meilleur contrôle */
+    font-size: 24px; /* Suggestion: taille fixe en pixels. Ajustez selon vos besoins. */
+    /* Ou utilisez rem, ex: font-size: 1.5rem; si la taille de police racine est standard */
+    line-height: 1.2; /* Contrôle la hauteur de la ligne, réduisant l'espace vertical excessif */
+    flex-shrink: 0; /* Empêche le titre de rétrécir */
+    background-color: rgba(11, 25, 216, 0.5); /* Jaune semi-transparent */
+}
+
+/* Conteneur principal pour les contrôles et le canvas */
+.mes-atouts-app .container {
+    display: flex;
+    flex-direction: row; /* Contrôles et Canvas côte à côte */
+    flex-grow: 1;       /* Permet à ce conteneur d'occuper l'espace vertical restant */
+    min-height: 0;      /* Crucial pour les enfants flex qui doivent défiler */
+    overflow: hidden;   /* Empêche ce conteneur de défiler; les enfants gèrent leur propre défilement */
+    border: 5px solid red !important; /* !important juste pour le test */
+}
+
+/* Conteneur pour le panneau de contrôles */
+.mes-atouts-app #controls-container {
+    flex-basis: 380px; /* Largeur de base pour le panneau de contrôles, ajustable */
+    flex-shrink: 0;   /* Empêche le panneau de contrôles de rétrécir */
+    margin-right: 15px; /* Espace entre le panneau de contrôles et le canvas */
+    overflow-y: auto;   /* Active le défilement vertical UNIQUEMENT pour ce panneau */
+    height: 100%;       /* Occupe toute la hauteur de son parent .container */
+}
+
+/* Le div interne #controls, si vous voulez ajouter un padding qui n'est pas affecté par la scrollbar */
+.mes-atouts-app #controls {
+    padding-right: 5px; /* Petit espace pour que la scrollbar ne colle pas au contenu */
+}
+
+/* Conteneur pour le canvas */
+.mes-atouts-app #canvas-container {
+    flex-grow: 1; /* Le conteneur du canvas prend l'espace restant en largeur */
+    display: flex;
+    justify-content: center; /* Centre le canvas horizontalement dans son conteneur */
+    align-items: flex-start;   /* Aligne le canvas en haut de son conteneur */
+    height: 100%;       /* Occupe toute la hauteur de son parent .container */
+    /* Pas de overflow-y: auto; ici, car il ne doit pas défiler */
+}
+
+/* Style pour le canvas lui-même */
+.mes-atouts-app #carteCanvas {
+    border: 1px solid #ccc; /* Optionnel: pour visualiser les bordures du canvas */
+    /* La taille du canvas est définie par ses attributs width/height dans le HTML.
+       Le CSS ici est surtout pour le positionnement et les bordures. */
+}
+
+/* Positionnement de l'icône des paramètres */
+.mes-atouts-app #settingsIconContainer {
+    position: absolute; /* Par rapport à .window-content ou .mes-atouts-app */
+    top: 15px;      /* Ajustez selon le padding de .window-content et la marge de h1 */
+    right: 15px;
+}
+
+/* Styles for collapsible fieldsets within MesAtoutsApp */
+.mes-atouts-app .collapsible-legend {
+  cursor: pointer;
+  user-select: none; /* Empêche la sélection du texte lors du clic */
+  padding: 5px;
+  border-bottom: 1px solid #ccc; /* Juste un exemple de style */
+  margin-bottom: 5px;
+  display: block; /* Assure que la bordure s'étend sur toute la largeur et que ::before fonctionne bien */
+}
+
+.mes-atouts-app .collapsible-legend:hover {
+  background-color: #f0f0f0;
+}
+
+/* Icône pour les légendes pliables */
+.mes-atouts-app .collapsible-legend::before {
+  content: '\25B6'; /* Triangle pointant vers la droite (▶) */
+  display: inline-block;
+  transition: transform 0.2s ease-in-out;
+  margin-right: 6px; /* Espace entre l'icône et le texte */
+  font-size: 0.8em; /* Taille de l'icône un peu plus petite */
+  /* Correction: Assurer que l'icône ne soit pas affectée par user-select de son parent */
+  user-select: none;
+}
+
+.mes-atouts-app .collapsible-legend.expanded::before {
+  transform: rotate(90deg); /* Triangle pointant vers le bas (▼) */
+}
+
+.mes-atouts-app .fieldset-content {
+  /* Vous pouvez ajouter des styles pour la partie contenu ici si nécessaire, par exemple : */
+  /* padding: 10px 0; */
+  /* Si vous utilisez slideToggle, jQuery gère le display. Sinon, vous pourriez avoir besoin de : */
+  /* display: none; par défaut si non géré par le HTML initial ou JS pour les fieldsets initialement cachés */
+}

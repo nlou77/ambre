@@ -1,0 +1,329 @@
+<form class="atout-form" style="display: flex; gap: 1em;">
+<style>
+    .image-picker-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+        gap: 5px;
+        background-color: rgba(0,0,0,0.1);
+        padding: 5px;
+        border-radius: 3px;
+        max-height: 200px;
+        overflow-y: auto;
+        border: 1px solid #555;
+    }
+    .picker-thumbnail {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 460 / 770;
+        object-fit: cover;
+        border: 2px solid transparent;
+        cursor: pointer;
+        border-radius: 3px;
+        transition: all 0.2s;
+        background-color: #222;
+    }
+    .picker-thumbnail:hover {
+        border-color: #ff6400;
+    }
+    .picker-thumbnail.selected {
+        border-color: #ff6400;
+        box-shadow: 0 0 8px #ff6400;
+    }
+</style>
+
+    <!-- Settings Column -->
+    <div class="settings-column" style="width: 600px; flex-shrink: 0;">
+        <nav class="sheet-tabs tabs" data-group="primary">
+            <a class="item" data-tab="concept">Concept</a>
+            <a class="item" data-tab="sujet">Sujet</a>
+            <a class="item" data-tab="structure">Structure</a>
+            <a class="item" data-tab="designation">Désignation</a>
+            <a class="item" data-tab="effets">Effets</a>
+            <a class="item" data-tab="creation">Création</a>
+        </nav>
+
+        <section class="sheet-body" style="min-height: 150px; max-height: 600px; overflow-y: auto; padding-bottom: 1em;">
+            <div class="tab" data-tab="concept">
+                <fieldset class="form-group-category">
+                    <legend>Nouvelle Création</legend>
+                    <button type="button" class="new-creation" style="width: 100%;"><i class="fas fa-file"></i> Démarrer une nouvelle création</button>
+                    <p class="notes" style="margin-top: 0.5em;">Réinitialise tous les champs du formulaire à leur état par défaut pour commencer une nouvelle carte d'atout.</p>
+                </fieldset>
+
+                <fieldset class="form-group-category">
+                    <legend>Style de l'Artiste</legend>
+                    <p class="notes">Gérez des styles réutilisables. Un style sauvegarde les réglages visuels (cadres, bannières, couleurs, etc.) mais pas le portrait, son échelle/position, ni le nom de l'atout.</p>
+                    
+                    <!-- Create new style -->
+                    <div class="form-group">
+                        <input type="text" name="newArtistStyleName" placeholder="Nom du nouveau style..." style="flex: 2;">
+                        <button type="button" class="create-artist-style" style="flex: 1;"><i class="fas fa-plus-circle"></i> Créer</button>
+                    </div>
+
+                    <!-- Manage existing styles -->
+                    <div class="form-group" style="gap: 5px;">
+                        <select name="selectedArtistStyle" style="flex-grow: 1;">
+                            <option value="">-- Choisir un style --</option>
+                            {{#each artistStyles}}
+                            <option value="{{this.name}}">{{this.name}}{{#if this.locked}} (Verrouillé){{/if}}</option>
+                            {{/each}}
+                        </select>
+                        <div class="artist-style-controls" style="display: flex; flex-shrink: 0; gap: 5px;">
+                            <button type="button" class="load-artist-style" title="Charger le style" style="flex: 0; padding: 5px;"><i class="fas fa-upload"></i></button>
+                            <button type="button" class="save-artist-style" title="Sauvegarder les modifications" style="flex: 0; padding: 5px;"><i class="fas fa-save"></i></button>
+                            <button type="button" class="lock-artist-style" title="Verrouiller/Déverrouiller" style="flex: 0; padding: 5px;"><i class="fas fa-lock"></i></button>
+                            <button type="button" class="delete-artist-style" title="Supprimer le style" style="flex: 0; padding: 5px;"><i class="fas fa-trash"></i></button>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <fieldset class="form-group-category">
+                    <legend>Travaux en cours</legend>
+                    <p class="notes">Sauvegardez une configuration pour la réutiliser plus tard.</p>
+                    <div class="form-group">
+                        <input type="text" name="presetName" placeholder="Nom de la configuration..." style="flex: 2;">
+                        <button type="button" class="save-preset" style="flex: 1;"><i class="fas fa-save"></i> Sauvegarder</button>
+                    </div>
+                    <ul class="preset-list" style="list-style: none; padding: 0; margin-top: 1em; max-height: 300px; overflow-y: auto;">
+                        {{#each presets}}
+                        <li class="preset-item" style="display: flex; justify-content: space-between; align-items: center; padding: 0.25em 0; border-bottom: 1px solid #ccc;">
+                            <span style="font-weight: bold;">{{this.name}}</span>
+                            <div class="preset-controls" style="display: flex; gap: 0.5em;">
+                                <button type="button" class="load-preset" data-preset-name="{{this.name}}" title="Charger"><i class="fas fa-upload"></i></button>
+                                <button type="button" class="delete-preset" data-preset-name="{{this.name}}" title="Supprimer"><i class="fas fa-trash"></i></button>
+                            </div>
+                        </li>
+                        {{/each}}
+                    </ul>
+                </fieldset>
+            </div>
+            <div class="tab" data-tab="sujet">
+                <fieldset class="form-group-category">
+                    <legend>Portrait</legend>
+                    <div class="form-group">
+                        <label for="portrait">Portrait (URL)
+                            <small>(glisser pour repositionner)</small>
+                        </label>
+                        <div class="form-fields">
+                            <input type="text" name="portrait" placeholder="Chemin vers l'image du portrait..." style="flex: 1;">
+                            <button type="button" class="file-picker" data-target="portrait" title="Parcourir les fichiers">
+                                <i class="fas fa-file-import"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="form-group" style="flex-direction: column; align-items: stretch; gap: 0.25em;">
+                        <label for="portraitScale">Échelle du Portrait</label>
+                        <div class="form-fields">
+                            <input type="range" name="portraitScale" min="0.2" max="3.0" step="0.05" value="1.0" style="flex: 2;">
+                            <span class="range-value" style="flex: 1; text-align: center;">1.00</span>
+                        </div>
+                        <div class="form-fields" style="margin-top: 5px;">
+                            <button type="button" class="reset-position" style="flex: 1;"><i class="fas fa-crosshairs"></i> Réinitialiser Position & Échelle</button>
+                        </div>
+                    </div>
+                    <!-- Hidden inputs for portrait offset -->
+                    <input type="hidden" name="portraitX" value="0">
+                    <input type="hidden" name="portraitY" value="0">
+                </fieldset>
+
+                <fieldset class="form-group-category">
+                    <legend>Masque du Portrait</legend>
+                    <div class="form-group" style="flex-direction: column; align-items: stretch; gap: 0.25em;">
+                        <label for="portraitMaskWidth">Largeur du Masque</label>
+                        <div class="form-fields">
+                            <input type="range" name="portraitMaskWidth" min="0" max="230" step="1" value="0" style="flex: 2;">
+                            <span class="range-value" style="flex: 1; text-align: center;">0</span>
+                        </div>
+                        <p class="notes" style="margin-top: 0.5em;">Contrôle la largeur des bandes sur les côtés qui masquent le portrait. Utilise la couleur de fond.</p>
+                    </div>
+                </fieldset>
+
+                <fieldset class="form-group-category">
+                    <legend>Fond</legend>
+                    <div class="form-group">
+                        <label for="backgroundColor">Couleur de Fond</label>
+                        <input type="color" name="backgroundColor" value="#000000">
+                    </div>
+                    <div class="form-group" style="flex-direction: column; align-items: stretch; gap: 0.25em;">
+                        <label for="backgroundOpacity">Opacité du Fond</label>
+                        <div class="form-fields">
+                            <input type="range" name="backgroundOpacity" min="0" max="1" step="0.01" value="1.0" style="flex: 2;">
+                            <span class="range-value" style="flex: 1; text-align: center;">1.00</span>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            
+            <div class="tab" data-tab="structure">
+                <fieldset class="form-group-category">
+                    <legend>Cadre</legend>
+                    <div class="form-group" style="flex-direction: column; align-items: stretch; gap: 0.25em;">
+                        <button type="button" class="refresh-images" data-target-type="frames" style="width: 100%;"><i class="fas fa-sync-alt"></i> Rafraîchir les images de Cadre</button>
+                        <p class="notes" style="margin-top: 0.5em;">Cliquez ici si vous avez ajouté ou modifié des images de cadre sur le disque.</p>
+                    </div>
+                    <div class="form-group" style="flex-direction: column; align-items: stretch;">
+                        <label for="frame">Image du Cadre</label>
+                        <div class="image-picker-container" data-target="frame">
+                            {{#each frames}}
+                                {{#if this.value}} 
+                                <img src="{{this.value}}" class="picker-thumbnail" data-value="{{this.value}}" title="{{this.label}}">
+                                {{else}}
+                                <div class="picker-thumbnail" data-value="" title="Aucun" style="display: flex; justify-content: center; align-items: center; background: #444; color: #fff;"><i class="fas fa-ban"></i></div>
+                                {{/if}}
+                            {{/each}}
+                        </div>
+                        <input type="hidden" name="frame" value="">
+                    </div>
+                    <div class="form-group" style="flex-direction: column; align-items: stretch; gap: 0.25em;">
+                        <label for="frameScale">Échelle du Cadre</label>
+                        <div class="form-fields">
+                            <input type="range" name="frameScale" min="0.2" max="3.0" step="0.05" value="1.0" style="flex: 2;">
+                            <span class="range-value" style="flex: 1; text-align: center;">1.00</span>
+                        </div>
+                    </div>
+                    <div class="form-group" style="flex-direction: column; align-items: stretch; gap: 0.25em;">
+                        <label for="frameOpacity">Opacité du Cadre</label>
+                        <div class="form-fields">
+                            <input type="range" name="frameOpacity" min="0" max="1" step="0.01" value="1.0" style="flex: 2;">
+                            <span class="range-value" style="flex: 1; text-align: center;">1.00</span>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <fieldset class="form-group-category">
+                    <legend>Bannière</legend>
+                    <div class="form-group" style="flex-direction: column; align-items: stretch; gap: 0.25em;">
+                        <button type="button" class="refresh-images" data-target-type="banners" style="width: 100%;"><i class="fas fa-sync-alt"></i> Rafraîchir les images de Bannière</button>
+                        <p class="notes" style="margin-top: 0.5em;">Cliquez ici si vous avez ajouté ou modifié des images de bannière sur le disque.</p>
+                    </div>
+                    <div class="form-group" style="flex-direction: column; align-items: stretch;">
+                        <label for="banner">Image de la Bannière</label>
+                        <div class="image-picker-container" data-target="banner">
+                            {{#each banners}}
+                                {{#if this.value}} 
+                                <img src="{{this.value}}" class="picker-thumbnail" data-value="{{this.value}}" title="{{this.label}}">
+                                {{else}}
+                                <div class="picker-thumbnail" data-value="" title="Aucune" style="display: flex; justify-content: center; align-items: center; background: #444; color: #fff;"><i class="fas fa-ban"></i></div>
+                                {{/if}}
+                            {{/each}}
+                        </div>
+                        <input type="hidden" name="banner" value="">
+                    </div>
+                    <div class="form-group" style="flex-direction: column; align-items: stretch; gap: 0.25em;">
+                        <label for="bannerScale">Échelle de la Bannière</label>
+                        <div class="form-fields">
+                            <input type="range" name="bannerScale" min="0.05" max="2.0" step="0.01" value="0.25" style="flex: 2;">
+                            <span class="range-value" style="flex: 1; text-align: center;">0.25</span>
+                        </div>
+                    </div>
+                    <div class="form-group" style="flex-direction: column; align-items: stretch; gap: 0.25em;">
+                        <label for="bannerOpacity">Opacité de la Bannière</label>
+                        <div class="form-fields">
+                            <input type="range" name="bannerOpacity" min="0" max="1" step="0.01" value="1.0" style="flex: 2;">
+                            <span class="range-value" style="flex: 1; text-align: center;">1.00</span>
+                        </div>
+                    </div>
+                    <div class="form-group" style="flex-direction: column; align-items: stretch; gap: 0.25em;">
+                        <label for="bannerY">Position Verticale Bannière</label>
+                        <div class="form-fields">
+                            <input type="range" name="bannerY" min="-400" max="800" step="1" value="0" style="flex: 2;">
+                            <span class="range-value" style="flex: 1; text-align: center;">0</span>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+
+            <div class="tab" data-tab="designation">
+                <div class="form-group">
+                    <label for="name">Nom de l'Atout</label>
+                    <input type="text" name="name" placeholder="Le Cavalier Noir" value="Nouvel Atout" data-dtype="String">
+                </div>
+                <div class="form-group">
+                    <label for="auteur">Auteur de l'Atout</label>
+                    <input type="text" name="auteur" placeholder="Dworkin" value="{{#if actor.name}}{{actor.name}}{{else}}Artiste Inconnu{{/if}}" data-dtype="String">
+                </div>
+                <fieldset class="form-group-category">
+                    <legend>Apparence du Texte</legend>
+                    <div class="form-group">
+                        <label for="designationFont">Police</label>
+                        <select name="designationFont" data-dtype="String">
+                            {{#each fonts as |font|}}
+                            <option value="{{font.value}}" {{#if (eq font.value "Arial")}}selected{{/if}}>{{font.label}}</option>
+                            {{/each}}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="designationColor">Couleur</label>
+                        <input type="color" name="designationColor" value="#FFFFFF">
+                    </div>
+                    <div class="form-group" style="flex-direction: column; align-items: stretch; gap: 0.25em;">
+                        <label for="designationSize">Taille du Texte</label>
+                        <div class="form-fields">
+                            <input type="range" name="designationSize" min="12" max="100" step="1" value="48" style="flex: 2;">
+                            <span class="range-value" style="flex: 1; text-align: center;">48</span>
+                        </div>
+                    </div>
+                    <div class="form-group" style="flex-direction: column; align-items: stretch; gap: 0.25em;">
+                        <label for="designationY">Position Verticale Texte</label>
+                        <div class="form-fields">
+                            <!-- Default Y position for text, same as banner's default -->
+                            <input type="range" name="designationY" min="-400" max="800" step="1" value="0" style="flex: 2;">
+                            <span class="range-value" style="flex: 1; text-align: center;">0</span>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+
+            <div class="tab" data-tab="effets">
+                <fieldset class="form-group-category">
+                    <legend>Texture de Fond</legend>
+                    <div class="form-group" style="flex-direction: column; align-items: stretch; gap: 0.25em;">
+                        <button type="button" class="refresh-images" data-target-type="textures" style="width: 100%;"><i class="fas fa-sync-alt"></i> Rafraîchir les images de Texture</button>
+                        <p class="notes" style="margin-top: 0.5em;">Cliquez ici si vous avez ajouté ou modifié des images de texture sur le disque.</p>
+                    </div>
+                    <div class="form-group" style="flex-direction: column; align-items: stretch;">
+                        <label for="texture">Image de la Texture</label>
+                        <div class="image-picker-container" data-target="texture">
+                            {{#each textures}}
+                                {{#if this.value}} 
+                                <img src="{{this.value}}" class="picker-thumbnail" data-value="{{this.value}}" title="{{this.label}}">
+                                {{else}}
+                                <div class="picker-thumbnail" data-value="" title="Aucune" style="display: flex; justify-content: center; align-items: center; background: #444; color: #fff;"><i class="fas fa-ban"></i></div>
+                                {{/if}}
+                            {{/each}}
+                        </div>
+                        <input type="hidden" name="texture" value="">
+                    </div>
+                    <div class="form-group" style="flex-direction: column; align-items: stretch; gap: 0.25em;">
+                        <label for="textureOpacity">Opacité de la Texture</label>
+                        <div class="form-fields">
+                            <input type="range" name="textureOpacity" min="0" max="1" step="0.01" value="1.0" style="flex: 2;">
+                            <span class="range-value" style="flex: 1; text-align: center;">1.00</span>
+                        </div>
+                    </div>
+                    <div class="form-group" style="flex-direction: column; align-items: stretch; gap: 0.25em;">
+                        <label>Mode d'application :</label>
+                        <div class="form-fields" style="display: flex; justify-content: space-around;">
+                            <label style="display: flex; align-items: center;"><input type="radio" name="textureBlendMode" value="beforeFrame" checked> Avant Cadre</label>
+                            <label style="display: flex; align-items: center;"><input type="radio" name="textureBlendMode" value="beforeDesignation"> Avant Désignation</label>
+                            <label style="display: flex; align-items: center;"><input type="radio" name="textureBlendMode" value="beforeBanner"> Avant Bannière</label>
+                            <label style="display: flex; align-items: center;"><input type="radio" name="textureBlendMode" value="afterAll"> Après Tout</label>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+
+            <div class="tab" data-tab="creation">
+                <button type="button" class="export-png-server-button" style="margin-bottom: 10px;"><i class="fas fa-file-image"></i> Exporter en PNG (Serveur)</button>
+                <button type="button" class="download-png-local-button" style="margin-bottom: 10px;"><i class="fas fa-download"></i> Télécharger PNG (Local)</button>
+                <button type="submit"><i class="fas fa-magic"></i> Créer l'Atout</button>
+            </div>
+        </section>
+    </div>
+
+    <!-- Preview Column -->
+    <div class="preview-column" style="flex-grow: 1; text-align: center; border-left: 1px solid #ccc; padding-left: 1em;">
+        <label style="display: block; margin-bottom: 0.5em; font-weight: bold;">Prévisualisation</label>
+        <canvas id="trumpCanvas" width="460" height="770" style="border: 1px solid #999; background: #f0f0f0; max-width: 100%; height: auto;"></canvas>
+    </div>
+</form>

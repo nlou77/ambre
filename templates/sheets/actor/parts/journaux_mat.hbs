@@ -1,0 +1,28 @@
+<main class="possession-content">
+
+</main>  <!-- Section Journaux -->
+  <section class="journaux-management actorDesc-group" style="background: var(--theme-background-light); padding: 10px; border-radius: 4px; margin-bottom: 15px; border: 1px solid var(--theme-border-color);">
+    <div class="actorDesc-header" style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--theme-primary-medium); margin-bottom: 10px; padding-bottom: 5px;">
+      <h4 align="center" style="color: var(--theme-primary-dark); margin: 0; flex-grow: 1;">JOURNAUX (Standard Foundry)</h4>
+      <a class="item-control journal-create-button" title="Créer une nouvelle Entrée de Journal"><i class="fas fa-plus"></i></a>
+    </div>
+    <div class="drop-target" data-group-type="journal" aria-label="Zone de dépôt pour journaux" style="min-height: 100px; border: 1px dashed var(--theme-border-color); padding: 5px; background: var(--theme-background-light);">
+      {{#if linkedJournals.length}}
+        {{#each linkedJournals}}
+          <div class="item draggable-item journal-list-item" data-journal-uuid="{{this.uuid}}" draggable="true" style="background: var(--theme-background-light); margin-bottom: 5px; padding: 8px 5px; border-radius: 3px; border-left: 3px solid var(--theme-primary-color); color: var(--theme-text-color); display: flex; justify-content: space-between; align-items: center;">
+            <h4 class="item-name item-name-clickable journal-edit" style="color: var(--theme-text-color); margin: 0; flex-grow: 1;" title="Ouvrir {{this.name}}">{{this.name}}</h4>
+            <div class="item-controls">
+                <a class="item-control journal-edit" title="Éditer l'Entrée de Journal"><i class="fas fa-edit"></i></a>
+                <a class="item-control journal-delete" title="Délier (et optionnellement supprimer) l'Entrée de Journal"><i class="fas fa-trash"></i></a>
+            </div>
+          </div>
+        {{/each}}
+      {{else}}
+        <p class="drop-hint" style="color: var(--theme-text-muted); text-align: center;">Déposez vos Journaux ici ou créez-en un nouveau.</p>
+      {{/if}}
+    </div>
+    <div class="decorum-separator-container">
+      <img src="systems/ambre/assets/skin/frames/separator{{system.decorumNumber}}.png" class="decorum-separator" alt="Separator"/>
+    </div>
+  </section>
+</main>

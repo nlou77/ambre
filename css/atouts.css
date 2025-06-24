@@ -1,0 +1,624 @@
+/* Styles for Atout list in the left column */
+.atout-list-item-detailed {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px; /* Increased spacing */
+    padding: 8px 12px; /* Increased padding */
+    border: 1px solid var(--theme-border-color); /* Use theme border */
+    border-radius: 4px; /* Rounded corners */
+    background: var(--theme-background-light); /* Use theme background */
+    box-shadow: 0 1px 3px var(--theme-shadow-color, rgba(0,0,0,0.05)); /* Subtle shadow */
+}
+
+.atout-details {
+    flex-grow: 1;
+}
+
+.atout-details .item-name { /* Target the h4 within atout-details */
+    margin: 0; /* Reset margin for the name */
+}
+
+.atout-quantity-control {
+    display: flex;
+    align-items: center;
+    margin-left: 10px; /* Spacing after the item name */
+    margin-right: 5px; /* Spacing before checkboxes */
+}
+
+.atout-quantity-control label {
+    margin-right: 3px; /* Space between "Q:" and the input */
+    font-size: 0.9em; /* Optional: match checkbox label size */
+}
+
+.atout-quantity-input { /* Class for the quantity input field */
+    width: 40px; /* Adjust width as needed */
+    height: 24px; /* Fixed height for alignment */
+    text-align: center;
+    padding: 2px 4px; /* Adjusted padding */
+    border: 1px solid var(--theme-border-color); /* Use theme border */
+    border-radius: 4px; /* Use theme border-radius */
+    background: var(--theme-background-alt); /* Use theme background */
+}
+
+.atout-checkboxes {
+    display: flex;
+    flex-direction: row; /* Arrange checkboxes horizontally */
+    align-items: center; /* Vertically align items within this container */
+    /* margin-left: 10px; Spacing now handled by atout-quantity-control's margin-right */
+    margin-right: 10px;
+    gap: 10px; /* Space between the "Croquis" and "Memorized" labels */
+}
+
+.atout-checkboxes label {
+    font-size: 0.9em; /* Keep relative size */
+    color: var(--theme-text-color); /* Use theme text color */
+}
+/* Styles for Atout gallery in the right column */
+.atout-gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); /* Creates a responsive grid */
+    gap: 10px;
+    padding-top: 10px;
+}
+
+.atout-grid-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    position: relative; 
+    /* cursor: default; Removed, <a> tag will handle cursor */
+}
+
+/* Styles for the <a> tag acting as an image button */
+.atout-image-as-button {
+    display: block; /* Make the link a block element */
+    cursor: pointer;
+    border-radius: 4px; /* Rounded corners for the button look */
+    transition: transform 0.1s ease-in-out, box-shadow 0.15s ease-in-out;
+    margin-bottom: 5px; /* Space between image-button and name */
+}
+
+.atout-grid-image {
+    display: block; /* Ensure image behaves as a block within the link */
+    width: 60px;  /* Token-like size */
+    height: 60px; /* Token-like size */
+    border: 1px solid var(--theme-border-dark); /* Use theme border */
+    object-fit: cover; /* Ensures the image covers the area, might crop */
+    /* margin-bottom: 5px; Moved to .atout-image-as-button */
+    border-radius: 4px; /* Consistent border-radius */
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.2); /* Basic shadow for relief */
+    transition: box-shadow 0.15s ease-in-out; /* Smooth shadow transition */
+}
+
+.atout-image-as-button:hover .atout-grid-image {
+    box-shadow: 3px 3px 7px rgba(0,0,0,0.3), 0 0 5px rgba(0, 120, 255, 0.5); /* Enhanced shadow and glow on hover */
+}
+
+.atout-image-as-button:active {
+    transform: translateY(1px) translateX(1px); /* Slight press effect */
+}
+.atout-image-as-button:active .atout-grid-image {
+    box-shadow: 1px 1px 3px rgba(0,0,0,0.3); /* Reduced shadow on active */
+}
+
+.atout-grid-name {
+    color: var(--theme-text-color); /* Use theme text color */
+    font-size: 0.8em;
+    word-break: break-word; /* Prevents long names from breaking layout */
+    max-width: 100%;
+}
+
+/* General layout for the atouts section if needed */
+.atouts-layout {
+    display: flex;
+    gap: 20px; /* Space between the two columns */
+}
+
+.atouts-drop-column {
+    flex: 1; /* Takes 1/3 of the space */
+    /* Add other styling as needed, e.g., padding, border */
+}
+
+.atouts-display-column {
+    flex: 2; /* Takes 2/3 of the space */
+    /* Add other styling as needed, e.g., padding, border */
+}
+
+/* Styles for the Atout Item Sheet (Card View) */
+.atout-card-sheet {
+    display: flex;
+    flex-direction: column;
+    border: 2px solid var(--theme-primary-color); /* Use theme primary color border */
+    box-shadow: 0 0 15px var(--theme-primary-shadow); /* Use theme shadow */
+    background-color: var(--theme-background-light); /* Use theme background */
+    overflow: hidden;
+    font-family: "Signika", sans-serif; /* Consistent Foundry font */
+}
+
+.atout-card-header {
+    padding: 5px 8px;
+    background-color: rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid #ccc;
+    text-align: center; /* Keep centered */
+}
+
+.atout-card-header input[type="text"] {
+    width: 100%;
+    border: none;
+    background: transparent;
+    font-size: 1.1em;
+    font-weight: bold;
+    text-align: center;
+    color: var(--theme-text-color); /* Use theme text color */
+}
+
+.atout-card-main {
+    flex-grow: 1; /* Takes up available space */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+    overflow: hidden; /* Prevent image from overflowing */
+}
+
+.atout-card-image {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain; /* Scales image down to fit, preserving aspect ratio */
+    border: 0px solid var(--theme-border-color); /* Use theme border */
+    border-radius: 0px; /* Add border-radius */
+}
+
+ .atout-card-footer {
+    background-color: rgba(0, 0, 0, 0.05);
+    border-top: 1px solid #ccc;
+    padding: 0; /* Padding will be on content */
+    position: relative; /* For positioning the toggle button */
+}
+
+.atout-card-footer .footer-toggle {
+    text-align: center;
+    padding: 3px 0;
+    background-color: #070707;
+}
+
+.atout-card-footer .toggle-footer-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--theme-text-secondary); /* Use theme text color */
+    font-size: 0.9em;
+}
+.atout-card-footer .toggle-footer-btn:hover {
+    color: var(--theme-text-color); /* Use theme text color */
+}
+
+.atout-card-footer .footer-content {
+    padding: 12px 12px 8px; /* Increased top padding, L/R 12px, bottom 8px */
+    font-size: 12px; /* Set base font size for footer content */
+    border: 1px solid #4a5568; /* Adjusted border for dark background */
+    border-radius: 4px; /* Add border-radius */
+    background: #2c3e50; /* Darker background */
+    color: #ecf0f1; /* Lighter font color for contrast */
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.3); /* Adjusted inset shadow for dark background */
+}
+
+.atout-card-footer .form-group {
+    margin-bottom: 2px; /* Slightly increased margin for readability */
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap; /* Allow wrapping on small widths */
+}
+
+.atout-card-footer .footer-line-condensed {
+    width: 100%; /* Ensure it takes full width */
+    justify-content: space-between; /* Distribute space between Auteur and Croquis */
+    gap: 1px; /* Small gap between the two groups */
+}
+
+.atout-card-footer .form-group-inline {
+    display: flex;
+    align-items: center;
+}
+
+.atout-card-footer .form-group-inline label {
+    margin-right: 3px; /* Tighter label spacing for inline groups */
+    flex-shrink: 0;
+    color: #ecf0f1; /* Lighter font color for contrast */
+    font-weight: bold; /* Make labels bold */
+    font-size: 12px; /* Set label font size */
+}
+
+.atout-card-footer .form-group-inline .input-condensed {
+    flex-grow: 1; /* Allow input to take available space in its group */
+    min-width: 50px; /* Prevent it from becoming too small */
+    padding: 2px 4px; /* Compact padding */
+    border: 1px solid var(--theme-border-color); /* Use theme border */
+    border-radius: 3px; /* Use theme border-radius */
+    background: var(--theme-background-alt); /* Use theme background */
+    color: var(--theme-text-color); /* Use theme text color */
+    font-size: 12px; /* Set input font size */
+}
+
+.atout-card-footer .form-group label {
+    margin-right: 5px; /* Keep standard spacing for non-inline labels */
+    /* flex-basis: 90px; Removed, let flex handle it */
+    flex-basis: 90px; /* Adjust as needed for label width, slightly smaller */
+    flex-shrink: 0;
+}
+.atout-card-footer .form-group input[type="text"],
+.atout-card-footer .form-group textarea {
+    flex-grow: 1;
+    width: auto; /* Allow flex to control width, or set a specific width if needed */
+    padding: 4px 6px; /* Standard padding */
+    border: 1px solid var(--theme-border-color); /* Use theme border */
+    border-radius: 4px; /* Use theme border-radius */
+    background: var(--theme-background-alt); /* Use theme background */
+    color: var(--theme-text-color); /* Use theme text color */
+}
+.atout-card-footer .form-group-checkbox input[type="checkbox"] {
+    margin-left: 0; /* Align with other inputs if labels have fixed width */
+}
+
+/* --- Atout Style Variations (Applied via class on the sheet) --- */
+/* Example: Apply different filters based on the selected style */
+
+.actor.atout-style-style1 .atout-grid-image {
+    filter: grayscale(100%); /* Example: Black and white */
+}
+
+.actor.atout-style-style2 .atout-grid-image {
+    filter: sepia(100%); /* Example: Sepia tone */
+}
+
+.actor.atout-style-style3 .atout-grid-image {
+    border: 2px solid gold; /* Example: Gold border */
+    box-shadow: 0 0 5px gold;
+}
+
+/* Styles for Atout list in the left column */
+.atout-list-item-detailed {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px; /* Increased spacing */
+    padding: 8px 12px; /* Increased padding */
+    border: 1px solid var(--theme-border-color); /* Use theme border */
+    border-radius: 4px; /* Rounded corners */
+    background: var(--theme-background-light); /* Use theme background */
+    box-shadow: 0 1px 3px var(--theme-shadow-color, rgba(0,0,0,0.05)); /* Subtle shadow */
+}
+
+.atout-details {
+    flex-grow: 1;
+}
+
+.atout-details .item-name { /* Target the h4 within atout-details */
+    margin: 0; /* Reset margin for the name */
+}
+
+.atout-quantity-control {
+    display: flex;
+    align-items: center;
+    margin-left: 10px; /* Spacing after the item name */
+    margin-right: 5px; /* Spacing before checkboxes */
+}
+
+.atout-quantity-control label {
+    margin-right: 3px; /* Space between "Q:" and the input */
+    font-size: 0.9em; /* Optional: match checkbox label size */
+}
+
+.atout-quantity-input { /* Class for the quantity input field */
+    width: 40px; /* Adjust width as needed */
+    height: 24px; /* Fixed height for alignment */
+    text-align: center;
+    padding: 2px 4px; /* Adjusted padding */
+    border: 1px solid var(--theme-border-color); /* Use theme border */
+    border-radius: 4px; /* Use theme border-radius */
+    background: var(--theme-background-alt); /* Use theme background */
+}
+
+.atout-checkboxes {
+    display: flex;
+    flex-direction: row; /* Arrange checkboxes horizontally */
+    align-items: center; /* Vertically align items within this container */
+    /* margin-left: 10px; Spacing now handled by atout-quantity-control's margin-right */
+    margin-right: 10px;
+    gap: 10px; /* Space between the "Croquis" and "Memorized" labels */
+}
+
+.atout-checkboxes label {
+    font-size: 0.9em; /* Keep relative size */
+    color: var(--theme-text-color); /* Use theme text color */
+}
+/* Styles for Atout gallery in the right column */
+.atout-gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); /* Creates a responsive grid */
+    gap: 10px;
+    padding-top: 10px;
+}
+
+.atout-grid-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    position: relative; 
+    /* cursor: default; Removed, <a> tag will handle cursor */
+}
+
+/* Styles for the <a> tag acting as an image button */
+.atout-image-as-button {
+    display: block; /* Make the link a block element */
+    cursor: pointer;
+    border-radius: 4px; /* Rounded corners for the button look */
+    transition: transform 0.1s ease-in-out, box-shadow 0.15s ease-in-out;
+    margin-bottom: 5px; /* Space between image-button and name */
+}
+
+.atout-grid-image {
+    display: block; /* Ensure image behaves as a block within the link */
+    width: 60px;  /* Token-like size */
+    height: 60px; /* Token-like size */
+    border: 1px solid var(--theme-border-dark); /* Use theme border */
+    object-fit: cover; /* Ensures the image covers the area, might crop */
+    /* margin-bottom: 5px; Moved to .atout-image-as-button */
+    border-radius: 4px; /* Consistent border-radius */
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.2); /* Basic shadow for relief */
+    transition: box-shadow 0.15s ease-in-out; /* Smooth shadow transition */
+}
+
+.atout-image-as-button:hover .atout-grid-image {
+    box-shadow: 3px 3px 7px rgba(0,0,0,0.3), 0 0 5px rgba(0, 120, 255, 0.5); /* Enhanced shadow and glow on hover */
+}
+
+.atout-image-as-button:active {
+    transform: translateY(1px) translateX(1px); /* Slight press effect */
+}
+.atout-image-as-button:active .atout-grid-image {
+    box-shadow: 1px 1px 3px rgba(0,0,0,0.3); /* Reduced shadow on active */
+}
+
+.atout-grid-name {
+    color: var(--theme-text-color); /* Use theme text color */
+    font-size: 0.8em;
+    word-break: break-word; /* Prevents long names from breaking layout */
+    max-width: 100%;
+}
+
+/* General layout for the atouts section if needed */
+.atouts-layout {
+    display: flex;
+    gap: 20px; /* Space between the two columns */
+}
+
+.atouts-drop-column {
+    flex: 1; /* Takes 1/3 of the space */
+    /* Add other styling as needed, e.g., padding, border */
+}
+
+.atouts-display-column {
+    flex: 2; /* Takes 2/3 of the space */
+    /* Add other styling as needed, e.g., padding, border */
+}
+
+/* Styles for the Atout Item Sheet (Card View) */
+.atout-card-sheet {
+    display: flex;
+    flex-direction: column;
+    border: 2px solid var(--theme-primary-color); /* Use theme primary color border */
+    box-shadow: 0 0 15px var(--theme-primary-shadow); /* Use theme shadow */
+    background-color: var(--theme-background-light); /* Use theme background */
+    overflow: hidden;
+    font-family: "Signika", sans-serif; /* Consistent Foundry font */
+}
+
+.atout-card-header {
+    padding: 5px 8px;
+    background-color: rgba(0, 0, 0, 0.1);
+    border:none;
+    text-align: center; /* Keep centered */
+}
+
+.atout-card-header input[type="text"] {
+    width: 100%;
+    border: none;
+    background: black;
+    font-size: 1.2em;
+    font-weight: bold;
+    text-align: center;
+    color: var(--theme-text-secondary); /* Use theme text color */
+}
+
+.atout-card-main {
+    flex-grow: 1; /* Takes up available space */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* Adjust padding to create the "inset" for the atout-card-image
+       against the main sheet background (frameTrumX.jpg).
+       This padding effectively becomes the border or margin provided by the frame background. */
+    padding: 0px; /* Example: 20px padding. Adjust as needed for your frameTrumX.jpg designs. */
+    overflow: hidden; /* Prevent image from overflowing */
+    background-color: black;
+    position: relative; /* Useful if you ever need to absolutely position elements within this main area */
+}
+
+.atout-card-image {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain; /* Scales image down to fit, preserving aspect ratio */    
+}
+
+ .atout-card-footer {
+    background-color: rgba(0, 0, 0, 0.05);
+    border-top: 0px  #070707;
+    padding: 0; /* Padding will be on content */
+    position: relative; /* For positioning the toggle button */
+}
+
+.atout-card-footer .footer-toggle {
+    text-align: center;
+    padding: 0px 0;     /* Increased vertical spacing */
+}
+
+.atout-card-footer .toggle-footer-btn {
+    background-color: transparent; /* Remove default background */
+    border: none;                  /* Remove default border */
+    padding: 8px;                  /* Add some padding to make it easier to click and give space around the icon */
+    cursor: pointer;               /* Change cursor to indicate it's clickable */
+    color: var(--theme-text-secondary, #777); /* Set a base color for the icon, using theme variable with fallback */
+    font-size: 1.2em;              /* Adjusts the size of the FontAwesome icon. */
+    line-height: 1;                /* Helps with vertical alignment of the icon */
+    outline: none;                 /* Removes the default browser focus outline. Consider adding custom focus styles for accessibility. */
+    border-radius: 4px;            /* Optional: adds slightly rounded corners */
+    transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out; /* Smooth transitions */
+}
+
+.atout-card-footer .toggle-footer-btn:hover {
+    color: var(--theme-text-color, #333); /* Darken icon color on hover, using theme variable with fallback */
+    /* Optional: slight background on hover, using a hypothetical theme variable or a fixed color */
+    background-color: var(--theme-hover-background, #f0f0f0); 
+}
+
+.atout-card-footer .toggle-footer-btn:active {
+  color: var(--theme-text-active, #000); /* Darken icon further when clicked, using a hypothetical theme variable */
+  /* Optional: slight background on active */
+  background-color: var(--theme-active-background, #e0e0e0); 
+}
+
+/* Styles for the icon within the button */
+.atout-card-footer .toggle-footer-btn i.fas {
+  display: block; /* Can help with consistent rendering and alignment */
+  transition: transform 0.2s ease-in-out; /* Smooth transition for rotation */
+}
+
+/* If you add an 'active' or 'open' class to the button via JavaScript when the footer is expanded */
+.atout-card-footer .toggle-footer-btn.active i.fas {
+  transform: rotate(180deg); /* Rotates the chevron down to up */
+}
+
+.atout-card-footer .footer-content {
+    padding: 12px 12px 8px; /* Increased top padding, L/R 12px, bottom 8px */
+    font-size: 12px; /* Set base font size for footer content */
+    border: none;
+    background: #2c3e50; /* Darker background */
+    color: #ecf0f1; /* Lighter font color for contrast */
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.3); /* Adjusted inset shadow for dark background */
+}
+
+.atout-card-footer .form-group {
+    margin-bottom: 5px; /* Slightly increased margin for readability */
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap; /* Allow wrapping on small widths */
+}
+
+.atout-card-footer .footer-line-condensed {
+    width: 100%; /* Ensure it takes full width */
+    justify-content: space-between; /* Distribute space between Auteur and Croquis */
+    gap: 5px; /* Small gap between the two groups */
+}
+
+.atout-card-footer .form-group-inline {
+    display: flex;
+    align-items: center;
+}
+
+.atout-card-footer .form-group-inline label {
+    margin-right: 3px; /* Tighter label spacing for inline groups */
+    flex-shrink: 0;
+    color: #ecf0f1; /* Lighter font color for contrast */
+    font-weight: bold; /* Make labels bold */
+    font-size: 12px; /* Set label font size */
+}
+
+.atout-card-footer .form-group-inline .input-condensed {
+    flex-grow: 1; /* Allow input to take available space in its group */
+    min-width: 50px; /* Prevent it from becoming too small */
+    padding: 2px 4px; /* Compact padding */
+    border: 1px solid var(--theme-border-color); /* Use theme border */
+    border-radius: 3px; /* Use theme border-radius */
+    background: var(--theme-background-alt); /* Use theme background */
+    color: var(--theme-text-color); /* Use theme text color */
+    font-size: 12px; /* Set input font size */
+}
+
+.atout-card-footer .form-group label {
+    margin-right: 5px; /* Keep standard spacing for non-inline labels */
+    /* flex-basis: 90px; Removed, let flex handle it */
+    flex-basis: 90px; /* Adjust as needed for label width, slightly smaller */
+    flex-shrink: 0;
+}
+.atout-card-footer .form-group input[type="text"],
+.atout-card-footer .form-group textarea {
+    flex-grow: 1;
+    width: auto; /* Allow flex to control width, or set a specific width if needed */
+    padding: 4px 6px; /* Standard padding */
+    border: 1px solid var(--theme-border-color); /* Use theme border */
+    border-radius: 4px; /* Use theme border-radius */
+    background: var(--theme-background-alt); /* Use theme background */
+    color: var(--theme-text-color); /* Use theme text color */
+}
+.atout-card-footer .form-group-checkbox input[type="checkbox"] {
+    margin-left: 0; /* Align with other inputs if labels have fixed width */
+}
+
+/* --- Atout Style Variations (Applied via class on the Actor Sheet and Item Sheet) --- */
+
+/* Styles for the Atout Item Sheet background */
+.item-sheet.item.atout {
+    /* Default background or base styles */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/* Apply background based on the actor's selected atout style (when no item override) */
+/* Map styleX to frameTrumX.jpg for X from 1 to 20 */
+.item-sheet.item.atout.atout-style-style1 { background-image: url("../../systems/ambre/assets/skin/trumps/frameTrump1.jpg"); }
+.item-sheet.item.atout.atout-style-style2 { background-image: url("../../systems/ambre/assets/skin/trumps/frameTrump2.jpg"); }
+.item-sheet.item.atout.atout-style-style3 { background-image: url("../../systems/ambre/assets/skin/trumps/frameTrump3.jpg"); }
+.item-sheet.item.atout.atout-style-style4 { background-image: url("../../systems/ambre/assets/skin/trumps/frameTrump4.jpg"); }
+.item-sheet.item.atout.atout-style-style5 { background-image: url("../../systems/ambre/assets/skin/trumps/frameTrump5.jpg"); }
+.item-sheet.item.atout.atout-style-style6 { background-image: url("../../systems/ambre/assets/skin/trumps/frameTrump6.jpg"); }
+.item-sheet.item.atout.atout-style-style7 { background-image: url("../../systems/ambre/assets/skin/trumps/frameTrump7.jpg"); }
+.item-sheet.item.atout.atout-style-style8 { background-image: url("../../systems/ambre/assets/skin/trumps/frameTrump8.jpg"); }
+.item-sheet.item.atout.atout-style-style9 { background-image: url("../../systems/ambre/assets/skin/trumps/frameTrump9.jpg"); }
+.item-sheet.item.atout.atout-style-style10 { background-image: url("../../systems/ambre/assets/skin/trumps/frameTrump10.jpg"); }
+.item-sheet.item.atout.atout-style-style11 { background-image: url("../../systems/ambre/assets/skin/trumps/frameTrump11.jpg"); }
+.item-sheet.item.atout.atout-style-style12 { background-image: url("../../systems/ambre/assets/skin/trumps/frameTrump12.jpg"); }
+.item-sheet.item.atout.atout-style-style13 { background-image: url("../../systems/ambre/assets/skin/trumps/frameTrump13.jpg"); }
+.item-sheet.item.atout.atout-style-style14 { background-image: url("../../systems/ambre/assets/skin/trumps/frameTrump14.jpg"); }
+.item-sheet.item.atout.atout-style-style15 { background-image: url("../../systems/ambre/assets/skin/trumps/frameTrump15.jpg"); }
+.item-sheet.item.atout.atout-style-style16 { background-image: url("../../systems/ambre/assets/skin/trumps/frameTrump16.jpg"); }
+.item-sheet.item.atout.atout-style-style17 { background-image: url("../../systems/ambre/assets/skin/trumps/frameTrump17.jpg"); }
+.item-sheet.item.atout.atout-style-style18 { background-image: url("../../systems/ambre/assets/skin/trumps/frameTrump18.jpg"); }
+.item-sheet.item.atout.atout-style-style19 { background-image: url("../../systems/ambre/assets/skin/trumps/frameTrump19.jpg"); }
+.item-sheet.item.atout.atout-style-style20 { background-image: url("../../systems/ambre/assets/skin/trumps/frameTrump20.jpg"); }
+
+/* You can add similar rules here for item-specific overrides if you add system.overrideAtoutStyle to the item data */
+/* Example:
+.item-sheet.item.atout.atout-style-override-styleA { background-image: url("../../systems/ambre/assets/skin/trumps/frameTrum21.jpg"); }
+*/
+
+/* ... Add rules for style4 through style20 ... */
+/* You will need to define the specific CSS properties for each style */
+
+/* Example for style4 */
+/*
+.actor.atout-style-style4 .atout-grid-image {
+    filter: hue-rotate(90deg);
+}
+*/
+
+/* Example for style5 */
+/*
+.actor.atout-style-style5 .atout-grid-image {
+    border: 2px dashed red;
+}
+*/

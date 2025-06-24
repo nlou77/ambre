@@ -1,0 +1,64 @@
+<form class="rune-sheet {{cssClass}}" autocomplete="off">
+    <header class="sheet-header">
+        <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}"/>
+        <div class="header-fields">
+            <h1 class="charname"><input name="name" type="text" value="{{item.name}}" placeholder="Nom de la Rune"/></h1>
+        </div>
+    </header>
+
+    {{!-- Sheet Tab Navigation --}}
+    <nav class="sheet-tabs tabs" data-group="primary">
+        <a class="item active" data-tab="description">Description</a>
+        <a class="item" data-tab="details">Détails</a>
+    </nav>
+
+    {{!-- Sheet Body --}}
+    <section class="sheet-body">
+
+        <div class="tab description active" data-group="primary" data-tab="description">
+            {{!-- This is the rich text editor, same as in sortileges.hbs --}}
+            {{editor system.description target="system.description" button=true owner=owner editable=editable}}
+        </div>
+
+        <div class="tab details" data-group="primary" data-tab="details">
+            <div class="form-group">
+                <label>Exemplaires</label>
+                <input type="number" name="system.exemplaires" value="{{system.exemplaires}}" data-dtype="Number"/>
+            </div>
+
+            <div class="dots-container">
+                {{#each dots}}
+                <a class="dot {{#if this.used}}used{{/if}}" data-index="{{@index}}"></a>
+                {{/each}}
+            </div>
+
+            <hr/>
+
+            <div class="form-group drop-target sortilege-drop-target">
+                <label>Sortilège Lié</label>
+                {{#if linkedSortilege}}
+                    <div class="linked-item-display">
+                        <img src="{{linkedSortilege.img}}" width="24" height="24"/>
+                        <a class="clickable-link" data-item-uuid="{{linkedSortilege.uuid}}">{{linkedSortilege.name}}</a>
+                        <a class="unlink-sortilege"><i class="fas fa-unlink"></i></a>
+                    </div>
+                {{else}}
+                    <div class="drop-instruction">Déposez un Sortilège ici</div>
+                {{/if}}
+            </div>
+
+            <div class="form-group drop-target mot-pouvoir-drop-target">
+                <label>Mot de Pouvoir Lié</label>
+                {{#if linkedMotPouvoir}}
+                    <div class="linked-item-display">
+                        <img src="{{linkedMotPouvoir.img}}" width="24" height="24"/>
+                        <a class="clickable-link" data-item-uuid="{{linkedMotPouvoir.uuid}}">{{linkedMotPouvoir.name}}</a>
+                        <a class="unlink-mot-pouvoir"><i class="fas fa-unlink"></i></a>
+                    </div>
+                {{else}}
+                    <div class="drop-instruction">Déposez un Mot de Pouvoir ici</div>
+                {{/if}}
+            </div>
+        </div>
+    </section>
+</form>

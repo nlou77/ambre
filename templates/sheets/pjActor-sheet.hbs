@@ -1,0 +1,428 @@
+<form class="{{cssClass}}" autocomplete="off">
+    <header class="sheet-header">
+        <img class="header-banner" src="systems/ambre/assets/artwork/banners/banner{{system.headerBannerNumber}}.png" alt="Header Banner"/>
+        <h1><input name="name" type="text" value="{{actor.name}}" placeholder="{{ localize 'Name' }}"/></h1>
+    </header>
+    
+    <div class="horizontal-navigation">
+        <nav class="sheet-navigation" data-group="primary">
+            <a class="sheet-navigation-tab active" data-tab="description"><img src="systems/ambre/assets/icons/icon_id.png" alt="Description Icon" class="tab-icon"/>Description</a>
+            <a class="sheet-navigation-tab" data-tab="attributs"><img src="systems/ambre/assets/icons/icon_attributs.png" alt="Caractéristiques Icon" class="tab-icon"/>Attributs</a>
+            <a class="sheet-navigation-tab" data-tab="pouvoirs"><img src="systems/ambre/assets/icons/icon_pouvoirs.png" alt="Pouvoirs Icon" class="tab-icon"/>Pouvoirs</a>
+            <a class="sheet-navigation-tab" data-tab="possessions"><img src="systems/ambre/assets/icons/icon_inventaire.png" alt="Possessions Icon" class="tab-icon"/>Possessions</a>
+            <a class="sheet-navigation-tab" data-tab="options"><img src="systems/ambre/assets/icons/icon_settings.png" alt="Options Icon" class="tab-icon"/>Options</a>
+        </nav>
+    </div>
+    <div class="sheet-body horizontal-scroll">
+        <div class="tab active" data-group="primary" data-tab="description">
+            {{> "systems/ambre/templates/sheets/actor/parts/description.hbs"}}
+        </div>
+        <div class="tab" data-group="primary" data-tab="attributs">
+            {{> "systems/ambre/templates/sheets/actor/parts/caracteristiques.hbs"}}
+
+            <div class="decorum-separator-container">
+                <img src="systems/ambre/assets/skin/frames/separator{{system.decorumNumber}}.png" class="decorum-separator" alt="Separator"/>
+            </div>
+
+            {{> "systems/ambre/templates/sheets/actor/parts/avantages.hbs"}}
+
+            <div class="decorum-separator-container">
+                <img src="systems/ambre/assets/skin/frames/separator{{system.decorumNumber}}.png" class="decorum-separator" alt="Separator"/>
+            </div>
+
+            {{> "systems/ambre/templates/sheets/actor/parts/competence.hbs"}}
+        </div>
+        <div class="tab" data-group="primary" data-tab="pouvoirs">
+            <div class="sheet-content">
+                {{!-- Include the Talents Spécifiques partial once, before listing individual powers --}}
+                {{!-- It needs the full pouvoirData object to check talents for all powers --}}
+                {{> "systems/ambre/templates/partials/talentsSpecifiques.hbs" pouvoirData=pouvoirData sortedTalentSections=sortedTalentSections}}
+                <div class="decorum-separator-container">
+                    <img src="systems/ambre/assets/skin/frames/separator{{system.decorumNumber}}.png" class="decorum-separator" alt="Separator"/>
+                </div>
+                <div class="pouvoirs-container-draggable">
+                    {{#each pouvoirsList as |p|}}
+                        {{!-- Check if this specific pouvoir (p.type) is enabled in system.options --}}
+                        {{#if (lookup ../system.options p.type)}}
+                            <div class="pouvoir-block-draggable" data-pouvoir-key="{{p.type}}" draggable="true">
+                                {{> "systems/ambre/templates/partials/pouvoir.hbs" pouvoirType=p.type pouvoirLabel=p.label pouvoirData=p.data}}
+                            </div>
+                        {{/if}}
+                    {{/each}}
+                </div>
+            </div>
+        </div>
+        <div class="tab" data-group="primary" data-tab="possessions">
+            <div class="possessions-sections-container">
+                {{#each sortedPossessionsSections as |section|}}
+                <div class="possessions-section-draggable" draggable="true" data-section-id="{{section.id}}">
+                    <h4 class="clickable-tab-title" data-toggles="possessions-{{section.id}}-content">{{section.label}}</h4>
+                    <div id="possessions-{{section.id}}-content" class="toggleable-tab-content">
+                        <div class="sheet-content">
+                            {{!-- Pass the entire parent context (..) to the partial. --}}
+                            {{!-- The partial will have access to system, owner, editable, as well as possessedArtefacts, etc. --}}
+                            {{> (lookup ../sectionPartials section.id) ..}}
+                        </div>
+                    </div>
+                </div>
+                {{/each}}
+            </div>
+        </div>
+
+        <div class="tab" data-group="primary" data-tab="options"> {{!-- Options Tab (Renamed from Creation) --}}
+            <h4 class="clickable-tab-title" data-toggles="settings-main-content">Paramétrage</h4>
+            <div id="settings-main-content" class="toggleable-tab-content">
+                <div class="sheet-content">
+                    
+                    <div class="two-column-layout">
+                        <div class="column"> {{!-- Ceci est votre colonne de gauche qui s'ajustera au contenu --}}
+                            <fieldset class="form-group capacites-display-settings">
+                            <legend>Affichage des Capacités</legend>
+                                <div class="form-fields">
+                                    <label class="radio-label">
+                                        <input type="radio" name="system.capacitesDisplayMode" value="all" {{checked system.capacitesDisplayMode "all"}} data-dtype="String"/>
+                                        <span>Toutes les capacités des pouvoirs acquis</span>
+                                    </label>
+                                    <label class="radio-label">
+                                        <input type="radio" name="system.capacitesDisplayMode" value="above_level" {{checked system.capacitesDisplayMode "above_level"}} data-dtype="String"/>
+                                        <span>Aucune capacité de niveau supérieur au niveau de pouvoir actuel</span>
+                                    </label>
+                                    <label class="radio-label">
+                                        <input type="radio" name="system.capacitesDisplayMode" value="next_level" {{checked system.capacitesDisplayMode "next_level"}} data-dtype="String"/>
+                                        <span>Seule la prochaine capacité de niveau supérieur au niveau actuel</span>
+                                    </label>
+                                </div>
+                            </fieldset>
+                        </div>
+                        
+                        <div class="column">
+                            {{!-- Banner Selection Controls --}}
+                            <fieldset class="form-group capacites-display-settings">
+                                <legend>Bannière d'En-tête</legend>
+                                <div class="banner-controls" style="display: flex; direction: row;">
+                                    <button type="button" class="banner-control prev-banner" title="Bannière précédente"><i class="fas fa-arrow-left"></i></button>
+                                    <span class="banner-number-display" style="width: 150px; text-align: center;">Bannière {{system.headerBannerNumber}}</span>
+                                    <button type="button" class="banner-control next-banner" title="Bannière suivante"><i class="fas fa-arrow-right"></i></button>
+                                </div>
+                            </fieldset>
+
+                            {{!-- Decorum Selection Controls --}}
+                            <fieldset class="form-group capacites-display-settings">
+                                <legend>Décorum</legend>
+                                <div class="decorum-controls" style="display: flex; direction: row;">
+                                    <button type="button" class="decorum-control prev-decorum" title="Décorum précédent"><i class="fas fa-arrow-left"></i></button>
+                                    <span class="decorum-number-display" style="width: 150px; text-align: center;">Décorum {{system.decorumNumber}}</span>
+                                    <button type="button" class="decorum-control next-decorum" title="Décorum suivant"><i class="fas fa-arrow-right"></i></button>
+                                </div>
+                            </fieldset>
+                            
+                            {{!-- Counter Icons Selection Controls --}}
+                            <fieldset class="form-group capacites-display-settings">
+                                <legend>Icônes des Compteurs</legend>
+                                <div class="counter-icon-controls">
+                                    <div class="counter-icon-row">
+                                        <label>Vie:</label>
+                                        <button type="button" class="counter-icon-control prev-icon" data-counter-type="health" title="Icône précédente"><i class="fas fa-arrow-left"></i></button>
+                                        <span class="counter-icon-number-display">Thème {{system.healthIconTheme}}</span>
+                                        <button type="button" class="counter-icon-control next-icon" data-counter-type="health" title="Icône suivante"><i class="fas fa-arrow-right"></i></button>
+                                    </div>
+                                    <div class="counter-icon-row">
+                                        <label>Réserve de Vie:</label>
+                                        <button type="button" class="counter-icon-control prev-icon" data-counter-type="healthReserve" title="Icône précédente"><i class="fas fa-arrow-left"></i></button>
+                                        <span class="counter-icon-number-display">Thème {{system.healthReserveIconTheme}}</span>
+                                        <button type="button" class="counter-icon-control next-icon" data-counter-type="healthReserve" title="Icône suivante"><i class="fas fa-arrow-right"></i></button>
+                                    </div>
+                                    <div class="counter-icon-row">
+                                        <label>Énergie:</label>
+                                        <button type="button" class="counter-icon-control prev-icon" data-counter-type="energy" title="Icône précédente"><i class="fas fa-arrow-left"></i></button>
+                                        <span class="counter-icon-number-display">Thème {{system.energyIconTheme}}</span>
+                                        <button type="button" class="counter-icon-control next-icon" data-counter-type="energy" title="Icône suivante"><i class="fas fa-arrow-right"></i></button>
+                                    </div>
+                                    <div class="counter-icon-row">
+                                        <label>Réserve d'Énergie:</label>
+                                        <button type="button" class="counter-icon-control prev-icon" data-counter-type="energyReserve" title="Icône précédente"><i class="fas fa-arrow-left"></i></button>
+                                        <span class="counter-icon-number-display">Thème {{system.energyReserveIconTheme}}</span>
+                                        <button type="button" class="counter-icon-control next-icon" data-counter-type="energyReserve" title="Icône suivante"><i class="fas fa-arrow-right"></i></button>
+                                    </div>
+                                    <div class="form-group description-field-line" style="margin-top: 10px;">
+                                        <label style="flex-basis: auto; flex-grow: 1; text-align: center; font-style: italic; font-size: 0.9em;">
+                                            (Thème 00 = Pas d'image)
+                                        </label>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </div>
+                    
+                    {{> "systems/ambre/templates/sheets/actor/parts/accespouvoirs.hbs"}}
+                    {{> "systems/ambre/templates/sheets/actor/parts/theme.hbs"}}
+                </div>
+            </div>
+            
+            <h4 class="clickable-tab-title" data-toggles="creation-main-content">Création de personnage</h4>
+            
+            <div id="creation-main-content" class="toggleable-tab-content">
+                    <div class="sheet-content">
+                    <div class="three-column-layout creation-layout">
+                        <!-- Left Column -->
+                        <div class="left-column">
+                            <!-- Contributions Block -->
+                            <div class="description-group-block">
+                                <h4 class="description-group-title">Contributions</h4>
+                                <div class="description-fields-list">
+                                     <div class="form-group description-field-line">
+                                        <label>Total</label>
+                                        <input name="system.totalContributionsDisplay" type="number" value="{{system.totalContributionsDisplay}}" data-dtype="Number" readonly class="calculated-field"/>
+                                     </div>
+                                     <div class="form-group description-field-line">
+                                        <input id="system.contribution1_text" name="system.contribution1_text" type="text" value="{{system.contribution1_text}}" data-dtype="String" />
+                                        <input id="system.contribution1" name="system.contribution1" type="number" value="{{system.contribution1}}" style="width: 100px;" data-dtype="Number" class="contribution-input"/>
+                                     </div>
+                                     <div class="form-group description-field-line">
+                                        <input id="system.contribution2_text" name="system.contribution2_text" type="text" value="{{system.contribution2_text}}" data-dtype="String" />
+                                        <input id="system.contribution2" name="system.contribution2" type="number" value="{{system.contribution2}}" style="width: 90px;" data-dtype="Number" class="contribution-input"/>
+                                     </div>
+                                     <div class="form-group description-field-line">
+                                        <input id="system.contribution3_text" name="system.contribution3_text" type="text" value="{{system.contribution3_text}}" data-dtype="String" />
+                                        <input id="system.contribution3" name="system.contribution3" type="number" value="{{system.contribution3}}" style="width: 120px;" data-dtype="Number" class="contribution-input"/>
+                                     </div>
+                                </div>
+                            </div>
+                            <!-- Allies Block -->
+                            <div class="description-group-block">
+                                <h4 class="description-group-title">Allié(s)</h4>
+                                <div class="description-fields-list">
+                                    <div class="form-group description-field-line">
+                                        <label>Type</label>
+                                        <select name="system.allieType" data-dtype="String">
+                                            <option value="">-- Choisissez un type --</option>
+                                            <option value="domestique_1" {{#if (eq system.allieType "domestique_1")}}selected{{/if}}>Domestique (1)</option>
+                                            <option value="domestique_2" {{#if (eq system.allieType "domestique_2")}}selected{{/if}}>Domestique (2)</option>
+                                            <option value="diplomate_or_3" {{#if (eq system.allieType "diplomate_or_3")}}selected{{/if}}>Diplomate du Cercle d'Or (3)</option>
+                                            <option value="diplomate_or_4" {{#if (eq system.allieType "diplomate_or_4")}}selected{{/if}}>Diplomate du Cercle d'Or (4)</option>
+                                            <option value="diplomate_noir_5" {{#if (eq system.allieType "diplomate_noir_5")}}selected{{/if}}>Diplomate du Cercle Noir (5)</option>
+                                            <option value="diplomate_noir_6" {{#if (eq system.allieType "diplomate_noir_6")}}selected{{/if}}>Diplomate du Cercle Noir (6)</option>
+                                            <option value="cousin_7" {{#if (eq system.allieType "cousin_7")}}selected{{/if}}>Cousin ou Cousine (7)</option>
+                                            <option value="cousin_8" {{#if (eq system.allieType "cousin_8")}}selected{{/if}}>Cousin ou Cousine (8)</option>
+                                            <option value="oncle_9" {{#if (eq system.allieType "oncle_9")}}selected{{/if}}>Oncle ou Tante (9)</option>
+                                            <option value="oncle_10" {{#if (eq system.allieType "oncle_10")}}selected{{/if}}>Oncle ou Tante (10)</option>
+                                            <option value="fratrie_11" {{#if (eq system.allieType "fratrie_11")}}selected{{/if}}>Une Fratrie de 1ère génération (11)</option>
+                                            <option value="fratrie_12" {{#if (eq system.allieType "fratrie_12")}}selected{{/if}}>Une Fratrie de 1ère génération (12)</option>
+                                            <option value="conseil_chaos_13" {{#if (eq system.allieType "conseil_chaos_13")}}selected{{/if}}>Membre du Conseil des Cours du Chaos (13)</option>
+                                            <option value="conseil_chaos_14" {{#if (eq system.allieType "conseil_chaos_14")}}selected{{/if}}>Membre du Conseil des Cours du Chaos (14)</option>
+                                            <option value="conseil_chaos_15" {{#if (eq system.allieType "conseil_chaos_15")}}selected{{/if}}>Membre du Conseil des Cours du Chaos (15)</option>
+                                        </select>
+                                    </div>
+                                     <div class="form-group description-field-line">
+                                        <label>Description</label>
+                                        <input name="system.allies" type="text" value="{{system.allies}}" data-dtype="String"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Enemies Block -->
+                            <div class="description-group-block">
+                                <h4 class="description-group-title">Ennemi(s)</h4>
+                                <div class="description-fields-list">
+                                    <div class="form-group description-field-line">
+                                        <label>Type</label>
+                                        <select name="system.ennemiType" data-dtype="String">
+                                            <option value="">-- Choisissez un type --</option>
+                                            <option value="domestique_1" {{#if (eq system.ennemiType "domestique_1")}}selected{{/if}}>Domestique (1)</option>
+                                            <option value="domestique_2" {{#if (eq system.ennemiType "domestique_2")}}selected{{/if}}>Domestique (2)</option>
+                                            <option value="diplomate_noir_3" {{#if (eq system.ennemiType "diplomate_noir_3")}}selected{{/if}}>Diplomate du Cercle Noir (3)</option>
+                                            <option value="diplomate_noir_4" {{#if (eq system.ennemiType "diplomate_noir_4")}}selected{{/if}}>Diplomate du Cercle Noir (4)</option>
+                                            <option value="diplomate_or_5" {{#if (eq system.ennemiType "diplomate_or_5")}}selected{{/if}}>Diplomate du Cercle d'Or (5)</option>
+                                            <option value="diplomate_or_6" {{#if (eq system.ennemiType "diplomate_or_6")}}selected{{/if}}>Diplomate du Cercle d'Or (6)</option>
+                                            <option value="cousin_7" {{#if (eq system.ennemiType "cousin_7")}}selected{{/if}}>Cousin ou Cousine (7)</option>
+                                            <option value="cousin_8" {{#if (eq system.ennemiType "cousin_8")}}selected{{/if}}>Cousin ou Cousine (8)</option>
+                                            <option value="conseil_chaos_9" {{#if (eq system.ennemiType "conseil_chaos_9")}}selected{{/if}}>Membre du Conseil des Cours du Chaos  (9)</option>
+                                            <option value="conseil_chaos_10" {{#if (eq system.ennemiType "conseil_chaos_10")}}selected{{/if}}>Membre du Conseil des Cours du Chaos (10)</option>
+                                            <option value="oncle_11" {{#if (eq system.ennemiType "oncle_11")}}selected{{/if}}>Oncle ou Tante (11)</option>
+                                            <option value="oncle_12" {{#if (eq system.ennemiType "oncle_12")}}selected{{/if}}>Oncle ou Tante (12)</option>
+                                            <option value="fratrie_13" {{#if (eq system.ennemiType "fratrie_13")}}selected{{/if}}>Une Fratrie de 1ère génération (13)</option>
+                                            <option value="fratrie_14" {{#if (eq system.ennemiType "fratrie_14")}}selected{{/if}}>Une Fratrie de 1ère génération (14)</option>
+                                            <option value="fratrie_15" {{#if (eq system.ennemiType "fratrie_15")}}selected{{/if}}>Une Fratrie de 1ère génération (15)</option>
+                                        </select>
+                                    </div>
+                                     <div class="form-group description-field-line">
+                                        <label>Description</label>
+                                        <input name="system.ennemis" type="text" value="{{system.ennemis}}" data-dtype="String"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Weakness Block -->
+                            <div class="description-group-block">
+                                <h4 class="description-group-title">Point Faible</h4>
+                                <div class="description-fields-list">
+                                     <div class="form-group description-field-line">
+                                        <input name="system.pointfaible" type="text" value="{{system.pointfaible}}" data-dtype="String" class="contribution-input"/>
+                                        <input name="system.ptspointfaible" type="number" value="{{system.ptspointfaible}}" data-dtype="Number" class="contribution-input" style="width: 80px;"/>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                        
+                        <div class="middle-column">
+                            <!-- Récapitulatif des Points Block -->
+                            <div class="description-group-block">
+                                <h4 class="description-group-title">Récapitulatif des Points</h4>
+                                <div class="description-fields-list">
+                                    <div class="form-group description-field-line">
+                                        <label>Caractéristiques</label>
+                                        <input name="system.creation.ptscaracteristiques" type="number" value="{{system.creation.ptscaracteristiques}}" data-dtype="Number" readonly class="calculated-field"/>
+                                    </div>
+                                    <div class="form-group description-field-line">
+                                        <label>Compétences</label>
+                                        <input name="system.creation.ptscompetences" type="number" value="{{system.creation.ptscompetences}}" data-dtype="Number" readonly class="calculated-field"/>
+                                    </div>
+                                    <div class="form-group description-field-line">
+                                        <label>Karma</label>
+                                        <input name="system.ptskarma" type="number" value="{{system.ptskarma}}" data-dtype="Number" readonly class="calculated-field"/>
+                                    </div>
+                                    <div class="form-group description-field-line">
+                                        <label>Artefacts</label>
+                                        <input name="system.creation.ptsartefacts" type="number" value="{{system.creation.ptsartefacts}}" data-dtype="Number" readonly class="calculated-field"/>
+                                    </div>
+                                    <div class="form-group description-field-line">
+                                        <label>Ombres</label>
+                                        <input name="system.creation.ptsombres" type="number" value="{{system.creation.ptsombres}}" data-dtype="Number" readonly class="calculated-field"/>
+                                    </div>
+                                    <div class="form-group description-field-line">
+                                        <label>Créatures</label>
+                                        <input name="system.creation.ptscreatures" type="number" value="{{system.creation.ptscreatures}}" data-dtype="Number" readonly class="calculated-field"/>
+                                    </div>
+                                    <div class="form-group description-field-line">
+                                        <label>Points d'Allié</label>
+                                        <input name="system.creation.allies_valeur" type="number" value="{{system.creation.allies_valeur}}" data-dtype="Number" readonly class="calculated-field"/>
+                                    </div>
+                                    <div class="form-group description-field-line">
+                                        <label>Points d'Ennemi</label>
+                                        <input name="system.creation.ennemis_valeur" type="number" value="{{system.creation.ennemis_valeur}}" data-dtype="Number" readonly class="calculated-field"/>
+                                    </div>
+                                    <div class="form-group description-field-line">
+                                        <label>Points de Contribution</label>
+                                        <input name="system.totalContributionsDisplay" type="number" value="{{system.totalContributionsDisplay}}" data-dtype="Number" readonly class="calculated-field"/>
+                                    </div>
+                                    <div class="form-group description-field-line">
+                                        <label>Points de Point Faible</label>
+                                        <input name="system.creation.ptspointfaible" type="number" value="{{system.creation.ptspointfaible}}" data-dtype="Number" readonly class="calculated-field"/>
+                                    </div>                            
+                                </div>
+                            </div>
+
+                            <!-- Détail des Points de Pouvoirs Block -->
+                            <div class="description-group-block">
+                                <h4 class="description-group-title">Détail des Points de Pouvoirs</h4>
+                                <div class="description-fields-list">
+                                    <div class="form-group description-field-line"> {{!-- This line is for the total Pouvoirs points --}}
+                                        <label>Total Pouvoirs</label>
+                                        <input name="system.creation.ptspouvoirs" type="number" value="{{system.creation.ptspouvoirs}}" data-dtype="Number" readonly class="calculated-field"/>
+                                    </div>
+                                    {{!-- Individual Pouvoir Points --}}
+                                    <div class="form-group description-field-line">
+                                    {{#if system.options.marelle}}
+                                        <label>Marelle</label>
+                                        <input name="system.ptsmarelle" type="number" value="{{system.ptsmarelle}}" readonly data-dtype="Number" class="calculated-field"/>
+                                    {{/if}}
+                                </div>
+                                    <div class="form-group description-field-line">
+                                    {{#if system.options.logrus}}
+                                        <label>Logrus</label>
+                                        <input name="system.ptslogrus" type="number" value="{{system.ptslogrus}}" readonly data-dtype="Number" class="calculated-field"/>
+                                    {{/if}}
+                                </div>
+                                    <div class="form-group description-field-line">
+                                    {{#if system.options.atouts}}
+                                        <label>Atouts</label>
+                                        <input name="system.ptsatouts" type="number" value="{{system.ptsatouts}}" readonly data-dtype="Number" class="calculated-field"/>
+                                    {{/if}}
+                                </div>
+                                    <div class="form-group description-field-line">
+                                    {{#if system.options.metamorphose}}
+                                        <label>Métamorphose</label>
+                                        <input name="system.ptsmetamorphose" type="number" value="{{system.ptsmetamorphose}}" data-dtype="Number" class="calculated-field"/>
+                                    {{/if}}
+                                </div>
+                                    <div class="form-group description-field-line">
+                                    {{#if system.options.pentacre}}
+                                        <label>Pentacre</label>
+                                        <input name="system.ptspentacre" type="number" value="{{system.ptspentacre}}" data-dtype="Number" class="calculated-field"/>
+                                    {{/if}}
+                                </div>
+                                    <div class="form-group description-field-line">
+                                    {{#if system.options.coeurflamme}}
+                                        <label>Coeur-Flamme</label>
+                                        <input name="system.ptscoeurflamme" type="number" value="{{system.ptscoeurflamme}}" data-dtype="Number" class="calculated-field"/>
+                                    {{/if}}
+                                </div>
+                                    <div class="form-group description-field-line">
+                                    {{#if system.options.orbochromat}}
+                                        <label>Orbochromat</label>
+                                        <input name="system.ptsorbochromat" type="number" value="{{system.ptsorbochromat}}" data-dtype="Number" class="calculated-field"/>
+                                    {{/if}}
+                                </div>
+                                    <div class="form-group description-field-line">
+                                    {{#if system.options.abreuvoir}}
+                                        <label>Abreuvoir</label>
+                                        <input name="system.ptsabreuvoir" type="number" value="{{system.ptsabreuvoir}}" data-dtype="Number" class="calculated-field"/>
+                                    {{/if}}
+                                </div>
+                                    <div class="form-group description-field-line">
+                                    {{#if system.options.harmonium}}
+                                        <label>Harmonium</label>
+                                        <input name="system.ptsharmonium" type="number" value="{{system.ptsharmonium}}" data-dtype="Number" class="calculated-field"/>
+                                    {{/if}}
+                                </div>
+                                    <div class="form-group description-field-line">
+                                    {{#if system.options.chimerion}}
+                                        <label>Chimerion</label>
+                                        <input name="system.ptschimerion" type="number" value="{{system.ptschimerion}}" data-dtype="Number" class="calculated-field"/>
+                                    {{/if}}
+                                </div>
+                                    <div class="form-group description-field-line">
+                                    {{#if system.options.sabliers}}
+                                        <label>Sabliers d'Ujuhe</label>
+                                        <input name="system.ptssabliers" type="number" value="{{system.ptssabliers}}" data-dtype="Number" class="calculated-field"/>
+                                    {{/if}}
+                                </div>
+                                    <div class="form-group description-field-line">
+                                    {{#if system.options.abysses}}
+                                        <label>Abysses</label>
+                                        <input name="system.ptsabysses" type="number" value="{{system.ptsabysses}}" data-dtype="Number" class="calculated-field"/>
+                                    {{/if}}
+                                </div>
+                                    <div class="form-group description-field-line">
+                                    {{#if system.options.magie}}
+                                        <label>Magie</label>
+                                        <input name="system.ptsmagie" type="number" value="{{system.ptsmagie}}" data-dtype="Number" class="calculated-field"/>
+                                    {{/if}} 
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Right Column -->
+                        <div class="right-column">
+                            
+                            {{!-- Points Totaux/Initiaux/Restants Block - Moved to Right Column --}}
+                            <div class="form-group calculated-stat">
+                                <label>POINTS TOTAUX</label>
+                                <input name="system.creation.ptstotaux" type="number" value="{{system.creation.ptstotaux}}" data-dtype="Number" readonly class="calculated-field"/>
+                                <small class="calculation-info">Somme des points répartis</small>
+                            
+                                <label>POINTS INITIAUX</label>
+                                <input name="system.creation.ptsbase" type="number" value="{{system.creation.ptsbase}}" data-dtype="Number" readonly class="calculated-field"/>
+                                <small class="calculation-info">Points de création de personnage</small>
+                            
+                                <label>POINTS RESTANTS</label>
+                                <input name="system.creation.ptsrestants" type="number" value="{{system.creation.ptsrestants}}" data-dtype="Number" readonly class="calculated-field"/>
+                                <small class="calculation-info">Somme des points restants</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>  
+    </div>
+</form>

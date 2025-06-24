@@ -1,0 +1,42 @@
+(system && system.psyche ? (Math.floor(120/(system.psyche/10))) : 0) ;
+
+(system && system.psyche && system.perception ? (Math.floor(320/((system.psyche+system.perception)/10))) : 0) ;
+
+Math.floor(((system.psyche+system.perception)/10)) : 0) ;
+
+
+tempsInvocation: (system) => {
+                    const baseInvocation = (system && system.psyche ? Math.floor(((system.psyche)*2)) : 0 ) ;
+                    return `${baseInvocation}`;
+                },
+                zoneEffet: (system) => {
+                    const baseZone = (system && system.psyche ? Math.floor(((system.psyche)*2)) : 0 ) ;
+                    return `${baseZone}`;
+                },
+                duree: (system) => {
+                    const baseDuree = (system && system.psyche ? Math.floor(((system.psyche)*2)) : 0 ) ;
+                    return `${baseDuree}`;
+                },
+                rang: (system) => {
+                    const baseRang = (system && system.psyche ? Math.floor(((system.psyche)*2)) : 0 ) ;
+                    return `${baseRang}`;
+                },
+                
+
+
+                tempsInvocation: (system) => {
+                    const baseInvocation = (system && system.psyche ? (Math.floor(120/(system.psyche/10))) : 0) ;
+                    return `${baseInvocation} sec`;
+                },
+                zoneEffet: (system) => {
+                    const baseZone = (system && system.perception ? Math.floor(((system.perception)*10)) : 0 ) ;
+                    return `${baseZone} m.`;
+                },
+                duree: (system) => {
+                    const baseDuree = (system && system.psyche ? Math.floor(((system.psyche)*2)) : 0 ) ;
+                    return `${baseDuree}`;
+                },
+                rang: (system) => {
+                    const baseRang = (system && system.psyche ? Math.floor(((system.psyche)/10)) : 0 ) ;
+                    return `${baseRang}`;
+                },                

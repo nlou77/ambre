@@ -1,0 +1,164 @@
+<div class="sheet-content">
+    <div class="description-container">
+        <div class="description-top-layout">
+            <!-- Left Column -->
+            <div class="description-left-column">
+                <!-- Group 1: Physical/Appearance Details -->
+                <div class="description-group-block">
+                    <h4 class="description-group-title">Détails Physiques</h4>
+                    <div class="description-fields-list">
+                        <div class="form-group description-field-line">
+                            <label>Taille</label>
+                            <input name="system.taille" type="number" value="{{system.taille}}" data-dtype="Number"/>
+                        </div>
+                        <div class="form-group description-field-line">
+                            <label>Poids</label>
+                            <input name="system.poids" type="number" value="{{system.poids}}" data-dtype="Number"/>
+                        </div>
+                        <div class="form-group description-field-line">
+                            <label>Age</label>
+                            <input name="system.age" type="number" value="{{system.age}}" data-dtype="Number"/>
+                        </div>
+                        <div class="form-group description-field-line">
+                            <label>Cheveux</label>
+                            <input name="system.couleurCheveux" type="text" value="{{system.couleurCheveux}}" data-dtype="String"/>
+                        </div>
+                        <div class="form-group description-field-line">
+                            <label>Yeux</label>
+                            <input name="system.couleurYeux" type="text" value="{{system.couleurYeux}}" data-dtype="String"/>
+                        </div>
+                        <div class="form-group description-field-line">
+                            <label>Origine</label>
+                            <input name="system.origine" type="text" value="{{system.origine}}" data-dtype="String"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="decorum-separator-container">
+                    <img src="systems/ambre/assets/skin/frames/separator{{system.decorumNumber}}.png" class="decorum-separator" alt="Separator"/>
+                </div>
+                <!-- Group 2: Family Details -->
+                 <div class="description-group-block">
+                    <h4 class="description-group-title">Famille</h4>
+                    <div class="description-fields-list">
+                        <div class="form-group description-field-line">
+                            <label>Père</label>
+                            <input name="system.pere" type="text" value="{{system.pere}}" data-dtype="String"/>
+                        </div>
+                        <div class="form-group description-field-line">
+                            <label>Mère</label>
+                            <input name="system.mere" type="text" value="{{system.mere}}" data-dtype="String"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="decorum-separator-container">
+                    <img src="systems/ambre/assets/skin/frames/separator{{system.decorumNumber}}.png" class="decorum-separator" alt="Separator"/>
+                </div>
+            </div> <!-- End description-left-column -->
+
+            <!-- Middle Column - Actor Image & Status -->
+            <div class="description-middle-column"  style="margin-bottom: 5px;">
+                <!-- Actor Image -->
+                <div class="actor-images-container description-group-block"> {{!-- Added description-group-block class --}}
+                    <h4 class="description-group-title">Portrait</h4> {{!-- Added title --}}
+                    <div class="actor-image">
+                        <img src="{{actor.img}}" data-edit="img" title="Portrait de {{actor.name}}" alt="Portrait de {{actor.name}}" style="width: 100%; height: 100%; object-fit: contain;"/>
+                    </div>
+                </div>
+                <div class="decorum-separator-container">
+                    <img src="systems/ambre/assets/skin/frames/separator{{system.decorumNumber}}.png" class="decorum-separator" alt="Separator"/>
+                </div>
+                <!-- Karma Counter Block -->
+                <div class="karma-image-display-container" style="margin-bottom: 5px;">
+                    <img src="systems/ambre/assets/artwork/karma-counter.png" alt="Karma Counter" class="karma-background-image"/>
+                    <input name="system.karma" type="number" value="{{system.karma}}" data-dtype="Number" min="-15" max="15" class="karma-input-circle karma-overlay-input karma-component"/>
+                </div>
+
+            </div> <!-- End description-middle-column -->
+
+            <!-- Right Column -->
+            <div class="description-right-column">
+                <!-- Status Block - Moved from Middle Column -->
+                <div class="description-group-block">
+                    <h4 class="description-group-title">Statut</h4>
+                    <div class="actorDesc-statusGroup">
+                        <div class="counter-icon-container" data-icon-for="health">
+                            {{#if (ne system.healthIconTheme "00")}}
+                            <img src="systems/ambre/assets/skin/cells/th{{system.healthIconTheme}}-vie.png" alt="Health Icon" class="counter-icon"/>
+                            {{/if}}
+                        </div>
+                        <span class="actorDesc-statusLabel">VIE</span>
+                        <input type="number" name="system.health.value" value="{{system.health.value}}" class="actorDesc-statusValue actual-hp" data-dtype="Number"/>
+                        <span class="actorDesc-statusValue max-hp">{{system.health.max}}</span>
+
+                        <div class="counter-icon-container" data-icon-for="healthReserve">
+                            {{#if (ne system.healthReserveIconTheme "00")}}
+                            <img src="systems/ambre/assets/skin/cells/th{{system.healthReserveIconTheme}}-vier.png" alt="Health Reserve Icon" class="counter-icon"/>
+                            {{/if}}
+                        </div>
+                        <span class="actorDesc-statusLabel">Réserve de Vie</span>
+                        <input type="number" name="system.health.healthReserve.value" value="{{system.health.healthReserve.value}}" class="actorDesc-statusValue actual-healthReserve" data-dtype="Number"/>
+                        <span class="actorDesc-statusValue max-healthReserve">{{system.health.healthReserve.max}}</span>
+                    </div>
+                    <div class="actorDesc-statusGroup">
+                        <div class="counter-icon-container" data-icon-for="energy">
+                            {{#if (ne system.energyIconTheme "00")}}
+                            <img src="systems/ambre/assets/skin/cells/th{{system.energyIconTheme}}-nrj.png" alt="Energy Icon" class="counter-icon"/>
+                            {{/if}}
+                        </div>
+                        <span class="actorDesc-statusLabel">ENERGIE</span>
+                        <input type="number" name="system.energy.value" value="{{system.energy.value}}" class="actorDesc-statusValue actual-energy" data-dtype="Number"/>
+                        <span class="actorDesc-statusValue max-energy">{{system.energy.max}}</span>
+
+                        <div class="counter-icon-container" data-icon-for="energyReserve">
+                            {{#if (ne system.energyReserveIconTheme "00")}}
+                            <img src="systems/ambre/assets/skin/cells/th{{system.energyReserveIconTheme}}-nrjr.png" alt="Energy Reserve Icon" class="counter-icon"/>
+                            {{/if}}
+                        </div>
+                        <span class="actorDesc-statusLabel">Réserve d'Energie</span>
+                        <input type="number" name="system.energy.energyReserve.value" value="{{system.energy.energyReserve.value}}" class="actorDesc-statusValue actual-energyReserve" data-dtype="Number"/>
+                        <span class="actorDesc-statusValue max-energyReserve">{{system.energy.energyReserve.max}}</span>
+                    </div>
+                </div>
+                <div class="decorum-separator-container">
+                    <img src="systems/ambre/assets/skin/frames/separator{{system.decorumNumber}}.png" class="decorum-separator" alt="Separator"/>
+                </div>
+                <!-- Group 4: Mal du Chaos - Moved to Right Column -->
+                <div class="description-group-block" >
+                   <h4 class="description-group-title">Mal du Chaos</h4>
+                   <div class="description-fields-list">
+                       <div class="form-group description-field-line">
+                           <label>Mal du Chaos</label>
+                           <input name="system.malchaos" type="number" value="{{system.malchaos}}" data-dtype="Number" min="-15" max="15" class="karma-input-circle"/>
+                           <input name="system.endurance" type="number" value="{{system.endurance}}" data-dtype="Number" readonly="true" class="karma-input-circle"/>
+                        </div>
+                   </div>
+                </div>
+                <div class="decorum-separator-container">
+                    <img src="systems/ambre/assets/skin/frames/separator{{system.decorumNumber}}.png" class="decorum-separator" alt="Separator"/>
+                </div>
+
+                <!-- Group 5: Mal des Abysses - Moved to Right Column -->
+                <div class="description-group-block" style="margin-bottom: 5px;">
+                   <h4 class="description-group-title">Mal des Abysses</h4>
+                   <div class="description-fields-list">
+                       <div class="form-group description-field-line">
+                           <label>Mal des Abysses</label>
+                           <input name="system.malabysses" type="number" value="{{system.malabysses}}" data-dtype="Number"  class="karma-input-circle"/>
+                           <input name="system.endurance" type="number" value="{{system.endurance}}" data-dtype="Number" readonly="true" class="karma-input-circle"/>
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- End description-right-column -->
+        </div> <!-- End description-top-layout -->
+        <div class="decorum-separator-container">
+            <img src="systems/ambre/assets/skin/frames/separator{{system.decorumNumber}}.png" class="decorum-separator" alt="Separator"/>
+        </div>
+        <section class="biographie-section actorDesc-group">
+            <div class="actorDesc-header" style="display: flex; justify-content: center; align-items: center; border-bottom: 1px solid var(--theme-primary-medium); margin-top: 5px; padding-bottom: 5px;">
+                <h4 style="color: var(--theme-primary-dark); margin: 0; flex-grow: 1; text-align: center;">BIOGRAPHIE</h4>
+            </div>
+        {{editor system.biography target="system.biography" button=true owner=owner editable=editable}}
+        </section>
+
+    </div> <!-- End description-container -->
+</div> <!-- End sheet-content -->

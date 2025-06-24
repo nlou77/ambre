@@ -1,0 +1,87 @@
+/* Basic PNJ Sheet Styling (add to ambre.css or a new pnj.css and import it) */
+
+.pnj-actor-sheet.pnj .pnj-sheet-body {
+    flex-grow: 1; /* Allows the sheet body to take available vertical space */
+    overflow-y: auto; /* Adds a vertical scrollbar if content overflows */
+    min-height: 0; /* Important for flex children to shrink properly if needed */
+}
+
+.pnj-actor-sheet.pnj .pnj-sheet-body .tab.main .sheet-content {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 8px;
+}
+
+.pnj-actor-sheet.pnj .form-group {
+    display: flex;
+    flex-direction: row; /* Arrange label and input horizontally */
+    gap: 10px; /* Space between label and input */
+    width: 100%;
+    height: auto;
+    margin-bottom: 8px;
+}
+
+.pnj-actor-sheet.pnj .form-group label {
+    /* flex-basis: 150px; /* Old fixed basis */
+    width: auto; /* Allow label to size to its content */
+    flex-shrink: 0; /* Prevent label from shrinking */
+    font-weight: bold;
+    color: var(--theme-primary-color);
+}
+
+.pnj-actor-sheet.pnj .form-group input[type="number"],
+.pnj-actor-sheet.pnj .form-group input[type="text"] {
+    flex-grow: 1;
+    width: auto; /* Allow input to size based on content or flex-grow */
+    padding: 6px 8px; /* Consistent padding */
+}
+
+.pnj-actor-sheet.pnj .biography-block .form-group {
+    /* Override the general .form-group rule for the biography block */
+    flex-direction: column; /* Stack title and editor vertically */
+    gap: 5px; /* Space between title and editor */
+    align-items: stretch;
+}
+
+.pnj-actor-sheet.pnj .pnj-main-layout {
+    display: flex;
+    flex-direction: column; /* Stack .pnj-top-row and .biography-block vertically */
+    gap: 10px; /* Space between the top row and the biography */
+}
+
+/* Increased specificity for pnj-top-row */
+.pnj-actor-sheet.pnj .sheet-body .pnj-main-layout > .pnj-top-row {
+    display: flex;
+    flex-direction: row; /* Arrange the two columns horizontally */
+    gap: 10px; /* Space between the two columns */
+    align-items: start; /* Align blocks to the top of their grid cell */
+}
+/* CSS for PNJ Sheet Drop Zones */
+.pnj-block.drop-zones {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr; /* Three equal columns */
+    gap: 10px;
+    padding: 8px;
+    border: 1px dashed var(--theme-border-color, #ccc);
+    border-radius: 5px;
+    margin-bottom: 10px; /* Space before the next section */
+    max-height: 250px; /* Set a maximum height */
+    overflow-y: auto; /* Add vertical scrollbar if content exceeds max-height */
+}
+
+.pnj-block.drop-zones .drop-target {
+    min-height: 80px;
+    border: 2px dashed #aaa; /* Clearer border */
+    border-radius: 5px;
+    padding: 5px;
+    text-align: center;
+    color: var(--theme-text-muted, #888);
+    background-color: var(--theme-background-alt, #f0f0f0);
+}
+
+.pnj-block.drop-zones .drop-hint {
+    font-size: 0.8em;
+    margin: 0;
+    font-style: italic;
+}

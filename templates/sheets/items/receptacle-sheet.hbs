@@ -1,0 +1,49 @@
+<form class="receptacle-sheet {{cssClass}}" autocomplete="off">
+    <header class="sheet-header">
+        <img class="profile-img" src="/systems/ambre/assets/icons/Magic treasure.png" data-edit="img" title="{{item.name}}"/>
+        <div class="header-fields">
+            <h1 class="charname"><input name="name" type="text" value="{{item.name}}" placeholder="Nom du Réceptacle"/></h1>
+        </div>
+    </header>
+
+    {{!-- Sheet Body --}}
+    <section class="sheet-body">
+
+        <div class="rune-details" style="padding: 10px; border-bottom: 1px solid #ccc; margin-bottom: 10px;">
+            <div class="drop-zones-container" style="display: flex; gap: 10px; margin-bottom: 10px;">
+                <div class="form-group" style="flex: 1; margin-bottom: 0;">
+                    <label>Sortilège Lié</label>
+                    <div class="sortilege-drop-target" style="flex-grow: 1; border: 2px dashed #aaa; padding: 8px; text-align: center; border-radius: 5px; min-height: 40px; display: flex; align-items: center; justify-content: center;">
+                        {{#if linkedSortilege}}
+                            <div class="linked-item-display" style="display: flex; align-items: center; gap: 10px; width: 100%;">
+                                <img src="{{linkedSortilege.img}}" width="24" height="24" title="{{linkedSortilege.name}}"/>
+                                <span class="item-name clickable-link" data-item-uuid="{{linkedSortilege.uuid}}" style="flex-grow: 1; text-align: left;">{{linkedSortilege.name}}</span>
+                                <a class="unlink-sortilege" title="Délier ce sortilège"><i class="fas fa-unlink"></i></a>
+                            </div>
+                        {{else}}
+                            <p class="drop-hint" style="margin: 0; color: #777;">Déposer un Sortilège</p>
+                        {{/if}}
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group" style="display: flex; align-items: center; gap: 15px;">
+                <div class="form-group" style="flex-shrink: 0; margin-bottom: 0;">
+                    <label style="font-weight: bold; margin-bottom: 4px;">Exemplaires</label>
+                    <input type="number" name="system.exemplaires" value="{{system.exemplaires}}" data-dtype="Number" min="0" style="width: 80px; text-align: center;"/>
+                </div>
+                <div class="form-group" style="flex-grow: 1; margin-bottom: 0;">
+                    <label>Utilisations</label>
+                    <div class="dots-container">
+                        {{#each dots as |dot i|}}
+                            <span class="dot {{#if dot.used}}filled{{/if}}" data-index="{{i}}"></span>
+                        {{/each}}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {{editor system.description target="system.description" button=true owner=owner editable=editable}}
+
+    </section>
+</form>

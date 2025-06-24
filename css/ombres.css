@@ -1,0 +1,1147 @@
+/* Styles généraux pour la feuille d'ombre */
+.ambre .window-app .ombre-card-sheet, /* Sélecteur plus spécifique pour Foundry VTT */
+.ombre-card-sheet {
+    min-width: 800px; /* Adjusted to match the new default JS width */
+    /* max-width: 1365px; Removed to allow sheet to grow with content */
+    width: auto;      /* S'adapte au contenu jusqu'à max-width */
+    max-height: 85vh; /* Cap the maximum height of the sheet to 85% of viewport height */
+    min-height: 420px;/* Hauteur minimale pour la feuille réduite */
+    height: auto;     /* S'adapte au contenu verticalement */
+    display: flex;
+    flex-direction: column;
+}
+
+.ombre-card-sheet .ombre-card-header {
+    display: flex;
+    align-items: center; /* Aligne l'image et le titre verticalement */
+    gap: 15px; /* Espace entre l'image et le titre */
+}
+.ombre-card-sheet .ombre-card-header input[name="name"] {
+    flex-grow: 1; /* Le champ de nom prend l'espace restant */
+    padding: 8px 12px;
+    font-size: 2em; /* Augmentation de la taille de la police */
+    font-family: var(--theme-font-header, "Modesto Condensed", serif);
+    text-align: center;
+    border: none;
+    border-bottom: 2px solid var(--theme-primary-color);
+    background-color: transparent;
+    color: var(--theme-primary-color);
+    margin-bottom: 10px;
+}
+
+.ombre-card-sheet .ombre-card-header .toggle-ombre-lock,
+.ombre-card-sheet .ombre-card-header .refresh-possessing-actor.header-button,
+.ombre-card-sheet .ombre-card-header .toggle-stat-refresh-lock.header-button,
+.ombre-card-sheet .ombre-card-header .toggle-description-editor.header-button {
+    font-size: 1.6em; /* Adjusted for better visual balance with the 2em name input */
+    color: var(--theme-primary-color);
+    cursor: pointer;
+    padding: 0 5px; /* Reduced padding slightly for two buttons */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0; /* Prevent it from shrinking */
+    /* height: 100%; Removed as align-items on parent should handle vertical centering */
+}
+
+.ombre-card-sheet .ombre-card-header .toggle-ombre-lock:hover,
+.ombre-card-sheet .ombre-card-header .refresh-possessing-actor.header-button:hover,
+.ombre-card-sheet .ombre-card-header .toggle-stat-refresh-lock.header-button:hover,
+.ombre-card-sheet .ombre-card-header .toggle-description-editor.header-button:hover {
+        color: var(--theme-primary-dark);
+}
+
+/* Specific adjustment for the lock button's right padding */
+.ombre-card-sheet .ombre-card-header .toggle-ombre-lock {
+    padding-right: 20px; /* Increased from 5px (from shared rule) to 10px */
+}
+
+.ombre-card-sheet .ombre-card-header .toggle-ombre-lock.locked i {
+    color: var(--theme-text-muted); /* Example: Mute the icon color when locked */
+}
+
+.ombre-card-sheet .ombre-card-header .refresh-possessing-actor.header-button.disabled i,
+.ombre-card-sheet .ombre-card-header .toggle-stat-refresh-lock.header-button.disabled i {
+    color: var(--theme-text-muted); /* Mute refresh icon when disabled (locked) */
+}
+
+.ombre-card-sheet .ombre-card-body {
+    padding: 5px 5px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column; /* Lays out .ombre-top-controls, .ombre-content-columns, and .ombre-description-section vertically */
+    overflow-y: auto;   /* Allows this section to scroll if content exceeds sheet height */
+    min-height: 0;      /* Important for nested flex containers to prevent overflow issues */
+}
+
+/* Styles for the new top controls row */
+.ombre-card-sheet .ombre-top-controls {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 4px 5px 4px 5px;
+    border-bottom: 1px solid var(--theme-border-light);
+    margin-bottom: 2px;
+    flex-direction: row;
+}
+
+.ombre-card-sheet .ombre-top-controls .form-group {
+    display: flex;
+    align-items: center;
+    gap: 4px; /* Space between label and control within each group */
+    flex-direction: row;
+}
+
+.ombre-card-sheet .ombre-top-controls .form-group label {
+    margin-bottom: 0; /* Remove default bottom margin if any */
+    font-weight: bold; 
+    color: var(--theme-primary-color);
+    white-space: nowrap; /* Prevent label text from wrapping */
+}
+
+/* Standard styling for ALL collapsible headers */
+.ombre-card-sheet .ombre-collapsible-header[data-target-section^="tech-level-content-"],
+.ombre-card-sheet .ombre-collapsible-header[data-target-section^="magic-level-content-"],
+.ombre-card-sheet .ombre-collapsible-header[data-target-section^="ombre-attributes-content-"],
+.ombre-card-sheet .ombre-collapsible-header[data-target-section^="ombre-linked-journals-content-"],
+.ombre-card-sheet .ombre-description-section > .ombre-collapsible-header { /* Target description header specifically */
+    margin-top: 10px; /* Consistent space above each collapsible header */
+    margin-bottom: 0; /* Remove bottom margin from header, content will handle spacing when open */
+    width: 100%; /* Ensure headers take full available width */
+    box-sizing: border-box;
+}
+
+/* Standard styling for ALL toggleable content blocks */
+.ombre-card-sheet .toggleable-content {
+    padding: 10px; /* Standardized padding */
+    background: var(--theme-background-alt); /* Consistent background */
+    border-radius: 0 0 6px 6px; /* Rounded bottom corners if header is rounded */
+    border: 1px solid var(--theme-primary-color); /* Consistent border */
+    border-top: none; /* Top border is handled by header or a specific rule when open */
+    margin-top: 0; /* Spacing controlled by header */
+    margin-bottom: 10px; /* Consistent space after each content block before the next header */
+    width: 100%; /* Ensure content blocks take full available width */
+    box-sizing: border-box;
+}
+
+/* Specific styling for tech-magic content when open */
+.ombre-card-sheet .ombre-top-controls.tech-magic-section.toggleable-content { /* Now also a toggleable content */
+    padding-top: 4px;
+    padding-bottom: 6px;
+    margin-bottom: 0; /* Margin will be on the header or next element */
+    flex-direction: column; /* Stack dropdown line and details line vertically */
+    align-items: flex-start; /* Align children to the start */
+    gap: 3px; /* Reduced gap between the dropdown line and details line */
+    border-top: 1px solid var(--theme-border-light); /* Add a top border when open */
+}
+
+/* Styling for the main attributes list when it's collapsible content */
+.ombre-card-sheet .ombre-attributes-list.toggleable-content {
+    border-top: 1px solid var(--theme-border-light); /* Add a top border when open */
+}
+
+/* Group for the dropdown and its info icon */
+.ombre-card-sheet .tech-magic-dropdown-group {
+    display: flex;
+    align-items: center;
+    gap: 5px; /* Space between label, select, and info icon */
+    width: 100%; /* Take full width */
+}
+
+.ombre-card-sheet .tech-magic-dropdown-group label {
+    white-space: nowrap;
+}
+.ombre-card-sheet .tech-magic-dropdown-group select {
+    flex-grow: 1; /* Allow select to take available space */
+    min-width: 200px; /* Give dropdowns enough space */
+}
+
+/* Container for inline tech details (Locomotion, Comm, Armes) */
+.ombre-card-sheet .tech-details-inline-container {
+    display: flex;
+    flex-direction: row; /* Keep this as row for inline display */
+    flex-wrap: nowrap;
+    gap: 10px;
+    width: 100%;
+    padding-left: 10px;
+    box-sizing: border-box;
+    margin-top: 2px;
+    align-items: center;
+}
+
+.ombre-card-sheet .tech-details-group {
+    display: flex; /* Align label and value within each detail group */
+    align-items: center;
+    gap: 4px; /* Small gap between label and value */
+    /* flex-basis: auto; Let flexbox handle sizing */
+    margin-left: 0; /* Reset margin as padding-left is on container */
+}
+
+.ombre-card-sheet .tech-details-group label {
+    font-weight: normal;
+    color: var(--theme-text-muted);
+    font-size: 0.85em; /* Smaller label */
+    white-space: nowrap;
+}
+
+.ombre-card-sheet .tech-detail-value {
+    font-style: italic;
+    font-size: 0.85em; /* Smaller value text */
+    color: var(--theme-text-color); /* Ensure it's readable */
+}
+
+
+/* Styles for the X Counter controls */
+.ombre-card-sheet .ombre-top-controls .x-counter-controls {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
+
+.ombre-card-sheet .ombre-top-controls .x-counter-controls .control-button {
+    padding: 3px 6px;
+    font-size: 0.8em;
+    line-height: 1;
+    min-width: 24px; /* Ensure buttons have a decent click area */
+    background-color: var(--theme-primary-light);
+    border: 1px solid var(--theme-primary-medium);
+    color: var(--theme-primary-color);
+    cursor: pointer;
+}
+.ombre-card-sheet .ombre-top-controls .x-counter-controls .control-button:hover:not(:disabled) {
+    background-color: var(--theme-primary-medium);
+}
+.ombre-card-sheet .ombre-top-controls .x-counter-display {
+    font-weight: bold;
+    padding: 0 5px; /* Space around the 'xN' text */
+}
+.ombre-card-sheet .ombre-content-columns {
+    display: flex; /* Utilisation de Flexbox pour les colonnes */
+    padding-bottom: 15px; /* Espace avant la section description */
+    align-items: stretch;
+}
+
+/* Ajustements pour l'image pour qu'elle s'adapte bien */
+.ombre-card-sheet .ombre-card-header .image-frame-wrapper {
+    width: 80px;  /* Taille fixe pour l'image dans l'en-tête */
+    height: 80px; /* Taille fixe pour l'image dans l'en-tête */
+    flex-shrink: 0; /* Empêche l'image de rétrécir */
+    position: relative; /* Si vous utilisez des cadres superposés */
+    aspect-ratio: 1 / 1; /* Assure que le conteneur de l'image est carré */
+    align-items: center;
+    justify-content: center;
+}
+.ombre-card-sheet .ombre-card-image,
+.ombre-card-sheet .ombre-foreground-frame {
+    max-width: 100%;
+    height: auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%; /* L'image remplit le conteneur carré */
+    height: 100%; /* L'image remplit le conteneur carré */
+    object-fit: cover; /* L'image couvre la zone, peut être rognée */
+}
+.ombre-card-sheet .ombre-foreground-frame {
+    pointer-events: none; /* Pour que le cadre ne bloque pas les clics sur l'image en dessous */
+    z-index: 1; /* S'assure que le cadre est au-dessus de l'image */
+}
+/* Styles génériques pour image-frame-wrapper si besoin ailleurs, mais celui du header est prioritaire */
+.ombre-card-sheet .image-frame-wrapper {
+    display: flex; /* Assure le centrage interne si pas déjà fait */
+    align-items: center;
+    justify-content: center;
+    position: relative; /* Pour les cadres superposés */
+}
+
+/* La colonne centrale (anciennement) est maintenant la colonne principale à gauche du contenu */
+.ombre-card-sheet .ombre-center-column { /* Was ombre-right-column */
+    flex: 0 0 750px; /* Largeur fixe pour la colonne principale */
+    min-width: 750px; /* Assure que la largeur n'est pas réduite en dessous de la valeur flex-basis */
+    display: flex;
+    flex-direction: column;
+    gap: 8px; /* Espacement vertical réduit dans la colonne de droite */
+}
+
+/* Styles pour la liste des attributs de l'ombre */
+.ombre-card-sheet .ombre-attributes-list {
+    background: var(--theme-primary-light); /* Similaire à .actorDesc-group */
+    border-radius: 6px; /* Similaire à .actorDesc-group */
+    padding: 10px;       /* Similaire à .actorDesc-group */
+    border: 2px solid var(--theme-primary-color);
+    display: grid;
+    grid-template-columns: minmax(100px, auto) minmax(200px, 1.2fr) auto minmax(70px, auto) minmax(150px, 1fr); /* Attributs, Niveau, Aide, Coût, Description */
+    gap: 8px 12px; /* row-gap column-gap */
+    align-items: center; /* Vertically center items in their cells */
+    /* height: 100%; -- Removed to allow column to shrink/grow with content */
+}
+
+.ombre-card-sheet .attribute-grid-header {
+    font-weight: bold;
+    color: var(--theme-primary-color);
+    padding-bottom: 5px;
+    border-bottom: 1px solid var(--theme-primary-medium);
+    text-align: left;
+}
+
+.ombre-card-sheet .attribute-grid-label label {
+    margin: 0;
+    font-family: var(--theme-font-header, Arial, sans-serif);
+    font-size: 14px;
+    font-weight: bold;
+    color: var(--theme-primary-color);
+}
+
+.ombre-card-sheet .attribute-grid-niveau .attribute-level-select {
+    width: 100%; /* Make select take full width of its grid cell */
+}
+
+/* Base style for all form-group-stat to ensure children are vertically aligned */
+/* .ombre-card-sheet .form-group-stat {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+}
+
+/* Styles pour chaque ligne d'attribut (label + input) */
+.ombre-card-sheet .ombre-attributes-list .form-group-stat {
+    /* display: flex; and align-items: center; are inherited from the base .form-group-stat rule */ /* No longer used */
+    gap: 20px; /* Espace entre le groupe label/select et le groupe valeur/description */
+    /* justify-content: space-between; /* Removed to align groups to the left */
+} 
+
+/* Styles pour le label de l'attribut */
+.ombre-card-sheet .ombre-attributes-list .form-group-stat .label-with-info {
+    display: flex;
+    align-items: center; /* Changé pour aligner verticalement au centre */
+    gap: 5px; /* Espace entre le label et l'icône d'info */
+    position: relative; /* Pour le positionnement du tooltip */
+    /* flex-grow: 1; /* Removed to prevent pushing value control to the far right */
+    /* margin-right: 10px; /* Replaced by gap on parent */
+    /* color: var(--theme-primary-color); */ /* No longer used */
+}
+
+.ombre-card-sheet .ombre-attributes-list .form-group-stat .label-with-info label {
+    margin: 0;                     /* Similaire à .actorDesc-header h4 */
+    font-family: var(--theme-font-header, Arial, sans-serif); /* Police avec fallback */
+    font-size: 14px;
+    font-weight: bold;
+    color: var(--theme-primary-color);
+    /* flex-grow: 1; -- Déplacé vers .label-with-info */
+    /* margin-right: 10px; -- Géré par le gap de .label-with-info et margin-right de .label-with-info */
+} 
+
+/* Nouveaux styles pour les groupes horizontaux d'attributs */
+.ombre-card-sheet .ombre-attribute-group-horizontal {
+    display: flex;
+    flex-direction: row;
+    gap: 10px; /* Espace horizontal entre les attributs dans un groupe */
+    align-items: flex-start; /* Aligne les items du groupe en haut */
+}
+
+.ombre-card-sheet .ombre-attribute-group-horizontal .form-group-stat {
+    flex: 1; /* Chaque attribut dans le groupe prend une part égale de l'espace */
+    min-width: 0; /* Permet aux éléments flex de rétrécir si nécessaire */
+}
+
+/* Styles pour l'icône d'information et son tooltip */
+.ombre-card-sheet .info-icon-wrapper {
+    position: relative;
+    display: inline-flex; /* S'assure que le wrapper prend juste la taille de l'icône */
+    align-items: center;
+}
+.ombre-card-sheet .attribute-grid-aide .info-icon-wrapper { /* Center icon in its cell */
+    justify-content: center;
+    width: 100%;
+}
+
+.ombre-card-sheet .attribute-info-icon {
+    cursor: help;
+    font-size: 0.9em; /* Légèrement plus petit que le texte du label */
+    /* color est hérité de .label-with-info ou peut être défini ici */
+}
+
+.ombre-card-sheet .tooltip-popup {
+    display: none; /* Caché par défaut */
+    position: fixed; /* Changed from absolute to fixed */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Center the tooltip */
+    /* margin-top: 5px; /* No longer needed for fixed positioning */
+    background-color: var(--theme-background-light, white);
+    border: 1px solid var(--theme-primary-color, #2C606D);
+    border-radius: 4px;
+    padding: 8px 10px;
+    box-shadow: 0 3px 7px var(--theme-primary-shadow, rgba(0,0,0,0.2));
+    z-index: 1050; /* Increased z-index to be consistent with other popups */
+    min-width: 300px; /* Largeur minimale du tooltip (200px * 1.5) */
+    max-width: 450px; /* Largeur maximale (300px * 1.5) */
+    font-size: 13px;
+    color: var(--theme-text-color) !important; /* Ensure text color is applied */
+    text-align: left;
+    max-height: 70vh; /* Add max-height to prevent overly tall tooltips */
+    overflow-y: auto; /* Allow scrolling for content that exceeds max-height */
+}
+.ombre-card-sheet .tooltip-popup p { /* Ensure paragraphs inside tooltip have normal color */
+    color: var(--theme-text-color) !important;
+}
+.ombre-card-sheet .attribute-grid-cout .attribute-cost-display {
+    font-weight: bold;
+    color: var(--theme-text-color);
+}
+
+.ombre-card-sheet .ombre-attributes-list .form-group-stat .ombre-attribute-value-control button {
+    background-color: var(--theme-primary-color);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    width: 28px;
+    height: 28px;
+    font-size: 1.1em; /* Taille de police pour les signes +/- */
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1; /* Assure que le texte est centré verticalement */
+    padding: 0;
+    transition: background-color 0.2s ease;
+} 
+
+.ombre-card-sheet .ombre-attributes-list .form-group-stat .ombre-attribute-value-control button:hover {
+    background-color: var(--theme-primary-dark);
+}
+
+.ombre-card-sheet .ombre-attributes-list .form-group-stat .ombre-attribute-value-control input[type="number"] {
+    /* Styling to look like a label/static text */
+    width: 40px;
+    min-width: 20px;
+    text-align: center;
+    background: transparent;
+    color: var(--theme-text-color);
+    padding: 0; /* Remove default input padding */
+    border: none; /* Remove input border */
+    font-size: inherit; /* Inherit from parent for consistency */
+    font-family: inherit; /* Inherit from parent for consistency */
+    font-weight: bold; /* Make the cost value stand out a bit */
+    box-sizing: border-box;
+    margin-right: 5px; /* Space before the description text span */
+} 
+
+/* Cache les flèches sur les navigateurs WebKit (Chrome, Safari, Edge) */
+.ombre-card-sheet .ombre-attributes-list .form-group-stat .ombre-attribute-value-control input[type="number"]::-webkit-outer-spin-button,
+.ombre-card-sheet .ombre-attributes-list .form-group-stat .ombre-attribute-value-control input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.ombre-card-sheet .ombre-attributes-list .form-group-stat .ombre-attribute-value-control input[type="number"][readonly]:focus {
+    /* Prevent focus styles on readonly inputs if they look like labels */
+    outline: none;
+    box-shadow: none;
+    /* border-color: var(--theme-primary-color); Similaire à .actorDesc-select:focus */
+}
+
+.ombre-card-sheet .attribute-grid-description .attribute-level-description-text {
+    font-size: 0.9em; /* Slightly smaller than main text */
+    color: var(--theme-text-muted, #555); /* Muted color for descriptive text */
+    font-style: italic;
+    text-align: left;
+}
+
+/* En-tête cliquable pour les sections masquables */
+.ombre-card-sheet .ombre-collapsible-header {
+    cursor: pointer;
+    padding: 8px 12px;
+    background: var(--theme-primary-light);
+    border: 1px solid var(--theme-primary-color);
+    border-radius: 6px;
+    margin-top: 15px; /* Espace au-dessus de l'en-tête */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background-color 0.2s ease;
+}
+/* Adjust margin for headers that are NOT the very first one after .ombre-top-controls */
+.ombre-card-sheet .ombre-collapsible-header + .ombre-collapsible-header {
+    margin-top: 10px; /* Standard space between collapsible sections */
+}
+
+.ombre-card-sheet .ombre-collapsible-header:hover {
+    background: var(--theme-primary-medium);
+}
+
+.ombre-card-sheet .ombre-collapsible-header .collapsible-header-title {
+    font-family: var(--theme-font-header, Arial, sans-serif);
+    font-size: 1.05em; /* Légèrement plus petit que le label de description */
+    font-weight: bold;
+    color: var(--theme-primary-color);
+}
+
+.ombre-card-sheet .ombre-collapsible-header .collapsible-header-icon {
+    transition: transform 0.3s ease;
+    margin-left: 10px; /* Adds space between the title and the icon */
+}
+
+.ombre-card-sheet .ombre-collapsible-header.open .collapsible-header-icon {
+    transform: rotate(180deg);
+}
+
+/* Content for single attribute collapsible sections like Polymorphie, now in right column */
+.ombre-parameters-content-main .ombre-single-attribute-collapsible-content { /* Path updated */
+    display: flex; /* Pour gérer l'espacement entre la valeur principale et la section des formes */
+    flex-direction: row;
+    gap: 15px; /* Espace entre la ligne de valeur polymorphie et la section des formes */
+    margin-top: 5px; /* Petit espace entre l'en-tête et le contenu lorsqu'il est ouvert */
+    /* Padding, background, border, radius now handled by .toggleable-content */
+    width: 100%; /* Prend toute la largeur de la colonne (droite dans ce cas) */
+    box-sizing: border-box;
+}
+
+.column-toggle-container {
+    /* This class might be removed or repurposed if no longer used for left/right column toggles */
+    flex: 0 0 30px; /* Fixed width for the toggle area */
+    display: flex;
+    align-items: center; /* Center button vertically */
+    justify-content: center; /* Center button horizontally */
+    background-color: var(--theme-background-alt); 
+    cursor: pointer;
+    align-self: stretch; /* Ensure it stretches to full height of flex container */
+    z-index: 5; /* Ensure it's above the column gap */
+    border-left: 1px solid var(--theme-border-dark);
+    border-right: 1px solid var(--theme-border-dark);
+}
+
+.column-toggle-container button {
+    background: none;
+    border: none;
+    padding: 10px 0px;
+    cursor: pointer;
+    color: var(--theme-primary-color);
+    font-size: 1.5em; /* Larger icon */
+    line-height: 1;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.column-toggle-container button:hover {
+    background-color: var(--theme-primary-light);
+    color: var(--theme-primary-dark);
+}
+
+/* Styles for the new Parameters section */
+.ombre-card-sheet .ombre-parameters-section {
+    margin-top: 10px;
+    width: 750px; /* Match the width of .ombre-center-column */
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+    position: relative;
+}
+
+.ombre-card-sheet .ombre-parameters-content-main {
+    padding: 12px;
+    /* Background, border, radius now handled by .toggleable-content if this becomes one */
+    border-radius: 6px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Space between nested collapsible sections */
+}
+
+/* Ensure the form-group inside Polymorphie (if it uses .form-group-stat) aligns items */
+.ombre-card-sheet .ombre-parameters-content-main .ombre-single-attribute-collapsible-content .form-group-stat {
+    justify-content: space-between;
+}
+
+/* Styles for Polymorphie Forms Section */
+.ombre-card-sheet .polymorphie-formes-section {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding-top: 10px;
+    border-top: 1px solid var(--theme-primary-light); /* Séparateur optionnel */
+}
+
+.ombre-card-sheet .polymorphie-formes-header {
+    margin: 0 0 8px 0;
+    font-family: var(--theme-font-header, Arial, sans-serif);
+    font-size: 1.0em;
+    font-weight: bold;
+    color: var(--theme-primary-color);
+    text-align: left;
+}
+
+.ombre-card-sheet .polymorphie-formes-list {
+    display: flex;
+    flex-direction: column;
+    gap: 6px; /* Espace entre chaque ligne de forme */
+}
+
+.ombre-card-sheet .polymorphie-forme-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.ombre-card-sheet .polymorphie-forme-label {
+    font-size: 13px;
+    color: var(--theme-text-color);
+    flex-shrink: 0; /* Empêche le label de rétrécir */
+    min-width: 110px; /* Donne une largeur minimale au label */
+}
+
+.ombre-card-sheet .polymorphie-forme-input {
+    flex-grow: 1; /* L'input prend l'espace restant */
+    padding: 4px 6px;
+    border: 1px solid var(--theme-border-color);
+    border-radius: 3px;
+    background: var(--theme-background-light);
+    font-size: 13px;
+}
+
+.ombre-card-sheet .polymorphie-forme-button {
+    flex-shrink: 0;
+    width: 24px; /* Taille des boutons +/- */
+    height: 24px;
+    padding: 0; /* Ajustez si l'icône n'est pas centrée */
+    font-size: 0.9em; /* Taille de l'icône dans le bouton */
+    /* Les styles de base des boutons (couleur, etc.) sont hérités de .ombre-attribute-value-control button */
+}
+
+/* Section pour le coût, liaison et acteurs liés */
+.ombre-card-sheet .ombre-linking-details {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Espace entre les champs internes, légèrement réduit */
+    margin-top: 5px; /* Petit espace entre l'en-tête et le contenu lorsqu'il est ouvert */
+    /* Padding, background, border, radius now handled by .toggleable-content */
+}
+
+.ombre-card-sheet .ombre-linking-details .form-group {
+    display: flex;
+    align-items: center; /* Aligne label et contrôle par défaut */
+    gap: 10px;
+    flex-direction: row;
+}
+
+.ombre-card-sheet .ombre-linking-details .form-group label {
+    flex-shrink: 0; /* Empêche le label de rétrécir */
+    min-width: 80px; /* Donne de l'espace au label */
+    margin: 0;
+    font-family: var(--theme-font-header, Arial, sans-serif);
+    font-size: 14px;
+    font-weight: bold;
+    color: var(--theme-primary-color);
+}
+
+.ombre-card-sheet .ombre-linking-details .ombre-total-cost-display {
+    flex-grow: 1; /* Prevent the input from growing */
+    flex-shrink: 0; /* Prevent the input from shrinking (optional but good practice for fixed width) */
+    width: 80px;  /* Set the desired width */
+    background-color: var(--theme-background-light);
+    border: 1px solid var(--theme-border-color);
+    padding: 6px 8px;
+    border-radius: 4px;
+    color: var(--theme-text-secondary); /* Couleur discrète pour readonly */
+    cursor: default;
+    text-align: right; /* Keep text alignment if desired */
+}
+
+.ombre-card-sheet .ombre-linking-details .form-group-checkbox label {
+    min-width: auto; /* Annule le min-width pour les labels de checkbox */
+}
+
+.ombre-card-sheet .ombre-linking-details .form-group-checkbox input[type="checkbox"] {
+    width: 18px; /* Taille de la checkbox */
+    height: 18px;
+    cursor: pointer;
+}
+
+/* New style for horizontally aligning checkboxes */
+.ombre-card-sheet .ombre-linking-details .form-group-horizontal-checkboxes {
+    display: flex;
+    flex-direction: row;
+    gap: 20px; /* Adjust gap between checkbox groups as needed */
+}
+
+/* Styles spécifiques pour le groupe de dépôt d'acteur */
+.ombre-card-sheet .ombre-linking-details .form-group.actor-drop-group {
+    align-items: flex-start; /* Aligne le label en haut avec la zone de dépôt */
+}
+
+.ombre-card-sheet .actor-drop-target {
+    border: 2px dashed var(--theme-primary-color);
+    border-radius: 6px;
+    padding: 10px;
+    text-align: center;
+    background-color: var(--theme-primary-light);
+    color: var(--theme-text-muted);
+    min-height: 70px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1; /* Prend l'espace disponible */
+    transition: background-color 0.2s ease, border-style 0.2s ease;
+}
+
+.ombre-card-sheet .actor-drop-target.drag-over { /* Classe à ajouter via JS lors du survol pendant un glisser-déposer */
+    background-color: var(--theme-primary-strong);
+    border-style: solid;
+}
+
+.ombre-card-sheet .actor-drop-target .drop-hint {
+    margin: 0 0 8px 0;
+    font-style: italic;
+    font-size: 12px;
+}
+
+.ombre-card-sheet .linked-actors-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    max-height: 80px; /* Hauteur max avec défilement */
+    overflow-y: auto;
+    font-size: 13px;
+}
+
+.ombre-card-sheet .linked-actors-list li {
+    background-color: var(--theme-background-light);
+    border: 1px solid var(--theme-border-light);
+    padding: 4px 8px;
+    margin-bottom: 3px;
+    border-radius: 4px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--theme-text-color);
+}
+
+.ombre-card-sheet .linked-actors-list li .linked-actor-img {
+    width: 24px; /* Adjust size as needed */
+    height: 24px; /* Adjust size as needed */
+    border-radius: 3px; /* Slightly rounded square, or 50% for circular */
+    margin-right: 8px;
+    object-fit: cover;
+    border: 1px solid var(--theme-border-light);
+    vertical-align: middle;
+}
+
+.ombre-card-sheet .linked-actors-list li span {
+    flex-grow: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin-right: 5px;
+}
+
+.ombre-card-sheet .linked-actors-list li .unlink-actor {
+    color: var(--theme-error-color, #D32F2F); /* Pensez à définir --theme-error-color dans theme.css */
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.ombre-card-sheet .linked-actors-list li .unlink-actor:hover {
+    color: var(--theme-error-dark, #B71C1C); /* Pensez à définir --theme-error-dark dans theme.css */
+}
+
+.ombre-card-sheet .linked-actors-list li.no-actors-linked {
+    background-color: transparent;
+    border: none;
+    color: var(--theme-text-muted);
+    font-style: italic;
+    text-align: center;
+    padding: 8px 0;
+}
+
+/* Standardized Description Section */
+.ombre-card-sheet .tab[data-tab="description"] {
+    margin-top: 10px; /* Marge supérieure réduite */
+    width: 750px; /* Match the width of .ombre-center-column */
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+    flex-grow: 1; /* This section as a whole should grow to fill available vertical space */
+    display: flex; /* It will lay out its header and content vertically */
+    flex-direction: column;
+    min-height: 0; /* Important for flex children that need to shrink/grow properly */
+}
+
+/* The edit button provided by {{editor button=true}} */
+.ombre-card-sheet .ombre-detailed-description-content .editor a.editor-edit { /* Path updated */
+    align-self: flex-end; /* Pushes button to the right (end of cross-axis for column flex) */
+    margin: 5px;          /* Spacing around the button */
+    font-size: 0.9em;     /* Slightly smaller icon/button */
+    padding: 4px 6px; 
+    background-color: var(--theme-background-alt); /* Use theme background alt */
+    border: 1px solid var(--theme-border-light, #cccccc);
+    border-radius: 3px;
+    color: var(--theme-primary-color);
+    cursor: pointer;
+    line-height: 1; /* Ensure icon is centered if it's just an <i> */
+}
+
+.ombre-card-sheet .ombre-detailed-description-content .editor a.editor-edit:hover { /* Path updated */
+    background-color: var(--theme-primary-light);
+    color: var(--theme-primary-dark);
+    border-color: var(--theme-border-medium);
+}
+
+/* General styling for select elements within the ombre sheet */
+.ombre-card-sheet select {
+    padding: 6px 8px;
+    border: 1px solid var(--theme-border-color);
+    border-radius: 4px;
+    background-color: var(--theme-background-light);
+    color: var(--theme-text-color);
+    font-family: var(--theme-font-body, sans-serif);
+    font-size: 1em; /* Or a specific size like 14px */
+    min-width: 150px; /* Ensure a decent default width */
+}
+.ombre-card-sheet select:focus {
+    border-color: var(--theme-primary-color);
+    outline: none;
+    box-shadow: 0 0 0 2px var(--theme-primary-shadow);
+}
+
+.attribute-level-select {
+    /* Example styles - adjust as needed */
+    flex-grow: 1; /* Allow it to take available space if desired */
+    min-width: 150px; /* Assure une largeur minimale pour la lisibilité */
+    max-width: 250px; /* Or a fixed width */
+    font-size: 0.9em;
+    padding: 2px 4px;
+    margin-left: 5px; /* Space from the label */
+    margin-right: 5px; /* Space before the info icon */
+}
+
+/* General style for <a> tags acting as buttons that are disabled/locked */
+.ombre-card-sheet a.disabled { /* Class 'disabled' should be added via JS/Handlebars */
+    pointer-events: none;
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* General style for disabled input fields */
+.ombre-card-sheet input[type="text"]:disabled,
+.ombre-card-sheet input[type="number"]:disabled,
+.ombre-card-sheet input[type="checkbox"]:disabled,
+.ombre-card-sheet select:disabled,
+.ombre-card-sheet textarea:disabled { /* If textareas are used and disabled */
+    opacity: 0.6;
+    cursor: not-allowed !important; /* Ensure cursor changes */
+    background-color: var(--theme-border-lighter); /* Use a light theme color for disabled bg */
+    color: var(--theme-text-muted); /* Use theme muted text color */
+    border-color: var(--theme-border-color); /* Use theme border color */
+}
+
+/* Specific override for the main name input when disabled */
+.ombre-card-sheet .ombre-card-header input[name="name"]:disabled {
+    background-color: transparent; /* Keep transparent background if desired */
+    border-bottom-color: var(--theme-border-color); /* Use theme border color */
+    color: var(--theme-text-muted); /* Use theme muted text color */
+    opacity: 0.7; /* Apply opacity */
+}
+
+/* General style for disabled buttons */
+.ombre-card-sheet button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed !important;
+    background-color: var(--theme-border-light) !important; /* Use a light theme color for disabled bg */
+    color: var(--theme-text-muted) !important; /* Use theme muted text color */
+    border-color: var(--theme-border-color) !important; /* Use theme border color */
+}
+
+/* Styling for the rich text editor when locked */
+/* This assumes the {{editor}} helper receives editable=false */
+/* and you add the .editor-lock-overlay div as suggested. */
+.ombre-card-sheet .editor-lock-overlay {
+    position: absolute;
+    /* Adjust top to cover only the editor area, not the label */
+    top: 2em; /* Approximate, adjust based on your label's height and margin */
+    left: 0;
+    width: 100%;
+    /* Adjust height to cover only the editor area */
+    height: calc(100% - 2em); /* Approximate, adjust as needed */
+    background-color: var(--theme-primary-shadow); /* Use a theme shadow/overlay color */
+    z-index: 10; /* Ensure it's above the editor content */
+    cursor: not-allowed;
+    border-radius: 4px; /* Match .editor's border-radius */
+}
+
+.ombre-card-sheet .possessing-actor-display label {
+    font-weight: normal; /* Less emphasis than main labels */
+    color: var(--theme-text-muted, #555);
+}
+
+/* Ensures the detailed description content area in the ombre sheet has a minimum height */
+#ombre-detailed-description-content .editor .editor-content {
+    /* Ensures it spans the grid columns under the polymorphie attribute row */
+    grid-column: 1 / -1;
+    /* Adds some spacing above and below the forms section */
+    margin-top: 8px;
+    margin-bottom: 12px;
+    /* Optional: if you want to indent it slightly from the grid edges */
+    /* padding-left: 15px; */
+    /* padding-right: 15px; */
+}
+
+.polymorphie-forms-details {
+    padding: 8px 12px; /* Reduced padding compared to typical collapsible sections */
+    background-color: rgba(0, 0, 0, 0.02); /* A very subtle background, or use 'transparent' */
+    border: 1px solid var(--color-border-light-tertiary, #ddd); /* Lighter border */
+    border-radius: 3px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05); /* Subtle shadow for a slight lift */
+}
+
+/* Optional: Adjust font size and spacing within the forms if the partial doesn't already handle it */
+.polymorphie-forms-details h4 { /* If you add a title like "Formes de Polymorphie :" */
+    margin-top: 0;
+    margin-bottom: 8px;
+    font-size: 1.05em;
+    font-weight: bold;
+    border-bottom: 1px solid var(--color-border-light-secondary, #eee);
+    padding-bottom: 4px;
+}
+
+.polymorphie-forms-details .form-group {
+    margin-bottom: 6px; /* Slightly reduced space between form groups */
+}
+
+.polymorphie-forms-details label {
+    font-size: 0.95em; /* Slightly smaller labels */
+}
+
+.polymorphie-forms-details input[type="text"],
+.polymorphie-forms-details input[type="number"] {
+    font-size: 0.95em; /* Slightly smaller input text */
+    padding: 3px 5px; /* Compact padding for inputs */
+}
+
+.polymorphie-forms-details button {
+    font-size: 0.9em; /* Smaller buttons */
+    padding: 3px 8px;
+}
+
+/* Style for readonly inputs that should appear locked */
+.ombre-top-controls .ombre-total-cost-display.locked-field {
+    opacity: 0.7;
+    background-color: var(--theme-border-lighter, #eee); /* Or a very light grey */
+    cursor: default;
+    color: var(--theme-text-muted, #555);
+}
+
+/* Style for the possessing actor display when locked */
+.ombre-top-controls .possessing-actor-display.locked-display label,
+.ombre-top-controls .possessing-actor-display.locked-display span {
+    opacity: 0.7;
+    color: var(--theme-text-muted, #555);
+}
+/* Styles for the trash icon to clear stale stored actor data (when item is unlocked) */
+.ombre-top-controls .stale-stored-actor-cleanup .clear-possessing-actor-on-lock {
+    color: var(--theme-error-color, #D32F2F);
+    cursor: pointer;
+    font-size: 0.9em;
+    margin-left: 8px;
+}
+.ombre-top-controls .stale-stored-actor-cleanup .clear-possessing-actor-on-lock:hover {
+    color: var(--theme-error-dark, #B71C1C);
+}
+
+/* OLD styles for trash icon when it was in the locked display - can be removed or kept if you might revert */
+/* .ombre-top-controls .possessing-actor-display.locked-display .clear-possessing-actor-on-lock {
+    opacity: 1; /* Counteract parent opacity if needed, color will still apply */
+.ombre-top-controls .possessing-actor-display.locked-display .clear-possessing-actor-on-lock:hover {
+    color: var(--theme-error-dark, #B71C1C);
+}
+/* === Custom Scrollbar Styles === */
+/* For WebKit-based browsers (Chrome, Safari, Edge) */
+.ombre-card-sheet .ombre-card-body::-webkit-scrollbar {
+    width: 14px; /* Makes the scrollbar wider */
+}
+
+.ombre-card-sheet .ombre-card-body::-webkit-scrollbar-track {
+    background: var(--theme-background-light, #e0e0e0); /* Light background for the track, adjust var as needed */
+    border-radius: 10px; /* Rounded corners for the track */
+    margin: 2px 0; /* Optional: adds a little space at the top and bottom of the track */
+}
+
+.ombre-card-sheet .ombre-card-body::-webkit-scrollbar-thumb {
+    background-color: var(--theme-primary-color, #2C606D); /* Main theme color for the thumb */
+    border-radius: 10px; /* Rounded corners for the thumb */
+    border: 3px solid var(--theme-background-light, #e0e0e0); /* Creates a "padding" effect around the thumb */
+}
+
+.ombre-card-sheet .ombre-card-body::-webkit-scrollbar-thumb:hover {
+    background-color: var(--theme-primary-dark, #1E4A55); /* Darker theme color on hover */
+}
+
+/* For Firefox */
+.ombre-card-sheet .ombre-card-body {
+    scrollbar-width: auto; /* 'auto' is default, 'thin' is an option. 'auto' allows for a wider scrollbar if browser supports it. */
+    scrollbar-color: var(--theme-primary-color, #2C606D) var(--theme-background-light, #e0e0e0); /* thumb color and track color */
+}
+
+/* Styles for Contrôle des Pouvoirs Amis Section */
+.controle-pouvoirs-amis-container {
+    grid-column: 1 / -1; /* Spans all 5 columns of the attribute grid */
+    margin-top: 8px;
+    margin-bottom: 12px;
+}
+
+.controle-pouvoirs-amis-details {
+    padding: 8px 12px; /* Reduced padding compared to typical collapsible sections */
+    background-color: rgba(0, 0, 0, 0.02); /* A very subtle background, or use 'transparent' */
+    border: 1px solid var(--color-border-light-tertiary, #ddd); /* Lighter border */
+    border-radius: 3px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05); /* Subtle shadow for a slight lift */
+}
+
+.controle-pouvoirs-amis-section {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.controle-pouvoirs-amis-header {
+    margin: 0 0 8px 0;
+    font-family: var(--theme-font-header, Arial, sans-serif);
+    font-size: 1.0em;
+    font-weight: bold;
+    color: var(--theme-primary-color);
+    text-align: left;
+    border-bottom: 1px solid var(--color-border-light-secondary, #eee);
+    padding-bottom: 4px;
+}
+
+.controle-pouvoirs-amis-list {
+    display: flex;
+    flex-direction: column;
+    gap: 6px; /* Espace entre chaque ligne d'ami */
+}
+
+.controle-pouvoirs-amis-grid-header,
+.controle-pouvoirs-ami-item {
+    display: grid;
+    grid-template-columns: 40px 1fr 70px 40px; /* ID, Name, Control, Actions */
+    align-items: center;
+    gap: 8px;
+    padding: 4px 0; /* Add some padding to rows */
+}
+
+.controle-pouvoirs-amis-grid-header > div {
+    font-weight: bold;
+    color: var(--theme-primary-color);
+    font-size: 0.9em;
+}
+
+.ami-id-display {
+    text-align: center;
+    font-size: 0.9em;
+    color: var(--theme-text-muted);
+}
+
+.controle-pouvoirs-ami-checkbox {
+    justify-self: center; /* Center checkbox in its grid cell */
+    margin: 0; /* Reset margin if any */
+}
+
+.controle-pouvoirs-ami-input {
+    flex-grow: 1; /* L'input prend l'espace restant */
+    padding: 4px 6px;
+    border: 1px solid var(--theme-border-color);
+    border-radius: 3px;
+    background: var(--theme-background-light);
+    font-size: 13px;
+}
+
+.controle-pouvoirs-ami-button {
+    flex-shrink: 0;
+    width: 24px; /* Taille des boutons +/- */
+    height: 24px;
+    padding: 0; /* Ajustez si l'icône n'est pas centrée */
+    font-size: 0.9em; /* Taille de l'icône dans le bouton */
+    background-color: var(--theme-primary-light);
+    border: 1px solid var(--theme-primary-medium);
+    color: var(--theme-primary-color);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 3px;
+}
+.controle-pouvoirs-ami-button:hover:not(:disabled) {
+    background-color: var(--theme-primary-medium);
+}
+.controle-pouvoirs-ami-button.add-controle-pouvoirs-ami { /* Specific for the add button */
+    width: auto; /* Allow it to size to content */
+    padding: 4px 8px;
+    margin-top: 5px;
+}
+
+/* Styles for Ombre Linked Journals Section */
+.ombre-card-sheet .ombre-linked-journals-section {
+    /* Padding, background, border, radius now handled by .toggleable-content */
+    /* margin-top: 0; Already handled by .toggleable-content */
+    border-top: 1px solid var(--theme-border-light); /* Add a top border when open */
+}
+
+.ombre-card-sheet .ombre-linked-journals-section .header-controls {
+    display: flex;
+    justify-content: flex-end; /* Align button to the right */
+    margin-bottom: 8px;
+}
+
+.ombre-card-sheet .ombre-linked-journals-section .journal-create-button {
+    padding: 4px 8px;
+    font-size: 0.9em;
+    background-color: var(--theme-primary-light);
+    border: 1px solid var(--theme-primary-medium);
+    color: var(--theme-primary-color);
+    cursor: pointer;
+    border-radius: 3px;
+    text-decoration: none;
+}
+.ombre-card-sheet .ombre-linked-journals-section .journal-create-button:hover {
+    background-color: var(--theme-primary-medium);
+}
+
+.ombre-card-sheet .journal-drop-target {
+    border: 2px dashed var(--theme-primary-color);
+    border-radius: 4px;
+    padding: 10px;
+    text-align: center;
+    background-color: var(--theme-primary-light);
+    color: var(--theme-text-muted);
+    min-height: 60px;
+}
+
+.ombre-card-sheet .linked-journals-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.ombre-card-sheet .linked-journals-list .journal-list-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px;
+    border-bottom: 1px solid var(--theme-border-light);
+}
+.ombre-card-sheet .linked-journals-list .journal-list-item:last-child {
+    border-bottom: none;
+}
+.ombre-card-sheet .linked-journals-list .journal-name {
+    flex-grow: 1;
+}
+.ombre-card-sheet .linked-journals-list .item-controls a {
+    margin-left: 8px;
+    color: var(--theme-primary-color);
+    cursor: pointer;
+}
+.ombre-card-sheet .linked-journals-list .item-controls a:hover {
+    color: var(--theme-primary-dark);
+}

@@ -1,0 +1,269 @@
+/* === Rich Text Editor Styles === */
+
+/* --- Actor Sheet Editors (Description & Possessions Tabs) --- */
+
+/* Main container for the editor on actor sheets */
+.editor-container {
+    min-height: 800px; /* Ensure the overall container is at least this tall */
+}
+
+/* Specific container styling for certain tabs */
+.tab[data-tab="description"] .editor-container,
+.tab[data-tab="possessions"] .editor-container {
+    border: 1px solid var(--theme-border-color);
+    border-radius: 4px;
+    padding: 10px;
+    background-color: var(--theme-background-alt);
+}
+
+/* Display mode (viewing content) */
+.editor-container .editor-content {
+    min-height: 800px; /* Double the typical default content height */
+    overflow-y: auto; /* Add a vertical scrollbar if content exceeds min-height */
+    resize: vertical; /* Allow users to manually resize the editor vertically */
+    box-sizing: border-box;
+}
+
+/* More specific display text styling */
+.tab[data-tab="description"] .editor-display .editor-text,
+.tab[data-tab="possessions"] .editor-display .editor-text {
+    padding: 8px;
+    background-color: rgba(255, 255, 255, 0.05); /* Using rgba for a light, transparent background */
+    border: 1px solid var(--theme-border-light);
+    border-radius: 3px;
+    font-family: var(--theme-font-body, "Arial", sans-serif);
+    color: var(--theme-text-color);
+}
+
+/* Edit mode (TinyMCE active) */
+.editor-container .editor-edit textarea.editor,
+.editor-container .editor-edit .tox-tinymce,
+.editor-container .editor-edit .tox-edit-area__iframe {
+    overflow-y: auto; /* Add vertical scrollbar when content overflows */
+    min-height: 800px !important;
+    box-sizing: border-box;
+}
+
+/* Edit/Save/Cancel buttons and icons */
+.tab[data-tab="description"] .editor-icon,
+.tab[data-tab="possessions"] .editor-icon {
+    text-align: right;
+    margin-top: 5px;
+}
+
+.tab[data-tab="description"] .editor-icon .editor-edit-btn,
+.tab[data-tab="possessions"] .editor-icon .editor-edit-btn {
+    cursor: pointer;
+    color: var(--theme-primary-color);
+}
+
+.tab[data-tab="description"] .editor-actions button,
+.tab[data-tab="possessions"] .editor-actions button {
+    padding: 6px 12px;
+    margin-top: 8px;
+    margin-right: 5px;
+    border: 1px solid var(--theme-primary-dark);
+    background-color: var(--theme-primary-color);
+    font-family: var(--theme-font-body, "Arial", sans-serif);
+    color: white;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.tab[data-tab="description"] .editor-actions button:hover,
+.tab[data-tab="possessions"] .editor-actions button:hover {
+    background-color: var(--theme-primary-dark);
+}
+
+/* Label above the editor */
+.tab[data-tab="description"] .form-group.full-width > label { 
+    display: block;
+    font-weight: bold;
+    font-family: var(--theme-font-header, "Arial", sans-serif);
+    margin-bottom: 5px;
+    color: var(--theme-text-color);
+}
+
+/* --- Item Sheet Editors (Ombre, Artefact, Creature) --- */
+
+/* Main container rendered by the {{editor}} helper */
+.ombre-card-sheet .tab[data-tab="description"] .editor,
+.artefact-card-sheet .tab[data-tab="description"] .editor,
+.creature-card-sheet .tab[data-tab="description"] .editor,
+.artefactabyssal-sheet .tab[data-tab="description"] .editor,
+.pnj-actor-sheet .biography-section .editor,
+.voiesecrete-sheet .tab[data-tab="description"] .editor,
+.mots-pouvoirs-sheet .tab[data-tab="description"] .editor,
+.catalyseur-sheet .tab[data-tab="description"] .editor,
+.ingredient-sheet .tab[data-tab="description"] .editor,
+.receptacle-sheet .editor,
+.sortileges-sheet .tab[data-tab="description"] .editor,
+.miroir-sheet .tab[data-tab="description"] .editor,
+.rune-sheet .editor {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column; 
+    border: 1px solid var(--theme-border-color);
+    border-radius: 4px;
+    background-color: var(--theme-background-light);
+    /* color is now set on .editor-content directly for better specificity */
+}
+
+/* The area where the non-editable content is displayed */
+.ombre-card-sheet .tab[data-tab="description"] .editor .editor-content,
+.artefact-card-sheet .tab[data-tab="description"] .editor .editor-content,
+.creature-card-sheet .tab[data-tab="description"] .editor .editor-content,
+.catalyseur-sheet .tab[data-tab="description"] .editor .editor-content,
+.pnj-actor-sheet .biography-section .editor .editor-content,
+.voiesecrete-sheet .tab[data-tab="description"] .editor .editor-content,
+.mots-pouvoirs-sheet .tab[data-tab="description"] .editor .editor-content,
+.ingredient-sheet .tab[data-tab="description"] .editor .editor-content,
+.artefactabyssal-sheet .tab[data-tab="description"] .editor .editor-content,
+.receptacle-sheet .editor .editor-content,
+.sortileges-sheet .tab[data-tab="description"] .editor .editor-content,
+.miroir-sheet .tab[data-tab="description"] .editor .editor-content,
+.rune-sheet .editor .editor-content {
+    flex-grow: 1;
+    overflow-y: auto;
+    min-height: calc(14px * 1.6 * 15);
+    /* min-height is now handled by the general .item-sheet rule below */
+    /* color is now inherited from the parent .editor container */
+    padding: 8px 10px; /* Add padding here instead of on p tags */
+}
+
+/* Paragraphs within the editor */
+.ombre-card-sheet .tab[data-tab="description"] .editor .editor-content p,
+.artefact-card-sheet .tab[data-tab="description"] .editor .editor-content p,
+.creature-card-sheet .tab[data-tab="description"] .editor .editor-content p,
+.pnj-actor-sheet .biography-section .editor .editor-content p,
+.voiesecrete-sheet .tab[data-tab="description"] .editor .editor-content p,
+.mots-pouvoirs-sheet .tab[data-tab="description"] .editor .editor-content p,
+.catalyseur-sheet .tab[data-tab="description"] .editor .editor-content p,
+.ingredient-sheet .tab[data-tab="description"] .editor .editor-content p,
+.artefactabyssal-sheet .tab[data-tab="description"] .editor .editor-content p,
+.receptacle-sheet .editor .editor-content p,
+.sortileges-sheet .tab[data-tab="description"] .editor .editor-content p,
+.miroir-sheet .tab[data-tab="description"] .editor .editor-content p,
+.rune-sheet .editor .editor-content p {
+    padding: 0; /* Padding is now on the parent .editor-content */
+    font-size: 14px;
+    line-height: 1.6;
+    /* color is inherited from .editor-content */
+    margin-bottom: 0.5em;
+}
+
+/* Spacing for paragraphs within the editor content */
+.ombre-card-sheet .ombre-quick-description .editor .editor-content p,
+.artefact-card-sheet .tab[data-tab="description"] .editor .editor-content p,
+.creature-card-sheet .creature-quick-description .editor .editor-content p,
+.pnj-actor-sheet .biography-section .editor .editor-content p,
+.voiesecrete-sheet .tab[data-tab="description"] .editor .editor-content p,
+.mots-pouvoirs-sheet .tab[data-tab="description"] .editor .editor-content p,
+.catalyseur-sheet .tab[data-tab="description"] .editor .editor-content p,
+.ingredient-sheet .tab[data-tab="description"] .editor .editor-content p,
+.artefactabyssal-sheet .tab[data-tab="description"] .editor .editor-content p,
+.receptacle-sheet .editor .editor-content p,
+.sortileges-sheet .tab[data-tab="description"] .editor .editor-content p,
+.miroir-sheet .tab[data-tab="description"] .editor .editor-content p,
+.rune-sheet .editor .editor-content p {
+    margin-bottom: 0.5em;
+}
+.ombre-card-sheet .tab[data-tab="description"] .editor .editor-content p:last-child,
+.artefact-card-sheet .tab[data-tab="description"] .editor .editor-content p:last-child,
+.pnj-actor-sheet .biography-section .editor .editor-content p:last-child,
+.voiesecrete-sheet .tab[data-tab="description"] .editor .editor-content p:last-child,
+.mots-pouvoirs-sheet .tab[data-tab="description"] .editor .editor-content p:last-child,
+.creature-card-sheet .tab[data-tab="description"] .editor .editor-content p:last-child,
+.catalyseur-sheet .tab[data-tab="description"] .editor .editor-content p:last-child,
+.artefactabyssal-sheet .tab[data-tab="description"] .editor .editor-content p:last-child,
+.receptacle-sheet .editor .editor-content p:last-child,
+.sortileges-sheet .tab[data-tab="description"] .editor .editor-content p:last-child,
+.miroir-sheet .tab[data-tab="description"] .editor .editor-content p:last-child,
+.rune-sheet .editor .editor-content p:last-child {
+    margin-bottom: 0;
+}
+
+/* The edit button provided by {{editor button=true}} */
+.ombre-card-sheet .tab[data-tab="description"] .editor a.editor-edit,
+.artefact-card-sheet .tab[data-tab="description"] .editor a.editor-edit,
+.pnj-actor-sheet .biography-section .editor a.editor-edit,
+.voiesecrete-sheet .tab[data-tab="description"] .editor a.editor-edit,
+.mots-pouvoirs-sheet .tab[data-tab="description"] .editor a.editor-edit,
+.creature-card-sheet .tab[data-tab="description"] .editor a.editor-edit,
+.catalyseur-sheet .tab[data-tab="description"] .editor a.editor-edit,
+.ingredient-sheet .tab[data-tab="description"] .editor a.editor-edit,
+.artefactabyssal-sheet .tab[data-tab="description"] .editor a.editor-edit,
+.receptacle-sheet .editor a.editor-edit,
+.sortileges-sheet .tab[data-tab="description"] .editor a.editor-edit,
+.miroir-sheet .tab[data-tab="description"] .editor a.editor-edit,
+.rune-sheet .editor a.editor-edit {
+    align-self: flex-end;
+    margin: 5px;
+    font-size: 0.9em;
+    padding: 4px 6px; 
+    background-color: var(--theme-background-alt);
+    border: 1px solid var(--theme-border-light, #cccccc);
+    border-radius: 3px;
+    color: var(--theme-primary-color);
+    cursor: pointer;
+    line-height: 1;
+}
+
+.ombre-card-sheet .tab[data-tab="description"] .editor a.editor-edit:hover,
+.pnj-actor-sheet .biography-section .editor a.editor-edit:hover,
+.voiesecrete-sheet .tab[data-tab="description"] .editor a.editor-edit:hover,
+.mots-pouvoirs-sheet .tab[data-tab="description"] .editor a.editor-edit:hover,
+.artefact-card-sheet .tab[data-tab="description"] .editor a.editor-edit:hover,
+.creature-card-sheet .tab[data-tab="description"] .editor a.editor-edit:hover,
+.catalyseur-sheet .tab[data-tab="description"] .editor a.editor-edit:hover,
+.ingredient-sheet .tab[data-tab="description"] .editor a.editor-edit:hover,
+.artefactabyssal-sheet .tab[data-tab="description"] .editor a.editor-edit:hover,
+.receptacle-sheet .editor a.editor-edit:hover,
+.sortileges-sheet .tab[data-tab="description"] .editor a.editor-edit:hover,
+.miroir-sheet .tab[data-tab="description"] .editor a.editor-edit:hover,
+.rune-sheet .editor a.editor-edit:hover {
+    background-color: var(--theme-primary-light);
+    color: var(--theme-primary-dark);
+    border-color: var(--theme-border-medium);
+}
+
+/* This block is now superseded by the more general .item-sheet rule below, but we'll keep it for specificity if needed later.
+   The min-height property itself is handled by the harmonized rule. */
+.ombre-card-sheet .tab[data-tab="description"] .editor .editor-content,
+.pnj-actor-sheet .biography-section .editor .editor-content,
+.voiesecrete-sheet .tab[data-tab="description"] .editor .editor-content,
+.mots-pouvoirs-sheet .tab[data-tab="description"] .editor .editor-content,
+.artefact-card-sheet .tab[data-tab="description"] .editor .editor-content,
+.creature-card-sheet .tab[data-tab="description"] .editor .editor-content,
+.artefactabyssal-sheet .tab[data-tab="description"] .editor .editor-content,
+.catalyseur-sheet .tab[data-tab="description"] .editor .editor-content,
+.ingredient-sheet .tab[data-tab="description"] .editor .editor-content,
+.receptacle-sheet .editor .editor-content,
+.miroir-sheet .tab[data-tab="description"] .editor .editor-content,
+.sortileges-sheet .tab[data-tab="description"] .editor .editor-content,
+.rune-sheet .editor .editor-content {
+    box-sizing: border-box; /* Ensure box-sizing is consistent */
+}
+
+/* Lock overlay for Artefact and Creature sheets */
+.artefact-card-sheet .editor-lock-overlay,
+.creature-card-sheet .editor-lock-overlay {
+    position: absolute;
+    top: 2em;
+    left: 0;
+    width: 100%;
+    height: calc(100% - 2em);
+    background-color: var(--theme-primary-shadow);
+    z-index: 10;
+    cursor: not-allowed;
+    border-radius: 4px;
+}
+
+/* Harmonized min-height for all item sheet editors */
+.item-sheet .editor .editor-content,
+.item-sheet .editor .editor-edit textarea.editor,
+.item-sheet .editor .editor-edit .tox-tinymce,
+.item-sheet .editor .editor-edit .tox-edit-area__iframe { 
+    overflow-y: auto; /* Add vertical scrollbar when content overflows */
+    min-height: 800px !important; /* Make item sheet editors taller */
+}

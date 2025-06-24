@@ -1,0 +1,21 @@
+<!-- systems/ambre/templates/partials/ombre-controle-pouvoirs-amis.html -->
+<div class="controle-pouvoirs-amis-section">
+    <h4 class="controle-pouvoirs-amis-header">Amis autorisés (Niveau 15 requis)</h4>
+    <div class="controle-pouvoirs-amis-grid-header">
+        <div class="ami-grid-id">ID</div>
+        <div class="ami-grid-name">Nom de l'ami</div>
+        <div class="ami-grid-control">Contrôle</div>
+        <div class="ami-grid-actions">Actions</div>
+    </div>
+    <div class="controle-pouvoirs-amis-list">
+        {{#each system.controlePouvoirsAmis as |ami index|}}
+        <div class="controle-pouvoirs-ami-item">
+            <div class="ami-id-display">{{add @index 1}}</div>
+            <input type="text" name="system.controlePouvoirsAmis.{{index}}.name" value="{{ami.name}}" placeholder="Nom de l'ami" class="controle-pouvoirs-ami-input" {{#if ../system.locked}}disabled{{/if}}/>
+            <input type="checkbox" name="system.controlePouvoirsAmis.{{index}}.hasControl" class="controle-pouvoirs-ami-checkbox" {{checked ami.hasControl}} {{#if ../system.locked}}disabled{{/if}} data-index="{{index}}"/>
+            <a class="remove-controle-pouvoirs-ami controle-pouvoirs-ami-button" data-index="{{index}}" title="Retirer cet ami" {{#if ../system.locked}}style="display:none;"{{/if}}><i class="fas fa-trash"></i></a>
+        </div>
+        {{/each}}
+    </div>
+    <button type="button" class="add-controle-pouvoirs-ami controle-pouvoirs-ami-button" {{#if ../system.locked}}style="display:none;"{{/if}}><i class="fas fa-plus"></i> Ajouter un ami</button>
+</div>

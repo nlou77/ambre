@@ -1,0 +1,461 @@
+{{!-- 
+    This partial displays specific talents for various powers.
+    It expects to receive the entire `pouvoirData` object, which contains
+    data for all powers (e.g., pouvoirData.logrus, pouvoirData.atouts).
+--}}
+
+{{#if sortedTalentSections.length}}
+<div class="talents-specifiques-collapsible-group">
+    <h3 class="collapsible-header talents-main-header {{#if talentsSpecifiquesExpanded}}expanded{{/if}}">
+        <span>Talents Spécifiques des Pouvoirs</span>
+        <span class="collapsible-icon"><i class="fas {{#if talentsSpecifiquesExpanded}}fa-chevron-down{{else}}fa-chevron-right{{/if}}"></i></span>
+    </h3>
+    <div class="collapsible-content" {{#unless talentsSpecifiquesExpanded}}style="display: none;"{{/unless}}>
+
+        {{#each sortedTalentSections as |talentConfig|}}
+            <div class="talent-block-draggable" draggable="true" data-talent-key="{{talentConfig.key}}">
+
+                {{!-- Logrus Talents --}}
+                {{#if (eq talentConfig.key "logrus")}}
+                    <div class="talents-specifiques-section" data-pouvoir-type="logrus">
+                        <h4>Talents du Logrus</h4>
+                        <div class="talent-item">
+                            <span class="talent-label">Nombre d'Extensions :</span>
+                            <div class="talent-circles-container">
+                                {{#each talentConfig.data.extensionsCircles}}
+                                    <span class="talent-circle clickable-talent-circle {{#if this.filled}}filled{{else}}empty{{/if}}" data-talent-type="logrus" data-circle-index="{{@index}}"></span>
+                                {{/each}}
+                            </div>
+                        </div>
+                        {{!-- Future talents for Logrus can be added here --}}
+                    </div>
+                {{/if}}
+                {{!-- Abreuvoir Talents - Puissance Counter --}}
+                {{#if (eq talentConfig.key "abreuvoir_puissance")}}
+                    <div class="talents-specifiques-section" data-pouvoir-type="abreuvoir">
+                        <h4>Talents de l'Abreuvoir</h4>
+                        <div class="talent-item">
+                            <div class="puissance-tracker" style="display: flex; flex-direction: column; align-items: flex-start; gap: 5px;">
+                                <span class="talent-label">Puissance :<span class="talent-value-text"> ({{talentConfig.data.usedPuissance}} / {{talentConfig.data.maxPuissance}})</span></span>
+                                <div class="talent-circles-container multi-line">
+                                    {{#each talentConfig.data.puissanceCircles as |circle index|}}
+                                        <span class="talent-circle clickable-talent-circle {{#if circle.filled}}filled{{else}}empty{{/if}}" data-talent-type="abreuvoir_puissance" data-circle-index="{{index}}" ></span>
+                                    {{/each}}
+                                </div>
+                                <div class="puissance-controls" style="display: flex; gap: 3px;">
+                                    <button type="button" class="puissance-change-btn" data-change-value="-10" title="-10"><i class="fas fa-angle-double-left"></i></button>
+                                    <button type="button" class="puissance-change-btn" data-change-value="-5" title="-5"><i class="fas fa-angle-left"></i></button>
+                                    <button type="button" class="puissance-change-btn" data-change-value="-1" title="-1"><i class="fas fa-minus"></i></button>
+                                    <button type="button" class="puissance-change-btn" data-change-value="+1" title="+1"><i class="fas fa-plus"></i></button>
+                                    <button type="button" class="puissance-change-btn" data-change-value="+5" title="+5"><i class="fas fa-angle-right"></i></button>
+                                    <button type="button" class="puissance-change-btn" data-change-value="+10" title="+10"><i class="fas fa-angle-double-right"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                        <small class="talent-subtitle">
+                            (Abreuvoir Niveau {{talentConfig.data.niveauNumeric}} requis: 1+)
+                        </small>
+                    </div>
+                {{/if}}
+                {{!-- Atouts Talents --}}
+                {{#if (eq talentConfig.key "atouts")}}
+                    <div class="talents-specifiques-section" data-pouvoir-type="atouts">
+                        <h4>Talents d'Atouts</h4>
+                        <div class="talent-item">
+                            <span class="talent-label">Nombre d'Atouts mémorisés :</span>
+                            <div class="talent-circles-container">
+                                {{#each talentConfig.data.atoutsCircles}}
+                                    <span class="talent-circle {{#if this.filled}}filled{{else}}empty{{/if}}" data-talent-type="atouts" data-circle-index="{{@index}}"></span>
+                                {{/each}}
+                            </div>
+                            <span class="talent-value-text"> ({{talentConfig.data.currentUsedAtoutSlots}} / {{talentConfig.data.nombreAtoutsMemorisable}})</span>
+                        </div>
+                        {{!-- Future talents for Atouts can be added here --}}
+                    </div>
+                {{/if}}
+
+                {{!-- Section for Mots de Pouvoirs, specific to 'magie' pouvoir --}}
+                {{#if (eq talentConfig.key "magie_motspouvoirs")}}
+                    <div class="mots-pouvoirs-section drop-target"
+                            data-pouvoir-type="magie"
+                            data-group-type="motspouvoirs">
+
+                        <div class="motspouvoirs-header-area">
+                            <h4 style="display: flex; align-items: center; flex-wrap: wrap;">
+                                Mots de Pouvoirs
+                                {{#if talentConfig.data.maxMotsPouvoirs}}
+                                    <span class="talent-circles-container" style="display: inline-flex; vertical-align: middle; margin-left: 8px; margin-right: 8px;">
+                                        {{#each talentConfig.data.motsPouvoirsCircles}}
+                                            <span class="talent-circle {{#if this.filled}}filled{{else}}empty{{/if}}"></span>
+                                        {{/each}}
+                                    </span>
+                                {{/if}}
+                                <small style="margin-top: auto; margin-bottom: auto;">
+                                    (Magie Niveau {{talentConfig.data.niveauNumeric}} requis: 2+{{#if talentConfig.data.maxMotsPouvoirs}} – {{talentConfig.data.currentMotsPouvoirsCount}} / {{talentConfig.data.maxMotsPouvoirs}} Mots acquis{{/if}})
+                                </small>
+                            </h4>
+                                                        
+                        </div>
+                        {{!-- Special Slot for Mots de Pouvoirs Header (Artefact or Catalyseur) --}}
+                            <div class="motspouvoirs-header-special-slot drop-target" 
+                                 data-special-slot="magie_motspouvoirs_catalyst_artefact" {{!-- New unique identifier --}}
+                                 title="{{#if talentConfig.data.headerItemForMotsPouvoirs}}Objet lié : {{talentConfig.data.headerItemForMotsPouvoirs.name}}{{else}}Déposer un Artefact ou Catalyseur unique ici{{/if}}">
+                                {{#if talentConfig.data.headerItemForMotsPouvoirs}}
+                                    <div class="linked-item-display item" data-item-id="{{talentConfig.data.headerItemForMotsPouvoirs._id}}"> {{!-- More generic class --}}
+                                        <img src="{{talentConfig.data.headerItemForMotsPouvoirs.img}}" class="item-image" width="32" height="32" />
+                                        <span class="item-name item-name-clickable">{{talentConfig.data.headerItemForMotsPouvoirs.name}}</span>
+                                        <div class="item-controls">
+                                            <a class="item-control item-edit" title="Éditer l'objet"><i class="fas fa-edit"></i></a>
+                                            <a class="item-control item-delete" title="Retirer l'objet"><i class="fas fa-trash"></i></a>
+                                        </div>
+                                    </div>
+                                {{else}}
+                                    <span class="drop-hint-small">Déposer un Artefact Catalyseur</span>
+                                    <i class="fas fa-gem drop-icon-placeholder"></i>
+                                {{/if}}
+                            </div>
+                        <p class="drop-hint">
+                            Déposez ici les objets de type "Mot de Pouvoir".
+                        </p>
+
+                        <ul class="item-list motspouvoirs-item-list">
+                            {{#each talentConfig.data.linkedMotsPouvoirs}}
+                                <li class="item motspouvoirs-item" data-item-id="{{this._id}}">
+                                    <img src="{{this.img}}" title="{{this.name}}" width="24" height="24" class="item-image item-icon" />
+                                    <span class="item-name item-name-clickable">{{this.name}}</span>
+                                    <div class="item-controls">
+                                        <a class="item-control item-edit" title="Éditer"><i class="fas fa-edit"></i></a>
+                                        <a class="item-control item-delete" title="Supprimer"><i class="fas fa-trash"></i></a>
+                                    </div>
+                                </li>
+                            {{else}}
+                                <li class="no-items-message">
+                                    Aucun Mot de Pouvoir lié.
+                                </li>
+                            {{/each}}
+                        </ul>
+                    </div>
+                {{/if}}
+
+             {{!-- Section for Sortilèges, specific to 'magie' pouvoir --}}
+                {{#if (eq talentConfig.key "magie_sortileges")}} {{!-- This key is used in pjActorSheet.js talentConfigurations --}}
+                    <div class="sortileges-section drop-target"
+                            data-pouvoir-type="magie"
+                            data-group-type="sortileges">
+
+                        <div class="sortileges-header-area">
+                         <h4 style="display: flex; align-items: center; flex-wrap: wrap;">
+                                Sortilèges                               
+                                <small style="margin-top: auto; margin-bottom: auto;">
+                                    (Magie Niveau {{talentConfig.data.niveauNumeric}} requis: 4+)
+                                </small>
+                            </h4>
+                                                        
+                        </div>
+                        <ul class="item-list sortileges-item-list">
+                         {{#each talentConfig.data.linkedSortileges}}
+                                <li class="item sortileges-item" data-item-id="{{this._id}}">
+                                    <img src="{{this.img}}" title="{{this.name}}" width="24" height="24" class="item-image item-icon" />
+                                    <span class="item-name item-name-clickable">{{this.name}}</span>
+                                    <div class="item-controls">
+                                    <div class="item-controls">
+                                        <a class="item-control item-edit" title="Éditer"><i class="fas fa-edit"></i></a>
+                                        <a class="item-control item-delete" title="Supprimer"><i class="fas fa-trash"></i></a>
+                                    </div>
+                                </li>
+                            {{else}}
+                                <li class="no-items-message"> 
+                                 Aucun Sortilège lié.
+                                </li>
+                            {{/each}}
+                        </ul>
+                    </div>
+                {{/if}}
+
+                {{!-- Section for Réceptacles, specific to 'magie' pouvoir --}}
+                {{#if (eq talentConfig.key "magie_receptacles")}} {{!-- New key for receptacles --}}
+                    <div class="capacites-animales-section drop-target" {{!-- Changed class --}}
+                            data-pouvoir-type="magie"
+                            data-group-type="receptacles">
+
+                        <h4 style="display: flex; align-items: center; flex-wrap: nowrap;"> {{!-- Changed flex-wrap and removed receptacles-header-area div --}}
+                            Réceptacles
+                            {{#if talentConfig.data.maxReceptacles}}
+                                <span class="talent-circles-container" style="display: inline-flex; vertical-align: middle; margin-left: 8px; margin-right: 8px;">
+                                    {{#each talentConfig.data.receptaclesCircles}}
+                                        <span class="talent-circle {{#if this.filled}}filled{{else}}empty{{/if}}"></span>
+                                    {{/each}}
+                                </span>
+                            {{/if}}
+                        </h4>
+                        <small class="talent-subtitle"> {{!-- Added class, removed inline style --}}
+                            (Magie Niveau {{talentConfig.data.niveauNumeric}} requis: 3+{{#if talentConfig.data.maxReceptacles}} – {{talentConfig.data.currentReceptaclesCount}} / {{talentConfig.data.maxReceptacles}} Réceptacles acquis{{/if}}) {{!-- Used currentReceptaclesCount for consistency --}}
+                        </small>
+                        <p class="drop-hint">
+                            Déposez ici les objets de type "Réceptacle".
+                        </p>
+                        <ul class="item-list capaciteanimale-item-list"> {{!-- Changed class --}}
+                         {{#each talentConfig.data.linkedReceptacles}}
+                                <li class="item capaciteanimale-item" data-item-id="{{this._id}}"> {{!-- Changed class --}}
+                                    <img src="{{this.img}}" title="{{this.name}}" width="24" height="24" class="item-image item-icon" />
+                                    <span class="item-name item-name-clickable">{{this.name}}</span>
+                                    <div class="item-controls">
+                                        <a class="item-control item-edit" title="Éditer"><i class="fas fa-edit"></i></a>
+                                        <a class="item-control item-delete" title="Supprimer"><i class="fas fa-trash"></i></a>
+                                    </div>
+                                </li>
+                            {{else}}
+                                <li class="no-items-message">
+                                 Aucun Réceptacle lié.
+                                </li>
+                            {{/each}}
+                        </ul>
+                    </div>
+                {{/if}}
+
+                {{!-- Section for Runes, specific to 'magie' pouvoir --}}
+                {{#if (eq talentConfig.key "magie_runes")}}
+                    <div class="capacites-animales-section drop-target" {{!-- Using same style as receptacles/miroirs --}}
+                            data-pouvoir-type="magie"
+                            data-group-type="runes">
+
+                        <h4 style="display: flex; align-items: center; flex-wrap: nowrap;">
+                            Runes
+                            {{#if talentConfig.data.maxRunes}}
+                                <span class="talent-circles-container" style="display: inline-flex; vertical-align: middle; margin-left: 8px; margin-right: 8px;">
+                                    {{#each talentConfig.data.runesCircles}}
+                                        <span class="talent-circle {{#if this.filled}}filled{{else}}empty{{/if}}"></span>
+                                    {{/each}}
+                                </span>
+                            {{/if}}
+                        </h4>
+                        <small class="talent-subtitle">
+                            (Magie Niveau {{talentConfig.data.niveauNumeric}} requis: 5+{{#if talentConfig.data.maxRunes}} – {{talentConfig.data.currentRunesCount}} / {{talentConfig.data.maxRunes}} Runes acquises{{/if}})
+                        </small>
+                        <p class="drop-hint">
+                            Déposez ici les objets de type "Rune".
+                        </p>
+                        <ul class="item-list capaciteanimale-item-list"> {{!-- Using same style --}}
+                            {{#each talentConfig.data.linkedRunes}}
+                                <li class="item capaciteanimale-item" data-item-id="{{this._id}}"> {{!-- Using same style --}}
+                                    <img src="{{this.img}}" title="{{this.name}}" width="24" height="24" class="item-image item-icon" />
+                                    <span class="item-name item-name-clickable">{{this.name}}</span>
+                                    <div class="item-controls">
+                                        <a class="item-control item-edit" title="Éditer"><i class="fas fa-edit"></i></a>
+                                        <a class="item-control item-delete" title="Supprimer"><i class="fas fa-trash"></i></a>
+                                    </div>
+                                </li>
+                            {{else}}
+                                <li class="no-items-message">
+                                    Aucune Rune liée.
+                                </li>
+                            {{/each}}
+                        </ul>
+                    </div>
+                {{/if}}
+
+                {{!-- Section for Miroirs, specific to 'chimerion' pouvoir --}}
+                {{#if (eq talentConfig.key "chimerion_miroirs")}}
+                    <div class="capacites-animales-section drop-target" {{!-- Using same style as receptacles/capacites animales --}}
+                            data-pouvoir-type="chimerion"
+                            data-group-type="miroirs">
+
+                        <h4 style="display: flex; align-items: center; flex-wrap: nowrap;">
+                            Miroirs
+                            {{#if talentConfig.data.maxMiroirs}}
+                                <span class="talent-circles-container" style="display: inline-flex; vertical-align: middle; margin-left: 8px; margin-right: 8px;">
+                                    {{#each talentConfig.data.miroirsCircles}}
+                                        <span class="talent-circle {{#if this.filled}}filled{{else}}empty{{/if}}"></span>
+                                    {{/each}}
+                                </span>
+                            {{/if}}
+                        </h4>
+                        <small class="talent-subtitle">
+                            (Chimérion Niveau {{talentConfig.data.niveauNumeric}} requis: 11+{{#if talentConfig.data.maxMiroirs}} – {{talentConfig.data.currentMiroirsCount}} / {{talentConfig.data.maxMiroirs}} Miroirs acquis{{/if}})
+                        </small>
+                        <p class="drop-hint">
+                            Déposez ici les objets de type "Miroir".
+                        </p>
+                        <ul class="item-list capaciteanimale-item-list"> {{!-- Using same style --}}
+                            {{#each talentConfig.data.linkedMiroirs}}
+                                <li class="item capaciteanimale-item" data-item-id="{{this._id}}"> {{!-- Using same style --}}
+                                    <img src="{{this.img}}" title="{{this.name}}" width="24" height="24" class="item-image item-icon" />
+                                    <span class="item-name item-name-clickable">{{this.name}}</span>
+                                    <div class="item-controls">
+                                        <a class="item-control item-edit" title="Éditer"><i class="fas fa-edit"></i></a>
+                                        <a class="item-control item-delete" title="Supprimer"><i class="fas fa-trash"></i></a>
+                                    </div>
+                                </li>
+                            {{else}}
+                                <li class="no-items-message">
+                                    Aucun Miroir lié.
+                                </li>
+                            {{/each}}
+                        </ul>
+                    </div>
+                {{/if}}
+
+                {{!-- Section for Capacités Animales (Forme Animale), specific to 'metamorphose' pouvoir Niveau 2+ --}}
+                {{#if (eq talentConfig.key "metamorphose_forme")}}
+                    <div class="capacites-animales-section drop-target"
+                            data-pouvoir-type="metamorphose"
+                            data-group-type="capaciteanimale"
+                            data-capacite-subtype="forme">
+                        <h4 style="display: flex; align-items: center; flex-wrap: nowrap;">
+                            Capacités de Forme Animale
+                            {{#if talentConfig.data.maxCapacitesAnimalesForme}}
+                                <span class="talent-circles-container" style="display: inline-flex; vertical-align: middle; margin-left: 8px; margin-right: 8px;">
+                                    {{#each talentConfig.data.capacitesAnimalesFormeCircles}}
+                                        <span class="talent-circle {{#if this.filled}}filled{{else}}empty{{/if}}"></span>
+                                    {{/each}}
+                                </span>
+                            {{/if}}
+                        </h4>
+                        <small class="talent-subtitle">
+                            (Métamorphose Niveau 2+ requis{{#if talentConfig.data.maxCapacitesAnimalesForme}} – {{talentConfig.data.currentCapacitesAnimalesFormeCount}} / {{talentConfig.data.maxCapacitesAnimalesForme}} acquises{{/if}})
+                        </small>
+                        <p class="drop-hint">
+                            Déposez ici les capacités de votre Forme Animale.
+                        </p>
+                        <ul class="item-list capaciteanimale-item-list">
+                            {{#each talentConfig.data.linkedCapacitesAnimalesForme}}
+                                <li class="item capaciteanimale-item" data-item-id="{{this._id}}">
+                                    <img src="{{this.img}}" title="{{this.name}}" width="24" height="24" class="item-image" />
+                                    <span class="item-name item-name-clickable">{{this.name}}</span>
+                                    <div class="item-controls">
+                                        <a class="item-control item-edit" title="Éditer"><i class="fas fa-edit"></i></a>
+                                        <a class="item-control item-delete" title="Supprimer"><i class="fas fa-trash"></i></a>
+                                    </div>
+                                </li>
+                            {{else}}
+                                <li class="no-items-message">
+                                    Aucune Capacité de Forme Animale liée.
+                                </li>
+                            {{/each}}
+                        </ul>
+                    </div>
+                {{/if}}
+
+                {{!-- Section for Capacités Animales Spéciales, specific to 'metamorphose' pouvoir Niveau 8+ --}}
+                {{#if (eq talentConfig.key "metamorphose_speciale")}}
+                    <div class="capacites-animales-section drop-target"
+                            data-pouvoir-type="metamorphose"
+                            data-group-type="capaciteanimale"
+                            data-capacite-subtype="speciale">
+                        <h4 style="display: flex; align-items: center; flex-wrap: nowrap;">
+                            Capacités de Métamorphose
+                            {{#if talentConfig.data.maxCapacitesAnimalesSpeciales}}
+                                <span class="talent-circles-container" style="display: inline-flex; vertical-align: middle; margin-left: 8px; margin-right: 8px;">
+                                    {{#each talentConfig.data.capacitesAnimalesSpecialesCircles}}
+                                        <span class="talent-circle {{#if this.filled}}filled{{else}}empty{{/if}}"></span>
+                                    {{/each}}
+                                </span>
+                            {{/if}}
+                        </h4>
+                        <small class="talent-subtitle">
+                            (Niveau 8+ requis{{#if talentConfig.data.maxCapacitesAnimalesSpeciales}} – {{talentConfig.data.currentCapacitesAnimalesSpecialesCount}} / {{talentConfig.data.maxCapacitesAnimalesSpeciales}} acquises{{/if}})
+                        </small>
+                        <p class="drop-hint">
+                            Déposez ici les Capacités de Métamorphose.
+                        </p>
+                        <ul class="item-list capaciteanimale-speciale-item-list">
+                            {{#each talentConfig.data.linkedCapacitesAnimalesSpeciales}}
+                                <li class="item capaciteanimale-item" data-item-id="{{this._id}}">
+                                    <img src="{{this.img}}" title="{{this.name}}" width="24" height="24" class="item-image" />
+                                    <span class="item-name item-name-clickable">{{this.name}}</span>
+                                    <div class="item-controls">
+                                        <a class="item-control item-edit" title="Éditer"><i class="fas fa-edit"></i></a>
+                                        <a class="item-control item-delete" title="Supprimer"><i class="fas fa-trash"></i></a>
+                                    </div>
+                                </li>
+                            {{else}}
+                                <li class="no-items-message">
+                                    Aucune Capacité de Métamorphose liée.
+                                </li>
+                            {{/each}}
+                        </ul>
+                    </div>
+                {{/if}}
+
+                {{!-- Orbochromat Talents --}}
+                {{#if (eq talentConfig.key "orbochromat_talents")}}
+                    <div class="talents-specifiques-section" data-pouvoir-type="orbochromat">
+                        <h4>Talents d'Orbochromat</h4>
+                        <div class="talent-item-icons">
+                            <span class="talent-icon" data-tooltip-type="brumes"><i class="fas fa-cloud"></i> Brumes</span>
+                            <span class="talent-icon" data-tooltip-type="fluides"><i class="fas fa-tint"></i> Fluides</span>
+                            <span class="talent-icon" data-tooltip-type="etincelles"><i class="fas fa-bolt"></i> Étincelles</span>
+                            <span class="talent-icon" data-tooltip-type="teintes"><i class="fas fa-palette"></i> Teintes</span>
+                        </div>
+                        {{!-- Future talents for Orbochromat can be added here --}}
+                    </div>
+                {{/if}}
+
+                {{!-- Abysses Talents - Failles Counter --}}
+                {{#if (eq talentConfig.key "abysses_failles")}}
+                    <div class="talents-specifiques-section" data-pouvoir-type="abysses">
+                        <h4>Talents des Abysses</h4>
+                        <div class="talent-item">
+                            <span class="talent-label">Nombre de Failles disponibles :</span>
+                            {{#if talentConfig.data.maxFailles}}
+                                <div class="talent-circles-container">
+                                    {{#each talentConfig.data.faillesCircles as |circle index|}}
+                                        <span class="talent-circle clickable-talent-circle {{#if circle.filled}}filled{{else}}empty{{/if}}" data-talent-type="abysses_failles" data-circle-index="{{index}}"></span>
+                                    {{/each}}
+                                </div>
+                                <span class="talent-value-text"> ({{talentConfig.data.maxFailles}})</span>
+                            {{else}}
+                                <span class="talent-value-text"> (0)</span>
+                            {{/if}}
+                        </div>
+                        <small class="talent-subtitle">
+                            (Abysses Niveau {{talentConfig.data.niveauNumeric}} requis: 6+{{#if talentConfig.data.maxFailles}} – Max: {{talentConfig.data.maxFailles}} Failles{{/if}})
+                        </small>
+                        {{!-- New calculated values for Abysses talents --}}
+                        {{#if talentConfig.data.showFaillesCounter}} {{!-- Only show if the counter is visible (Level 6+) --}}
+                            <div class="talent-item">
+                                <span class="talent-label">Taille du portail :</span>
+                                <span class="talent-value-text">{{talentConfig.data.taillePortail}} mètres</span>
+                            </div>
+                            <div class="talent-item">
+                                <span class="talent-label">Zone de dommages abyssaux :</span>
+                                <span class="talent-value-text">{{talentConfig.data.zoneDommagesAbyssaux}} mètres de rayon</span>
+                            </div>
+                            <div class="talent-item">
+                                <span class="talent-label">Dommages de la faille :</span>
+                                <span class="talent-value-text">{{talentConfig.data.dommagesFaille}} points de dommage</span>
+                            </div>
+                        {{/if}}
+                        {{!-- Future talents for Abysses can be added here --}}
+                    </div>
+                {{/if}}
+
+                {{!-- Sabliers Talents - Jours sans connexion --}}
+                {{#if (eq talentConfig.key "sabliers_jours_sans_connexion")}}
+                    <div class="talents-specifiques-section" data-pouvoir-type="sabliers">
+                        <h4>Talents des Sabliers d'Ujuhé</h4>
+                        <div class="talent-item">
+                            <span class="talent-label">Jours sans connexion :</span>
+                            {{#if talentConfig.data.maxJoursSansConnexion}}
+                                <div class="talent-circles-container">
+                                    {{#each talentConfig.data.joursSansConnexionCircles as |circle index|}}
+                                        <span class="talent-circle clickable-talent-circle {{#if circle.filled}}filled{{else}}empty{{/if}}" data-talent-type="sabliers_jours" data-circle-index="{{index}}"></span>
+                                    {{/each}}
+                                </div>
+                                <span class="talent-value-text"> ({{talentConfig.data.usedJoursSansConnexion}} / {{talentConfig.data.maxJoursSansConnexion}})</span>
+                            {{else}}
+                                <span class="talent-value-text"> (0 / 0)</span>
+                            {{/if}}
+                        </div>
+                        <small class="talent-subtitle">
+                            (Sabliers Niveau {{talentConfig.data.niveauNumeric}} requis: 2+)
+                        </small>
+                    </div>
+                {{/if}}
+
+            </div>
+        {{/each}}
+        {{!-- Add other #if blocks here for other pouvoirTypes with talents as they are developed --}}
+    </div>
+</div>
+{{/if}}

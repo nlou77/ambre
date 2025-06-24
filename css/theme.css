@@ -1,0 +1,702 @@
+:root {
+    /* Default Theme (Default) */
+    --theme-primary-color: #2C606D;
+    --theme-primary-dark: #1a4a54;
+    --theme-primary-light: rgba(44, 96, 109, 0.1);
+    --theme-primary-medium: rgba(44, 96, 109, 0.2);
+    --theme-primary-shadow: rgba(44, 96, 109, 0.3);
+    --theme-primary-strong: rgba(44, 96, 109, 0.5);
+    
+    --theme-text-color: #262925;
+    --theme-text-light: #afc4a6;
+    --theme-text-secondary: #4b4b4b;
+    --theme-text-muted: #666;
+    --theme-text-grey: #a1a1a1;
+    
+    --theme-background: url("../../systems/ambre/assets/skin/background/background.webp") repeat / var(--theme-background-size);
+    --theme-background-size: 150px 150px; /* Example size */
+    --theme-background-alt: rgba(255, 255, 255, 0.8);
+    --theme-background-light: rgba(255, 255, 255, 0.9);
+    --theme-background-transparent: rgba(255, 255, 255, 0.05);
+    
+    --theme-border-color: #ccc;
+    --theme-border-light: #ddd;
+    --theme-border-lighter: #eee;
+    --theme-border-dark: #d3d3d3;
+}
+
+/* ===== THEME-SPECIFIC STYLES ===== */
+
+/* Default Theme */
+.actor.theme-defaut {
+    --theme-primary-color: #2C606D;
+    --theme-primary-dark: #1a4a54;
+    --theme-primary-light: rgba(44, 96, 109, 0.1);
+    --theme-background: url("../../systems/ambre/assets/skin/background/background.webp") repeat;
+    --theme-text-color: #262925; /* from root */
+    --theme-text-secondary: #4b4b4b; /* from root */
+    --theme-text-muted: #666666; /* from root */
+    --theme-text-grey: #a1a1a1; /* from root */
+    --theme-text-light: #afc4a6; /* from root, for consistency */
+}
+
+/* Marelle Theme */
+.actor.theme-marelle {
+    --theme-primary-color: #5DADE2; /* Bleu clair et vif pour les accents */
+    --theme-primary-dark: #3488C0;  /* Teinte plus foncée du bleu primaire */
+    --theme-primary-light: rgba(93, 173, 226, 0.15); /* Bleu clair transparent */
+    --theme-primary-medium: rgba(93, 173, 226, 0.25);/* Bleu moyen transparent */
+    --theme-primary-shadow: rgba(93, 173, 226, 0.35);/* Ombre bleutée */
+    --theme-primary-strong: rgba(93, 173, 226, 0.6); /* Bleu prononcé */
+
+    --theme-text-color: #E8F0F5; /* Texte principal très clair, blanc bleuté */
+    --theme-text-secondary: #C0D0D8; /* Texte secondaire plus doux */
+    --theme-text-muted: #90A0A8;   /* Texte discret, gris-bleu */
+    --theme-text-grey: #A8B8C0;    /* Gris bleuté général */
+    --theme-text-light: #F0F8FF;   /* Texte très clair (AliceBlue) pour accents */
+
+    --theme-background: #1B263B; /* Fond bleu marine/ardoise foncé */
+    --theme-background-alt: #283747; /* Variante de fond marine, légèrement plus claire */
+    --theme-background-light: #34495E; /* Fond marine plus clair pour zones spécifiques */
+    --theme-background-transparent: rgba(27, 38, 59, 0.9); /* Fond transparent marine */
+
+    --theme-border-color: #547E9A; /* Bordure bleu-gris contrastante */
+    --theme-border-light: #7092AD; /* Bordure claire */
+    --theme-border-lighter: #98B4C8; /* Bordure très claire */
+    --theme-border-dark: #305068;  /* Bordure foncée pour définition */
+
+    --theme-font-title: "Cinzel", serif;
+    --theme-font-header: "Roboto Condensed", sans-serif;
+    --theme-font-body: "Inter", sans-serif;
+    --theme-background: url("../../systems/ambre/assets/skin/background/marelle-bg.webp") repeat center / 50% auto, #1B263B; /* Image + couleur de fond solide */
+}
+
+/* Atouts Theme - Gold/Royal */
+.actor.theme-atouts {
+    --theme-primary-color: #C8A078; /* Soft, muted ochre/light tan */
+    --theme-primary-dark: #A07E58;  /* Darker, muted ochre */
+    --theme-primary-light: rgba(200, 160, 120, 0.12); /* Very light, transparent ochre */
+    --theme-primary-medium: rgba(200, 160, 120, 0.22);/* Slightly more opaque light ochre */
+    --theme-primary-shadow: rgba(200, 160, 120, 0.3); /* Soft shadow color */
+    --theme-primary-strong: rgba(200, 160, 120, 0.55);/* Stronger accent ochre */
+
+    --theme-text-color: #5D4037; /* Soft dark brown for main text - good readability */
+    --theme-text-secondary: #795548; /* Slightly lighter soft brown */
+    --theme-text-muted: #A1887F; /* Muted, lighter brown/grey */
+    --theme-text-grey: #BCAAA4; /* Light brownish grey */
+    --theme-text-light: #E8D8C8; /* Very light ochre/cream for specific accents */
+
+    /* atouts-bg.webp is a dark red/brown texture. New solid colors are lighter. */
+    --theme-background: url("../../systems/ambre/assets/skin/background/atouts-bg.webp") repeat center/100%
+    --theme-background-alt: #F5EFE2; /* Slightly off-white/light beige for alternating sections */
+    --theme-background-light: #FCF8F0; /* Very light, almost white, for highlighted areas */
+    --theme-background-transparent: rgba(240, 230, 210, 0.85); /* Semi-transparent light parchment/cream */
+
+    --theme-border-color: #D7CCC8; /* Light, soft brownish-grey */
+    --theme-border-light: #EFEBE9; /* Very light grey/off-white */
+    --theme-border-lighter: #F5F5F5; /* Almost white */
+    --theme-border-dark: #BCAAA4; /* Slightly darker soft brown-grey */
+
+    --theme-font-title: "Cormorant Garamond", serif;
+    --theme-font-header: "Crimson Text", serif;
+    --theme-font-body: "Merriweather", serif;
+}
+
+/* Metamorphose Theme - Purple/Mystical */
+.actor.theme-metamorphose {
+    --theme-primary-color: #B8860B; /* DarkGoldenrod - Ocre soutenu pour les accents principaux */
+    --theme-primary-dark: #8B4513;  /* SaddleBrown - Brun cuir foncé pour les éléments sombres */
+    --theme-primary-light: rgba(184, 134, 11, 0.15); /* Ocre clair transparent */
+    --theme-primary-medium: rgba(184, 134, 11, 0.25);/* Ocre moyen transparent */
+    --theme-primary-shadow: rgba(139, 69, 19, 0.3);  /* Ombre basée sur le brun cuir */
+    --theme-primary-strong: rgba(184, 134, 11, 0.6); /* Ocre plus prononcé */
+
+    --theme-text-color: #4A3B31; /* Brun foncé (cuir vieilli) pour le texte principal sur fonds clairs */
+    --theme-text-secondary: #7B685A; /* Brun moyen pour texte secondaire */
+    --theme-text-muted: #A08C7D; /* Brun clair/beige pour texte discret */
+    --theme-text-grey: #B0A092; /* Gris-brun doux */
+    --theme-text-light: #F5EFE6; /* Texte très clair (presque blanc cassé) pour les fonds très sombres */
+
+    --theme-background: url("../../systems/ambre/assets/skin/background/metamorphose-bg.webp") repeat center/50%, #3D2B1F; /* Fond image + couleur solide (brun écorce foncé) */
+    --theme-background-size: 150px 150px; /* Example size */
+    --theme-background-alt: #EAE0D5; /* Beige parchemin/cuir clair pour fonds alternatifs d'UI */
+    --theme-background-light: #F8F0E3; /* Crème très clair pour zones mises en avant */
+    --theme-background-transparent: rgba(234, 224, 213, 0.6); /* Parchemin semi-transparent */
+
+    --theme-border-color: #C8B5A6; /* Bordure beige/gris-brun doux */
+    --theme-border-light: #E0D8CD; /* Bordure très claire */
+    --theme-border-lighter: #F0EBE5; /* Presque blanc cassé */
+    --theme-border-dark: #8B7D6B;  /* Bordure brun moyen pour plus de définition */
+
+    --theme-font-title: "BioRhyme Expanded", serif;
+    --theme-font-header: "Montserrat", sans-serif;
+    --theme-font-body: "IBM Plex Sans", sans-serif;
+}
+
+/* Pentacre Theme - Silver/Arcane */
+.actor.theme-pentacre {
+    --theme-primary-color: #AEC6CF; /* Argenté / bleu arcanique clair */
+    --theme-primary-dark: #829AA3;  /* Teinte plus foncée du primaire */
+    --theme-primary-light: rgba(174, 198, 207, 0.15); /* Primaire clair transparent */
+    --theme-primary-medium: rgba(174, 198, 207, 0.25);/* Primaire moyen transparent */
+    --theme-primary-shadow: rgba(174, 198, 207, 0.35);/* Ombre argentée/bleutée */
+    --theme-primary-strong: rgba(174, 198, 207, 0.6); /* Primaire prononcé */
+
+    --theme-text-color: #F0F4F8; /* Texte principal très clair (blanc cassé froid) */
+    --theme-text-secondary: #D0D8DD; /* Texte secondaire plus doux */
+    --theme-text-muted: #A8B2B9;   /* Texte discret, gris clair */
+    --theme-text-grey: #BCC4CA;    /* Gris clair général */
+    --theme-text-light: #FAFCFE;   /* Texte très clair, presque blanc, pour accents */
+
+    --theme-background: #2A2F33; /* Fond gris anthracite / ardoise foncé */
+    --theme-background-alt: #383E42; /* Variante de fond anthracite, légèrement plus claire */
+    --theme-background-light: #454A4E; /* Fond anthracite plus clair pour zones spécifiques */
+    --theme-background-transparent: rgba(42, 47, 51, 0.9); /* Fond transparent foncé */
+
+    --theme-border-color: #60686D; /* Bordure gris moyen / argenté */
+    --theme-border-light: #7E888F; /* Bordure claire */
+    --theme-border-lighter: #A0A8AE; /* Bordure très claire */
+    --theme-border-dark: #40484D;  /* Bordure foncée pour définition */
+
+    --theme-font-title: "Almendra SC", serif;
+    --theme-font-header: "IM Fell English", serif;
+    --theme-font-body: "EB Garamond", serif;
+    --theme-background: url("../../systems/ambre/assets/skin/background/pentacre-bg.webp") repeat center / 120% auto, #2A2F33; /* Image + couleur de fond solide */
+}
+
+/* Abreuvoir Theme - Blue/Water */
+.actor.theme-abreuvoir {
+    --theme-primary-color: #00E5FF; /* Cyan électrique vif */
+    --theme-primary-dark: #00B8D4;  /* Cyan plus foncé */
+    --theme-primary-light: rgba(0, 229, 255, 0.15); /* Cyan clair transparent */
+    --theme-primary-medium: rgba(0, 229, 255, 0.25);/* Cyan moyen transparent */
+    --theme-primary-shadow: rgba(0, 229, 255, 0.35);/* Ombre cyan */
+    --theme-primary-strong: rgba(0, 229, 255, 0.6); /* Cyan prononcé */
+
+    --theme-text-color: #E0F7FA; /* Texte principal très clair, blanc-cyan */
+    --theme-text-secondary: #B2EBF2; /* Texte secondaire plus doux */
+    --theme-text-muted: #80DEEA;   /* Texte discret, cyan clair */
+    --theme-text-grey: #A0E0E8;    /* Gris cyan général */
+    --theme-text-light: #F0FEFF;   /* Texte très clair pour accents */
+
+    --theme-background: #0D1B2A; /* Fond bleu nuit/profond pour contraster avec l'électrique */
+    --theme-background-alt: #1B2F45; /* Variante de fond, légèrement plus claire */
+    --theme-background-light: #2A4766; /* Fond plus clair pour zones spécifiques */
+    --theme-background-transparent: rgba(13, 27, 42, 0.9); /* Fond transparent foncé */
+
+    --theme-border-color: #4DD0E1; /* Bordure cyan contrastante */
+    --theme-border-light: #80DEEA; /* Bordure claire */
+    --theme-border-lighter: #B2EBF2; /* Bordure très claire */
+    --theme-border-dark: #00ACC1;  /* Bordure foncée pour définition */
+
+    --theme-font-title: "Electrolize", sans-serif; /* Police à l'aspect technologique/électrique */
+    --theme-font-header: "Roboto Mono", monospace; /* Police mono pour un look épuré */
+    --theme-font-body: "Open Sans", sans-serif;    /* Police de corps lisible et moderne */
+    --theme-background: linear-gradient(rgba(13, 27, 42, 0.7), rgba(13, 27, 42, 0.9)), 
+                        url("../../systems/ambre/assets/skin/background/abreuvoir-bg.webp") repeat center/100%, #0D1B2A; /* Image + dégradé + couleur solide */
+}
+
+/* Harmonium Theme - Cyan/Harmony */
+.actor.theme-harmonium {
+    --theme-primary-color: #C0A080; /* Or vieilli doux / Bronze clair */
+    --theme-primary-dark: #A08060;  /* Teinte plus foncée du primaire */
+    --theme-primary-light: rgba(192, 160, 128, 0.15); /* Primaire clair transparent */
+    --theme-primary-medium: rgba(192, 160, 128, 0.25);/* Primaire moyen transparent */
+    --theme-primary-shadow: rgba(192, 160, 128, 0.35);/* Ombre douce */
+    --theme-primary-strong: rgba(192, 160, 128, 0.6); /* Primaire prononcé */
+
+    --theme-text-color: #5D4037; /* Brun foncé pour le texte principal, bonne lisibilité sur fond clair */
+    --theme-text-secondary: #795548; /* Brun moyen pour texte secondaire */
+    --theme-text-muted: #A1887F;   /* Brun clair/beige pour texte discret */
+    --theme-text-grey: #BCAAA4;    /* Gris-brun doux */
+    --theme-text-light: #4E342E;   /* Texte brun plus foncé pour accents sur fond très clair si besoin */
+
+    --theme-background: #FDF5E6; /* Fond parchemin / blanc cassé (Old Lace) */
+    --theme-background-alt: #FAF0E6; /* Variante de fond, légèrement plus crème (Linen) */
+    --theme-background-light: #FFF8DC; /* Fond plus clair pour zones spécifiques (Cornsilk) */
+    --theme-background-transparent: rgba(253, 245, 230, 0.85); /* Fond transparent parchemin */
+
+    --theme-border-color: #D2B48C; /* Bordure tan / beige soutenu */
+    --theme-border-light: #E0C8A0; /* Bordure claire */
+    --theme-border-lighter: #F0E0C0; /* Bordure très claire */
+    --theme-border-dark: #B8860B;  /* Bordure darkgoldenrod pour définition */
+
+    --theme-font-title: "IM Fell DW Pica", serif; /* Police avec un aspect ancien/gravé */
+    --theme-font-header: "EB Garamond", serif;    /* Police serif classique et élégante */
+    --theme-font-body: "Gentium Book Basic", serif; /* Police de corps lisible et douce */
+    --theme-background: url("../../systems/ambre/assets/skin/background/harmonium-bg.webp") repeat center/50%
+}
+
+/* Chimerion Theme - Pink/Dream */
+.actor.theme-chimerion {
+    --theme-primary-color: #00BFFF; /* Bleu électrique (DeepSkyBlue) */
+    --theme-primary-dark: #009ACD;  /* Bleu électrique plus foncé */
+    --theme-primary-light: rgba(0, 191, 255, 0.15); /* Bleu clair transparent */
+    --theme-primary-medium: rgba(0, 191, 255, 0.25);/* Bleu moyen transparent */
+    --theme-primary-shadow: rgba(0, 191, 255, 0.35);/* Ombre bleutée */
+    --theme-primary-strong: rgba(0, 191, 255, 0.6); /* Bleu prononcé */
+
+    --theme-text-color: #E0E8F0; /* Texte principal très clair, blanc argenté/bleuté */
+    --theme-text-secondary: #B8C0C8; /* Texte secondaire argenté doux */
+    --theme-text-muted: #9098A0;   /* Texte discret, gris argenté */
+    --theme-text-grey: #A8B0B8;    /* Gris argenté général */
+    --theme-text-light: #F0F8FF;   /* Texte très clair (AliceBlue) pour accents lunaires */
+
+    --theme-background: #101820; /* Fond nuit profonde, presque noir */
+    --theme-background-alt: #1C2833; /* Variante de fond, légèrement plus claire, évoquant l'ombre */
+    --theme-background-light: #C0C0C0; /* Argent clair pour zones spécifiques, comme un reflet lunaire */
+    --theme-background-transparent: rgba(16, 24, 32, 0.9); /* Fond transparent sombre */
+
+    --theme-border-color: #708090; /* Bordure ardoise/argentée (SlateGray) */
+    --theme-border-light: #B0C4DE; /* Bordure bleu acier clair (LightSteelBlue) */
+    --theme-border-lighter: #D8E0E8; /* Bordure très claire, presque blanche */
+    --theme-border-dark: #485058;  /* Bordure foncée pour définition */
+
+    --theme-font-title: "Orbitron", sans-serif; /* Police futuriste/rêveuse */
+    --theme-font-header: "Quicksand", sans-serif; /* Police arrondie et douce */
+    --theme-font-body: "Montserrat", sans-serif;    /* Police moderne et lisible */
+    --theme-background: linear-gradient(rgba(16, 24, 32, 0.6), rgba(16, 24, 32, 0.8)),
+                        url("../../systems/ambre/assets/skin/background/chimerion-bg.webp") repeat center/100%, #101820; /* Image + dégradé + couleur solide */
+}
+
+/* Sabliers Theme - Brown/Time */
+.actor.theme-sabliers {
+    --theme-primary-color: #B08D57; /* Ocre/sable un peu plus soutenu */
+    --theme-primary-dark: #8C6F45;  /* Ocre foncé */
+    --theme-primary-light: rgba(176, 141, 87, 0.15); /* Ocre clair transparent */
+    --theme-primary-medium: rgba(176, 141, 87, 0.25);/* Ocre moyen transparent */
+    --theme-primary-shadow: rgba(176, 141, 87, 0.35);/* Ombre ocre */
+    --theme-primary-strong: rgba(176, 141, 87, 0.6); /* Ocre prononcé */
+
+    --theme-text-color: #4A3B31; /* Brun foncé (cuir vieilli) pour excellente lisibilité sur fond clair */
+    --theme-text-secondary: #7B685A; /* Brun moyen */
+    --theme-text-muted: #A08C7D;   /* Brun clair/beige */
+    --theme-text-grey: #B0A092;    /* Gris-brun doux */
+    --theme-text-light: #3D2B1F;   /* Texte brun très foncé pour accents sur fond très clair si besoin */
+
+    --theme-background: #F5F5DC; /* Fond beige (couleur du sable sec) */
+    --theme-background-alt: #FAF0E6; /* Variante de fond, lin/parchemin clair */
+    --theme-background-light: #FFF8DC; /* Fond plus clair, cornsilk, pour zones spécifiques */
+    --theme-background-transparent: rgba(245, 245, 220, 0.88); /* Fond transparent beige */
+
+    --theme-border-color: #D2B48C; /* Bordure tan / beige soutenu */
+    --theme-border-light: #E0C8A0; /* Bordure claire */
+    --theme-border-lighter: #F0E0C0; /* Bordure très claire */
+    --theme-border-dark: #A0522D;  /* Bordure sienne brûlée pour définition */
+
+    --theme-font-title: "Times New Roman", Times, serif; /* Classique et intemporel */
+    --theme-font-header: "Georgia", serif;             /* Serif lisible et élégant */
+    --theme-font-body: "Arial", Helvetica, sans-serif; /* Sans-serif très lisible pour le corps */
+    --theme-background: linear-gradient(rgba(245, 245, 220, 0.5), rgba(245, 245, 220, 0.7)),
+                        url("../../systems/ambre/assets/skin/background/sabliers-bg.webp") repeat center/100%, #F5F5DC; /* Image + dégradé + couleur solide */
+}
+
+.actor.theme-arden {
+    --theme-primary-color: #4B8B3B;
+    --theme-primary-dark: #2F5E26;
+    --theme-primary-light: rgba(75, 139, 59, 0.15);
+    --theme-primary-medium: rgba(75, 139, 59, 0.25);
+    --theme-primary-shadow: rgba(47, 94, 38, 0.35);
+    --theme-primary-strong: rgba(75, 139, 59, 0.6);
+
+    --theme-text-color: #EAF7E2;
+    --theme-text-secondary: #C8E6C9;
+    --theme-text-muted: #A5D6A7;
+    --theme-text-grey: #7BA67C;
+    --theme-text-light: #F0FFF0;
+
+    --theme-background: linear-gradient(to bottom, #1E2D1A, #294026, #355A34);
+    --theme-background-alt: #2A3725;
+    --theme-background-light: #3C4F3B;
+    --theme-background-transparent: rgba(30, 45, 26, 0.88);
+
+    --theme-border-color: #6BA26D;
+    --theme-border-light: #9ED39C;
+    --theme-border-lighter: #CDE8C8;
+    --theme-border-dark: #466B4D;
+
+    --theme-font-title: "IM Fell English", serif;
+    --theme-font-header: "Crimson Text", serif;
+    --theme-font-body: "Lora", serif;
+
+    --theme-background: url("../../systems/ambre/assets/skin/background/arden-bg.webp") repeat center/100%, radial-gradient(circle, #1E2D1A 10%, #355A34 100%);
+}
+
+
+.actor.theme-kolvir {
+    --theme-primary-color: #78838C;
+    --theme-primary-dark: #515C64;
+    --theme-primary-light: rgba(120, 131, 140, 0.15);
+    --theme-primary-medium: rgba(120, 131, 140, 0.25);
+    --theme-primary-shadow: rgba(81, 92, 100, 0.4);
+    --theme-primary-strong: rgba(120, 131, 140, 0.6);
+
+    --theme-text-color: #F2F2F2;
+    --theme-text-secondary: #D6D8DA;
+    --theme-text-muted: #B0B4B8;
+    --theme-text-grey: #9BA0A5;
+    --theme-text-light: #FFFFFF;
+
+    --theme-background: linear-gradient(180deg, #1D2124, #2F3539, #40484F);
+    --theme-background-alt: #31363B;
+    --theme-background-light: #4B5258;
+    --theme-background-transparent: rgba(29, 33, 36, 0.9);
+
+    --theme-border-color: #6E7B89;
+    --theme-border-light: #9AA8B5;
+    --theme-border-lighter: #CDD6DD;
+    --theme-border-dark: #3E474F;
+
+    --theme-font-title: "Spectral", serif;
+    --theme-font-header: "PT Serif", serif;
+    --theme-font-body: "Roboto", sans-serif;
+
+    --theme-background: url("../../systems/ambre/assets/skin/background/kolvir-bg.webp") repeat center/120%, linear-gradient(#1D2124, #40484F);
+}
+
+
+.actor.theme-tirnanogth {
+    --theme-primary-color: #C2B6E3;
+    --theme-primary-dark: #8C7BB3;
+    --theme-primary-light: rgba(194, 182, 227, 0.15);
+    --theme-primary-medium: rgba(194, 182, 227, 0.3);
+    --theme-primary-shadow: rgba(140, 123, 179, 0.4);
+    --theme-primary-strong: rgba(194, 182, 227, 0.6);
+
+    --theme-text-color: #F3F0FF;
+    --theme-text-secondary: #D8D0ED;
+    --theme-text-muted: #B8A9DA;
+    --theme-text-grey: #A290C7;
+    --theme-text-light: #FFFFFF;
+
+    --theme-background: linear-gradient(to bottom, #2A1A3F, #38265A, #4D3C75);
+    --theme-background-alt: #352C52;
+    --theme-background-light: #4C4370;
+    --theme-background-transparent: rgba(42, 26, 63, 0.88);
+
+    --theme-border-color: #A897D3;
+    --theme-border-light: #C7B8EA;
+    --theme-border-lighter: #EDE6FF;
+    --theme-border-dark: #665A91;
+
+    --theme-font-title: "Cormorant Garamond", serif;
+    --theme-font-header: "Josefin Sans", sans-serif;
+    --theme-font-body: "EB Garamond", serif;
+
+    --theme-background: url("../../systems/ambre/assets/skin/background/tirnanogth-bg.webp") repeat center/100%, radial-gradient(circle at center, #38265A, #2A1A3F);
+}
+
+
+.actor.theme-rebma {
+    --theme-primary-color: #6BC1E3;
+    --theme-primary-dark: #2C7DA0;
+    --theme-primary-light: rgba(107, 193, 227, 0.15);
+    --theme-primary-medium: rgba(107, 193, 227, 0.3);
+    --theme-primary-shadow: rgba(44, 125, 160, 0.4);
+    --theme-primary-strong: rgba(107, 193, 227, 0.6);
+
+    --theme-text-color: #E0F7FA;
+    --theme-text-secondary: #B2EBF2;
+    --theme-text-muted: #80DEEA;
+    --theme-text-grey: #4DD0E1;
+    --theme-text-light: #FFFFFF;
+
+    --theme-background: linear-gradient(to bottom, #0D1F2A, #12475A, #197B9F);
+    --theme-background-alt: #1A2F3A;
+    --theme-background-light: #236F89;
+    --theme-background-transparent: rgba(13, 31, 42, 0.9);
+
+    --theme-border-color: #4DD0E1;
+    --theme-border-light: #80DEEA;
+    --theme-border-lighter: #B2EBF2;
+    --theme-border-dark: #006064;
+
+    --theme-font-title: "Alegreya", serif;
+    --theme-font-header: "Roboto", sans-serif;
+    --theme-font-body: "Open Sans", sans-serif;
+
+    --theme-background:  url("../../systems/ambre/assets/skin/background/rebma-bg.webp") repeat center/100%;
+}
+
+.actor.theme-chaos {
+    --theme-primary-color: #B3261E;
+    --theme-primary-dark: #7F1512;
+    --theme-primary-light: rgba(179, 38, 30, 0.1);
+    --theme-primary-medium: rgba(179, 38, 30, 0.25);
+    --theme-primary-shadow: rgba(127, 21, 18, 0.4);
+    --theme-primary-strong: rgba(179, 38, 30, 0.6);
+
+    --theme-text-color: #FFEDEA;
+    --theme-text-secondary: #FFBCB0;
+    --theme-text-muted: #CC8070;
+    --theme-text-grey: #AA6255;
+    --theme-text-light: #FFF8F5;
+
+    --theme-background: linear-gradient(120deg, #1A0000, #350A0A 40%, #5C1010 100%);
+    --theme-background-alt: #330D0D;
+    --theme-background-light: #591919;
+    --theme-background-transparent: rgba(26, 0, 0, 0.88);
+
+    --theme-border-color: #992222;
+    --theme-border-light: #BB4444;
+    --theme-border-lighter: #D98888;
+    --theme-border-dark: #661111;
+
+    --theme-font-title: "UnifrakturCook", cursive;
+    --theme-font-header: "Rajdhani", sans-serif;
+    --theme-font-body: "Fira Sans", sans-serif;
+    --theme-background: radial-gradient(circle at center, #200000 10%, #5A1A1A 80%), url("../../systems/ambre/assets/skin/background/chaos-bg.webp") repeat center/120%;
+}
+
+.actor.theme-abysses-deep {
+    --theme-primary-color: #EDEDED;
+    --theme-primary-dark: #AAAAAA;
+    --theme-primary-light: rgba(237, 237, 237, 0.1);
+    --theme-primary-medium: rgba(237, 237, 237, 0.25);
+    --theme-primary-shadow: rgba(200, 200, 200, 0.3);
+    --theme-primary-strong: rgba(237, 237, 237, 0.55);
+
+    --theme-text-color: #E0E0E0;
+    --theme-text-secondary: #A0A0A0;
+    --theme-text-muted: #707070;
+    --theme-text-grey: #505050;
+    --theme-text-light: #FFFFFF;
+
+    --theme-background: radial-gradient(ellipse at center, #0C0C0C 0%, #000000 100%);
+    --theme-background-alt: #101010;
+    --theme-background-light: #1A1A1A;
+    --theme-background-transparent: rgba(0, 0, 0, 0.85);
+
+    --theme-border-color: #202020;
+    --theme-border-light: #333;
+    --theme-border-lighter: #444;
+    --theme-border-dark: #000;
+
+    --theme-font-title: "Share Tech Mono", monospace;
+    --theme-font-header: "Oswald", sans-serif;
+    --theme-font-body: "Roboto", sans-serif;
+    --theme-background: linear-gradient(180deg, #050505, #0B0B0B, #000), url("../../systems/ambre/assets/skin/background/abysses-bg.webp") repeat center/120%;
+}
+
+
+.actor.theme-musique {
+    --theme-primary-color: #9E70B3;
+    --theme-primary-dark: #683278;
+    --theme-primary-light: rgba(158, 112, 179, 0.15);
+    --theme-primary-medium: rgba(158, 112, 179, 0.3);
+    --theme-primary-shadow: rgba(104, 50, 120, 0.4);
+    --theme-primary-strong: rgba(158, 112, 179, 0.6);
+
+    --theme-text-color: #F5EBF8;
+    --theme-text-secondary: #D7BCE7;
+    --theme-text-muted: #B799C9;
+    --theme-text-grey: #A380B3;
+    --theme-text-light: #FFFFFF;
+
+    --theme-background: linear-gradient(160deg, #1E1024 0%, #2A1930 50%, #1C0C24 100%);
+    --theme-background-alt: #2B1A35;
+    --theme-background-light: #3C2B45;
+    --theme-background-transparent: rgba(30, 16, 36, 0.9);
+
+    --theme-border-color: #AC66D9;
+    --theme-border-light: #C99FEF;
+    --theme-border-lighter: #EBD6FF;
+    --theme-border-dark: #6A398A;
+
+    --theme-font-title: "Audiowide", cursive;
+    --theme-font-header: "Raleway", sans-serif;
+    --theme-font-body: "Poppins", sans-serif;
+    --theme-background: radial-gradient(circle at 30% 30%, #2A1930, #100818),url("../../systems/ambre/assets/skin/background/music-bg.webp") repeat center/120%;
+}
+
+
+.actor.theme-ygg {
+    --theme-primary-color: #5A7D3E;
+    --theme-primary-dark: #3D552C;
+    --theme-primary-light: rgba(90, 125, 62, 0.15);
+    --theme-primary-medium: rgba(90, 125, 62, 0.3);
+    --theme-primary-shadow: rgba(61, 85, 44, 0.4);
+    --theme-primary-strong: rgba(90, 125, 62, 0.6);
+
+    --theme-text-color: #E8E5DC;
+    --theme-text-secondary: #CFC9B0;
+    --theme-text-muted: #B5AF9A;
+    --theme-text-grey: #948E7A;
+    --theme-text-light: #FFFFFF;
+
+    --theme-background: linear-gradient(to bottom, #2A2E1F, #3F4B2C, #212418);
+    --theme-background-alt: #2E2B21;
+    --theme-background-light: #3D3B30;
+    --theme-background-transparent: rgba(42, 46, 31, 0.9);
+
+    --theme-border-color: #7B8B5C;
+    --theme-border-light: #A3B47A;
+    --theme-border-lighter: #DCE7B5;
+    --theme-border-dark: #4C5C34;
+
+    --theme-font-title: "IM Fell English SC", serif;
+    --theme-font-header: "Crimson Text", serif;
+    --theme-font-body: "Roboto", sans-serif;
+    --theme-background: radial-gradient(ellipse at bottom, #4C5A3A, #2A2E1F), url("../../systems/ambre/assets/skin/background/ygg-bg.webp") repeat center/100%;
+}
+
+
+.actor.theme-marelle-corwin {
+    --theme-primary-color: #8658A0;
+    --theme-primary-dark: #502B66;
+    --theme-primary-light: rgba(134, 88, 160, 0.1);
+    --theme-primary-medium: rgba(134, 88, 160, 0.2);
+    --theme-primary-shadow: rgba(80, 43, 102, 0.3);
+    --theme-primary-strong: rgba(134, 88, 160, 0.6);
+
+    --theme-text-color: #F3E5FF;
+    --theme-text-secondary: #C6A3D9;
+    --theme-text-muted: #A87CC0;
+    --theme-text-grey: #9068B0;
+    --theme-text-light: #FFFFFF;
+
+    --theme-background: linear-gradient(120deg, #120F14, #1E1624, #29232F);
+    --theme-background-alt: #201C2A;
+    --theme-background-light: #322D40;
+    --theme-background-transparent: rgba(18, 15, 20, 0.9);
+
+    --theme-border-color: #A67DB8;
+    --theme-border-light: #C5A3D6;
+    --theme-border-lighter: #E9D4F2;
+    --theme-border-dark: #502B66;
+
+    --theme-font-title: "Cinzel Decorative", serif;
+    --theme-font-header: "Lora", serif;
+    --theme-font-body: "Open Sans", sans-serif;
+    --theme-background: url("../../systems/ambre/assets/skin/background/marelle-corwin.webp") repeat center/120%, linear-gradient(180deg, #1E1624, #322D40);
+}
+
+.actor.theme-roue-spectrale {
+    --theme-primary-color: #00E0FF;
+    --theme-primary-dark: #008D99;
+    --theme-primary-light: rgba(0, 224, 255, 0.15);
+    --theme-primary-medium: rgba(0, 224, 255, 0.25);
+    --theme-primary-shadow: rgba(0, 224, 255, 0.35);
+    --theme-primary-strong: rgba(0, 224, 255, 0.6);
+
+    --theme-text-color: #E0FFFF;
+    --theme-text-secondary: #A0E0E0;
+    --theme-text-muted: #70C0C0;
+    --theme-text-grey: #50A0A0;
+    --theme-text-light: #FFFFFF;
+
+    --theme-background: linear-gradient(135deg, #000F1F, #001A33, #002F4F);
+    --theme-background-alt: #132C3F;
+    --theme-background-light: #20485F;
+    --theme-background-transparent: rgba(0, 15, 31, 0.85);
+
+    --theme-border-color: #00BFFF;
+    --theme-border-light: #40E0D0;
+    --theme-border-lighter: #B2FFFF;
+    --theme-border-dark: #008B8B;
+
+    --theme-font-title: "Orbitron", sans-serif;
+    --theme-font-header: "Share Tech Mono", monospace;
+    --theme-font-body: "Roboto Mono", monospace;
+    --theme-background: radial-gradient(circle at center, #001A33, #002F4F),
+                         url("../../systems/ambre/assets/skin/background/roue-spectrale-bg.webp") repeat center/100%;
+}
+
+.actor.theme-fontaine {
+    --theme-primary-color: #FFD700;
+    --theme-primary-dark: #C49100;
+    --theme-primary-light: rgba(255, 215, 0, 0.15);
+    --theme-primary-medium: rgba(255, 215, 0, 0.25);
+    --theme-primary-shadow: rgba(255, 215, 0, 0.4);
+    --theme-primary-strong: rgba(255, 215, 0, 0.6);
+
+    --theme-text-color: #FFF9E3;
+    --theme-text-secondary: #FFE9A6;
+    --theme-text-muted: #E6C85C;
+    --theme-text-grey: #D4B830;
+    --theme-text-light: #FFFFF0;
+
+    --theme-background: linear-gradient(to bottom, #2C1A00, #5A3A1A, #F7D060);
+    --theme-background-alt: #3F260A;
+    --theme-background-light: #FFE8B0;
+    --theme-background-transparent: rgba(44, 26, 0, 0.9);
+
+    --theme-border-color: #FFD700;
+    --theme-border-light: #FFE98C;
+    --theme-border-lighter: #FFF8DC;
+    --theme-border-dark: #B8860B;
+
+    --theme-font-title: "Cinzel", serif;
+    --theme-font-header: "IM Fell English", serif;
+    --theme-font-body: "Gentium Book Basic", serif;
+    --theme-background: radial-gradient(circle at center, #FFE8B0, #3F260A), url("../../systems/ambre/assets/skin/background/fontaine-puissance-bg.webp") repeat center/100%;
+}
+
+
+/* Styles for tab icons in sheet navigation */
+.sheet-navigation .tab-icon {
+    width: 40px;  /* Increased from 32px */
+    height: 40px; /* Increased from 32px */
+    margin-right: 10px; /* Increased spacing for larger icon */
+    vertical-align: middle; /* Helps with alignment if text wraps or line-height issues */
+}
+
+/* Styles for tab labels in sheet navigation */
+.sheet-navigation .sheet-navigation-tab {
+    font-size: 18px; /* Increased from 16px */
+    /* If vertical alignment looks off with larger icons/text, adjust padding: */
+    /* padding: 12px 20px; */ /* Example: increased vertical padding */
+}
+
+/* Make item names in lists clickable */
+.item-name-clickable {
+  cursor: pointer;
+  transition: color 0.2s ease, text-shadow 0.2s ease;
+}
+
+.item-name-clickable:hover {
+  color: var(--theme-primary-color);
+  text-shadow: 0 0 2px var(--theme-primary-shadow);
+}
+
+/*
+  This file defines how the header text color changes based on the actor's theme
+  and the "Entête" setting on their character sheet.
+
+  It assumes that each theme (e.g., .theme-marelle, .theme-chaos) defines the following
+  CSS variables:
+  --theme-text-color: The default/primary text color for the theme.
+  --theme-dark-text-color: A very dark color suitable for light backgrounds.
+  --theme-light-text-color: A very light color suitable for dark backgrounds.
+*/
+
+/* The target is the input field inside the sheet header's h1 tag */
+.actor.sheet .sheet-header h1 input {
+  /* A transition for smooth color changes */
+  transition: color 0.3s ease;
+}
+
+/* 
+  By default, or when "Défaut" is selected, the header text uses the main text color 
+  defined by the currently active theme.
+*/
+.actor.sheet.header-text-defaut .sheet-header h1 input {
+  color: var(--theme-text-color, #4b4a44); /* Fallback to a default dark grey */
+}
+
+/* 
+  When "Sombre" is selected, the header text uses the dark text color 
+  defined by the currently active theme.
+*/
+.actor.sheet.header-text-sombre .sheet-header h1 input {
+  color: var(--theme-dark-text-color, #191813); /* Fallback to a very dark color */
+}
+
+/* 
+  When "Lumineux" is selected, the header text uses the light text color 
+  defined by the currently active theme.
+*/
+.actor.sheet.header-text-lumineux .sheet-header h1 input {
+  color: var(--theme-light-text-color, #f0f0f0); /* Fallback to a light grey */
+}
+
